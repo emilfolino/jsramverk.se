@@ -90,6 +90,16 @@ p {
 
 
 @media (max-width: 667px) {
+    h2 {
+        font-size: 1.6rem;
+        font-weight: normal;
+    }
+
+    p {
+        font-size: 1.05em;
+        line-height: 1.4;
+    }
+
     .main {
         padding: 0.8rem;
     }
@@ -108,5 +118,10 @@ p {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+    }
+
+    .footer-column {
+        width: 94%;
+        padding-bottom: 0.6em;
     }
 }
