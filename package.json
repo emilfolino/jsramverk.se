@@ -1,0 +1,27 @@
+{
+  "name": "jsramverk.me",
+  "version": "1.0.0",
+  "description": "Possible new home for course jsramverk.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "style": "sass base.scss style.min.css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilfolino/jsramverk.me.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilfolino/jsramverk.me/issues"
+  },
+  "homepage": "https://github.com/emilfolino/jsramverk.me#readme",
+  "devDependencies": {
+    "sass": "^1.17.0"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  }
+}
