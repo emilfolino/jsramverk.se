@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>jsramverk.me</title>
-    <style>*{margin:0}body,html{height:100%}html{font-size:100%;font-family:sans-serif}h1{font-size:8rem}.main-header{position:absolute;bottom:4rem;right:4rem}.container,.main{width:100%;height:100%;z-index:10;position:relative}.container{padding-bottom:32rem}.main{background-color:#f0db4f;color:#333;box-sizing:border-box;padding:6rem;box-shadow:0 10px 32px 0 rgba(0,0,0,.2);animation:pulsate-bg 30s linear infinite}@media (max-width:1000px){.main-header{font-size:4em;bottom:3rem;right:3rem}}@media (max-width:667px){.main{padding:.8rem}.main-header{font-size:3em;bottom:2rem;right:2rem}}@media (min-width:64em){html{font-size:112.5%}}</style>
+    <title>jsramverk</title>
+    <style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family: sans-serif;}</style>
     <link rel="stylesheet" href="inter-ui.css" media="none" onload="if(media!='all')media='all'">
     <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
     <noscript>
@@ -12,26 +12,77 @@
     </noscript>
 </head>
 <body>
-    <div class="container">
-        <main class="main">
-            <h1 class="main-header">jsramverk</h1>
-        </main>
-        <footer class="footer">
-            <div class="inner-footer">
-                <div class="footer-column">
-                    <h2>dbwebb</h2>
-                    <p><a href="https://dbwebb.se">dbwebb.se</a> är en lärande community för programmering i webbmiljö. Lär dig själv - och hjälp andra lära sig - databaser, webbprogrammering och webbutveckling. Kika gärna på våra kurser, artiklar, guider, uppgifter och delta i gemenskapen.</p>
+    <header class="header">
+        <h1><a href="/">jsramverk.me</a></h1>
+    </header>
+
+    <main class="container">
+        <h2 class="main-title">Välkommen till jsramverk<h2>
+        <p>Detta är kursen DV1612 JavaScript-baserade webbramverk. Vi ska i denna kurs använda oss av javaScript både på frontend och backend för skapa användarvänliga webbplatser.</p>
+        <p>Nedan finns inlämningsuppgifterna i kursen tillsammans med material om de tekniker och verktyg som används i kursen.</p>
+
+        <div class="assignments">
+            <div class="assignment-box blue-box">
+                <div class="assignment-header">
+                    <h3>1: Frontend</h3>
                 </div>
-                <div class="footer-column">
-                    <h2>jsramverk</h2>
-                    <p><a href="https://dbwebb.se/kurser/ramverk2-v2">jsramverk</a> är en kurs där vi använder de senaste teknikerne inom JavaScript världen både på server- och klient-sidan. Vi bygger webbplatser med fokus på använderbarhet och bra design med de senaste teknikerna.</p>
-                </div>
-                <div class="footer-column">
-                    <h2>GitHub</h2>
-                    <p><a href="https://github.com/dbwebb-se/ramverk2">Kursrepot</a> finns på GitHub och repot för <a href="https://github.com/emilfolino/jsramverk.me">denna webbplats</a> finns där med.</p>
+                <div class="assignment-body">
+                    <p>Vi utvärderar frontend ramverk och skapar en me-applikation.</p>
                 </div>
             </div>
-        </footer>
-    </div>
+            <div class="assignment-box pink-box">
+                <div class="assignment-header">
+                    <h3>2: UX</h3>
+                </div>
+                <div class="assignment-body">
+                    <p>Vi bygger vidare på vår me-applikation och tittar på hur användarens upplevelse sätts i fokus.</p>
+                </div>
+            </div>
+            <div class="assignment-box yellow-box">
+                <div class="assignment-header">
+                    <h3>3: Backend</h3>
+                </div>
+                <div class="assignment-body">
+                    <p>Vi skaffar oss en server och driftsätter ett API som vi använder i vår me-applikation.</p>
+                </div>
+            </div>
+            <div class="assignment-box blue-box">
+                <div class="assignment-header">
+                    <h3>4: Test</h3>
+                </div>
+                <div class="assignment-body">
+                    <p>Vi skapar en testmiljö för både frontend och backend kod, samt sätter upp ett flöde för Continouos Integration.</p>
+                </div>
+            </div>
+            <div class="assignment-box pink-box">
+                <div class="assignment-header">
+                    <h3>5: Realtid</h3>
+                </div>
+                <div class="assignment-body">
+                    <p>Vi tittar på hur vi kan websockets för realtidsprogrammering.</p>
+                </div>
+            </div>
+            <div class="assignment-box yellow-box">
+                <div class="assignment-header">
+                    <h3>6: NoSQL</h3>
+                </div>
+                <div class="assignment-body">
+                    <p>Vi tittar på hur vi kan använda en NoSQL databas för att spara data.</p>
+                </div>
+            </div>
+            <div class="assignment-box project blue-box">
+                <div class="assignment-header">
+                    <h3>Projekt: Trading plattform</h3>
+                </div>
+                <div class="assignment-body">
+                    <p>Du använder dina kunskaper från tidigare i kursen till att skapa en trading plattform.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+
+    </footer>
 </body>
 </html>

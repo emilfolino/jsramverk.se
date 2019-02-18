@@ -1,0 +1,56 @@
+.assignments {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.assignment-box {
+    width: 100%;
+    height: 8em;
+    margin-bottom: 2.8rem;
+}
+
+.assignment-box.project {
+    width: 100%;
+}
+
+.assignment-header,
+.assignment-body {
+    padding: 0.6em;
+}
+
+.assignment-header h3 {
+    margin: 0;
+}
+
+.blue-box .assignment-header {
+    background: linear-gradient(45deg, $blueGem, lighten($blueGem, 10%));
+    color: $alternateFontColor;
+}
+
+.pink-box .assignment-header {
+    background: linear-gradient(45deg, $mediumRedViolet, lighten($mediumRedViolet, 10%));
+    color: $alternateFontColor;
+}
+
+.yellow-box .assignment-header {
+    background: linear-gradient(45deg, $minionYellow, lighten($minionYellow, 10%));
+}
+
+.grey-box .assignment-header {
+    background: linear-gradient(45deg, $darkCharcoal, lighten($darkCharcoal, 10%));
+}
+
+@media (min-width: 768px) {
+    .assignment-box {
+        width: 46%;
+        margin-bottom: 3.92rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .assignment-box {
+        width: 30%;
+    }
+}
