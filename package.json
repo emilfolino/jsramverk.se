@@ -4,7 +4,10 @@
   "description": "Possible new home for course jsramverk.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "posttest": "npm run eslint && npm run stylelint",
+    "eslint": "eslint .",
+    "stylelint": "stylelint **/*.*css",
     "style": "sass base.scss style.min.css --style compressed"
   },
   "repository": {
@@ -19,7 +22,11 @@
   },
   "homepage": "https://github.com/emilfolino/jsramverk.me#readme",
   "devDependencies": {
-    "sass": "^1.17.0"
+    "eslint": "^5.14.1",
+    "eslint-plugin-react": "^7.12.4",
+    "javascript-style-guide": "^0.9.10",
+    "sass": "^1.17.0",
+    "stylelint": "^9.10.1"
   },
   "dependencies": {
     "normalize.css": "^8.0.1"

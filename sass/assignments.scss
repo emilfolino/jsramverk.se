@@ -1,8 +1,7 @@
 .assignments {
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
 }
 
 .assignment-box {
