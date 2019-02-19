@@ -6,8 +6,9 @@
 
 .assignment-box {
     width: 100%;
-    height: 8em;
+    height: 13em;
     margin-bottom: 2.8rem;
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .assignment-box.project {
@@ -19,22 +20,12 @@
     padding: 0.6em;
 }
 
+.assignment-header {
+    background: linear-gradient(45deg, $minionYellow, lighten($minionYellow, 10%));
+}
+
 .assignment-header h3 {
     margin: 0;
-}
-
-.blue-box .assignment-header {
-    background: linear-gradient(45deg, $blueGem, lighten($blueGem, 10%));
-    color: $alternateFontColor;
-}
-
-.pink-box .assignment-header {
-    background: linear-gradient(45deg, $mediumRedViolet, lighten($mediumRedViolet, 10%));
-    color: $alternateFontColor;
-}
-
-.yellow-box .assignment-header {
-    background: linear-gradient(45deg, $minionYellow, lighten($minionYellow, 10%));
 }
 
 .grey-box .assignment-header {
