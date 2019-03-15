@@ -20,16 +20,70 @@
     padding: 0.6em;
 }
 
-.assignment-header {
-    background: linear-gradient(45deg, $minionYellow, lighten($minionYellow, 10%));
-}
-
 .assignment-header h3 {
     margin: 0;
 }
 
-.grey-box .assignment-header {
+.minion-yellow {
+    background: linear-gradient(45deg, $minionYellow, lighten($minionYellow, 10%));
+}
+
+.dark-charcoal {
     background: linear-gradient(45deg, $darkCharcoal, lighten($darkCharcoal, 10%));
+    color: white;
+
+    ::selection,
+    ::-moz-selection {
+        background: $darkCharcoal;
+    }
+}
+
+.blue-gem {
+    background: linear-gradient(45deg, $blueGem, lighten($blueGem, 10%));
+    color: white;
+
+    ::selection,
+    ::-moz-selection {
+        background: $blueGem;
+    }
+}
+
+.medium-red-violet {
+    background: linear-gradient(45deg, $mediumRedViolet, lighten($mediumRedViolet, 10%));
+    color: white;
+
+    ::selection,
+    ::-moz-selection {
+        background: $mediumRedViolet;
+    }
+}
+
+.purple {
+    background: linear-gradient(45deg, $purple, lighten($purple, 10%));
+    color: white;
+
+    ::selection,
+    ::-moz-selection {
+        background: $purple;
+    }
+}
+
+.spray {
+    background: linear-gradient(45deg, $spray, lighten($spray, 10%));
+
+    ::selection,
+    ::-moz-selection {
+        background: $spray;
+    }
+}
+
+.starship {
+    background: linear-gradient(45deg, $starship, lighten($starship, 10%));
+
+    ::selection,
+    ::-moz-selection {
+        background: $starship;
+    }
 }
 
 @media (min-width: 768px) {
