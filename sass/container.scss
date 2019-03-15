@@ -3,6 +3,8 @@
     width: 100%;
     margin-top: 8em;
     padding: 1.4em 1em;
+    overflow: auto;
+    position: relative;
 }
 
 ::selection,
@@ -13,6 +15,10 @@
 .main-title {
     font-size: 2.4rem;
     margin-bottom: 1.4rem;
+}
+
+.toc {
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -33,6 +39,21 @@
     .container,
     .inner-footer {
         width: 960px;
+    }
+
+    .toc {
+        display: block;
+        position: -webkit-sticky;
+        position: sticky;
+        text-align: right;
+        width: 30%;
+        top: 0;
+        left: 0;
+    }
+
+    .week {
+        width: 65%;
+        margin-left: 35%;
     }
 
     .main-title {
