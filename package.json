@@ -12,9 +12,9 @@
     "inline-style": "sass inline.scss output/inline.min.css --style compressed",
     "build": "node compiler.js",
     "publish": "rsync -av output/* efo@emilfolino.se:/var/www/jsramverk.me/html/",
-    "cp-base": "cp index.html inter-ui* output/",
+    "cp-font": "cp inter-ui/* output/",
     "clean-output": "rm -rf output/*",
-    "local": "npm run clean-output && npm run inline-style && npm run style && npm run build && npm run cp-base",
+    "local": "npm run clean-output && npm run inline-style && npm run style && npm run build && npm run cp-font",
     "production": "npm run local && npm run publish"
   },
   "repository": {
