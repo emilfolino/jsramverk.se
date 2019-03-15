@@ -1,7 +1,7 @@
 @font-face {
-  font-family: 'Inter UI';
-  font-style:  normal;
-  font-weight: 400;
-  src: url("inter-ui-regular.woff2") format("woff2"),
-       url("inter-ui-regular.woff") format("woff");
+    font-family: 'Inter UI';
+    font-style: normal;
+    font-weight: 400;
+    src: url("inter-ui-regular.woff2") format("woff2"),
+    url("inter-ui-regular.woff") format("woff");
 }
