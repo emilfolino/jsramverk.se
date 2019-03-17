@@ -54,9 +54,8 @@ const createAssignments = function (header) {
                 });
 
                 let breadcrump = createBreadCrumbs(h1);
-                let toc = createTOC(headers);
-                let article = createArticle(markdown.toHTML(data));
-                let result = header + breadcrump + toc + article;
+                let main = createMain(headers, markdown.toHTML(data));
+                let result = header + breadcrump + main;
                 let filename = file.replace("md", "html");
 
                 addFooterAndWriteToFile(result, filename);
@@ -65,16 +64,23 @@ const createAssignments = function (header) {
     });
 };
 
+const createMain = function (headers, article) {
+    return "<div class='week-container'>" +
+        createTOC(headers) +
+        createArticle(article) +
+        "</div>";
+};
+
 const createBreadCrumbs = function (current) {
     return `<p class='breadcrump'><a href='/'>jsramverk.me</a> / ${current}</p>`;
 };
 
 const createTOC = function (headers) {
-    let output = "<ul class='toc'>";
+    let output = "<nav class='toc'><ul>";
     headers.forEach((header) => {
         output += `<li><a href='#'>${header[2]}</a></li>`;
     });
-    output += "</ul>";
+    output += "</ul></nav>";
 
     return output;
 };

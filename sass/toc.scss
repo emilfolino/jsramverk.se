@@ -1,0 +1,23 @@
+@media (min-width: 992px) {
+    .toc {
+        display: block;
+    }
+
+    .toc ul {
+        list-style-type: none;
+        top: 0;
+        font-size: 1.4rem;
+        position: -webkit-sticky;
+        position: sticky;
+    }
+
+    .toc ul li a {
+        display: block;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+    }
+
+    .toc ul li a.current {
+        background: black;
+    }
+}

@@ -4,7 +4,6 @@
     margin-top: 8em;
     padding: 1.4em 1em;
     overflow: auto;
-    position: relative;
 }
 
 ::selection,
@@ -41,19 +40,13 @@
         width: 960px;
     }
 
-    .toc {
-        display: block;
-        position: -webkit-sticky;
-        position: sticky;
-        text-align: right;
-        width: 30%;
-        top: 0;
-        left: 0;
+    .week-container {
+        display: grid;
+        grid-template-columns: 30% auto;
     }
 
     .week {
         width: 65%;
-        margin-left: 35%;
     }
 
     .main-title {
