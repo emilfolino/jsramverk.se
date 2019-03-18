@@ -17,7 +17,7 @@
 }
 
 .toc {
-    display: none;
+    visibility: hidden;
 }
 
 @media (min-width: 768px) {
@@ -40,9 +40,15 @@
         width: 960px;
     }
 
+    .week-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        height: 1000px;
+    }
+
     .week {
         width: 65%;
-        margin-left: 35%;
     }
 
     .main-title {
@@ -56,11 +62,12 @@
     }
 
     .toc {
-        width: 25%;
-        display: block;
-        position: fixed;
-        top: 14.5rem;
+        width: 30%;
+        visibility: visible;
         text-align: right;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
     }
 
     .toc ul {

@@ -85,9 +85,6 @@ const compiler = {
             let slug = slugify(title.toLowerCase());
             let level = stringMatch[2];
 
-            console.log(stringMatch);
-            console.log(level);
-
             if (index) {
                 replaceString += "</section>";
             }
