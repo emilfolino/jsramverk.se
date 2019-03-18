@@ -1,5 +1,9 @@
 const fs = require("fs");
-const markdown = require("markdown").markdown;
+const md = require('markdown-it')({
+    html: true,
+    linkify: true,
+    typographer: true
+});
 const slugify = require("slugify");
 
 const includes = "./includes/";
@@ -47,32 +51,21 @@ const compiler = {
                         console.error(err.message);
                     }
 
-                    let parsed = markdown.parse(data);
+                    let parsed = md.render(data);
 
-                    let allElements = parsed.map((element, index) => {
-                        switch (element[0]) {
-                            case "header":
-                                return compiler.handleHeader(element, index);
-                            case "para":
-                                return `<p>${element[1]}</p>`;
-                            default:
-                                break;
-                        }
+                    let h1Pattern = /<h1>[a-zA-Z0-9äöåÄÖÅ]*<\/h1>/gi;
+                    let h1 = parsed.match(h1Pattern)[0].replace(/<\/?h1>/g, '');
+
+                    let headerPattern = /<h\d>[a-zA-Z0-9äöåÄÖÅ ]*<\/h\d>/gi;
+                    let headers = parsed.match(headerPattern).map((header) => {
+                        return header.replace(/<\/?h\d>/g, '');
                     });
 
-                    let h1 = parsed.filter((element) => {
-                        return Array.isArray(element) &&
-                            element[0] === 'header' &&
-                            element[1].level === 1;
-                    })[0][2];
 
-                    let headers = parsed.filter((element) => {
-                        return Array.isArray(element) &&
-                            element[0] === 'header';
-                    });
+                    parsed = compiler.makeSections(parsed);
 
                     let breadcrumb = compiler.createBreadCrumbs(h1);
-                    let main = compiler.createMain(headers, allElements.join("\n"));
+                    let main = compiler.createMain(headers, parsed);
                     let result = header + breadcrumb + main;
                     let filename = file.replace("md", "html");
 
@@ -82,19 +75,30 @@ const compiler = {
         });
     },
 
-    handleHeader: function (element, index) {
-        let slug = slugify(element[2]);
-        let level = element[1].level;
-        let returnedString = "";
+    makeSections: function (parsed) {
+        let sectionPattern = /<h\d>(.*?)<\/h\d>/gi;
+        let matches = parsed.match(sectionPattern);
 
-        if (index) {
-            returnedString = "</section>";
-        }
+        matches.forEach(function (stringMatch, index) {
+            let replaceString = "";
+            let title = stringMatch.replace(/<\/?h\d>/g, '');
+            let slug = slugify(title.toLowerCase());
+            let level = stringMatch[2];
 
-        returnedString += `<section  id="${slug}">`;
-        returnedString += `<h${level}><a href="#${slug}">${element[2]}</a></h${level}>`;
+            console.log(stringMatch);
+            console.log(level);
 
-        return returnedString;
+            if (index) {
+                replaceString += "</section>";
+            }
+
+            replaceString += `<section  id="${slug}">`;
+            replaceString += `<h${level}><a href="#${slug}">${title}</a></h${level}>`;
+
+            parsed = parsed.replace(stringMatch, replaceString);
+        });
+
+        return parsed;
     },
 
     createMain: function (headers, article) {
@@ -117,9 +121,9 @@ const compiler = {
         let output = "<nav class='toc'><ul>";
 
         headers.forEach((header) => {
-            let slug = slugify(header[2]);
+            let slug = slugify(header.toLowerCase());
 
-            output += `<li><a href='#${slug}'>${header[2]}</a></li>`;
+            output += `<li><a href='#${slug}'>${header}</a></li>`;
         });
         output += "</ul></nav>";
 
