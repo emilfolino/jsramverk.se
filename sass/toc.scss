@@ -1,23 +1,16 @@
 @media (min-width: 992px) {
-    .toc {
-        display: block;
-    }
-
-    .toc ul {
-        list-style-type: none;
-        top: 0;
-        font-size: 1.4rem;
-        position: -webkit-sticky;
-        position: sticky;
+    .toc ul li {
+        padding: 0.3rem 0;
     }
 
     .toc ul li a {
         display: block;
-        padding: 0.5rem 1rem;
+        padding: 0.2rem 1rem;
         text-decoration: none;
+        border-right: 3px solid white;
     }
 
     .toc ul li a.current {
-        background: black;
+        border-right: 3px solid $blueGem;
     }
 }

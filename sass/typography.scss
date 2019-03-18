@@ -31,3 +31,16 @@ p {
 a {
     color: $blueGem;
 }
+
+.week h1 a,
+.week h2 a,
+.week h3 a {
+    color: $darkCharcoal;
+    text-decoration: none;
+}
+
+.week h1 a:hover,
+.week h2 a:hover,
+.week h3 a:hover {
+    text-decoration: underline;
+}

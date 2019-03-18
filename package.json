@@ -11,10 +11,11 @@
     "style": "sass base.scss output/style.min.css --style compressed",
     "inline-style": "sass inline.scss output/inline.min.css --style compressed",
     "build": "node compiler.js",
-    "publish": "rsync -av output/* efo@emilfolino.se:/var/www/jsramverk.me/html/",
+    "publish": "rsync -av --delete --ignore-existing output/* efo@emilfolino.se:/var/www/jsramverk.me/html/",
     "cp-font": "cp inter-ui/* output/",
     "clean-output": "rm -rf output/*",
-    "local": "npm run clean-output && npm run inline-style && npm run style && npm run build && npm run cp-font",
+    "build-client-js": "uglifyjs client-js/scroll.js -o output/scroll.min.js --compress --mangle",
+    "local": "npm run clean-output && npm run inline-style && npm run style && npm run build-client-js && npm run build && npm run cp-font",
     "production": "npm run local && npm run publish"
   },
   "repository": {
@@ -33,10 +34,12 @@
     "eslint-plugin-react": "^7.12.4",
     "javascript-style-guide": "^0.9.10",
     "sass": "^1.17.0",
-    "stylelint": "^9.10.1"
+    "stylelint": "^9.10.1",
+    "uglify-js": "^3.4.10"
   },
   "dependencies": {
     "markdown": "^0.5.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "slugify": "^1.3.4"
   }
 }

@@ -1,8 +1,8 @@
 .container,
 .inner-footer {
     width: 100%;
-    margin-top: 8em;
-    padding: 1.4em 1em;
+    margin-top: 2rem;
+    padding: 1.4rem 1rem;
     overflow: auto;
 }
 
@@ -40,13 +40,9 @@
         width: 960px;
     }
 
-    .week-container {
-        display: grid;
-        grid-template-columns: 30% auto;
-    }
-
     .week {
         width: 65%;
+        margin-left: 35%;
     }
 
     .main-title {
@@ -57,6 +53,19 @@
     p {
         font-size: 1.4rem;
         margin-bottom: 1.96rem;
+    }
+
+    .toc {
+        width: 25%;
+        display: block;
+        position: fixed;
+        top: 16rem;
+        text-align: right;
+    }
+
+    .toc ul {
+        list-style-type: none;
+        font-size: 1.4rem;
     }
 }
 
