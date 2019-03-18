@@ -1,4 +1,3 @@
-const path = require("path");
 const fs = require("fs");
 
 const markdown = require("markdown").markdown;
@@ -38,7 +37,7 @@ const createIndex = function (header) {
 
         addFooterAndWriteToFile(outputContent, "index.html");
     });
-}
+};
 
 const createAssignments = function (header) {
     fs.readdir(content, (err, files) => {
@@ -54,10 +53,8 @@ const createAssignments = function (header) {
                     switch (element[0]) {
                         case "header":
                             return handleHeader(element, index);
-                            break;
                         case "para":
                             return `<p>${element[1]}</p>`;
-                            break;
                         default:
                             break;
                     }
@@ -131,7 +128,7 @@ const createTOC = function (headers) {
 
 const createArticle = function (content) {
     return `<article class='week'>${content}</article>`;
-}
+};
 
 const addFooterAndWriteToFile = function (outputContent, filename) {
     fs.readFile(`${includes}footer.html`, 'utf8', (err, data) => {
@@ -148,7 +145,7 @@ const addFooterAndWriteToFile = function (outputContent, filename) {
 
             console.log(`${filename} has been saved.`);
         });
-    })
+    });
 };
 
 createHeader(createIndex);

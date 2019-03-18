@@ -1,11 +1,7 @@
 (function() {
     var mainNavLinks = document.querySelectorAll(".toc ul li a");
-    var mainSections = document.querySelectorAll(".week section");
 
-    var lastId;
-    var cur = [];
-
-    window.addEventListener("scroll", function(event) {
+    window.addEventListener("scroll", function() {
         var fromTop = window.scrollY;
 
         mainNavLinks.forEach(function(link) {
