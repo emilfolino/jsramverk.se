@@ -10,7 +10,7 @@
     "stylelint": "stylelint **/*.*css",
     "style": "sass base.scss output/style.min.css --style compressed",
     "inline-style": "sass inline.scss output/inline.min.css --style compressed",
-    "build": "node compiler.js",
+    "build": "node app.js",
     "publish": "rsync -av --delete --ignore-existing output/* efo@emilfolino.se:/var/www/jsramverk.me/html/",
     "cp-font": "cp inter-ui/* output/",
     "clean-output": "rm -rf output/*",
