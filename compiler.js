@@ -65,7 +65,7 @@ const compiler = {
                     let h1Pattern = /<h1>[a-zA-Z0-9äöåÄÖÅ]*<\/h1>/gi;
                     let h1 = parsed.match(h1Pattern)[0].replace(/<\/?h1>/g, '');
 
-                    let headerPattern = /<h\d>[a-zA-Z0-9äöåÄÖÅ ]*<\/h\d>/gi;
+                    let headerPattern = /<h[1-3]>[a-zA-Z0-9äöåÄÖÅ ]*<\/h[1-3]>/gi;
                     let headers = parsed.match(headerPattern).map((header) => {
                         return header.replace(/<\/?h\d>/g, '');
                     });
@@ -94,14 +94,16 @@ const compiler = {
             let slug = slugify(title.toLowerCase());
             let level = stringMatch[2];
 
-            if (index) {
-                replaceString += "</section>";
+            if (level <= 3) {
+                if (index) {
+                    replaceString += "</section>";
+                }
+
+                replaceString += `<section  id="${slug}">`;
+                replaceString += `<h${level}><a href="#${slug}">${title}</a></h${level}>`;
+
+                parsed = parsed.replace(stringMatch, replaceString);
             }
-
-            replaceString += `<section  id="${slug}">`;
-            replaceString += `<h${level}><a href="#${slug}">${title}</a></h${level}>`;
-
-            parsed = parsed.replace(stringMatch, replaceString);
         });
 
         return parsed;

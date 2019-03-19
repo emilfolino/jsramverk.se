@@ -26,7 +26,7 @@ I nedanstående video berättar John Papa om hur man kan tänka när man väljer
 
 ## Material och tekniker
 
-#### Rader skriven kod i exempelprogrammen {#loc}
+#### Rader skriven kod i exempelprogrammen
 
 I kursrepots exempel katalog finns två olika exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I `example/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `example/calculator` är en simpel miniräknare implementerad.
 
@@ -44,7 +44,7 @@ I nedanstående tabell listas de rader kod som utvecklaren har skrivit för att 
 
 
 
-#### Storlek produktionsfil(er) {#filesize}
+#### Storlek produktionsfil(er)
 
 I nedanstående tabell listas storleken på produktionsfilerna som skapas av antingen bygg verktyget i ramverket, webpack eller uglify. Filstorlekar är utskrivna med hjälp av kommandot `ls -lh` i ett bash-skal.
 
@@ -56,11 +56,12 @@ I nedanstående tabell listas storleken på produktionsfilerna som skapas av ant
 
 
 
+## Tekniska koncept
 
 Vi tittar i denna del av artikeln på några tekniska koncept som används i de olika ramverken. Vi tittar på hur man har vald att implementera dessa koncept i de olika ramverken och utvärderar vilka fördelar och nackdelar som finns med att göra på det viset.
 
 
-### Komponenter {#komponenter}
+### Komponenter
 
 De fyra ramverk som har valts ut i denna artikel är alla byggda runt komponenter. Komponenter är återanvändbara delar av koden, som i bästa fall inte har några externa beroenden.
 
@@ -68,7 +69,7 @@ I mithril och React är allt JavaScript och komponenterna definieras i JavaScrip
 
 
 
-### Länkning av data {#linking}
+### Länkning av data
 
 Vi vill i många applikationer och speciellt i applikationer där data uppdateras ofta länka data i våra modeller till representationen i en vy. I vanilla JavaScript hade vi gjort det genom att varje gång data uppdateras sätta ett nytt värde för ett specifikt element i DOM'en.
 
@@ -104,4 +105,22 @@ Om medlemsvariabeln `current` får ett nytt värde ändras den direkt i den kopp
 
 ## Kravspecifikation
 
+1. Skapa en me-applikation i ditt valda ramverk med följande routes: "/", "/reports/kmom01" och "/reports/kmom02".
+
+1. "/" ska visa en kort beskrivning av dig själv hämtat från ditt me-api.
+
+1. "/reports/kmom01" och "/reports/kmom02" ska visa redovisningstexten från respektive kmom hämtat från ditt me-api.
+
+1. Driftsätta din me-applikation på din server och länka till applikationen i din redovisningstext på Canvas.
+
+1. Committa alla filer och lägg till en tagg (1.0.\*).
+
+1. Pusha upp repot till GitHub, inklusive taggarna.
+
 ## Skriva
+
+Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1 & 2 fokusera på bakgrund och introduktion. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb.
+
+I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktionen. Introduktionen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till nuvarande forskning. Därför är det viktigt att vi i introduktionen berättar för vår läsare hur det ligger till med den nuvarande forskningen i området.
+
+Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt.

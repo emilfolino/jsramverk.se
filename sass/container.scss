@@ -17,7 +17,7 @@
 }
 
 .toc {
-    visibility: hidden;
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -42,6 +42,7 @@
 
     .week-container {
         width: 100%;
+        margin-bottom: 16rem;
     }
 
     .week {
@@ -60,8 +61,8 @@
     }
 
     .toc {
-        width: 330px;
-        visibility: visible;
+        width: 310px;
+        display: block;
         text-align: right;
         position: fixed;
         top: 14.5rem;

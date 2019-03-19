@@ -4,6 +4,7 @@
     height: 0;
     overflow: hidden;
     max-width: 100%;
+    margin-bottom: 1.4rem;
 }
 
 .embed-container iframe,
@@ -14,4 +15,10 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+@media (min-width: 992px) {
+    .embed-container {
+        margin-bottom: 1.96rem;
+    }
 }
