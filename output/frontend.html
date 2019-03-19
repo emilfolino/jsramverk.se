@@ -8,7 +8,10 @@
 </style>
     <link rel="stylesheet" href="inter-ui.min.css" media="none" onload="if(media!='all')media='all'">
     <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="atom-one-dark.css"media="none" onload="if(media!='all')media='all'">
+
     <script defer src='scroll.min.js'></script>
+<script defer src='highlight.pack.js'></script>
 
     <noscript>
         <link rel="stylesheet" href="style.min.css">
@@ -42,6 +45,117 @@
 <p>I nedanstående video berättar John Papa om hur man kan tänka när man väljer ett JavaScript-ramverk.</p>
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/dHptnyroFNA" frameborder="0" allowfullscreen></iframe></div>
 </section><section  id="material-och-tekniker"><h2><a href="#material-och-tekniker">Material och tekniker</a></h2>
+</section><section  id="rader-skriven-kod-i-exempelprogrammen-loc"><h4><a href="#rader-skriven-kod-i-exempelprogrammen-loc">Rader skriven kod i exempelprogrammen {#loc}</a></h4>
+<p>I kursrepots exempel katalog finns två olika exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I <code>example/tic-tac-toe</code> finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I <code>example/calculator</code> är en simpel miniräknare implementerad.</p>
+<p>Dessutom finns det samma Me-sida som konsumerar me-api:t från tidigare kursmoment implementerad i de 5 olika teknikerna. <a href="https://github.com/emilfolino?utf8=%E2%9C%93&amp;tab=repositories&amp;q=me-&amp;type=&amp;language=">GitHub repon</a> för dessa 5 Me-sidor samt me-api:t finns tillgängligt. Dessa är även driftsatta på <code>me-{angular,mithril,react,vanilla,vue}.jsramverk.me</code>.</p>
+<p>Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.</p>
+<p>I nedanstående tabell listas de rader kod som utvecklaren har skrivit för att implementera exempelprogrammen. De rader som är räknade är enbart de rader som innehåller källkod, så rader med kommentarer och tomma rader är borttagna.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Angular</th>
+<th>Mithril</th>
+<th>React</th>
+<th>Vue</th>
+<th>Vanilla JS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>calculator</td>
+<td>112</td>
+<td>103</td>
+<td>133</td>
+<td>98</td>
+<td>118</td>
+</tr>
+<tr>
+<td>me</td>
+<td>166</td>
+<td>107</td>
+<td>117</td>
+<td>134</td>
+<td>92</td>
+</tr>
+<tr>
+<td>tic-tac-toe</td>
+<td>196</td>
+<td>136</td>
+<td>146</td>
+<td>172</td>
+<td>126</td>
+</tr>
+</tbody>
+</table>
+</section><section  id="storlek-produktionsfil(er)-filesize"><h4><a href="#storlek-produktionsfil(er)-filesize">Storlek produktionsfil(er) {#filesize}</a></h4>
+<p>I nedanstående tabell listas storleken på produktionsfilerna som skapas av antingen bygg verktyget i ramverket, webpack eller uglify. Filstorlekar är utskrivna med hjälp av kommandot <code>ls -lh</code> i ett bash-skal.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Angular</th>
+<th>Mithril</th>
+<th>React</th>
+<th>Vue</th>
+<th>Vanilla JS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>calculator</td>
+<td>217K</td>
+<td>30K</td>
+<td>115K</td>
+<td>83K</td>
+<td>2.6K</td>
+</tr>
+<tr>
+<td>me</td>
+<td>329K</td>
+<td>29K</td>
+<td>134K</td>
+<td>106K</td>
+<td>2.2K</td>
+</tr>
+<tr>
+<td>tic-tac-toe</td>
+<td>222K</td>
+<td>29K</td>
+<td>37K</td>
+<td>87K</td>
+<td>2.8K</td>
+</tr>
+</tbody>
+</table>
+<p>Vi tittar i denna del av artikeln på några tekniska koncept som används i de olika ramverken. Vi tittar på hur man har vald att implementera dessa koncept i de olika ramverken och utvärderar vilka fördelar och nackdelar som finns med att göra på det viset.</p>
+</section><section  id="komponenter-komponenter"><h3><a href="#komponenter-komponenter">Komponenter {#komponenter}</a></h3>
+<p>De fyra ramverk som har valts ut i denna artikel är alla byggda runt komponenter. Komponenter är återanvändbara delar av koden, som i bästa fall inte har några externa beroenden.</p>
+<p>I mithril och React är allt JavaScript och komponenterna definieras i JavaScript filer. I mithril är enda kravet att det ska finnas en <code>view</code> funktion som returnerar noder. I React heter funktionen <code>render</code> och funktionen returnerar JSX. I Vue finns varje komponent i en fil men är uppdelade i tre delar <code>template</code>, <code>script</code> och <code>style</code>, som motsvarar de tre lagren vi känner till från tidigare med struktur (HTML), stil (CSS) och dynamik (JavaScript). I angular har man tagit det ett steg längre med tre olika filer för dessa tre lager.</p>
+</section><section  id="lankning-av-data-linking"><h3><a href="#lankning-av-data-linking">Länkning av data {#linking}</a></h3>
+<p>Vi vill i många applikationer och speciellt i applikationer där data uppdateras ofta länka data i våra modeller till representationen i en vy. I vanilla JavaScript hade vi gjort det genom att varje gång data uppdateras sätta ett nytt värde för ett specifikt element i DOM’en.</p>
+<pre><code class="language-javascript">var data = 42;
+
+document.getElementById(&quot;element&quot;).textContent = data;
+</code></pre>
+<p>I många ramverk är detta nått man försöker förenkla genom att uppdatera vyn direkt varje gång data ändras. Detta är en av de magiska sakerna med JavaScript ramverk och vi ska nedan se exempel på hur detta kan göras. I de flesta ramverken definierar vi medlemsvariabler i komponenter och vi kan sedan använda dessa medlemsvariabler i templates. I nedanstående exempel ser vi hur vi använder medlemsvariabler i Vue.</p>
+<pre><code>&lt;template&gt;
+    &lt;div class=&quot;calculator&quot;&gt;
+        &lt;div class=&quot;display&quot;&gt;{{ current || 0 }}&lt;/div&gt;
+        ...
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    data() {
+        return {
+            current: 0,
+        }
+    },
+    ...
+</code></pre>
+<p>Om medlemsvariabeln <code>current</code> får ett nytt värde ändras den direkt i den kopplade template. I vanilla JavaScript gör vi en explicit koppling och uppdatering av data och i de ramverk som har valts ut är det en implicit koppling och uppdatering.</p>
 </section><section  id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
 </section><section  id="skriva"><h2><a href="#skriva">Skriva</a></h2>
 </article></section></div>    </main>

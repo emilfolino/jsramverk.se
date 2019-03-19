@@ -13,9 +13,10 @@
     "build": "node app.js",
     "publish": "rsync -av output/* efo@jsramverk.me:/var/www/jsramverk.me/html/",
     "cp-font": "cp inter-ui/* output/",
+    "cp-highlight": "cp highlight.js/highlight.pack.js highlight.js/styles/atom-one-dark.css output/",
     "clean-output": "rm -rf output/*",
     "build-client-js": "uglifyjs client-js/scroll.js -o output/scroll.min.js --compress --mangle",
-    "local": "npm test && npm run clean-output && npm run inline-style && npm run style && npm run build-client-js && npm run build && npm run cp-font",
+    "local": "npm test && npm run clean-output && npm run inline-style && npm run style && npm run build-client-js && npm run build && npm run cp-font && npm run cp-highlight",
     "production": "npm run local && npm run publish"
   },
   "repository": {

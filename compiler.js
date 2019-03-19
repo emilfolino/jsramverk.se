@@ -11,7 +11,7 @@ const content = "./content/";
 const output = "./output/";
 
 const compiler = {
-    createHeader: function (next, additionalJS=[]) {
+    createHeader: function (next, additionalCSS=[], additionalJS=[]) {
         fs.readFile(`${includes}header.html`, 'utf8', (err, data) => {
             if (err) {
                 console.error(err.message);
@@ -24,6 +24,15 @@ const compiler = {
             });
 
             data = data.replace("{{jsScripts}}", jsScripts);
+
+            let cssFiles = "";
+
+            additionalCSS.forEach(function(css) {
+                cssFiles += `<link rel="stylesheet" href="${css}"` +
+                    `media="none" onload="if(media!='all')media='all'">\n`;
+            });
+
+            data = data.replace("{{cssFiles}}", cssFiles);
 
             fs.readFile(`${output}inline.min.css`, 'utf8', (err, cssData) => {
                 next(data.replace("{{inline-style}}", cssData));

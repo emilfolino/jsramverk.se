@@ -1,0 +1,22 @@
+pre code {
+    font-size: 1rem;
+    margin-bottom: 1.4rem;
+}
+
+code {
+    font-size: 1rem;
+    color: #abb2bf;
+    background: #282c34;
+    padding: 0 0.6rem;
+}
+
+@media (min-width: 992px) {
+    pre code {
+        font-size: 1.4rem;
+        margin-bottom: 1.96rem;
+    }
+
+    code {
+        font-size: 1.4rem;
+    }
+}
