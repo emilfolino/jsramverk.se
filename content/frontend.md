@@ -22,9 +22,11 @@ I nedanstående video berättar John Papa om hur man kan tänka när man väljer
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/dHptnyroFNA" frameborder="0" allowfullscreen></iframe></div>
 
-Hej hej
+
 
 ## Material och tekniker
+
+
 
 ## Kravspecifikation
 

@@ -41,14 +41,12 @@
     }
 
     .week-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        height: 1000px;
+        width: 100%;
     }
 
     .week {
-        width: 65%;
+        width: auto;
+        margin-left: 350px;
     }
 
     .main-title {
@@ -62,12 +60,11 @@
     }
 
     .toc {
-        width: 30%;
+        width: 330px;
         visibility: visible;
         text-align: right;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
+        position: fixed;
+        top: 14.5rem;
     }
 
     .toc ul {
