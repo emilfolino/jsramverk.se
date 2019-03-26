@@ -6,18 +6,19 @@
 
 .assignment-box {
     width: 100%;
-    height: 8em;
+    height: 16rem;
     margin-bottom: 2.8rem;
     box-shadow: $shadow;
 }
 
 .assignment-box.project {
     width: 100%;
+    height: 19rem;
 }
 
 .assignment-header,
 .assignment-body {
-    padding: 0.6em;
+    padding: 1.4rem;
 }
 
 .assignment-header {
@@ -38,13 +39,18 @@
     .assignment-box {
         width: 46%;
         margin-bottom: 3.92rem;
-        height: 8em;
+        height: 16rem;
+    }
+
+    .assignment-box.project {
+        width: 100%;
+        height: 14rem;
     }
 }
 
 @media (min-width: 992px) {
     .assignment-box {
         width: 30%;
-        height: 10em;
+        height: 20rem;
     }
 }
