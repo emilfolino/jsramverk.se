@@ -22,12 +22,12 @@
 }
 
 .assignment-header {
-    background: linear-gradient(45deg, $royalBlue, lighten($royalBlue, 10%));
+    background: linear-gradient(45deg, $blueGem, lighten($blueGem, 20%));
     color: white;
 
     ::selection,
     ::-moz-selection {
-        background: $royalBlue;
+        background: $blueGem;
     }
 }
 

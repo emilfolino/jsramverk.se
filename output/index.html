@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>jsramverk</title>
-    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:sans-serif;font-display:auto}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.96rem}p{font-size:1.4rem;margin-bottom:1.96rem}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%}body{font-family:sans-serif;font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.96rem}p{font-size:1.4rem;margin-bottom:1.96rem}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
 </style>
     <link rel="stylesheet" href="inter-ui.min.css" media="none" onload="if(media!='all')media='all'">
     <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
@@ -26,7 +26,7 @@
 
 <section class="assignments">
     <div class="assignment-box">
-        <div class="assignment-header dark-charcoal">
+        <div class="assignment-header">
             <h3>1: Frontend</h3>
         </div>
         <div class="assignment-body">
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="assignment-box">
-        <div class="assignment-header blue-gem">
+        <div class="assignment-header">
             <h3>2: UX</h3>
         </div>
         <div class="assignment-body">
@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="assignment-box">
-        <div class="assignment-header medium-red-violet">
+        <div class="assignment-header">
             <h3>3: Backend</h3>
         </div>
         <div class="assignment-body">
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="assignment-box">
-        <div class="assignment-header purple">
+        <div class="assignment-header">
             <h3>4: Test</h3>
         </div>
         <div class="assignment-body">
@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="assignment-box">
-        <div class="assignment-header spray">
+        <div class="assignment-header">
             <h3>5: Realtid</h3>
         </div>
         <div class="assignment-body">
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="assignment-box">
-        <div class="assignment-header starship">
+        <div class="assignment-header">
             <h3>6: NoSQL</h3>
         </div>
         <div class="assignment-body">
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="assignment-box project">
-        <div class="assignment-header minion-yellow">
+        <div class="assignment-header">
             <h3>Projekt: Trading plattform</h3>
         </div>
         <div class="assignment-body">
@@ -97,49 +97,71 @@
     </div>
 </section>
 
-<section class="general-information">
-    <h2>Generell information</h2>
+<section class="general-information" id="general-information">
+    <h2>Generell information<a class="anchor" href="#general-information">&#128279;</a></h2>
 
-    <h4>Kursplan</h4>
-    <p>Kursplanen hittas genom att söka på <a href="http://edu.bth.se/utbildning/utb_kursplaner.asp?KKurskod=DV1612">DV1612</a> via BTH's webbplats.</p>
+    <section id="courseplan">
+        <h4>Kursplan
+            <a class="anchor" href="#courseplan">&#128279;</a>
+        </h4>
 
-    <h4>Studie- och lektionsplan</h4>
-    <p></p>
+        <p>Kursplanen hittas genom att söka på <a href="http://edu.bth.se/utbildning/utb_kursplaner.asp?KKurskod=DV1612">DV1612</a> via BTH's webbplats.</p>
+    </section>
 
-    <h4>Betygsättning</h4>
-    <p></p>
+    <section id="studyplan">
+        <h4>Studie- och lektionsplan
+            <a class="anchor" href="#studyplan">&#128279;</a>
+        </h4>
+        <p></p>
+    </section>
 
-    <h4>Ladok</h4>
-    <p>Enligt kursplanen finns det 3 Ladok-moment. Dessa är kopplade till inlämningsuppgifterna enligt nedan.</p>
+    <section id="grading">
+        <h4>Betygsättning
+            <a class="anchor" href="#grading">&#128279;</a>
+        </h4>
+        <p></p>
+    </section>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Kursens moment</th>
-                <th>Ladok moment enligt kursplan</th>
-                <th>Betyg</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Frontend &amp; UX</td>
-                <td>Inlämning 1 á 2.5hp</td>
-                <td>G-U</td>
-            </tr>
-            <tr>
-                <td>Backend &amp; Test</td>
-                <td>Inlämning 2 á 2.5hp</td>
-                <td>G-U</td>
-            </tr>
-            <tr>
-                <td>Realtid, NoSQL &amp; Projektet</td>
-                <td>Inlämning 3 á 2.5hp</td>
-                <td>A-F</td>
-            </tr>
-        </tbody>
-    </table>
+    <section id="ladok">
+        <h4>Ladok
+            <a class="anchor" href="#ladok">&#128279;</a>
+        </h4>
+        <p>Enligt kursplanen finns det 3 Ladok-moment. Dessa är kopplade till inlämningsuppgifterna enligt nedan.</p>
 
-    <h4>Kursvärdering</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kursens moment</th>
+                    <th>Ladok moment enligt kursplan</th>
+                    <th>Betyg</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Frontend &amp; UX</td>
+                    <td>Inlämning 1 á 2.5hp</td>
+                    <td>G-U</td>
+                </tr>
+                <tr>
+                    <td>Backend &amp; Test</td>
+                    <td>Inlämning 2 á 2.5hp</td>
+                    <td>G-U</td>
+                </tr>
+                <tr>
+                    <td>Realtid, NoSQL &amp; Projektet</td>
+                    <td>Inlämning 3 á 2.5hp</td>
+                    <td>A-F</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="evaluation">
+        <h4>Kursvärdering
+            <a class="anchor" href="#evaluation">&#128279;</a>
+        </h4>
+        <p></p>
+    </section>
 </section>
     </main>
 

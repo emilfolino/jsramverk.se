@@ -6,6 +6,7 @@ body {
     font-family: $mainFont;
     color: $mainFontColor;
     line-height: 1.4;
+    font-display: auto;
 }
 
 h1 {
@@ -50,4 +51,15 @@ a {
 .week h3 a:hover,
 .week h4 a:hover {
     text-decoration: underline;
+}
+
+.anchor {
+    text-decoration: none;
+    margin-left: 1rem;
+    display: none;
+}
+
+.general-information h2:hover .anchor,
+.general-information h4:hover .anchor {
+    display: inline;
 }
