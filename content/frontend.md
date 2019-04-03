@@ -1,6 +1,8 @@
 # Frontend
 
-Vi utvärderar frontend ramverk och skapar en me-applikation i det JavaScript ramverk du valde.
+Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tittar på en föreläsning om hur man väljer JavaScript ramverk.
+
+
 
 ## Läsa
 
@@ -56,12 +58,29 @@ I nedanstående tabell listas storleken på produktionsfilerna som skapas av ant
 
 
 
+## Flera exempelprogram
+
+#### RealWorld
+
+För att ytterligare utvärdera våra valda ramverk tar vi en titt i GitHub repot [RealWorld Example](https://github.com/gothinkster/realworld). RealWorld Example repon är både backend och frontend som uppfyller vissa specifikationer och därför kan sättas ihop villkorligt. Använd dessa repon för att skapa dig en uppfattning om hur frontend ramverken samspelar med backends.
+
+
+
+#### John Papa's Heroes
+
+Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk. Som förberedelse för presentationen hade han skapat samma app i "The Big Three" och de tre apparna ligger som open source kod på GitHub. [heroes-angular](https://github.com/johnpapa/heroes-angular), [heroes-react](https://github.com/johnpapa/heroes-react) och [heroes-vue](https://github.com/johnpapa/heroes-vue) är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.
+
+Titta igenom repon och se hur John Papa har strukturerat apparna i de olika ramverken.
+
+
+
 ## Tekniska koncept
 
 Vi tittar i denna del av artikeln på några tekniska koncept som används i de olika ramverken. Vi tittar på hur man har vald att implementera dessa koncept i de olika ramverken och utvärderar vilka fördelar och nackdelar som finns med att göra på det viset.
 
 
-### Komponenter
+
+#### Komponenter
 
 De fyra ramverk som har valts ut i denna artikel är alla byggda runt komponenter. Komponenter är återanvändbara delar av koden, som i bästa fall inte har några externa beroenden.
 
@@ -69,7 +88,7 @@ I mithril och React är allt JavaScript och komponenterna definieras i JavaScrip
 
 
 
-### Länkning av data
+#### Länkning av data
 
 Vi vill i många applikationer och speciellt i applikationer där data uppdateras ofta länka data i våra modeller till representationen i en vy. I vanilla JavaScript hade vi gjort det genom att varje gång data uppdateras sätta ett nytt värde för ett specifikt element i DOM'en.
 
@@ -103,19 +122,88 @@ Om medlemsvariabeln `current` får ett nytt värde ändras den direkt i den kopp
 
 
 
+#### Routing
+
+I de flesta applikationer vi vill kunna gå mellan olika sidor och då är en router ett bra sätt att delegera och strukturera detta förfarande. I många fall av klient-sida routing använder man hashbang (#!) routing där de två tecknen #! används för att markera att detta är en route. Me-applikationer som har redovisats ovan använder alla någon form av routing.
+
+I angular och mithril finns det inbyggda routers, i Angular importerar man ett paket och i mithril används funktionen `m.route()`. I react och vue installeras ytterligare paket `react-router-dom` och `vue-router`.
+
+I angular (`app.module.ts`), mithril (`index.js`) och vue (`router/index.js`) definieras alla router i en JavaScript kontext och man använder sedan ett element för att visa de olika komponenter kopplat till routen. Filerna inom parentes är de filer där routerna är difinierat i Me-applikationerna. I react anges router och vad som ska visas på de olika router i filen `App.js` med hjälp av JSX.
+
+Ett exempel på en enkel router i vanilla JavaScript kan ses i me-vanilla exemplet där funktioner används för att skriva ut de enskilda vyerna.
+
+
+
+#### Eventhantering och delegering
+
+JavaScript tillför det dynamiska lagret till webben och en stor del av detta är att hantera användarens klick, skrivande osv. I vanilla JavaScript sköter vi detta med EventListeners till exempel.
+
+```javascript
+document.getElementById("my-btn").addEventListener("click", function (event) {
+    // do the thing needed when a button is clicked.
+});
+```
+
+Ramverken försöker förenkla detta förfarandet genom att förkorta ner syntaxen för EventListeners. tic-tac-toc exempelprogrammen är bra exempel både på Eventhantering och delegering och vi kan titta på hur detta lösas i de olika ramverk.
+
+```
+// angular
+<div class="square" (click)="click()">
+  {{ squareValue }}
+</div>
+
+// mithril
+return m("div.square",
+    {
+        onclick: function () {
+            game.handleClick(index);
+        }
+    },
+    game.history[game.stepNumber].squares[index]
+);
+
+// react
+<button className="square" onClick={props.onClick}>
+{props.value}
+</button>
+
+// vue
+<div class="square" @click="onClick(index)">
+  {{ current }}
+</div>
+```
+
+I react och vue har vi skickat med en click-callback funktion från en annan komponent och när den sen klickas anropas den ursprungliga funktionen. I mithril används en funktion i modellen `game` som får hantera click-callbacken. I angular använder vi oss istället av en `EventEmitter`, som i sin tur skickar eventet upp i trädet av komponenter istället för att man som i react och vue skickar med en funktion ner i trädet.
+
+
+
+#### HTTP-anrop
+
+För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i webapp.
+
+I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
+
+
+
 ## Kravspecifikation
 
-1. Skapa en me-applikation i ditt valda ramverk med följande routes: "/", "/reports/kmom01" och "/reports/kmom02".
+Nedan finns kravspecifikationen för veckans inlämningsuppgift:
+
+1. Skapa en me-applikation i ditt valda ramverk med följande routes: "/", "/reports/kmom01".
 
 1. "/" ska visa en kort beskrivning av dig själv hämtat från ditt me-api.
 
-1. "/reports/kmom01" och "/reports/kmom02" ska visa redovisningstexten från respektive kmom hämtat från ditt me-api.
-
-1. Driftsätta din me-applikation på din server och länka till applikationen i din redovisningstext på Canvas.
+1. "/reports/kmom01" ska visa texten beskriven i [Skriva](#skriva).
 
 1. Committa alla filer och lägg till en tagg (1.0.\*).
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
+
+1. Länka till ditt GitHub repo i din inlämning på Canvas.
+
+1. Se till att de tre kommandon `git clone` -> `npm install` -> `npm start` klonar, installerar dependencies och startar din me-applikation. Notera i inlämningen om en annan kombination av kommandon ska användas.
+
+
 
 ## Skriva
 
@@ -124,3 +212,11 @@ Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1 & 2 fok
 I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktionen. Introduktionen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till nuvarande forskning. Därför är det viktigt att vi i introduktionen berättar för vår läsare hur det ligger till med den nuvarande forskningen i området.
 
 Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt.
+
+
+
+## Sammanfattning
+
+Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för [django](https://www.djangoproject.com/) pratar om hur vi inte alltid behöver ett JavaScript ramverk.
+
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/k7n2xnOiWI8" frameborder="0" allowfullscreen></iframe></div>

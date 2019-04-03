@@ -21,8 +21,8 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Frontend</p><div class='week-container'><nav class='toc'><ul><li><a href='#frontend'>Frontend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#titta'>Titta</a></li><li><a href='#material-och-tekniker'>Material och tekniker</a></li><li><a href='#tekniska-koncept'>Tekniska koncept</a></li><li><a href='#komponenter'>Komponenter</a></li><li><a href='#lankning-av-data'>Länkning av data</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section  id="frontend"><h1><a href="#frontend">Frontend</a></h1>
-<p>Vi utvärderar frontend ramverk och skapar en me-applikation i det JavaScript ramverk du valde.</p>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Frontend</p><div class='week-container'><nav class='toc'><ul><li><a href='#frontend'>Frontend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#titta'>Titta</a></li><li><a href='#material-och-tekniker'>Material och tekniker</a></li><li><a href='#flera-exempelprogram'>Flera exempelprogram</a></li><li><a href='#tekniska-koncept'>Tekniska koncept</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li><li><a href='#sammanfattning'>Sammanfattning</a></li></ul></nav><article class='week'><section  id="frontend"><h1><a href="#frontend">Frontend</a></h1>
+<p>Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför “The Big Three” Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tittar på en föreläsning om hur man väljer JavaScript ramverk.</p>
 </section><section  id="lasa"><h2><a href="#lasa">Läsa</a></h2>
 <p>Följande länkar är bra att ha för undersökande och implementation.</p>
 <ol>
@@ -126,12 +126,18 @@
 </tr>
 </tbody>
 </table>
+</section><section  id="flera-exempelprogram"><h2><a href="#flera-exempelprogram">Flera exempelprogram</a></h2>
+<h4>RealWorld</h4>
+<p>För att ytterligare utvärdera våra valda ramverk tar vi en titt i GitHub repot <a href="https://github.com/gothinkster/realworld">RealWorld Example</a>. RealWorld Example repon är både backend och frontend som uppfyller vissa specifikationer och därför kan sättas ihop villkorligt. Använd dessa repon för att skapa dig en uppfattning om hur frontend ramverken samspelar med backends.</p>
+<h4>John Papa’s Heroes</h4>
+<p>Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk. Som förberedelse för presentationen hade han skapat samma app i “The Big Three” och de tre apparna ligger som open source kod på GitHub. <a href="https://github.com/johnpapa/heroes-angular">heroes-angular</a>, <a href="https://github.com/johnpapa/heroes-react">heroes-react</a> och <a href="https://github.com/johnpapa/heroes-vue">heroes-vue</a> är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.</p>
+<p>Titta igenom repon och se hur John Papa har strukturerat apparna i de olika ramverken.</p>
 </section><section  id="tekniska-koncept"><h2><a href="#tekniska-koncept">Tekniska koncept</a></h2>
 <p>Vi tittar i denna del av artikeln på några tekniska koncept som används i de olika ramverken. Vi tittar på hur man har vald att implementera dessa koncept i de olika ramverken och utvärderar vilka fördelar och nackdelar som finns med att göra på det viset.</p>
-</section><section  id="komponenter"><h3><a href="#komponenter">Komponenter</a></h3>
+<h4>Komponenter</h4>
 <p>De fyra ramverk som har valts ut i denna artikel är alla byggda runt komponenter. Komponenter är återanvändbara delar av koden, som i bästa fall inte har några externa beroenden.</p>
 <p>I mithril och React är allt JavaScript och komponenterna definieras i JavaScript filer. I mithril är enda kravet att det ska finnas en <code>view</code> funktion som returnerar noder. I React heter funktionen <code>render</code> och funktionen returnerar JSX. I Vue finns varje komponent i en fil men är uppdelade i tre delar <code>template</code>, <code>script</code> och <code>style</code>, som motsvarar de tre lagren vi känner till från tidigare med struktur (HTML), stil (CSS) och dynamik (JavaScript). I angular har man tagit det ett steg längre med tre olika filer för dessa tre lager.</p>
-</section><section  id="lankning-av-data"><h3><a href="#lankning-av-data">Länkning av data</a></h3>
+<h4>Länkning av data</h4>
 <p>Vi vill i många applikationer och speciellt i applikationer där data uppdateras ofta länka data i våra modeller till representationen i en vy. I vanilla JavaScript hade vi gjort det genom att varje gång data uppdateras sätta ett nytt värde för ett specifikt element i DOM’en.</p>
 <pre><code class="language-javascript">var data = 42;
 
@@ -155,19 +161,58 @@ export default {
     ...
 </code></pre>
 <p>Om medlemsvariabeln <code>current</code> får ett nytt värde ändras den direkt i den kopplade template. I vanilla JavaScript gör vi en explicit koppling och uppdatering av data och i de ramverk som har valts ut är det en implicit koppling och uppdatering.</p>
+<h4>Routing</h4>
+<p>I de flesta applikationer vi vill kunna gå mellan olika sidor och då är en router ett bra sätt att delegera och strukturera detta förfarande. I många fall av klient-sida routing använder man hashbang (#!) routing där de två tecknen #! används för att markera att detta är en route. Me-applikationer som har redovisats ovan använder alla någon form av routing.</p>
+<p>I angular och mithril finns det inbyggda routers, i Angular importerar man ett paket och i mithril används funktionen <code>m.route()</code>. I react och vue installeras ytterligare paket <code>react-router-dom</code> och <code>vue-router</code>.</p>
+<p>I angular (<code>app.module.ts</code>), mithril (<code>index.js</code>) och vue (<code>router/index.js</code>) definieras alla router i en JavaScript kontext och man använder sedan ett element för att visa de olika komponenter kopplat till routen. Filerna inom parentes är de filer där routerna är difinierat i Me-applikationerna. I react anges router och vad som ska visas på de olika router i filen <code>App.js</code> med hjälp av JSX.</p>
+<p>Ett exempel på en enkel router i vanilla JavaScript kan ses i me-vanilla exemplet där funktioner används för att skriva ut de enskilda vyerna.</p>
+<h4>Eventhantering och delegering</h4>
+<p>JavaScript tillför det dynamiska lagret till webben och en stor del av detta är att hantera användarens klick, skrivande osv. I vanilla JavaScript sköter vi detta med EventListeners till exempel.</p>
+<pre><code class="language-javascript">document.getElementById(&quot;my-btn&quot;).addEventListener(&quot;click&quot;, function (event) {
+    // do the thing needed when a button is clicked.
+});
+</code></pre>
+<p>Ramverken försöker förenkla detta förfarandet genom att förkorta ner syntaxen för EventListeners. tic-tac-toc exempelprogrammen är bra exempel både på Eventhantering och delegering och vi kan titta på hur detta lösas i de olika ramverk.</p>
+<pre><code>// angular
+&lt;div class=&quot;square&quot; (click)=&quot;click()&quot;&gt;
+  {{ squareValue }}
+&lt;/div&gt;
+
+// mithril
+return m(&quot;div.square&quot;,
+    {
+        onclick: function () {
+            game.handleClick(index);
+        }
+    },
+    game.history[game.stepNumber].squares[index]
+);
+
+// react
+&lt;button className=&quot;square&quot; onClick={props.onClick}&gt;
+{props.value}
+&lt;/button&gt;
+
+// vue
+&lt;div class=&quot;square&quot; @click=&quot;onClick(index)&quot;&gt;
+  {{ current }}
+&lt;/div&gt;
+</code></pre>
+<p>I react och vue har vi skickat med en click-callback funktion från en annan komponent och när den sen klickas anropas den ursprungliga funktionen. I mithril används en funktion i modellen <code>game</code> som får hantera click-callbacken. I angular använder vi oss istället av en <code>EventEmitter</code>, som i sin tur skickar eventet upp i trädet av komponenter istället för att man som i react och vue skickar med en funktion ner i trädet.</p>
+<h4>HTTP-anrop</h4>
+<p>För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch</a>, som vi känner igen från tidigare. I mithril används den inbyggda funktionen <code>m.request()</code>, som introducerades tillsammans med mithril i webapp.</p>
+<p>I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna <code>src/app/report</code> och <code>src/app/me</code>.</p>
 </section><section  id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
+<p>Nedan finns kravspecifikationen för veckans inlämningsuppgift:</p>
 <ol>
 <li>
-<p>Skapa en me-applikation i ditt valda ramverk med följande routes: “/”, “/reports/kmom01” och “/reports/kmom02”.</p>
+<p>Skapa en me-applikation i ditt valda ramverk med följande routes: “/”, “/reports/kmom01”.</p>
 </li>
 <li>
 <p>“/” ska visa en kort beskrivning av dig själv hämtat från ditt me-api.</p>
 </li>
 <li>
-<p>“/reports/kmom01” och “/reports/kmom02” ska visa redovisningstexten från respektive kmom hämtat från ditt me-api.</p>
-</li>
-<li>
-<p>Driftsätta din me-applikation på din server och länka till applikationen i din redovisningstext på Canvas.</p>
+<p>“/reports/kmom01” ska visa texten beskriven i <a href="#skriva">Skriva</a>.</p>
 </li>
 <li>
 <p>Committa alla filer och lägg till en tagg (1.0.*).</p>
@@ -175,11 +220,20 @@ export default {
 <li>
 <p>Pusha upp repot till GitHub, inklusive taggarna.</p>
 </li>
+<li>
+<p>Länka till ditt GitHub repo i din inlämning på Canvas.</p>
+</li>
+<li>
+<p>Se till att de tre kommandon <code>git clone</code> -&gt; <code>npm install</code> -&gt; <code>npm start</code> klonar, installerar dependencies och startar din me-applikation. Notera i inlämningen om en annan kombination av kommandon ska användas.</p>
+</li>
 </ol>
 </section><section  id="skriva"><h2><a href="#skriva">Skriva</a></h2>
 <p>Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1 &amp; 2 fokusera på bakgrund och introduktion. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb.</p>
 <p>I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktionen. Introduktionen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till nuvarande forskning. Därför är det viktigt att vi i introduktionen berättar för vår läsare hur det ligger till med den nuvarande forskningen i området.</p>
 <p>Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt.</p>
+</section><section  id="sammanfattning"><h2><a href="#sammanfattning">Sammanfattning</a></h2>
+<p>Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för <a href="https://www.djangoproject.com/">django</a> pratar om hur vi inte alltid behöver ett JavaScript ramverk.</p>
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/k7n2xnOiWI8" frameborder="0" allowfullscreen></iframe></div>
 </article></section></div>    </main>
 
     <footer class="footer">
