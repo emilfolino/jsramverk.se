@@ -195,13 +195,13 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 1. "/reports/kmom01" ska visa texten beskriven i [Skriva](#skriva).
 
+1. Skapa en README.md fil i ditt repo som beskriver hur man installerar moduler och starter din me-applikation.
+
 1. Committa alla filer och lägg till en tagg (1.0.\*).
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
 1. Länka till ditt GitHub repo i din inlämning på Canvas.
-
-1. Se till att de tre kommandon `git clone` -> `npm install` -> `npm start` klonar, installerar dependencies och startar din me-applikation. Notera i inlämningen om en annan kombination av kommandon ska användas.
 
 
 
