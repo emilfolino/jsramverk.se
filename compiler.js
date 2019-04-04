@@ -99,8 +99,15 @@ const compiler = {
                     replaceString += "</section>";
                 }
 
-                replaceString += `<section  id="${slug}">`;
+                replaceString += `<section id="${slug}">`;
                 replaceString += `<h${level}><a href="#${slug}">${title}</a></h${level}>`;
+
+                parsed = parsed.replace(stringMatch, replaceString);
+            }
+
+            if (level == 4) {
+                replaceString += `<h${level} id="${slug}">`+
+                    `<a href="#${slug}">${title}</a></h${level}>`;
 
                 parsed = parsed.replace(stringMatch, replaceString);
             }
