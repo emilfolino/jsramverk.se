@@ -36,15 +36,17 @@
 }
 
 .general-information {
-    margin-bottom: 22.4rem;
+    margin-bottom: 8rem;
 }
 
-.general-information a {
+.general-information h2 a,
+.general-information h3 a {
     color: $darkCharcoal;
     text-decoration: none;
 }
 
-.general-information a:hover {
+.general-information h2 a:hover,
+.general-information h3 a:hover {
     text-decoration: underline;
 }
 
