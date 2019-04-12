@@ -11,19 +11,19 @@ const content = "./content/";
 const output = "./output/";
 
 const compiler = {
-    createHeader: function (next, additionalCSS=[], additionalJS=[]) {
+    createHeader: function (next, additionalCSS=[]) {
         fs.readFile(`${includes}header.html`, 'utf8', (err, data) => {
             if (err) {
                 console.error(err.message);
             }
 
-            let jsScripts = "";
-
-            additionalJS.forEach(function(js) {
-                jsScripts += `<script defer src='${js}'></script>\n`;
-            });
-
-            data = data.replace("{{jsScripts}}", jsScripts);
+            // let jsScripts = "";
+            //
+            // additionalJS.forEach(function(js) {
+            //     jsScripts += `<script defer src='${js}'></script>\n`;
+            // });
+            //
+            // data = data.replace("{{jsScripts}}", jsScripts);
 
             let cssFiles = "";
 
