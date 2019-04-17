@@ -20,10 +20,422 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>läsa</a></li><li><a href='#titta'>titta</a></li><li><a href='#kravspec'>kravspec</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#titta'>titta</a></li><li><a href='#material'>Material</a></li><li><a href='#kravspec'>kravspec</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
 <p>Vi skaffar oss en server och driftsätter ett API som vi använder i vår me-applikation.</p>
-</section><section id="lasa"><h2><a href="#lasa">läsa</a></h2>
+</section><section id="lasa"><h2><a href="#lasa">Läsa</a></h2>
+<p>Vi vänder oss nu till dokumentationen för <a href="https://nodejs.org/en/docs/">Node</a> och <a href="http://expressjs.com/">Express</a> för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.</p>
 </section><section id="titta"><h2><a href="#titta">titta</a></h2>
+</section><section id="material"><h2><a href="#material">Material</a></h2>
+<p>Modulen <a href="https://www.npmjs.com/package/express">Express finns på npm</a>. Express är en del av <a href="http://mean.io/">MEAN</a> som är en samling moduler för att bygga webbapplikationer med Node.js. I denna artikeln kommer vi att använda Express (E) och Node.js (N) i MEAN.</p>
+<p>Innan vi börjar så skapar vi en <code>package.json</code> som kan spara information om de moduler vi nu skall använda.</p>
+<pre><code class="language-bash"># Ställ dig i katalogen du vill jobba
+npm init
+</code></pre>
+<p>När du ombeds döpa paketet så ange “me-api” eller något liknande (det spelar ingen roll). Använd bara inte “express” eftersom det paketnamnet redan finns och du får problem i nästa steg. Du kan köra om <code>npm init</code> om du vill ändra namn, eller redigera namnet direkt i filen <code>package.json</code>.</p>
+<p>Nu kan vi installera paketen vi skall använda <code>express</code>, <code>cors</code> och <code>morgan</code>. Vi väljer att spara dem i vår <code>package.json</code>.</p>
+<pre><code class="language-bash">npm install express cors morgan --save
+</code></pre>
+<p>Vi använder oss av <code>cors</code> för att hantera Cross-Origin Sharing problematik och <code>morgan</code> för loggning av händelser i API:t.</p>
+<p>Då vi inte vill ha <code>node_modules</code> katalogen versionshanterad i git skapar vi filen <code>.gitignore</code> och lägger “node_modules/” som första rad i den filen.</p>
+<h4 id="verifiera-att-express-fungerar"><a href="#verifiera-att-express-fungerar">Verifiera att Express fungerar</a></h4>
+<p>Låt oss starta upp en server för att se att installationen gick bra.</p>
+<p>Jag börjar med kod som startar upp servern tillsammans med en route för <code>/</code> och sparar i en fil du själv skapar <code>app.js</code>.</p>
+<pre><code class="language-javascript">const express = require(&quot;express&quot;);
+const app = express();
+
+const port = 1337;
+
+// Add a route
+app.get(&quot;/&quot;, (req, res) =&gt; {
+    res.send(&quot;Hello World&quot;);
+});
+
+// Start up server
+app.listen(port, () =&gt; console.log(`Example API listening on port ${port}!`));
+</code></pre>
+<p>Sedan startar jag servern.</p>
+<pre><code class="language-bash">$ node app.js
+Example API listening on port 1337!
+</code></pre>
+<p>Nu kan jag skicka requester till servern via curl.</p>
+<pre><code class="language-bash">$ curl localhost:1337
+Hello World
+</code></pre>
+<p>Om jag använder en route som inte finns så får jag en 404 tillsammans med ett svar som säger att routen inte finns.</p>
+<pre><code class="language-bash">$ curl -i localhost:1337/asd
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Security-Policy: default-src 'self'
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 134
+Date: Wed, 15 Mar 2017 08:47:43 GMT
+Connection: keep-alive
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;Error&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre&gt;Cannot GET /asd&lt;/pre&gt;
+&lt;/body&gt;
+</code></pre>
+<p>Pröva nu samma routes via din webbläsare. Du bör få motsvarande svar även i din webbläsare.</p>
+<p>Det verkar som allt gick bra och Express är uppe och snurrar och svarar på tilltal.</p>
+<h4 id="lat-npm-kora-dina-skript-skript"><a href="#lat-npm-kora-dina-skript-skript">Låt npm köra dina skript {#skript}</a></h4>
+<p>I filen <code>package.json</code> kan du lägga in skript och köra dem via <code>npm</code>. Du kan till exempel lägga till skriptet för att starta servern så här.</p>
+<pre><code class="language-json">{
+    &quot;scripts&quot;: {
+        &quot;start&quot;: &quot;node app.js&quot;
+    }
+}
+</code></pre>
+<p>Nu kan du starta servern via <code>npm start</code>. Det blir ett sätt att samla enklare skript in i din <code>package.json</code>.</p>
+<h4 id="svara-med-json"><a href="#svara-med-json">Svara med JSON</a></h4>
+<p>I de allra flesta fall vill vi att vårt API svarar med ett JSON svar. För det använder vi <code>response</code> objektets inbyggda funktion <code>json</code> istället för <code>send</code> som vi såg ovan.</p>
+<pre><code class="language-javascript">const express = require(&quot;express&quot;);
+const app = express();
+
+const port = 1337;
+
+// Add a route
+app.get(&quot;/&quot;, (req, res) =&gt; {
+    const data = {
+        data: {
+            msg: &quot;Hello World&quot;
+        }
+    };
+
+    res.json(data);
+});
+
+// Start up server
+app.listen(port, () =&gt; console.log(`Example API listening on port ${port}!`));
+</code></pre>
+<p>I exemplet ovan skickar vi ett JSON objekt när vi skickar en förfrågan till <code>/</code>. Vi startar om servern och vi får följande svar om vi testar med curl i terminalen.</p>
+<pre><code class="language-bash">$ curl localhost:1337
+{&quot;data&quot;:{&quot;msg&quot;:&quot;Hello World&quot;}}
+</code></pre>
+<h4 id="routing-mot-olika-request-metoder"><a href="#routing-mot-olika-request-metoder">Routing mot olika request metoder</a></h4>
+<p>En route sätts upp för att svara mot en speciell request metod såsom GET, POST, PUT, DELETE. Det är på det sättet man bygger upp en RESTful tjänst.</p>
+<p>Här är fyra routes som har samma url, men skiftar i requestens metod.</p>
+<pre><code class="language-javascript">// Testing routes with method
+app.get(&quot;/user&quot;, (req, res) =&gt; {
+    res.json({
+        data: {
+            msg: &quot;Got a GET request&quot;
+        }
+    });
+});
+
+app.post(&quot;/user&quot;, (req, res) =&gt; {
+    res.json({
+        data: {
+            msg: &quot;Got a POST request&quot;);
+        }
+    });
+});
+
+app.put(&quot;/user&quot;, (req, res) =&gt; {
+    res.json({
+        data: {
+            msg: &quot;Got a PUT request&quot;);
+        }
+    });
+});
+
+app.delete(&quot;/user&quot;, (req, res) =&gt; {
+    res.json({
+        data: {
+            msg: &quot;Got a DELETE request&quot;);
+        }
+    });
+});
+</code></pre>
+<p>Om du testar med din webbläsare så blir det en GET request.</p>
+<p>För att testa de andra metoderna så använder jag verktygen Postman eller RESTClient som är ett plugin in till Firefox. Med de verktygen kan jag välja om jag skall skicka en GET, POST, PUT, DELETE eller någon annan av de HTTP-metoder som finns. En sådan REST-klient är ett värdefullt utvecklingsverktyg.</p>
+<p>Så här ser det ut när jag skickar en request med en annan metod än GET.</p>
+<p>[FIGURE src=image/snapvt17/express-rest-client.png?w=w2 caption=“En DELETE request skickas tll servern som svarar från rätt route.”]</p>
+<p>Det var routes och stöd för olika metoder det. Se till att du installerar en klient motsvarande RESTClient och testa din egen server.</p>
+<p>Man vill ofta skicka en annan statuskod än 200 när man gör andra typer av requests än GET. Det kan vi göra med <code>response</code> objektets inbyggda funktion <code>status</code>.</p>
+<pre><code class="language-javascript">// Testing routes with method
+app.get(&quot;/user&quot;, (req, res) =&gt; {
+    res.json({
+        data: {
+            msg: &quot;Got a GET request, sending back default 200&quot;
+        }
+    });
+});
+
+app.post(&quot;/user&quot;, (req, res) =&gt; {
+    res.status(201).json({
+        data: {
+            msg: &quot;Got a POST request, sending back 201 Created&quot;);
+        }
+    });
+});
+
+app.put(&quot;/user&quot;, (req, res) =&gt; {
+    // PUT requests should return 204 No Content
+    res.status(204).send();
+});
+
+app.delete(&quot;/user&quot;, (req, res) =&gt; {
+    // DELETE requests should return 204 No Content
+    res.status(204).send();
+});
+</code></pre>
+<p>Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med <code>status</code> funktion. För se innebörden av alla HTTP status koder finns <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">följande lista</a>.</p>
+<h4 id="route-med-dynamiskt-innehall"><a href="#route-med-dynamiskt-innehall">Route med dynamiskt innehåll</a></h4>
+<p>Vi skapar nya routes för att se hur routern hanterar dynamiskt innehåll i form av parametrar.</p>
+<pre><code class="language-javascript">const express = require(&quot;express&quot;);
+const app = express();
+
+const port = 1337;
+
+// Add a route
+app.get(&quot;/&quot;, (req, res) =&gt; {
+    const data = {
+        data: {
+            msg: &quot;Hello World&quot;
+        }
+    };
+
+    res.json(data);
+});
+
+app.get(&quot;/hello/:msg&quot;, (req, res) =&gt; {
+    const data = {
+        data: {
+            msg: req.params.msg
+        }
+    };
+
+    res.json(data);
+});
+
+// Start up server
+app.listen(port, () =&gt; console.log(`Example API listening on port ${port}!`));
+</code></pre>
+<p>Vi kan nu använda följande routes och se vad som händer.</p>
+<pre><code class="language-text">/
+/hello/Hello-World
+/hello/Hello World
+/hello/Jag kan svenska ÅÄÖ
+</code></pre>
+<p>Vi ser att parametern hanteras och kan nås i routen via <code>req.params</code>. Vi ser också att mellanslag och svenska tecken hanteras och översätts med <code>encodeURIComponent()</code>.</p>
+<p>I webbsidan ser det ut som det ska.</p>
+<p>[FIGURE src=image/ramverk2/dynamic-routing.png?w=w3 caption=“I webbläsaren ser det bra ut, ungefär som man tänkte.”]</p>
+<p>I terminalen där servern kör ser det ut så här.</p>
+<pre><code class="language-text">GET
+/hello/Jag%20kan%20svenska%20%C3%85%C3%84%C3%96
+</code></pre>
+<p>Det vi ser är exempel på hur webbläsaren och servern hanterar encodning av udda tecken.</p>
+<p>Webbläsaren konverterar länken, urlencodar, så att mellanslagen byts ut mot <code>%20</code>. När länken tas emot som en route och översätts till parametrar, så gör Express en urldecode på innehållet. Detta är sättet som används för att hantera udda tecken i en webblänk och det sker automatiskt av webbläsaren och Express.</p>
+<p>Det fungerar så här, om man översätter det till ren JavaScript.</p>
+<pre><code class="language-bash">$ node
+&gt; a = encodeURIComponent(&quot;Jag kan svenska åäö&quot;)
+'Jag%20kan%20svenska%20%C3%A5%C3%A4%C3%B6'
+&gt; b = decodeURIComponent(a)
+'Jag kan svenska åäö'
+&gt;
+</code></pre>
+<p>Det är bra att veta om att det finns en hantering av udda tecken som sker i bakgrunden.</p>
+<p>Om man vill använda sig av parametrar tillsammans med HTTP metoderna POST, PUT och DELETE används <code>body-parser</code>. Vi importerar modulen längst upp i <code>app.js</code>. Och lägger sen till att vi vill göra en parse på bodyn genom följande rader kod.</p>
+<pre><code class="language-javascript">const bodyParser = require(&quot;body-parser&quot;);
+
+...
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+</code></pre>
+<h4 id="middleware-cors-och-loggning"><a href="#middleware-cors-och-loggning">Middleware - CORS och loggning</a></h4>
+<p>I express finns termen “middleware” som benämning på callbacks som anropas innan själva routens hanterare anropas. En middleware kan också vara en hanterare som alltid anropas för alla routes.</p>
+<p>Låt oss skapa en sådan middleware, som alltid anropas, oavsett route. Den skall skriva ut vilken route som accessades och med vilken metod.</p>
+<p>Vi lägger till middleware via metoden <code>app.use()</code>. Vi kan lägga till dem för en specifik route, eller för alla routes.</p>
+<pre><code class="language-javascript">// This is middleware called for all routes.
+// Middleware takes three parameters.
+app.use((req, res, next) =&gt; {
+    console.log(req.method);
+    console.log(req.path);
+    next();
+});
+</code></pre>
+<p>Middleware anropas i den ordningen de är definierade, när de matchar en route. Använd ett anrop till <code>next()</code> när du är klar och vill skicka vidare kontrollen till nästa middleware och slutligen till routens hanterare.</p>
+<p>Om du vill att denna middleware alltid skall anropas så behöver du lägga den högst upp i din kod.</p>
+<p>På serversidan ser du nu delar av innehållet i request-objektet som visar metoden och pathen som anropats, samt eventuellt inkommande parametrar.</p>
+<h4 id="loggning-med-tredjepartsmodul"><a href="#loggning-med-tredjepartsmodul">Loggning med tredjepartsmodul</a></h4>
+<p>Vi väljer i vårt API att använda en tredje parts modul <code>morgan</code> för loggning. Vi har redan installerad <code>morgan</code> som en del av <code>node_modules</code> och vi lägger till modulen i <code>app.js</code> enligt nedan och använder den inbyggda middleware för att skriva ut loggen. Vi lägger in anropet till <code>morgan</code> innan vi anropar några routes då vi vill att loggningen sker för alla routes.</p>
+<pre><code class="language-javascript">const express = require('express');
+const morgan = require('morgan');
+
+const app = express();
+const port = 1337;
+
+// don't show the log when it is test
+if (process.env.NODE_ENV !== 'test') {
+    // use morgan to log at command line
+    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
+}
+</code></pre>
+<h4 id="cross-origin-resource-sharing-(cors)-cors"><a href="#cross-origin-resource-sharing-(cors)-cors">Cross-Origin Resource Sharing (CORS) {#cors}</a></h4>
+<p>Då vi vill att vårt API ska kunna konsumeras av många olika klienter vill vi tillåta att klienter från andra domäner kan hämta information från vårt API. Vi gör även detta med en tredjepartsmodul <code>cors</code>, som vi installerade i början av artikeln. På samma sätt som för <code>morgan</code> använder vi den inbyggda middleware och använder funktionen <code>use</code>.</p>
+<pre><code class="language-javascript">const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+
+const app = express();
+const port = 1337;
+
+app.use(cors());
+
+// don't show the log when it is test
+if (process.env.NODE_ENV !== 'test') {
+    // use morgan to log at command line
+    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
+}
+</code></pre>
+<h4 id="404-med-routes"><a href="#404-med-routes">404 med routes</a></h4>
+<p>När användaren försöker nå en route som inte finns så blir det ett svar med statuskod 404.</p>
+<p>[FIGURE src=image/snapvt17/express-default-404.png?w=w2 caption=“Ett standard felmeddelande när routen saknas.”]</p>
+<p>Man kan lägga till en egen route som blir en “catch all” och agerar kontrollerad hantering av 404.</p>
+<pre><code class="language-javascript">// Add routes for 404 and error handling
+// Catch 404 and forward to error handler
+// Put this last
+app.use((req, res, next) =&gt; {
+    var err = new Error(&quot;Not Found&quot;);
+    err.status = 404;
+    next(err);
+});
+</code></pre>
+<p>Ovan så använder min hanterare för 404 den inbyggda felhanteraren. Det sker via anropet <code>next(err)</code> där <code>err</code> är ett objekt av typen <code>Error</code>. Min variant är alltså att säga att nu är det felkod 404 och jag överlämnar till den inbyggda felhanteraren att skriva ut felmeddelandet.</p>
+<p>[FIGURE src=image/snapvt17/express-default-error-handler.png?w=w2 caption=“Den inbyggda felhanteraren ger ett fel och en stacktrace.”]</p>
+<p>Det finns alltså en inbyggd felhanterare som visar upp information om felet, tillsammans med en stacktrace. Det är användbart när man utvecklar.</p>
+<p>När node startar upp Express så är det default i utvecklingsläge. Du kan testa att starta upp i produktionsläge, det ger mindre information i felmeddelandena.</p>
+<pre><code class="language-bash">$ NODE_ENV=&quot;production&quot; node app.js
+</code></pre>
+<p>Nu försvann stacktracen från klienten, men den syns fortfarande i terminalen där servern körs.</p>
+<p>[FIGURE src=image/snapvt17/express-error-handling-production.png?w=w2 caption=“I produktion så visas inte stacktrace för klienten.”]</p>
+<p>Vi ser till att även skapa ett npm skript för att köra i produktion som vi sedan kan använda på servern. Vi kan då köra <code>npm run production</code> för att starta i i produktion.</p>
+<pre><code class="language-json">{
+    &quot;scripts&quot;: {
+        &quot;start&quot;: &quot;node app.js&quot;,
+        &quot;production&quot;: &quot;NODE_ENV='production' node app.js&quot;
+    }
+}
+</code></pre>
+<p>När vi utvecklar så blir det enklast att köra development läge (standard). Men när man sätter en server i produktion så får man se till att det också är produktionsläge för felmeddelandena, vilket innebär att visa så lite information som möjligt.</p>
+<h4 id="en-egen-hanterare-for-felutskrift"><a href="#en-egen-hanterare-for-felutskrift">En egen hanterare för felutskrift</a></h4>
+<p>Vi kan skapa vår egen felhanterare och skicka felmeddelandet som JSON.</p>
+<p>En egen felhanterare i Express kan se ut som det <code>app.use</code> funktionsanrop längst ner. Vi kombinerar det med vår hanterare för 404 felmeddelande och använder <code>next(err);</code> för att skicka vidare felmeddelandet till vår egen hanterare.</p>
+<pre><code class="language-javascript">app.use((req, res, next) =&gt; {
+    var err = new Error(&quot;Not Found&quot;);
+    err.status = 404;
+    next(err);
+});
+
+app.use((err, req, res, next) =&gt; {
+    if (res.headersSent) {
+        return next(err);
+    }
+
+    res.status(err.status || 500).json({
+        &quot;errors&quot;: [
+            {
+                &quot;status&quot;: err.status,
+                &quot;title&quot;:  err.message,
+                &quot;detail&quot;: err.message
+            }
+        ]
+    });
+});
+</code></pre>
+<p>Kom ihåg att en sådan här felhanterare är som all annan middleware och det är viktigt i vilken ordning de ligger. De kan anropas i den ordningen som de definieras.</p>
+<h4 id="uppdelning-av-routes"><a href="#uppdelning-av-routes">Uppdelning av routes</a></h4>
+<p>Med tanke på de få routes vi kommer ha tillgängliga i våra API:er hade det inte varit helt orimligt att ha al hantering i <code>app.js</code>, men vi väljer ändå att dela upp våra routes då vi gillar bra struktur inför framtida uppskalningar.</p>
+<p>Vi skapar katalogen <code>routes</code> och i den katalogen skapar vi två stycken filer <code>index.js</code> och <code>hello.js</code>. Här skapar vi och returnerar ett objekt av typen <code>express.Router()</code>.</p>
+<pre><code class="language-javascript">var express = require('express');
+var router = express.Router();
+
+router.get('/', function(req, res, next) {
+    const data = {
+        data: {
+            msg: &quot;Hello World&quot;
+        }
+    };
+
+    res.json(data);
+});
+
+module.exports = router;
+</code></pre>
+<p>Vi importerar sedan dessa filer i <code>app.js</code> och använder de som routehanterare med ett funktionsanrop till <code>use</code>.</p>
+<pre><code class="language-javascript">...
+
+const index = require('./routes/index');
+const hello = require('./routes/hello');
+
+...
+
+app.use('/', index);
+app.use('/hello', hello);
+</code></pre>
+<p>På det sättet håller vi <code>app.js</code> liten i storlek och var sak har sin plats.</p>
+<h4 id="driftsattning"><a href="#driftsattning">Driftsättning</a></h4>
+<p>PM2???</p>
+<p>Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog <code>~/git</code> där jag klonar mitt repo till. När du har klonat repot kan du göra <code>npm install</code> så alla moduler är installerat.</p>
+<p>För att våra klienter ska komma åt API:t ser vi till att driftsätta det på vår server. Vi ska använda oss av det som kallas en nginx reverse proxy för att trafiken utifrån på port 80 eller 443 (vanliga portarna för HTTP och HTTPS) ska skickas till vårt API som ligger och lyssnar på en annan port.</p>
+<p>När vi installerade nginx fick vi med oss ett antal olika kataloger och konfigurationsfiler. I katalogen <code>/var/www</code> kommer vi skapa kataloger för de webbplatser vi vill skapa på vår server. Vi börjar med att logga in på servern som <code>deploy</code> och skapar en katalog för vårt API.</p>
+<p>Jag kommer i följande exempel utgå ifrån min konfiguration på servern <a href="https://jsramverk.me">jsramverk.me</a> där mitt API ligger på subdomänen <a href="https://me-api.jsramverk.me">me-api.jsramverk.me</a>.</p>
+<p>Jag skapar alltså katalogen <code>/var/www/me-api.jsramverk.me/html</code> enklast med kommandot <code>sudo mkdir -p /var/www/me-api.jsramverk.me/html</code>. Denna katalog kommer inte användas för filer, men vi kommer använda den i ett senare skede när vi vill spara ett certifikat för HTTPS trafik till vårt API.</p>
+<p>Jag har satt i gång API:t med kommandot <code>npm run production</code> och API:t ligger och lyssnar på port 8333. Den reverse proxy som vi skapar i följande stycke lyssnar i första skedet på port 80 och skickar vidare förfrågningarna till 8333.</p>
+<p>I katalogen <code>/etc/nginx/sites-available</code> skapar vi en konfigurationsfil <code>me-api.jsramverk.me</code> genom att kopiera standard konfiguration från filen <code>default</code> och öppna upp filen i text editorn nano. Vi gör det med följande kommandon.</p>
+<pre><code class="language-bash">cd /etc/nginx/sites-available
+sudo cp default me-api.jsramverk.me
+sudo nano me-api.jsramverk.me
+</code></pre>
+<p>I filen klistrar vi in följande konfiguration. Först skapar vi en server med namnet <a href="http://me-api.jsramverk.me">me-api.jsramverk.me</a>. Vi skapar därefter två stycken <code>location</code>. Det är routes där vi vill att nått speciellt ska hända. Den första är för en fil relaterad till det certifikat vi ska installera om ett ögonblick för att fixa HTTPS till vår server. Den andra <code>location /</code> är alla andra routes som ska skickas till <code>http://localhost:8333</code> där vårt API ligger och lyssnar. Detta kallas en reverse proxy och användas i många sammanhang för att kopplat förfrågningar på port 80 till en annan port. En reverse proxy används då man inte vill öppna portarna utåt, men vill låta nginx ta hand om detta.</p>
+<pre><code class="language-bash">server {
+    server_name me-api.jsramverk.me;
+
+    location /.well-known {
+        alias /var/www/me-api.jsramverk.me/html/.well-known;
+    }
+
+    location / {
+        proxy_pass http://localhost:8333;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    listen 80;
+}
+</code></pre>
+<p>Vi sparar filen genom att trycka <code>Ctrl-X</code> och skriva in ett y + Enter. Vi skapar sedan en symbolisk länk i katalogen <code>/etc/nginx/sites-enabled</code> till vår konfigurations fil för att sidan blir tillgänglig.</p>
+<pre><code class="language-bash">cd /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/me-api.jsramverk.me
+</code></pre>
+<p>Vi vill sedan testa om konfigurationen är korrekt och sedan starta om nginx och det gör vi med följande kommandon.</p>
+<pre><code class="language-bash">sudo nginx -t
+sudo service nginx restart
+</code></pre>
+<p>För att internet ska veta att vi har en server som ligger här och vill svara på förfrågningar skapar vi en subdomän i Digital Ocean gränssnittet. Gå till Networking och välj din domän skriv sedan in din subdomän välj din droplet och skapa subdomänen.</p>
+<p>[FIGURE src=image/ramverk2/do-subdomain.png?w=w3 caption=“Digital Ocean subdomän”]</p>
+<p>Det ska nu gå att se ett JSON svar från API:t om vi går till vår subdomän. Ibland kan det ta en liten stund innan subdomäner kommer på plats, så avvakta lite grann om det inte syns direkt.</p>
+<h4 id="https"><a href="#https">HTTPS</a></h4>
+<p>Då vi är medvetna om våra användares privatliv vill vi att alla anslutningar till våra tjänster och services sker över HTTPS, som krypterar den data som skickas. Vi behöver därför installera ett certifikat. Vi väljer att använda ett certifikat från <a href="https://letsencrypt.org/">Let’s Encrypt</a> och vi installerar det med tjänsten <a href="https://certbot.eff.org/">Certbot</a> då vi har tillgång till serverns CLI.</p>
+<p>Vi behöver först öppna upp så vi kan installera paket från det som heter APT backports. Vi öppnar upp filen <code>/etc/apt/sources.list</code> och letar reda på följande två rader som vi avkommenterar. Raderne brukar finnas längst ner i filen.</p>
+<pre><code class="language-bash">deb http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
+deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
+</code></pre>
+<p>Uppdatera apt-get med <code>sudo apt-get update</code>. Vi kan nu installera verktyget certbot med kommandot <code>sudo apt-get install python-certbot-nginx -t stretch-backports</code>.</p>
+<p>Vi startar verktyget genom att köra kommandot <code>sudo certbot --nginx</code>. Vi får då välja för vilka domäner och subdomäner vi vill installera certifikat. Efter att vi har vald domänerna får vi frågan om vi vill omdirigera all trafik till HTTPS istället för HTTP och det svarar vi ja till (i certbot gränssnittet motsvarar det en tvåa).</p>
+<p>Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.</p>
 </section><section id="kravspec"><h2><a href="#kravspec">kravspec</a></h2>
 </article></section></div>    </main>
 
