@@ -133,7 +133,7 @@ const compiler = {
     },
 
     createTOC: function (headers) {
-        let output = "<nav class='toc'><ul>";
+        let output = "<nav class='toc' id='toc'><ul>";
 
         headers.forEach((header) => {
             let slug = slugify(header.toLowerCase());

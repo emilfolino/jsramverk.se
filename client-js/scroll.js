@@ -1,8 +1,20 @@
-(function() {
+document.addEventListener("turbolinks:load", function () {
     var mainNavLinks = document.querySelectorAll(".toc ul li a");
+    var footer = document.getElementById("footer");
+    var toc = document.getElementById("toc");
+    var topToToc = 14.5 * parseFloat(getComputedStyle(document.body).fontSize);
 
     window.addEventListener("scroll", function() {
         var fromTop = window.scrollY + 200;
+        var tocAbsoluteBottom = window.scrollY + topToToc + toc.clientHeight;
+        var limit = document.body.clientHeight - footer.clientHeight;
+
+        if (tocAbsoluteBottom > limit) {
+            toc.style.top = "0px";
+            // toc.style.bottom = (footer.clientHeight + toc.clientHeight + 40) + "px";
+        } else {
+            toc.style.top = topToToc + "px";
+        }
 
         mainNavLinks.forEach(function(link) {
             var section = document.querySelector(link.hash);
@@ -17,4 +29,4 @@
             }
         });
     });
-})();
+});
