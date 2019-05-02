@@ -11,7 +11,6 @@ document.addEventListener("turbolinks:load", function () {
 
         if (tocAbsoluteBottom > limit) {
             toc.style.top = "0px";
-            // toc.style.bottom = (footer.clientHeight + toc.clientHeight + 40) + "px";
         } else {
             toc.style.top = topToToc + "px";
         }

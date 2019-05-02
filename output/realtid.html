@@ -23,11 +23,48 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Realtid</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#realtid'>Realtid</a></li><li><a href='#lasa'>läsa</a></li><li><a href='#titta'>titta</a></li><li><a href='#kravspec'>kravspec</a></li></ul></nav><article class='week'><section id="realtid"><h1><a href="#realtid">Realtid</a></h1>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Realtid</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#realtid'>Realtid</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#material-och-tekniker'>Material och tekniker</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="realtid"><h1><a href="#realtid">Realtid</a></h1>
 <p>Vi tittar på hur vi kan använda websockets för realtidsprogrammering på webben.</p>
-</section><section id="lasa"><h2><a href="#lasa">läsa</a></h2>
-</section><section id="titta"><h2><a href="#titta">titta</a></h2>
-</section><section id="kravspec"><h2><a href="#kravspec">kravspec</a></h2>
+</section><section id="lasa"><h2><a href="#lasa">Läsa</a></h2>
+<p>Läs igenom nedanstående dokumentation översiktligt och spara de för referens under arbetet.</p>
+<ol>
+<li>
+<p><a href="https://github.com/websockets/ws">websocket modulen ws</a> är en websocket server som använder rena (<em>native</em>) WebSockets.</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">MDN WebSockets API</a> ger dig material för klientsidan samt bakomliggande information om hur man bygger en server från grunden.</p>
+</li>
+<li>
+<p><a href="https://socket.io/">socket.io</a> är en introduktion till en modul som implementerar websockets (och närliggande tekniker) för realtid i klient och server.</p>
+</li>
+</ol>
+</section><section id="material-och-tekniker"><h2><a href="#material-och-tekniker">Material och tekniker</a></h2>
+<p>HTML5 Websockets skapar nya möjligheter där webbläsaren kan ha en konstant uppkoppling mot en server där meddelanden både kan skickas och tas emot med minimal overhead. Möjligheten öppnar sig för att bättre bygga webbapplikationer som agerar i realtid.</p>
+<p>Det finns en W3C standard för <a href="https://www.w3.org/TR/websockets/">The Websocket API</a>, det ger grunden till vad utvecklare av webbläsare och liknande behöver förhålla sig till.</p>
+<p>Om man vill se detaljer om Websocket protokollet så finns en <a href="https://tools.ietf.org/html/rfc6455">RFC 6455</a> som beskriver protokollet och hur klienten och servern kopplar upp sig, sköter kommunikationen och stänger ned kopplingen.</p>
+<p>För att se guider med exempelkod för både klient och servrar implementerade i olika språk så vänder vi oss till <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">MDN WebSocket API</a>.</p>
+</section><section id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
+<ol>
+<li>
+<p>Skapa en klient och en server för chatt. Välj en teknik som grundar sig på websockets. Visa att klienten fungerar genom att integrera den i din me-applikation.</p>
+</li>
+<li>
+<p>Bygg ett eget applikationsprotokoll ovanpå websockets. Förslagsvis använder du JSON (eller annat du väljer).</p>
+</li>
+<li>
+<p>Använd subprotokoll i din lösning, på så vis är du förberedd om du behöver göra en ny version av ditt applikationsprotokoll.</p>
+</li>
+<li>
+<p>När man kopplar upp sig så identifierar man sig med ett nick, ett smeknamn.</p>
+</li>
+<li>
+<p>Flera klienter kan koppla sig till chatten. När någon skriver något ser alla andra det. Man ser nicket tillsammans med meddelandet.</p>
+</li>
+<li>
+<p>Committa, tagga och pusha relevanta repon samt driftsätta på din server.</p>
+</li>
+</ol>
+</section><section id="skriva"><h2><a href="#skriva">Skriva</a></h2>
 </article></section></div>    </main>
 
     <footer class="footer" id="footer">
