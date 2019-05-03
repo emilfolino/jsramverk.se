@@ -94,7 +94,7 @@ const compiler = {
             let slug = slugify(title.toLowerCase());
             let level = stringMatch[2];
 
-            if (level <= 3) {
+            if (level <= 2) {
                 if (index) {
                     replaceString += "</section>";
                 }
@@ -105,7 +105,7 @@ const compiler = {
                 parsed = parsed.replace(stringMatch, replaceString);
             }
 
-            if (level == 4) {
+            if (level == 3 || level == 4) {
                 replaceString += `<h${level} id="${slug}">`+
                     `<a href="#${slug}">${title}</a></h${level}>`;
 
