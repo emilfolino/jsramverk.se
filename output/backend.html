@@ -23,12 +23,121 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#titta'>titta</a></li><li><a href='#material'>Material</a></li><li><a href='#kravspec'>kravspec</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
-<p>Vi skaffar oss en server och driftsätter ett API som vi använder i vår me-applikation.</p>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#material'>Material</a></li><li><a href='#en-server-i-molnet'>En server i molnet</a></li><li><a href='#forsta-10-minuter-pa-en-server'>Första 10 minuter på en server</a></li><li><a href='#en-doman-till-din-server'>En domän till din server</a></li><li><a href='#installera-programvara'>Installera programvara</a></li><li><a href='#ett-express-api'>Ett Express API</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
+<p>Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.</p>
 </section><section id="lasa"><h2><a href="#lasa">Läsa</a></h2>
 <p>Vi vänder oss nu till dokumentationen för <a href="https://nodejs.org/en/docs/">Node</a> och <a href="http://expressjs.com/">Express</a> för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.</p>
-</section><section id="titta"><h2><a href="#titta">titta</a></h2>
 </section><section id="material"><h2><a href="#material">Material</a></h2>
+<p>Vi ska i följande stycken först titta på hur vi med hjälp av GitHub Education Pack och DigitalOcean skapar en droplet. I slutet av veckan har vi driftsatt både vår frontend applikation och en simpel backend applikation.</p>
+</section><section id="en-server-i-molnet"><h3><a href="#en-server-i-molnet">En server i molnet</a></h3>
+<p>Se till att ha din student e-postadress nära till hands då den behövs för att få tillgång till GitHub Education Pack.</p>
+<h4 id="github-education-pack"><a href="#github-education-pack">GitHub Education Pack</a></h4>
+<p>För att få tillgång till rabatter och rabattkoder som erbjuds i <a href="https://education.github.com/pack">GitHub Education Pack</a> behöver du GitHub veta att du är student. Gå till den länkade sidan och tryck på den blåa knappen “Get your Pack”. Viktigt att du använder din student mail när du registrerar dig då mailen måste vara kopplat till en undervisningsinstitution.</p>
+<h4 id="digital-ocean"><a href="#digital-ocean">Digital Ocean</a></h4>
+<p>När du är verifierad via GitHub får du tillgång till en rabattkod för Digital Ocean. Efter det går du till <a href="https://cloud.digitalocean.com/registrations/new">Digital Ocean Sign Up</a> och skapar ett konto. Du behöver ange ett kreditkort, men vi kommer sedan använda rabattkoden så det kommer inte kosta något.</p>
+<p>När du har skapat kontot gå till Account längst upp till höger under din användare logga. Gå sedan till Billing fliken och scrolla ner till Promo Code. Här lägger du in rabattkoden du fick från Github Education Pack när du tryckte på länken ‘request your offer code’.</p>
+<p>Gå sedan till första sidan och tryck ‘Get started with a Droplet’. Instruktioner i kommande stycken och resten av kursen kommer utgå från en Debian Stretch (9.x) droplet, så en stark rekommendation är att välja en sån droplet. Jag rekommenderar att ni kör en 10$/månad droplet, då man får bra prestanda och samtidigt inte använder hela rabatten under kursens gång. Välj Frankfurt eller London som region och lägg till din <code>id_rsa.pub</code> SSH nyckel så du kan logga in på servern.</p>
+</section><section id="forsta-10-minuter-pa-en-server"><h3><a href="#forsta-10-minuter-pa-en-server">Första 10 minuter på en server</a></h3>
+<p>Med utgångspunkt i artiklar som <a href="https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers">My First 5 Minutes On A Server; Or, Essential Security for Linux Servers</a> och <a href="https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/">My First 10 Minutes On a Server - Primer for Securing Ubuntu</a> ska vi i följande stycke titta på hur vi säkrar upp en Linux-baserad server av Ubuntu eller Debian variant.</p>
+<h4 id="logga-in-pa-servern"><a href="#logga-in-pa-servern">Logga in på servern</a></h4>
+<p>Vi loggar in på servern genom att använda SSH via terminalen med kommandot. <code>ssh root@[IP]</code> ersätt din [IP] med den IP som visas för din droplet.</p>
+<h4 id="losenord"><a href="#losenord">Lösenord</a></h4>
+<p>Än så länge har vi inte ens ett lösenord till vår <code>root</code> användare så låt oss se till att sätter ett lösenord. Välj ett säkert lösenord och med säkert lösenord menas ett slumpat och komplext lösenord. Jag rekommenderar starkt att använda en Password Manager och skapa lösenordet med hjälp av denna Password Manager inställt på den mest komplexa inställningen du kan hitta. För Mac och Linux rekommenderas <a href="https://www.passwordstore.org">pass</a> och för Windows verkar <a href="https://www.lastpass.com">LastPass</a> vara det mest använda gratis programmet som finns.</p>
+<p>När du har skapat ett slumpmässigt och komplext lösenord skriv följande kommando och följ instruktionerna.</p>
+<pre><code class="language-bash">passwd
+</code></pre>
+<h4 id="uppdatera-servern"><a href="#uppdatera-servern">Uppdatera servern</a></h4>
+<p>Nästa steg är att uppdatera serverns programvara till senaste version genom att använda verktyget <code>apt-get</code>.</p>
+<pre><code class="language-bash">apt-get update
+apt-get upgrade
+</code></pre>
+<h4 id="skapa-din-egen-anvandare"><a href="#skapa-din-egen-anvandare">Skapa din egen användare</a></h4>
+<p>Vi vill aldrig logga in som <code>root</code> då <code>root</code> har tillgång till för mycket. Så vi skapar en egen användare <code>deploy</code> med följande kommandon. Du kan byta ut <code>deploy</code> mot vad som helst, men då ska du göra det i alla följande kommandon. De två första kommandon är för att rensa bort en befintlig användare Digital Ocean lägger till när debian installeras.</p>
+<pre><code class="language-bash">apt-get remove --purge unscd
+userdel -r debian
+useradd deploy
+mkdir /home/deploy
+mkdir /home/deploy/.ssh
+chmod 700 /home/deploy/.ssh
+</code></pre>
+<p>Vi passar på att i samma veva ställa in vilken förvald terminal vår nya använda ska använda, vi väljer <code>bash</code> då vi är vana vid den.</p>
+<pre><code class="language-bash">usermod -s /bin/bash deploy
+</code></pre>
+<h4 id="stanga-av-inloggning-med-losenord"><a href="#stanga-av-inloggning-med-losenord">Stänga av inloggning med lösenord</a></h4>
+<p>Lösenord kan knäckas.</p>
+<p>Därför använder vi istället SSH nycklar för att autentisera oss mot servern. Skapa och öppna filen med kommandot <code>nano /home/deploy/.ssh/authorized_keys</code> och lägg innehållet av din lokala <code>.ssh/id_rsa.pub</code> nyckel i den filen på en rad.</p>
+<p>När du har lagt till nyckeln kör du följande två kommandon för att sätta korrekta rättigheter på katalogen och filen.</p>
+<pre><code class="language-bash">chmod 400 /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy -R
+</code></pre>
+<p>Testa nu att logga in i ett nytt terminalfönster med kommandot <code>ssh deploy@[IP]</code>. Vi har kvar terminal fönstret där vi loggade in som root om något skulle gå fel.</p>
+<p>Vi skapar sedan ett lösenord för <code>deploy</code> användaren från root terminalfönstret, <code>passwd deploy</code>, använd igen ett långt och slumpmässigt lösenord. Och vi lägger till <code>deploy</code> som sudo användare med kommandot <code>usermod -aG sudo deploy</code>.</p>
+<p>Som vi sagt tidigare vill vi bara kunna logga in med SSH nycklar. Vi gör detta genom att ändra tre rader i filen <code>/etc/ssh/sshd_config</code>. Öppna filen med din texteditor på din server till exempel nano med kommandot <code>nano /etc/ssh/sshd_config</code>.</p>
+<p>Hitta raderna nedan och se till att ändra från yes till no. Raderna ligger inte på samma ställe i filer, så ibland får man leta en liten stund. Den sista raden nedan får du skriva in själv.</p>
+<pre><code class="language-bash">PermitRootLogin no
+PasswordAuthentication no
+AllowUsers deploy
+</code></pre>
+<p>Spara filen och starta om SSH med hjälp av kommandot <code>service ssh restart</code>. Testa nu att logga ut och in i ditt andra terminal fönster där du tidigare var inloggat som <code>deploy</code>.</p>
+<h4 id="brandvagg"><a href="#brandvagg">Brandvägg</a></h4>
+<p>Först stänger vi ner uppkopplingen för användaren root genom att skriva exit i terminalfönstret. Alla kommandon vi kommer köra från och med nu körs som användaren deploy.</p>
+<p>Vi använder oss av brandväggen <code>ufw</code> för att stänga och öppna portar till vår server. Installera med kommandot <code>sudo apt-get install ufw</code>.</p>
+<p>Vi vill nu öppna upp för trafik på 3 portar 22 för SSH, 80 för HTTP och 443 för HTTPS. Vi gör det med hjälp av följande kommandon.</p>
+<pre><code class="language-bash">sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw disable
+sudo ufw enable
+</code></pre>
+<h4 id="automagiska-uppdateringar"><a href="#automagiska-uppdateringar">Automagiska uppdateringar</a></h4>
+<p>Vi vill inte hålla på att manuellt uppdatera vår server, men vi vill inte heller sakna en patch när de kommer så vi kommer använda oss av verktyget unattended-upgrades. Vi installerar med <code>sudo apt-get install unattended-upgrades</code>.</p>
+<p>Uppdatera filen <code>/etc/apt/apt.conf.d/10periodic</code> så den innehåller nedanstående.</p>
+<pre><code class="language-bash">APT::Periodic::Update-Package-Lists &quot;1&quot;;
+APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;
+APT::Periodic::AutocleanInterval &quot;7&quot;;
+APT::Periodic::Unattended-Upgrade &quot;1&quot;;
+</code></pre>
+<p>Uppdatera även filen <code>/etc/apt/apt.conf.d/50unattended-upgrades</code> så den ser ut som nedan.</p>
+<pre><code class="language-bash">Unattended-Upgrade::Allowed-Origins {
+    &quot;${distro_id}:${distro_codename}&quot;;
+    &quot;${distro_id}:${distro_codename}-security&quot;;
+    &quot;${distro_id}ESM:${distro_codename}&quot;;
+    //&quot;${distro_id}:${distro_codename}-updates&quot;;
+};
+</code></pre>
+<h4 id="fail2ban"><a href="#fail2ban">fail2ban</a></h4>
+<p>Vårt sista steg är att installera verktyget fail2ban som används för att automatiskt kolla logfiler och stoppa aktivitet som vi inte vill ha på vår server. Vi installerar och låter ursprungsinställningarna göra sitt jobb. Vi installerar med <code>sudo apt-get install fail2ban</code>.</p>
+</section><section id="en-doman-till-din-server"><h3><a href="#en-doman-till-din-server">En domän till din server</a></h3>
+<p>Som en del av Github Education Pack får du som student även ett domän-namn på top-domänen .me från registratorn namecheap gratis under ett år. Om du vill använda en annan registrator är det fritt fram.</p>
+<p>För att använda namecheap tryck på länken “Get access by connecting your GitHub account on Namecheap” och knyta ihop ditt GitHub konto med namecheap och skapa en användare.</p>
+<p>När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valda ‘<a href="http://jsramverk.me">jsramverk.me</a>’.</p>
+<p>[FIGURE src=/image/ramverk2/namecheap-nameservers.png?w=w3 caption=“Fyll i nameservers hos namecheap.”]</p>
+<p>Gå sedan till Digital Ocean och välj Networking&gt;Domains. Här Väljer du att skapa den valda domänen.</p>
+<p>[FIGURE src=/image/ramverk2/do-domains.png?w=w3 caption=“Skapa domän på Digital Ocean.”]</p>
+<p>Vi vill sedan peka domänen till vår droplet och för att komma åt root-domänen anger vi @. Vill vi ange en subdomän anger vi subdomänen.</p>
+<p>[FIGURE src=/image/ramverk2/do-domain-names.png?w=w3 caption=“Peka domän till droplet på Digital Ocean.”]</p>
+</section><section id="installera-programvara"><h3><a href="#installera-programvara">Installera programvara</a></h3>
+<p>Vi ska i denna del installera programvara för att vi kan köra både frontend och backend applikationer på vår server.</p>
+<h4 id="installera-nginx"><a href="#installera-nginx">Installera nginx</a></h4>
+<p>Vi installerar webbservern nginx med hjälp av kommandot <code>sudo apt-get install nginx</code>. Du ska nu kunna gå till din domän-adress och där se Welcome to nginx! Ibland kan det ta en liten stund innan alla ändringar slå igenom, så nu är att bra tillfälle att hämta kaffe eller gå en runda om det inte fungerar direkt.</p>
+<h4 id="installera-nodejs-och-npm"><a href="#installera-nodejs-och-npm">Installera nodejs och npm</a></h4>
+<p>Vi vill ha nodejs och npm installerat så vi kan köra en backend på vår server. Vi installerar LTS (Long Term Support) versionen då detta är vår produktionsserver. Vi kommer i kommande kursmoment se hur vi kan testa i olika versioner av nodejs. Vi installerar nodejs och npm med följande kommandon.</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install curl
+cd ~
+curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt install nodejs
+nodejs -v
+</code></pre>
+<p>Här ska du gärna se en utskrift med ett versionsnummer som inledas med <code>v10.</code>.</p>
+<p>Om du kör kommandot <code>npm -v</code> ser du att du även har Node Package Manager npm installerat med ett versionsnummer över 6. För att vissa program ska kunna installeras via npm behöver vi även installera build-essentials. Vi gör det med kommandot <code>sudo apt install build-essential</code>.</p>
+<h4 id="installera-tmux"><a href="#installera-tmux">Installera tmux</a></h4>
+<p>tmux är ett oerhört trevligt verktyg att använda om man vill komma tillbaka till samma vy när man loggar in på en server från ett antal olika servrar. Installera med kommandot <code>sudo apt-get install tmux</code>.</p>
+<p>Du öppnar en tmux session genom att skriva <code>tmux</code> i terminalen. I sitt grundutförande är Ctrl-b kommandotangenten, du trycker alltså in Ctrl-b släpper och en knapp till för att utföra kommandot. Du kan skapa nya fönster med Ctrl-b följd av c, du kopplar ner från sessionen med Ctrl-b d och vill du tillbaka till sessionen kan du skriva <code>tmux a -t 0</code>. Bra och smidigt när man vill logga in från flera olika datorer, men ändå se samma bild.</p>
+<h4 id="installera-git"><a href="#installera-git">Installera git</a></h4>
+<p>För att lättare kunna driftsätta våra git-repon installerar vi även git med kommandot <code>sudo apt-get install git</code>.</p>
+</section><section id="ett-express-api"><h3><a href="#ett-express-api">Ett Express API</a></h3>
 <p>Modulen <a href="https://www.npmjs.com/package/express">Express finns på npm</a>. Express är en del av <a href="http://mean.io/">MEAN</a> som är en samling moduler för att bygga webbapplikationer med Node.js. I denna artikeln kommer vi att använda Express (E) och Node.js (N) i MEAN.</p>
 <p>Innan vi börjar så skapar vi en <code>package.json</code> som kan spara information om de moduler vi nu skall använda.</p>
 <pre><code class="language-bash"># Ställ dig i katalogen du vill jobba
@@ -439,7 +548,8 @@ deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib no
 <p>Uppdatera apt-get med <code>sudo apt-get update</code>. Vi kan nu installera verktyget certbot med kommandot <code>sudo apt-get install python-certbot-nginx -t stretch-backports</code>.</p>
 <p>Vi startar verktyget genom att köra kommandot <code>sudo certbot --nginx</code>. Vi får då välja för vilka domäner och subdomäner vi vill installera certifikat. Efter att vi har vald domänerna får vi frågan om vi vill omdirigera all trafik till HTTPS istället för HTTP och det svarar vi ja till (i certbot gränssnittet motsvarar det en tvåa).</p>
 <p>Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.</p>
-</section><section id="kravspec"><h2><a href="#kravspec">kravspec</a></h2>
+</section><section id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
+</section><section id="skriva"><h2><a href="#skriva">Skriva</a></h2>
 </article></section></div>    </main>
 
     <footer class="footer" id="footer">
