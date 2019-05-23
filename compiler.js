@@ -62,10 +62,10 @@ const compiler = {
 
                     let parsed = md.render(data);
 
-                    let h1Pattern = /<h1>[a-zA-Z0-9äöåÄÖÅ]*<\/h1>/gi;
+                    let h1Pattern = /<h1>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h1>/gi;
                     let h1 = parsed.match(h1Pattern)[0].replace(/<\/?h1>/g, '');
 
-                    let headerPattern = /<h[1-3]>[a-zA-Z0-9äöåÄÖÅ ]*<\/h[1-3]>/gi;
+                    let headerPattern = /<h[1-3]>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h[1-3]>/gi;
                     let headers = parsed.match(headerPattern).map((header) => {
                         return header.replace(/<\/?h\d>/g, '');
                     });

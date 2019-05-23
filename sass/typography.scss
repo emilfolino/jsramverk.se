@@ -5,33 +5,33 @@ html {
 body {
     font-family: $mainFont;
     color: $mainFontColor;
-    line-height: 1.4;
+    line-height: $mainLineHeight;
     font-display: auto;
 }
 
 h1 {
-    font-size: 3rem;
-    margin-bottom: 1.4rem;
+    font-size: $mainH1FontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
 h2 {
-    font-size: 2.4rem;
-    margin-bottom: 1.4rem;
+    font-size: $mainH2FontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
 h3 {
-    font-size: 2rem;
-    margin-bottom: 1.4rem;
+    font-size: $mainH3FontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
 h4 {
-    font-size: 1.7rem;
-    margin-bottom: 1.4rem;
+    font-size: $mainH4FontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
 p {
-    font-size: 1rem;
-    margin-bottom: 1.4rem;
+    font-size: $mainPFontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
 a {
@@ -62,4 +62,16 @@ a {
 .general-information h2:hover .anchor,
 .general-information h4:hover .anchor {
     display: inline;
+}
+
+blockquote {
+    border-left: 4px solid $minionYellow;
+    padding: 2rem;
+    box-shadow: $shadow;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
+}
+
+blockquote p {
+    font-size: $mainPFontSize * $fontScaleFactor;
+    margin-bottom: 0;
 }
