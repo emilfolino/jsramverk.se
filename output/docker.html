@@ -7,7 +7,7 @@
     <meta name="keywords" content="JavaScript,javascript,ramverk,framework,BTH,webbprogrammering">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>jsramverk</title>
-    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%}body{font-family:sans-serif;font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.61rem}h1{font-size:3.45rem;margin-bottom:1.61rem}h2{font-size:2.76rem;margin-bottom:1.61rem}h3{font-size:2.3rem;margin-bottom:1.61rem}h4{font-size:1.955rem;margin-bottom:1.61rem}p{font-size:1.15rem;margin-bottom:1.61rem}blockquote{margin-bottom:1.61rem}blockquote p{font-size:1.3225rem;margin-bottom:0}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%}body{font-family:sans-serif;font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.68rem}h1{font-size:3.6rem;margin-bottom:1.68rem}h2{font-size:2.88rem;margin-bottom:1.68rem}h3{font-size:2.4rem;margin-bottom:1.68rem}h4{font-size:2.04rem;margin-bottom:1.68rem}p{font-size:1.2rem;margin-bottom:1.68rem}blockquote{margin-bottom:1.68rem}blockquote p{font-size:1.44rem;margin-bottom:0}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
 </style>
     <link rel="stylesheet" href="inter-ui.min.css" media="none" onload="if(media!='all')media='all'">
     <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
@@ -185,6 +185,120 @@ docker-compose up -d
 <p>Ska vi ta det en gång till?</p>
 <p>Om du vill skapa egna images och publicera på Docker Store så börjar du med ett eget repo där du underhåller dina Dockerfiles. Du bygger dem och publicerar dem till Docker Store på det sättet som jag visade att Makefilen gjorde.</p>
 <p>För att allt skall fungera så behöver du ditt konto på Docker. Så här ser <a href="https://store.docker.com/profiles/mikaelroos">mitt konto ut</a>.</p>
+</section><section id="docker-mot-olika-versioner-av-node-docker"><h2><a href="#docker-mot-olika-versioner-av-node-docker">Docker mot olika versioner av Node {#docker}</a></h2>
+<p>Ibland vill man välja vilken version av Node man använder för sina enhetstester. Det kan vara bra att kunna köra testerna mot godtycklig version av Node, eventuellt kombinerad med specifika versioner av andra programvaror. Här kan Docker hjälpa oss.</p>
+</section><section id="kor-enhetstester-mot-olika-versioner-testversion"><h3><a href="#kor-enhetstester-mot-olika-versioner-testversion">Kör enhetstester mot olika versioner {#testversion}</a></h3>
+<p>I katalogen <code>example/test/unittest-docker</code> har jag förberett ett exempel som kör samma testfall som tidigare men man kan välja att köra dem mot en Docker kontainer som kör en specifik installation av Node.</p>
+<p>Du kan köra testerna mot en specifik kontainer på något av följande sätt.</p>
+<pre><code class="language-text">docker-compose run node_alpine npm test
+npm run docker-latest
+</code></pre>
+<p>Du kan sedan köra testerna mot en äldre version av Node på följande sätt.</p>
+<pre><code class="language-text"># Node version 8
+docker-compose run node_8_alpine npm test
+npm run docker-8
+
+# Node version 6
+docker-compose run node_6_alpine npm test
+npm run docker-6
+</code></pre>
+<p>Nu har du alltså möjligheten att köra tester med samma kodbas mot flera versioner av Node. Det är kraftfullt och kan spara dig tid när du utvecklar och måste ha koll på att koden fungerar på olika versioner.</p>
+</section><section id="tjansterna-kontrolleras-av-docker-compose-service"><h3><a href="#tjansterna-kontrolleras-av-docker-compose-service">Tjänsterna kontrolleras av docker-compose {#service}</a></h3>
+<p>Det är filen <code>docker-compose.yml</code> som styr vilka kontainrar som startas upp. I <code>package.json</code> ligger de kommandon som körs och <code>npm run</code> erbjuder därmed en kortare väg att starta upp testerna mot olika versioner av Node.</p>
+<p>Så här ser <code>docker-compose.yml</code> ut för ett par av de tjänster som definieras.</p>
+<pre><code class="language-text">version: &quot;3&quot;
+services:
+    node_alpine:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-alpine
+        volumes:
+            - ./:/app/
+            - /app/node_modules/
+
+    node_8_alpine:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-8-alpine
+        volumes:
+            - ./:/app/
+            - /app/node_modules/
+</code></pre>
+<p>Filen <code>docker-compose.yml</code> hänvisar till de Docker-filer som används för att bygga respektive image.</p>
+<p>När docker-compose använder en image för att starta upp en kontainer så kan den montera volymer och på så sätt länka kontainern till det lokala filsystemet.</p>
+<p>Följande rader monterar hela katalogen in i kontainern, men den använder katalogen <code>app/node_modules/</code> som finns i imagen, även om det finns en lokal katalog som heter <code>node_modules</code>.</p>
+<pre><code class="language-text">volumes:
+    - ./:/app/
+    - /app/node_modules/
+</code></pre>
+<p>På så vis kan du både ha en lokal installation av alla dina node moduler och det kan finnas en specifik installation i respektive image.</p>
+</section><section id="docker-filer-ger-images-dockerfile"><h3><a href="#docker-filer-ger-images-dockerfile">Docker-filer ger images {#dockerfile}</a></h3>
+<p>Grunden till varje image är en Dockerfile som i exemplet ligger i katalogen <code>docker/</code>. De ger basen för imagens innehåll. När en image byggs, i samband med att den refereras av docker-compose, så byggs den i ett context av katalogen vi står i.</p>
+<pre><code class="language-text">build:
+    context: .
+    dockerfile: docker/Dockerfile-node-alpine
+</code></pre>
+<p>En Dockerfile kan se ut så här, exemplet är från <code>docker/Dockerfile-node-alpine</code>.</p>
+<pre><code class="language-text"># Use a base image
+FROM node:alpine
+
+# Create a workdir
+RUN mkdir -p /app
+WORKDIR /app
+
+# Install npm packages
+COPY package.json /app
+RUN npm install
+</code></pre>
+<p>De sista raderna kopierar filen <code>package.json</code> från byggets context, in i imagen och därefter körs <code>npm install</code> som blir image-specifik och installeras i <code>/app/node_modules</code>.</p>
+<p>Om du gör ändringar i en image-fil kan det kräva att du bygger om den, till exempel via <code>docker-compose build node_alpine</code>.</p>
+<pre><code class="language-text"># Bygg om en image om du gjort ändringar i dess Dockerfile
+docker-compose build node_alpine
+</code></pre>
+</section><section id="inspektera-en-image-inspectdocker"><h3><a href="#inspektera-en-image-inspectdocker">Inspektera en image {#inspectdocker}</a></h3>
+<p>Du kan starta en terminal (bash, sh) mot en kontainer för att inspektera den och se vad den innehåller.</p>
+<pre><code class="language-text">$ docker-compose run node_alpine sh
+/app # pwd
+/app
+/app # ls
+coverage            docker              docker-compose.yml
+node_modules        package.json        src
+test
+</code></pre>
+<p>De images som slutar på <code>alpine</code> innehåller bara <code>sh</code> medans du kan använda <code>bash</code> i de andra som bygger på debian.</p>
+</section><section id="varfor-alpine-versus-debian-alpine"><h3><a href="#varfor-alpine-versus-debian-alpine">Varför alpine versus debian? {#alpine}</a></h3>
+<p>Alpine är en minimal <a href="https://store.docker.com/images/alpine">bas-image alpine</a> vars storlek är väldigt liten jämfört med en image baserad på debian eller ubuntu.</p>
+<p>Här kan du se storleken på de images som bygger på alpine och de andra som bygger på debian.</p>
+<pre><code class="language-text">$ docker image ls
+REPOSITORY                     TAG         SIZE
+unittestdocker_node_latest     latest      690MB
+unittestdocker_node_8          latest      695MB
+unittestdocker_node_6          latest      682MB
+unittestdocker_node_alpine     latest      83.4MB
+unittestdocker_node_8_alpine   latest      86.5MB
+unittestdocker_node_6_alpine   latest      74.2MB
+</code></pre>
+<p>Som du ser så finns det utrymma att spara med hjälp av alpine-images.</p>
+</section><section id="dubbelkolla-vilken-version-som-kors-nodeversion"><h3><a href="#dubbelkolla-vilken-version-som-kors-nodeversion">Dubbelkolla vilken version som körs {#nodeversion}</a></h3>
+<p>Om du vill dubbelkolla vilken version av Node som körs i en kontainer, bara för att vara säker, så kan du starta upp en interaktiv session och kontrollera versionerna.</p>
+<pre><code class="language-bash">$ docker-compose run node_alpine node
+&gt; process.version
+'v8.8.1'
+&gt; process.versions
+{ http_parser: '2.7.0',
+  node: '8.8.1',
+  v8: '6.1.534.42',
+  uv: '1.15.0',
+  zlib: '1.2.11',
+  ares: '1.10.1-DEV',
+  modules: '57',
+  nghttp2: '1.25.0',
+  openssl: '1.0.2l',
+  icu: '59.1',
+  unicode: '9.0',
+  cldr: '31.0.1',
+  tz: '2017b' }
+</code></pre>
 </section><section id="avslutningvis"><h2><a href="#avslutningvis">Avslutningvis</a></h2>
 <p>Vi har gått igenom de första stegen i hur man kommer igång med Docker via kommandot <code>docker</code> och <code>docker-compose</code>. Vi har också sett hur images och kontainrar fungerar och hur de kan användas för att göra en flexibel test- och utvecklingsmiljö kopplad till ditt repo.</p>
 <p>Avslutningsvis såg vi hur man kan göra egna images.</p>

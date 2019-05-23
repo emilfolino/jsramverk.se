@@ -118,6 +118,87 @@ Ett annat test som kan vara av vikt är acceptanstester ([Wikipedia om Acceptanc
 
 
 
+### Testverktyg för JavaScript
+
+Likt de flesta programmeringsspråk erbjuder även ekomiljön kring JavaScript ett större utbud av verktyg som kan användas för att bygga upp en testmiljö.
+
+Om vi börjar "underifrån" med enhetstester så är de mer kända verktygen [Mocha](https://mochajs.org/), [Jasmine](https://jasmine.github.io/) och [Jest](http://facebook.github.io/jest/).
+
+Det är inte en enkel sak att välja testverktyg, men om man börjar välja något så kan man ta det vidare därifrån och efterhand utvärdera vilket verktyg som lämpar sig för den egna organisationen.
+
+På min kravlista finns att kodtäckning skall fungera för mina enhetstester. I JavaScript-världen finns främst [Istanbul](https://istanbul.js.org/) och [Blanket.js](http://blanketjs.org/) som ger oss denna möjlighet. Testverktyget jag väljer behöver alltså ha en känd koppling mot något av dessa verktyg.
+
+När jag går från enhetstester till funktionstester så kan behovet av en headless browser komma upp. Här finns [Selenium](http://www.seleniumhq.org/) som en av de mer kända. Men alternativen är flera.
+
+När jag väl bestämt mig för verktygen behövs en testrunner som kör mina tester och en hantering av testrapporten så den kan visas upp för programmerare och kanske även extern personal.
+
+Allt som allt, någonstans här är namnen på några vanliga testverktyg inom JavaScript och jag tänker välja bland dessa.
+
+
+
+#### Kodmoduler att testa
+
+Innan jag väljer verktyg så behöver jag en kodbas som jag vill testa. För denna övnings skull så bygger jag en kortlek och ett [kortspel Black Jack](https://sv.wikipedia.org/wiki/Black_Jack). Det bör fungera för att visa hur testerna kan fungera med den testmiljö jag nu skall välja.
+
+Mitt repo som jag delvis använder för att exemplifiera artikeln hittar du under repot [janaxs/blackjack](https://github.com/janaxs/blackjack).
+
+Det finns också exempelprogram i kursrepot [ramverk2 under `example/test`](https://github.com/dbwebb-se/ramverk2/tree/master/example/test) som exemplifierar kommande stycken i artikeln.
+
+Låt oss då titta på de olika tester som körs på systemet och vilka verktyg jag valde.
+
+
+
+#### Enhetstestning i JavaScript
+
+Det första testverktyget jag valde är för enhetstester. De verktygen jag valde mellan var främst [Mocha](https://mochajs.org/), [Yasmine](https://jasmine.github.io/) och [Jest](http://facebook.github.io/jest/). Mitt val föll på Mocha och jag gjorde ett testprogram i `example/test/unittest-mocha` för att se hur det fungerade.
+
+```bash
+example/test/unittest-mocha$ tree .
+.
+├── package.json
+├── src
+│   └── card
+│       └── card.js
+└── test
+    └── card
+        ├── card.js
+        └── cardParameterized.js
+```
+
+Min källkod finns i `src/card` och mina enhetstester ligger i `test/card`. De båda filerna under test-katalogen innehåller samma tester, men testfallen är olika implementerade. Börja att kika i filen `card.js` då den är tydligast i hur testfallen kan skrivas. När du tycker att det blir alltför mycket kod i testfallen så tittar du istället i `cardParameterized.js` för att se hur man kan skriva mindre kod för samma testfall.
+
+Koden som testas är en klass `Card` som skall fungera som ett kort i en vanlig kortlek.
+
+Innan vi kan köra testerna så behöver vi installera Mocha. Det går att installera med `npm install mocha --save-dev` eller bara `npm install` eftersom filen `package.json` redan innehåller en referens till Mocha. När installationen är klar kan du köra testfallen med `npm test` eftersom `package.json` redan är konfigurerad för att köra Mocha med enhetstesterna.
+
+```bash
+npm install
+npm test
+```
+
+Resultatet du ser är körningen av samtliga enhetstester. Men hur väl lyckas vi med kodtäckningen?
+
+
+
+#### Kodtäckning vid enhetstestning
+
+När man kör enhetstester är man i princip beroende av ett verktyg som kan visa kodtäckningen för testfallen. Här väljer jag verktygen [Istanbul](https://istanbul.js.org/). I katalogen `example/test/unittest-mocha-istanbul` har jag utökat mitt exempel med att använda Istanbul tillsammans med Mocha.
+
+För att kunna köra testerna med kodtäckning behöver du först installera kommandoradsklienten [`nyc`](https://github.com/istanbuljs/nyc) via `npm install nyc --save-dev` eller bara `npm install`. Sedan kan du köra testerna igen, nu med kodtäckning inkluderat.
+
+```bash
+npm install
+npm test
+```
+
+I filen `package.json` körs nu kommandot `nyc --reporter=html --reporter=text mocha 'test/**/*.js'` där `nyc` sköter kodtäckningen för alla testfall som `mocha` exekverar. Vi får en rapport i ren text och i katalogen `cover` genereras en HTML-rapport.
+
+![Kodtäckningen är på 100% i vårt exempel.](https://dbwebb.se/image/snapht17/mocha-nyc-codecoverage.png?w=w2)
+
+Med en HTML-rapport är det enkelt att klicka sig fram och se vilka delar av koden som täcks av testfallen. Kodtäckning är ett viktigt verktyg när man gör enhetstester.
+
+Dessa verktyg skapar en del filer och kataloger, som vi inte är intresserade av att ha versionshanterad. Därför lägger vi till en ny `.gitignore` som gör att vi inte får kataloger genererad av testverktygen. Vi tar den officiella [Node.gitignore
+](https://github.com/github/gitignore/blob/master/Node.gitignore) och kopierar in i vår `.gitignore`.
 
 
 
@@ -128,4 +209,145 @@ npm install --global --production windows-build-tools
 ```
 
 
-## kravspec
+## Statisk kodvalidering
+
+Vi är ju inne på tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under `example/test/validate`.
+
+Eftersom vi utgår från kodstilen som definieras i [`javascript-style-guide`](https://www.npmjs.com/package/javascript-style-guide) så hämtar vi hem den och använder dess konfigurationsfil.
+
+```bash
+npm install javascript-style-guide --save-dev
+cp node_modules/javascript-style-guide/.eslint* .
+```
+
+Vi behöver installera validatorn som löser både kodstil och linter.
+
+```bash
+npm install eslint eslint-plugin-react --save-dev
+```
+
+Verktyget har flera plugins som kan vara relevanta att lägga till, lite beroende på vilken typ av kod (REACT, `.jsx`, `.pug`, etc) du utvecklar. Jag väljer att lägga till en plugin för REACT, även om den inte används i exemplet. Det finns en referens i konfigurationsfilen som vi lånat, som behöver pluginen.
+
+Nu kan vi köra validatorn och eftersom den redan finns definierade i `package.json` så köra via npm.
+
+```bash
+npm run eslint
+```
+
+Vill du köra validatorn som en del av din `npm test` så kan du lägga till följande i din `package.json`.
+
+```json
+"scripts": {
+    "posttest": "npm run eslint"
+}
+```
+
+När enhetstester körs så genereras kodtäckningen till katalogen `build/`. Det är för att undvika att skräpa ned i katalogen och samla bygg-relaterade filer i en katalog som är enkel att ta bort vid behov. Du kan se detaljer för hur `nyc` konfigureras i dess konfigfil `.nycrc`.
+
+
+
+## Continuous integration (CI)
+
+Nu när vi har en `package.json` på plats kan vi fortsätta och sätta igång en CI-kedja för att automatisera våra tester.
+
+Det som sammanhåller alla tester är nu sekvensen `npm install test` som installerar det som behövs via `package.json` och sen kör testerna.
+
+```bash
+npm install   # Installerar allt som finns i package.json
+npm test      # Exekvera validatorer och testfall
+```
+
+Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `example/test/ci` och jag använder ett repo [janaxs/blackjack](https://github.com/janaxs/blackjack) för att demonstrera hur det ser ut.
+
+
+
+#### Byggverktyg Travis och CircleCI
+
+Först tar vi ett byggsystem, eller två. Jag väljer [Travis](https://travis-ci.org/janaxs/blackjack) och [CircleCI](https://circleci.com/gh/janaxs/blackjack). Syftet med byggsystemet är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
+
+Jag lägger till mitt repo till Travis och CircleCI.
+
+I katalogen `example/test/ci` ligger en konfigurationsfil `.travis.yml` och en `.circleci/config.yml` som är exempel på konfigurationsfiler för Travis respektive CircleCI (v2). Om du kikar i filerna ser du referenser till `npm install` och `npm test`.
+
+
+
+#### Kodtäckning med Coveralls och Codecov
+
+Byggsystemen kör testerna och kan sedan rapportera kodtäckningen till två system som är specialiserade på kodtäckning. I detta fallet använder jag [Coveralls](https://coveralls.io/github/janaxs/blackjack) och [Codecov](https://codecov.io/gh/janaxs/blackjack).
+
+Jag lägger till mitt repo till Coveralls och Codecov.
+
+Sedan behöver jag skicka en rapport från byggsystemets senaste tester. Det gör jag med skript i `package.json` på följande sätt.
+
+```json
+"scripts": {
+  "report-coveralls": "nyc report --reporter=text-lcov | coveralls",
+  "report-codecov": "nyc report --reporter=lcov > coverage.lcov && codecov"
+},
+```
+
+Det som behövs för att detta skall fungera är att paketen `coveralls` och `codecov` installeras. Det är specifika paket som enbart är till för att rapportera kodtäckningen.
+
+```bash
+npm install coveralls codecov --save-dev
+```
+
+Vid nästa bygge kommer ny kodtäckningen skickas upp till respektive system, förutsatt att kommandona körs. Jag har valt att köra dem från Travis och du kan se hur de körs i konfigurationsfilen `.travis.yml`.
+
+```bash
+after_success:
+    - npm run report-coveralls
+    - npm run report-codecov
+```
+
+Om du vill friska upp minnet om ovan- och nedanstående testverktyg förklarar Mikael hur man integrerar de olika testverktygen med github repot i artikeln [Integrera din packagist modul med verktyg för automatisk test och validering](kunskap/integrera-din-packagist-modul-med-verktyg-for-automatisk-test-och-validering).
+
+
+
+#### Kodkvalitet med Codeclimate och Codacy
+
+Till slut integrerar jag även med två verktyg som har fokus på kodkvalitet. Det är [Codeclimate](https://codeclimate.com/github/janaxs/blackjack) och [Codacy](https://www.codacy.com/app/mosbth/blackjack/dashboard).
+
+Jag lägger till mitt repo till Codeclimate och Codacy.
+
+De båda verktygen har olika sätt att visualisera hur de upplever min kodkvalitet. Verktygen kan också visa kodtäckning om jag väljer att bifoga en sådan rapport.
+
+Delvis kan alltså dessa båda verktyg ersätta de två verktyg vi såg som enbart hade fokus på kodtäckning. Vilka verktyg man i slutändan använder får bli en sak att utvärdera.
+
+I detta läget behöver jag inte göra mer, de båda verktygen checkar automatiskt ut min kod när den uppdateras.
+
+
+
+#### Kodkvalitet och kodtäckning med Scrutinizer
+
+Avslutningsvis integrerar jag mitt repo mot [Scrutinizer](https://scrutinizer-ci.com/g/janaxs/blackjack/) som är ett verktyg för kodkvalitet och kodtäckning. Verktyget kan exekvera mina tester, visa kodtäckning och analysera min kod ur olika aspekter.
+
+
+
+#### CI kedja klar
+
+Då var vår CI kedja klar med flera alternativ för byggsystem, kodtäckning och kodkvalitet.
+
+Du kan ta en närmare titt på mitt demo repo [janaxs/blackjack](https://github.com/janaxs/blackjack) om du vill se valideringsverktyg, enhetstester och ci-kedjan i ett sammanhang i ett repo med nödvändiga konfigurationsfiler.
+
+
+
+## Kravspecifikation
+
+1. Allt som behövs i ditt repo skall installeras vid `npm install`.
+
+1. Välj och integrera ett verktyg för enhetstester. Verktyget skall exekvera enhetstester vid `npm test` (även om det är 0 testfall).
+
+1. Lägg till så att kodtäckning fungerar vid enhetstester.
+
+1. Bygg en CI-kedja och integrera med en byggtjänst likt Travis eller CircleCI som checkar ut ditt repo och utför `npm install test`. Badga din README.
+
+1. Bygg vidare på din CI-kedja och integrera med minst en tjänst för kodkvalitet och kodtäckning. Du kan välja att integrera mot flera tjänster och/eller en tjänst som löser kodtäckning och en tjänst som löser kodkvalitet. Badga din README.
+
+1. Committa och tagga ditt redovisa-repo med taggen 3.0.0 eller senare, ladda upp till GitHub och till studentservern.
+
+
+
+## Skriva
+
+Metod del 2

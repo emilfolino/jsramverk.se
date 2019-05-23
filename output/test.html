@@ -7,7 +7,7 @@
     <meta name="keywords" content="JavaScript,javascript,ramverk,framework,BTH,webbprogrammering">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>jsramverk</title>
-    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%}body{font-family:sans-serif;font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.61rem}h1{font-size:3.45rem;margin-bottom:1.61rem}h2{font-size:2.76rem;margin-bottom:1.61rem}h3{font-size:2.3rem;margin-bottom:1.61rem}h4{font-size:1.955rem;margin-bottom:1.61rem}p{font-size:1.15rem;margin-bottom:1.61rem}blockquote{margin-bottom:1.61rem}blockquote p{font-size:1.3225rem;margin-bottom:0}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%}body{font-family:sans-serif;font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.68rem}h1{font-size:3.6rem;margin-bottom:1.68rem}h2{font-size:2.88rem;margin-bottom:1.68rem}h3{font-size:2.4rem;margin-bottom:1.68rem}h4{font-size:2.04rem;margin-bottom:1.68rem}p{font-size:1.2rem;margin-bottom:1.68rem}blockquote{margin-bottom:1.68rem}blockquote p{font-size:1.44rem;margin-bottom:0}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
 </style>
     <link rel="stylesheet" href="inter-ui.min.css" media="none" onload="if(media!='all')media='all'">
     <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
@@ -23,7 +23,7 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Test</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#test'>Test</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#material-och-tekniker'>Material och tekniker</a></li><li><a href='#kravspec'>kravspec</a></li></ul></nav><article class='week'><section id="test"><h1><a href="#test">Test</a></h1>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Test</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#test'>Test</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#material-och-tekniker'>Material och tekniker</a></li><li><a href='#testverktyg-for-javascript'>Testverktyg för JavaScript</a></li><li><a href='#statisk-kodvalidering'>Statisk kodvalidering</a></li><li><a href='#continuous-integration-(ci)'>Continuous integration (CI)</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="test"><h1><a href="#test">Test</a></h1>
 <p>Vi skapar en testmiljö för både frontend och backend kod, samt ett flöde för Continouos Integration.</p>
 <p>Tanken är att vi förbereder oss för ett större utvecklingsprojekt i JavaScript och vi vill säkerställa att vi har en utvecklingsmiljö där vi kan testa vår programvara.</p>
 <p>Vilken typ av tester vill vi göra och vilka verktyg kan hjälpa oss med detta? Låt oss gå igenom läget i JavaScript och använda några testrelaterade verktyg för att sätta en grund.</p>
@@ -99,10 +99,135 @@ BDD. En intressant del i BDD är att man diskuterar systemet i features som skri
 <p>Integrationstester (<a href="https://en.wikipedia.org/wiki/Integration_testing">Wikipedia om Integration testing</a>) fokuserar på att testa att flera moduler kan samverka på ett tänkt sätt. Man ser det som ett steg i en CI pipeline (Continuous integration) att alla moduler, eller en delmängd av dem, behöver integreras i något steg och då vill man verifiera med en testsuite att integrationen gick bra. Likt alla testfaser behöver man bestämma kriteria för vad som skall testas, hur det skall testas och vad som bestämmer att testerna går bra.</p>
 <p>I systemtestfasen (<a href="https://en.wikipedia.org/wiki/System_testing">Wikipedia om System testing</a>) utförs en serie av tester mot systemet som helhet. Alla moduler är på plats och systemet snurrar i en miljö som är relevant och motsvarar systemets verkliga driftsmiljö. Man kan utföra säkerhetstester, usabilitytester, prestandatester och stresstester eller tester av dokumentationen. Man tänker på systemet som helhet och testar de aspekter som är viktiga och relevanta. Systemtestet är en plats för att verifiera systemets icke-funktionella krav via icke-funktionella tester (<a href="https://en.wikipedia.org/wiki/Non-functional_testing">Wikipedia om Non-functional testing</a>).</p>
 <p>Ett annat test som kan vara av vikt är acceptanstester (<a href="https://en.wikipedia.org/wiki/Acceptance_testing">Wikipedia om Acceptance testing</a>). Det är tester som utförs inför, tillsammans med, eller av kunden, när de tar emot leveransen. Där är ett viktigt dokument/fas som du och kunden gemensamt tagit fram som en del av beställningen och där testerna syftar till att verifiera att kunden verkligen fått leverans enligt beställning. Ur beställarens synpunkt kan acceptanstestet vara nästan lika viktigt som kravspecen då ett godkänt acceptanstest innebär att fakturan kan skickas och kunden har accepterat att systemet möter de kriteria som var viktigt.</p>
+</section><section id="testverktyg-for-javascript"><h3><a href="#testverktyg-for-javascript">Testverktyg för JavaScript</a></h3>
+<p>Likt de flesta programmeringsspråk erbjuder även ekomiljön kring JavaScript ett större utbud av verktyg som kan användas för att bygga upp en testmiljö.</p>
+<p>Om vi börjar “underifrån” med enhetstester så är de mer kända verktygen <a href="https://mochajs.org/">Mocha</a>, <a href="https://jasmine.github.io/">Jasmine</a> och <a href="http://facebook.github.io/jest/">Jest</a>.</p>
+<p>Det är inte en enkel sak att välja testverktyg, men om man börjar välja något så kan man ta det vidare därifrån och efterhand utvärdera vilket verktyg som lämpar sig för den egna organisationen.</p>
+<p>På min kravlista finns att kodtäckning skall fungera för mina enhetstester. I JavaScript-världen finns främst <a href="https://istanbul.js.org/">Istanbul</a> och <a href="http://blanketjs.org/">Blanket.js</a> som ger oss denna möjlighet. Testverktyget jag väljer behöver alltså ha en känd koppling mot något av dessa verktyg.</p>
+<p>När jag går från enhetstester till funktionstester så kan behovet av en headless browser komma upp. Här finns <a href="http://www.seleniumhq.org/">Selenium</a> som en av de mer kända. Men alternativen är flera.</p>
+<p>När jag väl bestämt mig för verktygen behövs en testrunner som kör mina tester och en hantering av testrapporten så den kan visas upp för programmerare och kanske även extern personal.</p>
+<p>Allt som allt, någonstans här är namnen på några vanliga testverktyg inom JavaScript och jag tänker välja bland dessa.</p>
+<h4 id="kodmoduler-att-testa"><a href="#kodmoduler-att-testa">Kodmoduler att testa</a></h4>
+<p>Innan jag väljer verktyg så behöver jag en kodbas som jag vill testa. För denna övnings skull så bygger jag en kortlek och ett <a href="https://sv.wikipedia.org/wiki/Black_Jack">kortspel Black Jack</a>. Det bör fungera för att visa hur testerna kan fungera med den testmiljö jag nu skall välja.</p>
+<p>Mitt repo som jag delvis använder för att exemplifiera artikeln hittar du under repot <a href="https://github.com/janaxs/blackjack">janaxs/blackjack</a>.</p>
+<p>Det finns också exempelprogram i kursrepot <a href="https://github.com/dbwebb-se/ramverk2/tree/master/example/test">ramverk2 under <code>example/test</code></a> som exemplifierar kommande stycken i artikeln.</p>
+<p>Låt oss då titta på de olika tester som körs på systemet och vilka verktyg jag valde.</p>
+<h4 id="enhetstestning-i-javascript"><a href="#enhetstestning-i-javascript">Enhetstestning i JavaScript</a></h4>
+<p>Det första testverktyget jag valde är för enhetstester. De verktygen jag valde mellan var främst <a href="https://mochajs.org/">Mocha</a>, <a href="https://jasmine.github.io/">Yasmine</a> och <a href="http://facebook.github.io/jest/">Jest</a>. Mitt val föll på Mocha och jag gjorde ett testprogram i <code>example/test/unittest-mocha</code> för att se hur det fungerade.</p>
+<pre><code class="language-bash">example/test/unittest-mocha$ tree .
+.
+├── package.json
+├── src
+│   └── card
+│       └── card.js
+└── test
+    └── card
+        ├── card.js
+        └── cardParameterized.js
+</code></pre>
+<p>Min källkod finns i <code>src/card</code> och mina enhetstester ligger i <code>test/card</code>. De båda filerna under test-katalogen innehåller samma tester, men testfallen är olika implementerade. Börja att kika i filen <code>card.js</code> då den är tydligast i hur testfallen kan skrivas. När du tycker att det blir alltför mycket kod i testfallen så tittar du istället i <code>cardParameterized.js</code> för att se hur man kan skriva mindre kod för samma testfall.</p>
+<p>Koden som testas är en klass <code>Card</code> som skall fungera som ett kort i en vanlig kortlek.</p>
+<p>Innan vi kan köra testerna så behöver vi installera Mocha. Det går att installera med <code>npm install mocha --save-dev</code> eller bara <code>npm install</code> eftersom filen <code>package.json</code> redan innehåller en referens till Mocha. När installationen är klar kan du köra testfallen med <code>npm test</code> eftersom <code>package.json</code> redan är konfigurerad för att köra Mocha med enhetstesterna.</p>
+<pre><code class="language-bash">npm install
+npm test
+</code></pre>
+<p>Resultatet du ser är körningen av samtliga enhetstester. Men hur väl lyckas vi med kodtäckningen?</p>
+<h4 id="kodtackning-vid-enhetstestning"><a href="#kodtackning-vid-enhetstestning">Kodtäckning vid enhetstestning</a></h4>
+<p>När man kör enhetstester är man i princip beroende av ett verktyg som kan visa kodtäckningen för testfallen. Här väljer jag verktygen <a href="https://istanbul.js.org/">Istanbul</a>. I katalogen <code>example/test/unittest-mocha-istanbul</code> har jag utökat mitt exempel med att använda Istanbul tillsammans med Mocha.</p>
+<p>För att kunna köra testerna med kodtäckning behöver du först installera kommandoradsklienten <a href="https://github.com/istanbuljs/nyc"><code>nyc</code></a> via <code>npm install nyc --save-dev</code> eller bara <code>npm install</code>. Sedan kan du köra testerna igen, nu med kodtäckning inkluderat.</p>
+<pre><code class="language-bash">npm install
+npm test
+</code></pre>
+<p>I filen <code>package.json</code> körs nu kommandot <code>nyc --reporter=html --reporter=text mocha 'test/**/*.js'</code> där <code>nyc</code> sköter kodtäckningen för alla testfall som <code>mocha</code> exekverar. Vi får en rapport i ren text och i katalogen <code>cover</code> genereras en HTML-rapport.</p>
+<p><img src="https://dbwebb.se/image/snapht17/mocha-nyc-codecoverage.png?w=w2" alt="Kodtäckningen är på 100% i vårt exempel."></p>
+<p>Med en HTML-rapport är det enkelt att klicka sig fram och se vilka delar av koden som täcks av testfallen. Kodtäckning är ett viktigt verktyg när man gör enhetstester.</p>
+<p>Dessa verktyg skapar en del filer och kataloger, som vi inte är intresserade av att ha versionshanterad. Därför lägger vi till en ny <code>.gitignore</code> som gör att vi inte får kataloger genererad av testverktygen. Vi tar den officiella <a href="https://github.com/github/gitignore/blob/master/Node.gitignore">Node.gitignore
+</a> och kopierar in i vår <code>.gitignore</code>.</p>
 <p>Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från <a href="https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows">installationsmanualen för bcrypt</a> är att installare npm paketet <code>windows-build-tools</code> med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.</p>
 <pre><code class="language-bash">npm install --global --production windows-build-tools
 </code></pre>
-</section><section id="kravspec"><h2><a href="#kravspec">kravspec</a></h2>
+</section><section id="statisk-kodvalidering"><h2><a href="#statisk-kodvalidering">Statisk kodvalidering</a></h2>
+<p>Vi är ju inne på tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under <code>example/test/validate</code>.</p>
+<p>Eftersom vi utgår från kodstilen som definieras i <a href="https://www.npmjs.com/package/javascript-style-guide"><code>javascript-style-guide</code></a> så hämtar vi hem den och använder dess konfigurationsfil.</p>
+<pre><code class="language-bash">npm install javascript-style-guide --save-dev
+cp node_modules/javascript-style-guide/.eslint* .
+</code></pre>
+<p>Vi behöver installera validatorn som löser både kodstil och linter.</p>
+<pre><code class="language-bash">npm install eslint eslint-plugin-react --save-dev
+</code></pre>
+<p>Verktyget har flera plugins som kan vara relevanta att lägga till, lite beroende på vilken typ av kod (REACT, <code>.jsx</code>, <code>.pug</code>, etc) du utvecklar. Jag väljer att lägga till en plugin för REACT, även om den inte används i exemplet. Det finns en referens i konfigurationsfilen som vi lånat, som behöver pluginen.</p>
+<p>Nu kan vi köra validatorn och eftersom den redan finns definierade i <code>package.json</code> så köra via npm.</p>
+<pre><code class="language-bash">npm run eslint
+</code></pre>
+<p>Vill du köra validatorn som en del av din <code>npm test</code> så kan du lägga till följande i din <code>package.json</code>.</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;posttest&quot;: &quot;npm run eslint&quot;
+}
+</code></pre>
+<p>När enhetstester körs så genereras kodtäckningen till katalogen <code>build/</code>. Det är för att undvika att skräpa ned i katalogen och samla bygg-relaterade filer i en katalog som är enkel att ta bort vid behov. Du kan se detaljer för hur <code>nyc</code> konfigureras i dess konfigfil <code>.nycrc</code>.</p>
+</section><section id="continuous-integration-(ci)"><h2><a href="#continuous-integration-(ci)">Continuous integration (CI)</a></h2>
+<p>Nu när vi har en <code>package.json</code> på plats kan vi fortsätta och sätta igång en CI-kedja för att automatisera våra tester.</p>
+<p>Det som sammanhåller alla tester är nu sekvensen <code>npm install test</code> som installerar det som behövs via <code>package.json</code> och sen kör testerna.</p>
+<pre><code class="language-bash">npm install   # Installerar allt som finns i package.json
+npm test      # Exekvera validatorer och testfall
+</code></pre>
+<p>Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under <code>example/test/ci</code> och jag använder ett repo <a href="https://github.com/janaxs/blackjack">janaxs/blackjack</a> för att demonstrera hur det ser ut.</p>
+<h4 id="byggverktyg-travis-och-circleci"><a href="#byggverktyg-travis-och-circleci">Byggverktyg Travis och CircleCI</a></h4>
+<p>Först tar vi ett byggsystem, eller två. Jag väljer <a href="https://travis-ci.org/janaxs/blackjack">Travis</a> och <a href="https://circleci.com/gh/janaxs/blackjack">CircleCI</a>. Syftet med byggsystemet är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.</p>
+<p>Jag lägger till mitt repo till Travis och CircleCI.</p>
+<p>I katalogen <code>example/test/ci</code> ligger en konfigurationsfil <code>.travis.yml</code> och en <code>.circleci/config.yml</code> som är exempel på konfigurationsfiler för Travis respektive CircleCI (v2). Om du kikar i filerna ser du referenser till <code>npm install</code> och <code>npm test</code>.</p>
+<h4 id="kodtackning-med-coveralls-och-codecov"><a href="#kodtackning-med-coveralls-och-codecov">Kodtäckning med Coveralls och Codecov</a></h4>
+<p>Byggsystemen kör testerna och kan sedan rapportera kodtäckningen till två system som är specialiserade på kodtäckning. I detta fallet använder jag <a href="https://coveralls.io/github/janaxs/blackjack">Coveralls</a> och <a href="https://codecov.io/gh/janaxs/blackjack">Codecov</a>.</p>
+<p>Jag lägger till mitt repo till Coveralls och Codecov.</p>
+<p>Sedan behöver jag skicka en rapport från byggsystemets senaste tester. Det gör jag med skript i <code>package.json</code> på följande sätt.</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+  &quot;report-coveralls&quot;: &quot;nyc report --reporter=text-lcov | coveralls&quot;,
+  &quot;report-codecov&quot;: &quot;nyc report --reporter=lcov &gt; coverage.lcov &amp;&amp; codecov&quot;
+},
+</code></pre>
+<p>Det som behövs för att detta skall fungera är att paketen <code>coveralls</code> och <code>codecov</code> installeras. Det är specifika paket som enbart är till för att rapportera kodtäckningen.</p>
+<pre><code class="language-bash">npm install coveralls codecov --save-dev
+</code></pre>
+<p>Vid nästa bygge kommer ny kodtäckningen skickas upp till respektive system, förutsatt att kommandona körs. Jag har valt att köra dem från Travis och du kan se hur de körs i konfigurationsfilen <code>.travis.yml</code>.</p>
+<pre><code class="language-bash">after_success:
+    - npm run report-coveralls
+    - npm run report-codecov
+</code></pre>
+<p>Om du vill friska upp minnet om ovan- och nedanstående testverktyg förklarar Mikael hur man integrerar de olika testverktygen med github repot i artikeln <a href="kunskap/integrera-din-packagist-modul-med-verktyg-for-automatisk-test-och-validering">Integrera din packagist modul med verktyg för automatisk test och validering</a>.</p>
+<h4 id="kodkvalitet-med-codeclimate-och-codacy"><a href="#kodkvalitet-med-codeclimate-och-codacy">Kodkvalitet med Codeclimate och Codacy</a></h4>
+<p>Till slut integrerar jag även med två verktyg som har fokus på kodkvalitet. Det är <a href="https://codeclimate.com/github/janaxs/blackjack">Codeclimate</a> och <a href="https://www.codacy.com/app/mosbth/blackjack/dashboard">Codacy</a>.</p>
+<p>Jag lägger till mitt repo till Codeclimate och Codacy.</p>
+<p>De båda verktygen har olika sätt att visualisera hur de upplever min kodkvalitet. Verktygen kan också visa kodtäckning om jag väljer att bifoga en sådan rapport.</p>
+<p>Delvis kan alltså dessa båda verktyg ersätta de två verktyg vi såg som enbart hade fokus på kodtäckning. Vilka verktyg man i slutändan använder får bli en sak att utvärdera.</p>
+<p>I detta läget behöver jag inte göra mer, de båda verktygen checkar automatiskt ut min kod när den uppdateras.</p>
+<h4 id="kodkvalitet-och-kodtackning-med-scrutinizer"><a href="#kodkvalitet-och-kodtackning-med-scrutinizer">Kodkvalitet och kodtäckning med Scrutinizer</a></h4>
+<p>Avslutningsvis integrerar jag mitt repo mot <a href="https://scrutinizer-ci.com/g/janaxs/blackjack/">Scrutinizer</a> som är ett verktyg för kodkvalitet och kodtäckning. Verktyget kan exekvera mina tester, visa kodtäckning och analysera min kod ur olika aspekter.</p>
+<h4 id="ci-kedja-klar"><a href="#ci-kedja-klar">CI kedja klar</a></h4>
+<p>Då var vår CI kedja klar med flera alternativ för byggsystem, kodtäckning och kodkvalitet.</p>
+<p>Du kan ta en närmare titt på mitt demo repo <a href="https://github.com/janaxs/blackjack">janaxs/blackjack</a> om du vill se valideringsverktyg, enhetstester och ci-kedjan i ett sammanhang i ett repo med nödvändiga konfigurationsfiler.</p>
+</section><section id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
+<ol>
+<li>
+<p>Allt som behövs i ditt repo skall installeras vid <code>npm install</code>.</p>
+</li>
+<li>
+<p>Välj och integrera ett verktyg för enhetstester. Verktyget skall exekvera enhetstester vid <code>npm test</code> (även om det är 0 testfall).</p>
+</li>
+<li>
+<p>Lägg till så att kodtäckning fungerar vid enhetstester.</p>
+</li>
+<li>
+<p>Bygg en CI-kedja och integrera med en byggtjänst likt Travis eller CircleCI som checkar ut ditt repo och utför <code>npm install test</code>. Badga din README.</p>
+</li>
+<li>
+<p>Bygg vidare på din CI-kedja och integrera med minst en tjänst för kodkvalitet och kodtäckning. Du kan välja att integrera mot flera tjänster och/eller en tjänst som löser kodtäckning och en tjänst som löser kodkvalitet. Badga din README.</p>
+</li>
+<li>
+<p>Committa och tagga ditt redovisa-repo med taggen 3.0.0 eller senare, ladda upp till GitHub och till studentservern.</p>
+</li>
+</ol>
+</section><section id="skriva"><h2><a href="#skriva">Skriva</a></h2>
+<p>Metod del 2</p>
 </article></section></div>    </main>
 
     <footer class="footer" id="footer">

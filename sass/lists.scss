@@ -1,4 +1,13 @@
 ol,
 ul {
     padding-left: 2rem;
+    font-size: $mainPFontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
+}
+
+
+ul,
+ol {
+    font-size: $mainPFontSize * $fontScaleFactor;
+    margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
 }

@@ -304,6 +304,183 @@ För att allt skall fungera så behöver du ditt konto på Docker. Så här ser 
 
 
 
+Docker mot olika versioner av Node {#docker}
+--------------------------------------------------------------------
+
+Ibland vill man välja vilken version av Node man använder för sina enhetstester. Det kan vara bra att kunna köra testerna mot godtycklig version av Node, eventuellt kombinerad med specifika versioner av andra programvaror. Här kan Docker hjälpa oss.
+
+
+
+### Kör enhetstester mot olika versioner {#testversion}
+
+I katalogen `example/test/unittest-docker` har jag förberett ett exempel som kör samma testfall som tidigare men man kan välja att köra dem mot en Docker kontainer som kör en specifik installation av Node.
+
+Du kan köra testerna mot en specifik kontainer på något av följande sätt.
+
+```text
+docker-compose run node_alpine npm test
+npm run docker-latest
+```
+
+Du kan sedan köra testerna mot en äldre version av Node på följande sätt.
+
+```text
+# Node version 8
+docker-compose run node_8_alpine npm test
+npm run docker-8
+
+# Node version 6
+docker-compose run node_6_alpine npm test
+npm run docker-6
+```
+
+Nu har du alltså möjligheten att köra tester med samma kodbas mot flera versioner av Node. Det är kraftfullt och kan spara dig tid när du utvecklar och måste ha koll på att koden fungerar på olika versioner.
+
+
+
+### Tjänsterna kontrolleras av docker-compose {#service}
+
+Det är filen `docker-compose.yml` som styr vilka kontainrar som startas upp. I `package.json` ligger de kommandon som körs och `npm run` erbjuder därmed en kortare väg att starta upp testerna mot olika versioner av Node.
+
+Så här ser `docker-compose.yml` ut för ett par av de tjänster som definieras.
+
+```text
+version: "3"
+services:
+    node_alpine:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-alpine
+        volumes:
+            - ./:/app/
+            - /app/node_modules/
+
+    node_8_alpine:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-8-alpine
+        volumes:
+            - ./:/app/
+            - /app/node_modules/
+```
+
+Filen `docker-compose.yml` hänvisar till de Docker-filer som används för att bygga respektive image.
+
+När docker-compose använder en image för att starta upp en kontainer så kan den montera volymer och på så sätt länka kontainern till det lokala filsystemet.
+
+Följande rader monterar hela katalogen in i kontainern, men den använder katalogen `app/node_modules/` som finns i imagen, även om det finns en lokal katalog som heter `node_modules`.
+
+```text
+volumes:
+    - ./:/app/
+    - /app/node_modules/
+```
+
+På så vis kan du både ha en lokal installation av alla dina node moduler och det kan finnas en specifik installation i respektive image.
+
+
+
+### Docker-filer ger images {#dockerfile}
+
+Grunden till varje image är en Dockerfile som i exemplet ligger i katalogen `docker/`. De ger basen för imagens innehåll. När en image byggs, i samband med att den refereras av docker-compose, så byggs den i ett context av katalogen vi står i.
+
+```text
+build:
+    context: .
+    dockerfile: docker/Dockerfile-node-alpine
+```
+
+En Dockerfile kan se ut så här, exemplet är från `docker/Dockerfile-node-alpine`.
+
+```text
+# Use a base image
+FROM node:alpine
+
+# Create a workdir
+RUN mkdir -p /app
+WORKDIR /app
+
+# Install npm packages
+COPY package.json /app
+RUN npm install
+```
+
+De sista raderna kopierar filen `package.json` från byggets context, in i imagen och därefter körs `npm install` som blir image-specifik och installeras i `/app/node_modules`.
+
+Om du gör ändringar i en image-fil kan det kräva att du bygger om den, till exempel via `docker-compose build node_alpine`.
+
+```text
+# Bygg om en image om du gjort ändringar i dess Dockerfile
+docker-compose build node_alpine
+```
+
+
+
+### Inspektera en image {#inspectdocker}
+
+Du kan starta en terminal (bash, sh) mot en kontainer för att inspektera den och se vad den innehåller.
+
+```text
+$ docker-compose run node_alpine sh
+/app # pwd
+/app
+/app # ls
+coverage            docker              docker-compose.yml
+node_modules        package.json        src
+test
+```
+
+De images som slutar på `alpine` innehåller bara `sh` medans du kan använda `bash` i de andra som bygger på debian.
+
+
+
+### Varför alpine versus debian? {#alpine}
+
+Alpine är en minimal [bas-image alpine](https://store.docker.com/images/alpine) vars storlek är väldigt liten jämfört med en image baserad på debian eller ubuntu.
+
+Här kan du se storleken på de images som bygger på alpine och de andra som bygger på debian.
+
+```text
+$ docker image ls
+REPOSITORY                     TAG         SIZE
+unittestdocker_node_latest     latest      690MB
+unittestdocker_node_8          latest      695MB
+unittestdocker_node_6          latest      682MB
+unittestdocker_node_alpine     latest      83.4MB
+unittestdocker_node_8_alpine   latest      86.5MB
+unittestdocker_node_6_alpine   latest      74.2MB
+```
+
+Som du ser så finns det utrymma att spara med hjälp av alpine-images.
+
+
+
+### Dubbelkolla vilken version som körs {#nodeversion}
+
+Om du vill dubbelkolla vilken version av Node som körs i en kontainer, bara för att vara säker, så kan du starta upp en interaktiv session och kontrollera versionerna.
+
+```bash
+$ docker-compose run node_alpine node
+> process.version
+'v8.8.1'
+> process.versions
+{ http_parser: '2.7.0',
+  node: '8.8.1',
+  v8: '6.1.534.42',
+  uv: '1.15.0',
+  zlib: '1.2.11',
+  ares: '1.10.1-DEV',
+  modules: '57',
+  nghttp2: '1.25.0',
+  openssl: '1.0.2l',
+  icu: '59.1',
+  unicode: '9.0',
+  cldr: '31.0.1',
+  tz: '2017b' }
+```
+
+
+
 ## Avslutningvis
 
 Vi har gått igenom de första stegen i hur man kommer igång med Docker via kommandot `docker` och `docker-compose`. Vi har också sett hur images och kontainrar fungerar och hur de kan användas för att göra en flexibel test- och utvecklingsmiljö kopplad till ditt repo.
