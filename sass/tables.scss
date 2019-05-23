@@ -4,8 +4,8 @@ table {
     width: 100%;
     display: block;
     overflow-x: auto;
-    margin-bottom: 1.4rem;
-    font-size: 1rem;
+    margin-bottom: $mainPFontSize * $mainLineHeight;
+    font-size: $mainPFontSize;
 
     th {
         text-align: left;
@@ -28,7 +28,7 @@ table {
 
 @media (min-width: 992px) {
     table {
-        font-size: 1.4rem;
-        margin-bottom: 1.96rem;
+        font-size: $mainPFontSize * $fontScaleFactor;
+        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
     }
 }

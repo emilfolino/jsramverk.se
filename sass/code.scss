@@ -1,6 +1,6 @@
 pre code {
-    font-size: 1rem;
-    margin-bottom: 1.4rem;
+    font-size: $mainPFontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
 code {
@@ -12,11 +12,11 @@ code {
 
 @media (min-width: 992px) {
     pre code {
-        font-size: 1.4rem;
-        margin-bottom: 1.96rem;
+        font-size: $mainPFontSize * $fontScaleFactor;
+        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
     }
 
     code {
-        font-size: 1.4rem;
+        font-size: $mainPFontSize * $fontScaleFactor;
     }
 }

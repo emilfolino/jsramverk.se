@@ -4,7 +4,7 @@
     height: 0;
     overflow: hidden;
     max-width: 100%;
-    margin-bottom: 1.4rem;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
 .embed-container iframe,
@@ -19,6 +19,6 @@
 
 @media (min-width: 992px) {
     .embed-container {
-        margin-bottom: 1.96rem;
+        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
     }
 }
