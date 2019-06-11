@@ -5,9 +5,10 @@ ul {
     margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
-
-ul,
-ol {
-    font-size: $mainPFontSize * $fontScaleFactor;
-    margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
+@media (min-width: 992px) {
+    ol,
+    ul {
+        font-size: $mainPFontSize * $fontScaleFactor;
+        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
+    }
 }
