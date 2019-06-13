@@ -549,6 +549,46 @@ deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib no
 <p>Vi startar verktyget genom att köra kommandot <code>sudo certbot --nginx</code>. Vi får då välja för vilka domäner och subdomäner vi vill installera certifikat. Efter att vi har vald domänerna får vi frågan om vi vill omdirigera all trafik till HTTPS istället för HTTP och det svarar vi ja till (i certbot gränssnittet motsvarar det en tvåa).</p>
 <p>Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.</p>
 </section><section id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
+<p>Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och en del om hur din frontend applikation ska konsumera backend API:t.</p>
+<h4 id="del-1:-backend"><a href="#del-1:-backend">Del 1: Backend</a></h4>
+<ol>
+<li>
+<p>Skapa ett Me-API med nedanstående router.</p>
+</li>
+<li>
+<p>Se till att det finns en <code>package.json</code> i katalogen. Filen skall innehålla alla beroenden som krävs.</p>
+</li>
+<li>
+<p>Skapa routen <code>/</code> där du ger en presentation av dig själv.</p>
+</li>
+<li>
+<p>Skapa routen <code>/reports/kmom01</code> där du ger din redovisningstext för kmom01.</p>
+</li>
+<li>
+<p>Committa alla filer och lägg till en tagg (1.0.0) med hjälp av <code>npm version 1.0.0</code>. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.</p>
+</li>
+<li>
+<p>Pusha upp repot till GitHub, inklusive taggarna.</p>
+</li>
+<li>
+<p>Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.</p>
+</li>
+</ol>
+<h4 id="del-2:-frontend"><a href="#del-2:-frontend">Del 2: Frontend</a></h4>
+<ol>
+<li>
+<p>Din frontend Me-applikation från vecka 1 och 2 ska nu hämta redovisningstexter från Me-API:t.</p>
+</li>
+<li>
+<p>Committa alla filer och lägg till en tagg (3.0.0) med hjälp av <code>npm version 3.0.0</code>. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.</p>
+</li>
+<li>
+<p>Pusha upp repot till GitHub, inklusive taggarna.</p>
+</li>
+<li>
+<p>Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.</p>
+</li>
+</ol>
 </section><section id="skriva"><h2><a href="#skriva">Skriva</a></h2>
 </article></section></div>    </main>
 

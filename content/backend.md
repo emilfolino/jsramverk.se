@@ -837,6 +837,42 @@ Vi startar verktyget genom att köra kommandot `sudo certbot --nginx`. Vi får d
 
 Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.
 
+
+
 ## Kravspecifikation
+
+Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och en del om hur din frontend applikation ska konsumera backend API:t.
+
+
+
+#### Del 1: Backend
+
+1. Skapa ett Me-API med nedanstående router.
+
+1. Se till att det finns en `package.json` i katalogen. Filen skall innehålla alla beroenden som krävs.
+
+1. Skapa routen `/` där du ger en presentation av dig själv.
+
+1. Skapa routen `/reports/kmom01` där du ger din redovisningstext för kmom01.
+
+1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.
+
+1. Pusha upp repot till GitHub, inklusive taggarna.
+
+1. Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.
+
+
+
+#### Del 2: Frontend
+
+1. Din frontend Me-applikation från vecka 1 och 2 ska nu hämta redovisningstexter från Me-API:t.
+
+1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 3.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.
+
+1. Pusha upp repot till GitHub, inklusive taggarna.
+
+1. Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.
+
+
 
 ## Skriva
