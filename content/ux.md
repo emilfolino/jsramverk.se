@@ -24,6 +24,4 @@ I nedanstående artikel introducerar Nathan Kontny konceptet LUFO och hur han sk
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande genom att ytterligare en gång skriva en introduktion till en teknik. Vi ser till att ta till vara på den feedback och återkoppling vi fick under första veckan och förbättrar därigenom texten.
-
-Veckans teknik som vi ska skriva en introduktion om är UX och hur just du applicerade UX principer i din kod.
+Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på första veckans text och förbättra din introduktion.

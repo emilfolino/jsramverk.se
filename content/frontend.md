@@ -207,11 +207,13 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 ## Skriva
 
-Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1 & 2 fokusera på bakgrund och introduktion. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb.
+Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1, 2 & 3 fokusera på bakgrund och introduktion. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb.
 
-I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktionen. Introduktionen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till nuvarande forskning. Därför är det viktigt att vi i introduktionen berättar för vår läsare hur det ligger till med den nuvarande forskningen i området.
+I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktionen. Introduktionen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till nuvarande forskning. Därför är det viktigt att vi i introduktionen berättar för vår läsare om läget på den nuvarande forskningen i området.
 
-Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt.
+Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt. Se denna texten som ett första utkast, vi kommer under de kommande två veckorna förbättra texten.
+
+Du får skriva inttroduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med teknik du vill skriva texten. Under föreläsningen går Emil igenom ett antal olika sätt att skriva texten.
 
 
 
