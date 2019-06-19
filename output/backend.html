@@ -269,7 +269,7 @@ app.delete(&quot;/user&quot;, (req, res) =&gt; {
 <p>Om du testar med din webbläsare så blir det en GET request.</p>
 <p>För att testa de andra metoderna så använder jag verktygen Postman eller RESTClient som är ett plugin in till Firefox. Med de verktygen kan jag välja om jag skall skicka en GET, POST, PUT, DELETE eller någon annan av de HTTP-metoder som finns. En sådan REST-klient är ett värdefullt utvecklingsverktyg.</p>
 <p>Så här ser det ut när jag skickar en request med en annan metod än GET.</p>
-<p>[FIGURE src=image/snapvt17/express-rest-client.png?w=w2 caption=“En DELETE request skickas tll servern som svarar från rätt route.”]</p>
+<p><img src="https://dbwebb.se/image/snapvt17/express-rest-client.png?w=w2" alt="En DELETE request skickas tll servern som svarar från rätt route."></p>
 <p>Det var routes och stöd för olika metoder det. Se till att du installerar en klient motsvarande RESTClient och testa din egen server.</p>
 <p>Man vill ofta skicka en annan statuskod än 200 när man gör andra typer av requests än GET. Det kan vi göra med <code>response</code> objektets inbyggda funktion <code>status</code>.</p>
 <pre><code class="language-javascript">// Testing routes with method
@@ -332,16 +332,16 @@ app.get(&quot;/hello/:msg&quot;, (req, res) =&gt; {
 app.listen(port, () =&gt; console.log(`Example API listening on port ${port}!`));
 </code></pre>
 <p>Vi kan nu använda följande routes och se vad som händer.</p>
-<pre><code class="language-text">/
+<pre><code class="language-bash">/
 /hello/Hello-World
 /hello/Hello World
 /hello/Jag kan svenska ÅÄÖ
 </code></pre>
 <p>Vi ser att parametern hanteras och kan nås i routen via <code>req.params</code>. Vi ser också att mellanslag och svenska tecken hanteras och översätts med <code>encodeURIComponent()</code>.</p>
 <p>I webbsidan ser det ut som det ska.</p>
-<p>[FIGURE src=image/ramverk2/dynamic-routing.png?w=w3 caption=“I webbläsaren ser det bra ut, ungefär som man tänkte.”]</p>
+<p><img src="https://dbwebb.se/image/ramverk2/dynamic-routing.png?w=w3" alt="I webbläsaren ser det bra ut, ungefär som man tänkte."></p>
 <p>I terminalen där servern kör ser det ut så här.</p>
-<pre><code class="language-text">GET
+<pre><code class="language-bash">GET
 /hello/Jag%20kan%20svenska%20%C3%85%C3%84%C3%96
 </code></pre>
 <p>Det vi ser är exempel på hur webbläsaren och servern hanterar encodning av udda tecken.</p>
@@ -411,7 +411,7 @@ if (process.env.NODE_ENV !== 'test') {
 </code></pre>
 <h4 id="404-med-routes"><a href="#404-med-routes">404 med routes</a></h4>
 <p>När användaren försöker nå en route som inte finns så blir det ett svar med statuskod 404.</p>
-<p>[FIGURE src=image/snapvt17/express-default-404.png?w=w2 caption=“Ett standard felmeddelande när routen saknas.”]</p>
+<p><img src="image/snapvt17/express-default-404.png?w=w2" alt="Ett standard felmeddelande när routen saknas."></p>
 <p>Man kan lägga till en egen route som blir en “catch all” och agerar kontrollerad hantering av 404.</p>
 <pre><code class="language-javascript">// Add routes for 404 and error handling
 // Catch 404 and forward to error handler
@@ -423,13 +423,13 @@ app.use((req, res, next) =&gt; {
 });
 </code></pre>
 <p>Ovan så använder min hanterare för 404 den inbyggda felhanteraren. Det sker via anropet <code>next(err)</code> där <code>err</code> är ett objekt av typen <code>Error</code>. Min variant är alltså att säga att nu är det felkod 404 och jag överlämnar till den inbyggda felhanteraren att skriva ut felmeddelandet.</p>
-<p>[FIGURE src=image/snapvt17/express-default-error-handler.png?w=w2 caption=“Den inbyggda felhanteraren ger ett fel och en stacktrace.”]</p>
+<p><img src="https://dbwebb.se/image/snapvt17/express-default-error-handler.png?w=w2" alt="Den inbyggda felhanteraren ger ett fel och en stacktrace."></p>
 <p>Det finns alltså en inbyggd felhanterare som visar upp information om felet, tillsammans med en stacktrace. Det är användbart när man utvecklar.</p>
 <p>När node startar upp Express så är det default i utvecklingsläge. Du kan testa att starta upp i produktionsläge, det ger mindre information i felmeddelandena.</p>
 <pre><code class="language-bash">$ NODE_ENV=&quot;production&quot; node app.js
 </code></pre>
 <p>Nu försvann stacktracen från klienten, men den syns fortfarande i terminalen där servern körs.</p>
-<p>[FIGURE src=image/snapvt17/express-error-handling-production.png?w=w2 caption=“I produktion så visas inte stacktrace för klienten.”]</p>
+<p><img src="image/snapvt17/express-error-handling-production.png?w=w2" alt="I produktion så visas inte stacktrace för klienten."></p>
 <p>Vi ser till att även skapa ett npm skript för att köra i produktion som vi sedan kan använda på servern. Vi kan då köra <code>npm run production</code> för att starta i i produktion.</p>
 <pre><code class="language-json">{
     &quot;scripts&quot;: {

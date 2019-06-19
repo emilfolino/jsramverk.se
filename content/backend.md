@@ -14,6 +14,8 @@ Vi vänder oss nu till dokumentationen för [Node](https://nodejs.org/en/docs/) 
 
 Vi ska i följande stycken först titta på hur vi med hjälp av GitHub Education Pack och DigitalOcean skapar en droplet. I slutet av veckan har vi driftsatt både vår frontend applikation och en simpel backend applikation.
 
+
+
 ### En server i molnet
 
 Se till att ha din student e-postadress nära till hands då den behövs för att få tillgång till GitHub Education Pack.
@@ -429,7 +431,7 @@ För att testa de andra metoderna så använder jag verktygen Postman eller REST
 
 Så här ser det ut när jag skickar en request med en annan metod än GET.
 
-[FIGURE src=image/snapvt17/express-rest-client.png?w=w2 caption="En DELETE request skickas tll servern som svarar från rätt route."]
+![En DELETE request skickas tll servern som svarar från rätt route.](https://dbwebb.se/image/snapvt17/express-rest-client.png?w=w2)
 
 Det var routes och stöd för olika metoder det. Se till att du installerar en klient motsvarande RESTClient och testa din egen server.
 
@@ -505,7 +507,7 @@ app.listen(port, () => console.log(`Example API listening on port ${port}!`));
 
 Vi kan nu använda följande routes och se vad som händer.
 
-```text
+```bash
 /
 /hello/Hello-World
 /hello/Hello World
@@ -516,11 +518,11 @@ Vi ser att parametern hanteras och kan nås i routen via `req.params`. Vi ser oc
 
 I webbsidan ser det ut som det ska.
 
-[FIGURE src=image/ramverk2/dynamic-routing.png?w=w3 caption="I webbläsaren ser det bra ut, ungefär som man tänkte."]
+![I webbläsaren ser det bra ut, ungefär som man tänkte.](https://dbwebb.se/image/ramverk2/dynamic-routing.png?w=w3)
 
 I terminalen där servern kör ser det ut så här.
 
-```text
+```bash
 GET
 /hello/Jag%20kan%20svenska%20%C3%85%C3%84%C3%96
 ```
@@ -629,7 +631,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 När användaren försöker nå en route som inte finns så blir det ett svar med statuskod 404.
 
-[FIGURE src=image/snapvt17/express-default-404.png?w=w2 caption="Ett standard felmeddelande när routen saknas."]
+![Ett standard felmeddelande när routen saknas.](image/snapvt17/express-default-404.png?w=w2)
 
 Man kan lägga till en egen route som blir en "catch all" och agerar kontrollerad hantering av 404.
 
@@ -646,7 +648,7 @@ app.use((req, res, next) => {
 
 Ovan så använder min hanterare för 404 den inbyggda felhanteraren. Det sker via anropet `next(err)` där `err` är ett objekt av typen `Error`. Min variant är alltså att säga att nu är det felkod 404 och jag överlämnar till den inbyggda felhanteraren att skriva ut felmeddelandet.
 
-[FIGURE src=image/snapvt17/express-default-error-handler.png?w=w2 caption="Den inbyggda felhanteraren ger ett fel och en stacktrace."]
+![Den inbyggda felhanteraren ger ett fel och en stacktrace.](https://dbwebb.se/image/snapvt17/express-default-error-handler.png?w=w2)
 
 Det finns alltså en inbyggd felhanterare som visar upp information om felet, tillsammans med en stacktrace. Det är användbart när man utvecklar.
 
@@ -658,7 +660,7 @@ $ NODE_ENV="production" node app.js
 
 Nu försvann stacktracen från klienten, men den syns fortfarande i terminalen där servern körs.
 
-[FIGURE src=image/snapvt17/express-error-handling-production.png?w=w2 caption="I produktion så visas inte stacktrace för klienten."]
+![I produktion så visas inte stacktrace för klienten.](image/snapvt17/express-error-handling-production.png?w=w2)
 
 Vi ser till att även skapa ett npm skript för att köra i produktion som vi sedan kan använda på servern. Vi kan då köra `npm run production` för att starta i i produktion.
 
