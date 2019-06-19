@@ -140,9 +140,9 @@ Allt som allt, någonstans här är namnen på några vanliga testverktyg inom J
 
 Innan jag väljer verktyg så behöver jag en kodbas som jag vill testa. För denna övnings skull så bygger jag en kortlek och ett [kortspel Black Jack](https://sv.wikipedia.org/wiki/Black_Jack). Det bör fungera för att visa hur testerna kan fungera med den testmiljö jag nu skall välja.
 
-Mitt repo som jag delvis använder för att exemplifiera artikeln hittar du under repot [janaxs/blackjack](https://github.com/janaxs/blackjack).
+Mikael Roos' repo som jag delvis använder för att exemplifiera artikeln hittar du under repot [janaxs/blackjack](https://github.com/janaxs/blackjack).
 
-Det finns också exempelprogram i kursrepot [ramverk2 under `example/test`](https://github.com/dbwebb-se/ramverk2/tree/master/example/test) som exemplifierar kommande stycken i artikeln.
+Det finns också exempelprogram i kursrepot [ramverk2 under `/test`](https://github.com/emilfolino/jsramverk/tree/master/test) som exemplifierar kommande stycken i artikeln.
 
 Låt oss då titta på de olika tester som körs på systemet och vilka verktyg jag valde.
 
@@ -150,10 +150,10 @@ Låt oss då titta på de olika tester som körs på systemet och vilka verktyg 
 
 #### Enhetstestning i JavaScript
 
-Det första testverktyget jag valde är för enhetstester. De verktygen jag valde mellan var främst [Mocha](https://mochajs.org/), [Yasmine](https://jasmine.github.io/) och [Jest](http://facebook.github.io/jest/). Mitt val föll på Mocha och jag gjorde ett testprogram i `example/test/unittest-mocha` för att se hur det fungerade.
+Det första testverktyget jag valde är för enhetstester. De verktygen jag valde mellan var främst [Mocha](https://mochajs.org/), [Yasmine](https://jasmine.github.io/) och [Jest](http://facebook.github.io/jest/). Mitt val föll på Mocha och jag gjorde ett testprogram i `/test/unittest-mocha` för att se hur det fungerade.
 
 ```bash
-example/test/unittest-mocha$ tree .
+/test/unittest-mocha$ tree .
 .
 ├── package.json
 ├── src
@@ -182,7 +182,7 @@ Resultatet du ser är körningen av samtliga enhetstester. Men hur väl lyckas v
 
 #### Kodtäckning vid enhetstestning
 
-När man kör enhetstester är man i princip beroende av ett verktyg som kan visa kodtäckningen för testfallen. Här väljer jag verktygen [Istanbul](https://istanbul.js.org/). I katalogen `example/test/unittest-mocha-istanbul` har jag utökat mitt exempel med att använda Istanbul tillsammans med Mocha.
+När man kör enhetstester är man i princip beroende av ett verktyg som kan visa kodtäckningen för testfallen. Här väljer jag verktygen [Istanbul](https://istanbul.js.org/). I katalogen `/test/unittest-mocha-istanbul` har jag utökat mitt exempel med att använda Istanbul tillsammans med Mocha.
 
 För att kunna köra testerna med kodtäckning behöver du först installera kommandoradsklienten [`nyc`](https://github.com/istanbuljs/nyc) via `npm install nyc --save-dev` eller bara `npm install`. Sedan kan du köra testerna igen, nu med kodtäckning inkluderat.
 
@@ -211,7 +211,7 @@ npm install --global --production windows-build-tools
 
 ## Statisk kodvalidering
 
-Vi är ju inne på tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under `example/test/validate`.
+Vi är ju inne på tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under `/test/validate`.
 
 Eftersom vi utgår från kodstilen som definieras i [`javascript-style-guide`](https://www.npmjs.com/package/javascript-style-guide) så hämtar vi hem den och använder dess konfigurationsfil.
 
@@ -257,64 +257,17 @@ npm install   # Installerar allt som finns i package.json
 npm test      # Exekvera validatorer och testfall
 ```
 
-Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `example/test/ci` och jag använder ett repo [janaxs/blackjack](https://github.com/janaxs/blackjack) för att demonstrera hur det ser ut.
+Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `/test/ci` och jag använder ett repo [janaxs/blackjack](https://github.com/janaxs/blackjack) för att demonstrera hur det ser ut.
 
 
 
 #### Byggverktyg Travis och CircleCI
 
-Först tar vi ett byggsystem, eller två. Jag väljer [Travis](https://travis-ci.org/janaxs/blackjack) och [CircleCI](https://circleci.com/gh/janaxs/blackjack). Syftet med byggsystemet är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
+Först tar vi en tiit på byggsystemet [Travis](https://travis-ci.org/janaxs/blackjack) Syftet med byggsystemet är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
 
-Jag lägger till mitt repo till Travis och CircleCI.
+Jag lägger till mitt repo till Travis.
 
-I katalogen `example/test/ci` ligger en konfigurationsfil `.travis.yml` och en `.circleci/config.yml` som är exempel på konfigurationsfiler för Travis respektive CircleCI (v2). Om du kikar i filerna ser du referenser till `npm install` och `npm test`.
-
-
-
-#### Kodtäckning med Coveralls och Codecov
-
-Byggsystemen kör testerna och kan sedan rapportera kodtäckningen till två system som är specialiserade på kodtäckning. I detta fallet använder jag [Coveralls](https://coveralls.io/github/janaxs/blackjack) och [Codecov](https://codecov.io/gh/janaxs/blackjack).
-
-Jag lägger till mitt repo till Coveralls och Codecov.
-
-Sedan behöver jag skicka en rapport från byggsystemets senaste tester. Det gör jag med skript i `package.json` på följande sätt.
-
-```json
-"scripts": {
-  "report-coveralls": "nyc report --reporter=text-lcov | coveralls",
-  "report-codecov": "nyc report --reporter=lcov > coverage.lcov && codecov"
-},
-```
-
-Det som behövs för att detta skall fungera är att paketen `coveralls` och `codecov` installeras. Det är specifika paket som enbart är till för att rapportera kodtäckningen.
-
-```bash
-npm install coveralls codecov --save-dev
-```
-
-Vid nästa bygge kommer ny kodtäckningen skickas upp till respektive system, förutsatt att kommandona körs. Jag har valt att köra dem från Travis och du kan se hur de körs i konfigurationsfilen `.travis.yml`.
-
-```bash
-after_success:
-    - npm run report-coveralls
-    - npm run report-codecov
-```
-
-Om du vill friska upp minnet om ovan- och nedanstående testverktyg förklarar Mikael hur man integrerar de olika testverktygen med github repot i artikeln [Integrera din packagist modul med verktyg för automatisk test och validering](kunskap/integrera-din-packagist-modul-med-verktyg-for-automatisk-test-och-validering).
-
-
-
-#### Kodkvalitet med Codeclimate och Codacy
-
-Till slut integrerar jag även med två verktyg som har fokus på kodkvalitet. Det är [Codeclimate](https://codeclimate.com/github/janaxs/blackjack) och [Codacy](https://www.codacy.com/app/mosbth/blackjack/dashboard).
-
-Jag lägger till mitt repo till Codeclimate och Codacy.
-
-De båda verktygen har olika sätt att visualisera hur de upplever min kodkvalitet. Verktygen kan också visa kodtäckning om jag väljer att bifoga en sådan rapport.
-
-Delvis kan alltså dessa båda verktyg ersätta de två verktyg vi såg som enbart hade fokus på kodtäckning. Vilka verktyg man i slutändan använder får bli en sak att utvärdera.
-
-I detta läget behöver jag inte göra mer, de båda verktygen checkar automatiskt ut min kod när den uppdateras.
+I katalogen `/test/ci` ligger en konfigurationsfil `.travis.yml`  som är exempel på konfigurationsfiler för Travis. Om du kikar i filerna ser du referenser till `npm install` och `npm test`.
 
 
 
@@ -350,4 +303,4 @@ Du kan ta en närmare titt på mitt demo repo [janaxs/blackjack](https://github.
 
 ## Skriva
 
-Metod del 2
+Metod del 1

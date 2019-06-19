@@ -109,12 +109,12 @@ BDD. En intressant del i BDD är att man diskuterar systemet i features som skri
 <p>Allt som allt, någonstans här är namnen på några vanliga testverktyg inom JavaScript och jag tänker välja bland dessa.</p>
 <h4 id="kodmoduler-att-testa"><a href="#kodmoduler-att-testa">Kodmoduler att testa</a></h4>
 <p>Innan jag väljer verktyg så behöver jag en kodbas som jag vill testa. För denna övnings skull så bygger jag en kortlek och ett <a href="https://sv.wikipedia.org/wiki/Black_Jack">kortspel Black Jack</a>. Det bör fungera för att visa hur testerna kan fungera med den testmiljö jag nu skall välja.</p>
-<p>Mitt repo som jag delvis använder för att exemplifiera artikeln hittar du under repot <a href="https://github.com/janaxs/blackjack">janaxs/blackjack</a>.</p>
-<p>Det finns också exempelprogram i kursrepot <a href="https://github.com/dbwebb-se/ramverk2/tree/master/example/test">ramverk2 under <code>example/test</code></a> som exemplifierar kommande stycken i artikeln.</p>
+<p>Mikael Roos’ repo som jag delvis använder för att exemplifiera artikeln hittar du under repot <a href="https://github.com/janaxs/blackjack">janaxs/blackjack</a>.</p>
+<p>Det finns också exempelprogram i kursrepot <a href="https://github.com/emilfolino/jsramverk/tree/master/test">ramverk2 under <code>/test</code></a> som exemplifierar kommande stycken i artikeln.</p>
 <p>Låt oss då titta på de olika tester som körs på systemet och vilka verktyg jag valde.</p>
 <h4 id="enhetstestning-i-javascript"><a href="#enhetstestning-i-javascript">Enhetstestning i JavaScript</a></h4>
-<p>Det första testverktyget jag valde är för enhetstester. De verktygen jag valde mellan var främst <a href="https://mochajs.org/">Mocha</a>, <a href="https://jasmine.github.io/">Yasmine</a> och <a href="http://facebook.github.io/jest/">Jest</a>. Mitt val föll på Mocha och jag gjorde ett testprogram i <code>example/test/unittest-mocha</code> för att se hur det fungerade.</p>
-<pre><code class="language-bash">example/test/unittest-mocha$ tree .
+<p>Det första testverktyget jag valde är för enhetstester. De verktygen jag valde mellan var främst <a href="https://mochajs.org/">Mocha</a>, <a href="https://jasmine.github.io/">Yasmine</a> och <a href="http://facebook.github.io/jest/">Jest</a>. Mitt val föll på Mocha och jag gjorde ett testprogram i <code>/test/unittest-mocha</code> för att se hur det fungerade.</p>
+<pre><code class="language-bash">/test/unittest-mocha$ tree .
 .
 ├── package.json
 ├── src
@@ -133,7 +133,7 @@ npm test
 </code></pre>
 <p>Resultatet du ser är körningen av samtliga enhetstester. Men hur väl lyckas vi med kodtäckningen?</p>
 <h4 id="kodtackning-vid-enhetstestning"><a href="#kodtackning-vid-enhetstestning">Kodtäckning vid enhetstestning</a></h4>
-<p>När man kör enhetstester är man i princip beroende av ett verktyg som kan visa kodtäckningen för testfallen. Här väljer jag verktygen <a href="https://istanbul.js.org/">Istanbul</a>. I katalogen <code>example/test/unittest-mocha-istanbul</code> har jag utökat mitt exempel med att använda Istanbul tillsammans med Mocha.</p>
+<p>När man kör enhetstester är man i princip beroende av ett verktyg som kan visa kodtäckningen för testfallen. Här väljer jag verktygen <a href="https://istanbul.js.org/">Istanbul</a>. I katalogen <code>/test/unittest-mocha-istanbul</code> har jag utökat mitt exempel med att använda Istanbul tillsammans med Mocha.</p>
 <p>För att kunna köra testerna med kodtäckning behöver du först installera kommandoradsklienten <a href="https://github.com/istanbuljs/nyc"><code>nyc</code></a> via <code>npm install nyc --save-dev</code> eller bara <code>npm install</code>. Sedan kan du köra testerna igen, nu med kodtäckning inkluderat.</p>
 <pre><code class="language-bash">npm install
 npm test
@@ -147,7 +147,7 @@ npm test
 <pre><code class="language-bash">npm install --global --production windows-build-tools
 </code></pre>
 </section><section id="statisk-kodvalidering"><h2><a href="#statisk-kodvalidering">Statisk kodvalidering</a></h2>
-<p>Vi är ju inne på tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under <code>example/test/validate</code>.</p>
+<p>Vi är ju inne på tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under <code>/test/validate</code>.</p>
 <p>Eftersom vi utgår från kodstilen som definieras i <a href="https://www.npmjs.com/package/javascript-style-guide"><code>javascript-style-guide</code></a> så hämtar vi hem den och använder dess konfigurationsfil.</p>
 <pre><code class="language-bash">npm install javascript-style-guide --save-dev
 cp node_modules/javascript-style-guide/.eslint* .
@@ -171,35 +171,11 @@ cp node_modules/javascript-style-guide/.eslint* .
 <pre><code class="language-bash">npm install   # Installerar allt som finns i package.json
 npm test      # Exekvera validatorer och testfall
 </code></pre>
-<p>Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under <code>example/test/ci</code> och jag använder ett repo <a href="https://github.com/janaxs/blackjack">janaxs/blackjack</a> för att demonstrera hur det ser ut.</p>
+<p>Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under <code>/test/ci</code> och jag använder ett repo <a href="https://github.com/janaxs/blackjack">janaxs/blackjack</a> för att demonstrera hur det ser ut.</p>
 <h4 id="byggverktyg-travis-och-circleci"><a href="#byggverktyg-travis-och-circleci">Byggverktyg Travis och CircleCI</a></h4>
-<p>Först tar vi ett byggsystem, eller två. Jag väljer <a href="https://travis-ci.org/janaxs/blackjack">Travis</a> och <a href="https://circleci.com/gh/janaxs/blackjack">CircleCI</a>. Syftet med byggsystemet är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.</p>
-<p>Jag lägger till mitt repo till Travis och CircleCI.</p>
-<p>I katalogen <code>example/test/ci</code> ligger en konfigurationsfil <code>.travis.yml</code> och en <code>.circleci/config.yml</code> som är exempel på konfigurationsfiler för Travis respektive CircleCI (v2). Om du kikar i filerna ser du referenser till <code>npm install</code> och <code>npm test</code>.</p>
-<h4 id="kodtackning-med-coveralls-och-codecov"><a href="#kodtackning-med-coveralls-och-codecov">Kodtäckning med Coveralls och Codecov</a></h4>
-<p>Byggsystemen kör testerna och kan sedan rapportera kodtäckningen till två system som är specialiserade på kodtäckning. I detta fallet använder jag <a href="https://coveralls.io/github/janaxs/blackjack">Coveralls</a> och <a href="https://codecov.io/gh/janaxs/blackjack">Codecov</a>.</p>
-<p>Jag lägger till mitt repo till Coveralls och Codecov.</p>
-<p>Sedan behöver jag skicka en rapport från byggsystemets senaste tester. Det gör jag med skript i <code>package.json</code> på följande sätt.</p>
-<pre><code class="language-json">&quot;scripts&quot;: {
-  &quot;report-coveralls&quot;: &quot;nyc report --reporter=text-lcov | coveralls&quot;,
-  &quot;report-codecov&quot;: &quot;nyc report --reporter=lcov &gt; coverage.lcov &amp;&amp; codecov&quot;
-},
-</code></pre>
-<p>Det som behövs för att detta skall fungera är att paketen <code>coveralls</code> och <code>codecov</code> installeras. Det är specifika paket som enbart är till för att rapportera kodtäckningen.</p>
-<pre><code class="language-bash">npm install coveralls codecov --save-dev
-</code></pre>
-<p>Vid nästa bygge kommer ny kodtäckningen skickas upp till respektive system, förutsatt att kommandona körs. Jag har valt att köra dem från Travis och du kan se hur de körs i konfigurationsfilen <code>.travis.yml</code>.</p>
-<pre><code class="language-bash">after_success:
-    - npm run report-coveralls
-    - npm run report-codecov
-</code></pre>
-<p>Om du vill friska upp minnet om ovan- och nedanstående testverktyg förklarar Mikael hur man integrerar de olika testverktygen med github repot i artikeln <a href="kunskap/integrera-din-packagist-modul-med-verktyg-for-automatisk-test-och-validering">Integrera din packagist modul med verktyg för automatisk test och validering</a>.</p>
-<h4 id="kodkvalitet-med-codeclimate-och-codacy"><a href="#kodkvalitet-med-codeclimate-och-codacy">Kodkvalitet med Codeclimate och Codacy</a></h4>
-<p>Till slut integrerar jag även med två verktyg som har fokus på kodkvalitet. Det är <a href="https://codeclimate.com/github/janaxs/blackjack">Codeclimate</a> och <a href="https://www.codacy.com/app/mosbth/blackjack/dashboard">Codacy</a>.</p>
-<p>Jag lägger till mitt repo till Codeclimate och Codacy.</p>
-<p>De båda verktygen har olika sätt att visualisera hur de upplever min kodkvalitet. Verktygen kan också visa kodtäckning om jag väljer att bifoga en sådan rapport.</p>
-<p>Delvis kan alltså dessa båda verktyg ersätta de två verktyg vi såg som enbart hade fokus på kodtäckning. Vilka verktyg man i slutändan använder får bli en sak att utvärdera.</p>
-<p>I detta läget behöver jag inte göra mer, de båda verktygen checkar automatiskt ut min kod när den uppdateras.</p>
+<p>Först tar vi en tiit på byggsystemet <a href="https://travis-ci.org/janaxs/blackjack">Travis</a> Syftet med byggsystemet är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.</p>
+<p>Jag lägger till mitt repo till Travis.</p>
+<p>I katalogen <code>/test/ci</code> ligger en konfigurationsfil <code>.travis.yml</code>  som är exempel på konfigurationsfiler för Travis. Om du kikar i filerna ser du referenser till <code>npm install</code> och <code>npm test</code>.</p>
 <h4 id="kodkvalitet-och-kodtackning-med-scrutinizer"><a href="#kodkvalitet-och-kodtackning-med-scrutinizer">Kodkvalitet och kodtäckning med Scrutinizer</a></h4>
 <p>Avslutningsvis integrerar jag mitt repo mot <a href="https://scrutinizer-ci.com/g/janaxs/blackjack/">Scrutinizer</a> som är ett verktyg för kodkvalitet och kodtäckning. Verktyget kan exekvera mina tester, visa kodtäckning och analysera min kod ur olika aspekter.</p>
 <h4 id="ci-kedja-klar"><a href="#ci-kedja-klar">CI kedja klar</a></h4>
@@ -227,7 +203,7 @@ npm test      # Exekvera validatorer och testfall
 </li>
 </ol>
 </section><section id="skriva"><h2><a href="#skriva">Skriva</a></h2>
-<p>Metod del 2</p>
+<p>Metod del 1</p>
 </article></section></div>    </main>
 
     <footer class="footer" id="footer">
