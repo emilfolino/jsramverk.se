@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Emil Folino">
+    <meta name="description" content="Kursplats för kursen DV1612 JavaScript-baserade webbramverk också kallad jsramverk vid Blekinge Tekniska Högskola">
+    <meta name="keywords" content="JavaScript,javascript,ramverk,framework,BTH,webbprogrammering">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>jsramverk</title>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%}body{font-family:sans-serif;font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.68rem}h1{font-size:3.6rem;margin-bottom:1.68rem}h2{font-size:2.88rem;margin-bottom:1.68rem}h3{font-size:2.4rem;margin-bottom:1.68rem}h4{font-size:2.04rem;margin-bottom:1.68rem}p{font-size:1.2rem;margin-bottom:1.68rem}blockquote{margin-bottom:1.68rem}blockquote p{font-size:1.44rem;margin-bottom:0}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
+</style>
+    <link rel="stylesheet" href="inter-ui.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
+    
+    <script src="bundle.js" defer></script>
+    <noscript>
+        <link rel="stylesheet" href="style.min.css">
+    </noscript>
+</head>
+<body>
+    <header class="header">
+        <h1><a href="/">jsramverk.me</a></h1>
+    </header>
+
+    <main class="container">
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Driftsättning av frontend</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#driftsattning-av-frontend'>Driftsättning av frontend</a></li><li><a href='#doman'>Domän</a></li><li><a href='#angular'>Angular</a></li><li><a href='#mithril'>Mithril</a></li><li><a href='#react'>React</a></li><li><a href='#vanilla-javascript'>Vanilla JavaScript</a></li><li><a href='#vue'>Vue</a></li></ul></nav><article class='week'><section id="driftsattning-av-frontend"><h1><a href="#driftsattning-av-frontend">Driftsättning av frontend</a></h1>
+<p>Vi ska i denna artikel titta på hur vi driftsätter appar vi har skapat med hjälp av dessa ramverk på vår server.</p>
+</section><section id="doman"><h2><a href="#doman">Domän</a></h2>
+<p>Vi vill i de flesta fall lägga våra alster på en domän eller subdomän. Vi har redan pekat al trafik från registratorn namecheap till vårt Cloud i Digital Ocean. Vi behöver därför bara skapa en subdomän i Digital Ocean. Vi gör det på samma sätt som i “<a href="kunskap/nodejs-api-med-express">Node.js API med Express</a>”. Gå till Networking och välj din domän skriv sedan in din subdomän välj din droplet och skapa subdomänen.</p>
+<p>[FIGURE src=image/ramverk2/do-subdomain.png?w=w3 caption=“Digital Ocean subdomän”]</p>
+<p>Ibland kan det ta en liten stund innan subdomäner kommer på plats, så avvakta lite grann om det inte syns direkt.</p>
+</section><section id="angular"><h2><a href="#angular">Angular</a></h2>
+<p>För att driftsätta en Angular app krävs att vi har en statisk fil webbserver (static file web server) till exempel nginx. Om appen är skapat med hjälp av <code>ng</code> kan vi skapa produktionsfilerna med hjälp av kommandot <code>ng build --prod</code>. Vi har då en <code>dist/</code> katalog som innehåller en katalog med applikationens namn och där finns filerna som ska användas när vi vill driftsätta.</p>
+<p>Vi skapar en site i nginx med följande konfiguration, där du byter ut <code>[SERVER_NAME]</code> med det server namn du vill använda. Vi skapar även root katalogen <code>/var/www/[SERVER_NAME]/html</code> med kommandot <code>sudo mkdir -p /var/www/[SERVER_NAME]/html</code>.</p>
+<pre><code class="language-bash">server {
+
+        root /var/www/[SERVER_NAME]/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name [SERVER_NAME];
+
+        charset utf-8;
+
+        error_page 404 /index.html;
+
+        location / {
+        }
+}
+</code></pre>
+<p>Skapa en symbolisk länk från <code>/etc/nginx/sites-enabled</code> katalogen till din konfigurations-fil i <code>sites-available</code>. Kör sedan kommandot <code>sudo nginx -t</code> för att testa konfigurationen och <code>sudo service nginx restart</code> för att starta om nginx.</p>
+<p>Då jag inte vill installera och bygga applikationer på servern väljer jag att använda <code>rsync</code> för att överföra filer till servern. Först behöver dock <code>deploy</code>-användaren äga och få skriva till katalogen <code>/var/www/[SERVER_NAME]/html</code>. Det gör vi med följande kommandon.</p>
+<pre><code class="language-bash">sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+sudo chmod 775 /var/www/[SERVER_NAME]/html
+</code></pre>
+<p>Jag väljer att använda möjligheten för att skapa npm-scripts i <code>package.json</code> och skapar ett deploy script på följande sätt. I nedanstående är <code>[SERVER]</code> din domän och <code>[SERVER_NAME]</code> samma som tidigare, <code>[APP_NAME]</code> är namnet på din applikation.</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;ng&quot;: &quot;ng&quot;,
+    &quot;start&quot;: &quot;ng serve&quot;,
+    &quot;build&quot;: &quot;ng build&quot;,
+    &quot;test&quot;: &quot;ng test&quot;,
+    &quot;lint&quot;: &quot;ng lint&quot;,
+    &quot;e2e&quot;: &quot;ng e2e&quot;,
+    &quot;deploy&quot;: &quot;ng build --prod &amp;&amp; rsync -av dist/[APP_NAME]/* deploy@[SERVER]:/var/www/[SERVER_NAME]/html/&quot;
+},
+</code></pre>
+<p>Vi kan nu köra kommandot <code>npm run deploy</code> och applikationen byggas för produktion samt överföras till rätt katalog på servern.</p>
+</section><section id="mithril"><h2><a href="#mithril">Mithril</a></h2>
+<p>Då vi i mithril använder webpack för att bygga våra JavaScript fil skapar vi ytterligare ett npm script för att göra en produktionsfil.</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+  &quot;start&quot;: &quot;webpack -d&quot;,
+  &quot;production&quot;: &quot;webpack -p&quot;
+},
+</code></pre>
+<p>Vi kan nu köra kommandot med <code>npm run production</code> och då skapas en ny <code>bundle.js</code> fil, som är redo för produktion. På samma sätt som för vanilla JavaScript appen använder vi rsync för att föra över de tre filerna till servern. Jag utgår från fil och katalog strukturen som finns exempel katalogen.</p>
+<pre><code class="language-bash">rsync -av index.html ../style.css dist/bundle.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
+</code></pre>
+<p>På servern skapar vi en likadan nginx konfigurationsfil, som för ramverken.</p>
+</section><section id="react"><h2><a href="#react">React</a></h2>
+<p>För att driftsätta en React app krävs att vi har en statisk fil webbserver (static file web server) till exempel nginx. Om appen är skapat med hjälp av <code>create.react-app</code> kan vi skapa produktionsfilerna med hjälp av kommandot <code>npm run build</code>. Vi har då en <code>build/</code> katalog som är de filerna som ska användas när vi vill driftsätta.</p>
+<p>Vi skapar en site i nginx med följande konfiguration, där du byter ut <code>[SERVER_NAME]</code> med det server namn du vill använda. Vi skapar även root katalogen <code>/var/www/[SERVER_NAME]/html</code> med kommandot <code>sudo mkdir -p /var/www/[SERVER_NAME]/html</code>.</p>
+<pre><code class="language-bash">server {
+
+        root /var/www/[SERVER_NAME]/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name [SERVER_NAME];
+
+        charset utf-8;
+
+        error_page 404 /index.html;
+
+        location / {
+        }
+}
+</code></pre>
+<p>Skapa en symbolisk länk från <code>/etc/nginx/sites-enabled</code> katalogen till din konfigurations-fil i <code>sites-available</code>. Kör sedan kommandot <code>sudo nginx -t</code> för att testa konfigurationen och <code>sudo service nginx restart</code> för att starta om nginx.</p>
+<p>Då jag inte vill installera och bygga applikationer på servern väljer jag att använda <code>rsync</code> för att överföra filer till servern. Först behöver dock <code>deploy</code>-användaren äga och få skriva till katalogen <code>/var/www/[SERVER_NAME]/html</code>. Det gör vi med följande kommandon.</p>
+<pre><code class="language-bash">sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+sudo chmod 775 /var/www/[SERVER_NAME]/html
+</code></pre>
+<p>Jag väljer att använda möjligheten för att skapa npm-scripts i <code>package.json</code> och skapar ett deploy script på följande sätt. I nedanstående är <code>[SERVER]</code> din domän och <code>[SERVER_NAME]</code> samma som tidigare.</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+  &quot;start&quot;: &quot;react-scripts start&quot;,
+  &quot;build&quot;: &quot;react-scripts build&quot;,
+  &quot;test&quot;: &quot;react-scripts test&quot;,
+  &quot;eject&quot;: &quot;react-scripts eject&quot;,
+  &quot;deploy&quot;: &quot;npm run build &amp;&amp; rsync -av build/* deploy@[SERVER]:/var/www/[SERVER_NAME]/html/&quot;
+},
+</code></pre>
+<p>Vi kan nu köra kommandot <code>npm run deploy</code> och applikationen byggas för produktion samt överföras till rätt katalog på servern.</p>
+</section><section id="vanilla-javascript"><h2><a href="#vanilla-javascript">Vanilla JavaScript</a></h2>
+<p>För att driftsätta vanilla JavaScript applikationen använde jag uglifyjs för att minifiera koden. Sedan är det ett liknande <code>rsync</code> kommando som för de andra apparna. Jag utgår från fil och katalog strukturen som finns exempel katalogen.</p>
+<pre><code class="language-bash">uglifyjs main.js -o bundle.min.js
+rsync -av index.html ../style.css bundle.min.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
+</code></pre>
+<p>På servern skapar vi en likadan nginx konfigurationsfil, som för ramverken.</p>
+</section><section id="vue"><h2><a href="#vue">Vue</a></h2>
+<p>För att driftsätta en Vue app krävs att vi har en statisk fil webbserver (static file web server) till exempel nginx. Om appen är skapat med hjälp av <code>vue-cli</code> kan vi skapa produktionsfilerna med hjälp av kommandot <code>npm run build</code>. Vi har då en <code>dist/</code> katalog som är de filerna som ska användas när vi vill driftsätta.</p>
+<p>Vi skapar en site i nginx med följande konfiguration, där du byter ut <code>[SERVER_NAME]</code> med det server namn du vill använda. Vi skapar även root katalogen <code>/var/www/[SERVER_NAME]/html</code> med kommandot <code>sudo mkdir -p /var/www/[SERVER_NAME]/html</code>.</p>
+<pre><code class="language-bash">server {
+
+        root /var/www/[SERVER_NAME]/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name [SERVER_NAME];
+
+        charset utf-8;
+
+        error_page 404 /index.html;
+
+        location / {
+        }
+}
+</code></pre>
+<p>Skapa en symbolisk länk från <code>/etc/nginx/sites-enabled</code> katalogen till din konfigurations-fil i <code>sites-available</code>. Kör sedan kommandot <code>sudo nginx -t</code> för att testa konfigurationen och <code>sudo service nginx restart</code> för att starta om nginx.</p>
+<p>Då jag inte vill installera och bygga applikationer på servern väljer jag att använda <code>rsync</code> för att överföra filer till servern. Först behöver dock <code>deploy</code>-användaren äga och få skriva till katalogen <code>/var/www/[SERVER_NAME]/html</code>. Det gör vi med följande kommandon.</p>
+<pre><code class="language-bash">sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+sudo chmod 775 /var/www/[SERVER_NAME]/html
+</code></pre>
+<p>Jag väljer att använda möjligheten för att skapa npm-scripts i <code>package.json</code> och skapar ett deploy script på följande sätt. I nedanstående är <code>[SERVER]</code> din domän och <code>[SERVER_NAME]</code> samma som tidigare.</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+  &quot;serve&quot;: &quot;vue-cli-service serve&quot;,
+  &quot;build&quot;: &quot;vue-cli-service build&quot;,
+  &quot;lint&quot;: &quot;vue-cli-service lint&quot;,
+  &quot;deploy&quot;: &quot;npm run build &amp;&amp; rsync -av dist/* deploy@[SERVER]:/var/www/[SERVER_NAME]/html/&quot;
+},
+</code></pre>
+<p>Vi kan nu köra kommandot <code>npm run deploy</code> och applikationen byggas för produktion samt överföras till rätt katalog på servern.</p>
+</article></section></div>    </main>
+
+    <footer class="footer" id="footer">
+        <div class="inner-footer">
+            <p>&copy; <a href="https://emilfolino.se" target="_blank">Emil Folino</a></p>
+            <p>This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</p>
+            <p>The source code can be found at <a href="https://github.com/emilfolino/jsramverk.me">GitHub emilfolino/jsramverk.me</a></p>
+        </div>
+    </footer>
+</body>
+</html>
