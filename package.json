@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Possible new home for course jsramverk.",
   "main": "index.js",
+  "watch": {
+    "fast-local": "{content,includes,sass,client-js}/*.*"
+  },
   "scripts": {
     "test": "",
     "posttest": "npm run eslint && npm run stylelint",
@@ -20,7 +23,8 @@
     "local": "npm test && npm run fast-local",
     "fast-local": "npm run clean-output && npm run build-style && npm run build && npm run build-client-js && npm run cp-font",
     "production": "npm run local && npm run publish",
-    "postproduction": "npm run sitemap"
+    "postproduction": "npm run sitemap",
+    "watch": "npm-watch"
   },
   "repository": {
     "type": "git",
@@ -38,6 +42,7 @@
     "eslint": "^5.14.1",
     "eslint-plugin-react": "^7.12.4",
     "javascript-style-guide": "^0.9.10",
+    "npm-watch": "^0.6.0",
     "sass": "^1.17.0",
     "style-loader": "^0.23.1",
     "stylelint": "^9.10.1",
