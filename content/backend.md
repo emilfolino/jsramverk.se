@@ -779,6 +779,12 @@ På det sättet håller vi `app.js` liten i storlek och var sak har sin plats.
 
 
 
+### En databas
+
+Vi vill koppla vårt API mot en databas för att vi ska kunna hämta och spara data där istället för att bara ha statisk data. I denna del av kursen väljer vi att använda den filbaserade relationsdatabasen SQLite. Senare i kursen kommer vi bekanta oss med [Dokument-orienterade databaser](nosql).
+
+
+
 ### Driftsättning
 
 Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog `~/git` där jag klonar mitt repo till. När du har klonat repot kan du göra `npm install` så alla moduler är installerat.
@@ -911,7 +917,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
-1. Publicera din Me-applikation publikt och lägg den publika adressen i din inlämning på Canvas. I artikeln [Driftsätta din Me-applikation](deploy-frontend.html) finns information om hur du driftsätter en Me-applikation i ditt valda frontend ramverk.
+1. Publicera din Me-applikation publikt och lägg den publika adressen i din inlämning på Canvas. I artikeln [Driftsätta din Me-applikation](deploy-frontend) finns information om hur du driftsätter en Me-applikation i ditt valda frontend ramverk.
 
 
 

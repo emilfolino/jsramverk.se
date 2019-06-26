@@ -23,7 +23,7 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#titta'>Titta</a></li><li><a href='#material'>Material</a></li><li><a href='#en-server-i-molnet'>En server i molnet</a></li><li><a href='#installera-programvara'>Installera programvara</a></li><li><a href='#ett-express-api'>Ett Express API</a></li><li><a href='#driftsattning'>Driftsättning</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#titta'>Titta</a></li><li><a href='#material'>Material</a></li><li><a href='#en-server-i-molnet'>En server i molnet</a></li><li><a href='#installera-programvara'>Installera programvara</a></li><li><a href='#ett-express-api'>Ett Express API</a></li><li><a href='#en-databas'>En databas</a></li><li><a href='#driftsattning'>Driftsättning</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
 <p>Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.</p>
 </section><section id="lasa"><h2><a href="#lasa">Läsa</a></h2>
 <p>Vi vänder oss nu till dokumentationen för <a href="https://nodejs.org/en/docs/">Node</a> och <a href="http://expressjs.com/">Express</a> för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.</p>
@@ -509,6 +509,8 @@ app.use('/', index);
 app.use('/hello', hello);
 </code></pre>
 <p>På det sättet håller vi <code>app.js</code> liten i storlek och var sak har sin plats.</p>
+</section><section id="en-databas"><h3><a href="#en-databas">En databas</a></h3>
+<p>Vi vill koppla vårt API mot en databas för att vi ska kunna hämta och spara data där istället för att bara ha statisk data. I denna del av kursen väljer vi att använda den filbaserade relationsdatabasen SQLite. Senare i kursen kommer vi bekanta oss med <a href="nosql">Dokument-orienterade databaser</a>.</p>
 </section><section id="driftsattning"><h3><a href="#driftsattning">Driftsättning</a></h3>
 <p>Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog <code>~/git</code> där jag klonar mitt repo till. När du har klonat repot kan du göra <code>npm install</code> så alla moduler är installerat.</p>
 <p>För att våra klienter ska komma åt API:t ser vi till att driftsätta det på vår server. Vi ska använda oss av det som kallas en nginx reverse proxy för att trafiken utifrån på port 80 eller 443 (vanliga portarna för HTTP och HTTPS) ska skickas till vårt API som ligger och lyssnar på en annan port.</p>
@@ -605,7 +607,7 @@ deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib no
 <p>Pusha upp repot till GitHub, inklusive taggarna.</p>
 </li>
 <li>
-<p>Publicera din Me-applikation publikt och lägg den publika adressen i din inlämning på Canvas. I artikeln <a href="deploy-frontend.html">Driftsätta din Me-applikation</a> finns information om hur du driftsätter en Me-applikation i ditt valda frontend ramverk.</p>
+<p>Publicera din Me-applikation publikt och lägg den publika adressen i din inlämning på Canvas. I artikeln <a href="deploy-frontend">Driftsätta din Me-applikation</a> finns information om hur du driftsätter en Me-applikation i ditt valda frontend ramverk.</p>
 </li>
 </ol>
 </section><section id="skriva"><h2><a href="#skriva">Skriva</a></h2>
