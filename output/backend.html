@@ -23,10 +23,13 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#material'>Material</a></li><li><a href='#en-server-i-molnet'>En server i molnet</a></li><li><a href='#forsta-10-minuter-pa-en-server'>Första 10 minuter på en server</a></li><li><a href='#en-doman-till-din-server'>En domän till din server</a></li><li><a href='#installera-programvara'>Installera programvara</a></li><li><a href='#ett-express-api'>Ett Express API</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
-<p>Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.</p>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Backend</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#backend'>Backend</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#titta'>Titta</a></li><li><a href='#material'>Material</a></li><li><a href='#en-server-i-molnet'>En server i molnet</a></li><li><a href='#installera-programvara'>Installera programvara</a></li><li><a href='#ett-express-api'>Ett Express API</a></li><li><a href='#driftsattning'>Driftsättning</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="backend"><h1><a href="#backend">Backend</a></h1>
+<p>Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.</p>
 </section><section id="lasa"><h2><a href="#lasa">Läsa</a></h2>
 <p>Vi vänder oss nu till dokumentationen för <a href="https://nodejs.org/en/docs/">Node</a> och <a href="http://expressjs.com/">Express</a> för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.</p>
+</section><section id="titta"><h2><a href="#titta">Titta</a></h2>
+<p>Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite extra bra koll på hur “Event-loop” fungerar i JavaScript. Denna video ger en bra introduktion till hur det fungerar både för frontend och backend.</p>
+<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/8aGhZQkoFbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </section><section id="material"><h2><a href="#material">Material</a></h2>
 <p>Vi ska i följande stycken först titta på hur vi med hjälp av GitHub Education Pack och DigitalOcean skapar en droplet. I slutet av veckan har vi driftsatt både vår frontend applikation och en simpel backend applikation.</p>
 </section><section id="en-server-i-molnet"><h3><a href="#en-server-i-molnet">En server i molnet</a></h3>
@@ -37,7 +40,7 @@
 <p>När du är verifierad via GitHub får du tillgång till en rabattkod för Digital Ocean. Efter det går du till <a href="https://cloud.digitalocean.com/registrations/new">Digital Ocean Sign Up</a> och skapar ett konto. Du behöver ange ett kreditkort, men vi kommer sedan använda rabattkoden så det kommer inte kosta något.</p>
 <p>När du har skapat kontot gå till Account längst upp till höger under din användare logga. Gå sedan till Billing fliken och scrolla ner till Promo Code. Här lägger du in rabattkoden du fick från Github Education Pack när du tryckte på länken ‘request your offer code’.</p>
 <p>Gå sedan till första sidan och tryck ‘Get started with a Droplet’. Instruktioner i kommande stycken och resten av kursen kommer utgå från en Debian Stretch (9.x) droplet, så en stark rekommendation är att välja en sån droplet. Jag rekommenderar att ni kör en 10$/månad droplet, då man får bra prestanda och samtidigt inte använder hela rabatten under kursens gång. Välj Frankfurt eller London som region och lägg till din <code>id_rsa.pub</code> SSH nyckel så du kan logga in på servern.</p>
-</section><section id="forsta-10-minuter-pa-en-server"><h3><a href="#forsta-10-minuter-pa-en-server">Första 10 minuter på en server</a></h3>
+<h4 id="forsta-10-minuter-pa-en-server"><a href="#forsta-10-minuter-pa-en-server">Första 10 minuter på en server</a></h4>
 <p>Med utgångspunkt i artiklar som <a href="https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers">My First 5 Minutes On A Server; Or, Essential Security for Linux Servers</a> och <a href="https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/">My First 10 Minutes On a Server - Primer for Securing Ubuntu</a> ska vi i följande stycke titta på hur vi säkrar upp en Linux-baserad server av Ubuntu eller Debian variant.</p>
 <h4 id="logga-in-pa-servern"><a href="#logga-in-pa-servern">Logga in på servern</a></h4>
 <p>Vi loggar in på servern genom att använda SSH via terminalen med kommandot. <code>ssh root@[IP]</code> ersätt din [IP] med den IP som visas för din droplet.</p>
@@ -107,7 +110,7 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
 </code></pre>
 <h4 id="fail2ban"><a href="#fail2ban">fail2ban</a></h4>
 <p>Vårt sista steg är att installera verktyget fail2ban som används för att automatiskt kolla logfiler och stoppa aktivitet som vi inte vill ha på vår server. Vi installerar och låter ursprungsinställningarna göra sitt jobb. Vi installerar med <code>sudo apt-get install fail2ban</code>.</p>
-</section><section id="en-doman-till-din-server"><h3><a href="#en-doman-till-din-server">En domän till din server</a></h3>
+<h4 id="en-doman-till-din-server"><a href="#en-doman-till-din-server">En domän till din server</a></h4>
 <p>Som en del av Github Education Pack får du som student även ett domän-namn på top-domänen .me från registratorn namecheap gratis under ett år. Om du vill använda en annan registrator är det fritt fram.</p>
 <p>För att använda namecheap tryck på länken “Get access by connecting your GitHub account on Namecheap” och knyta ihop ditt GitHub konto med namecheap och skapa en användare.</p>
 <p>När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valda ‘<a href="http://jsramverk.me">jsramverk.me</a>’.</p>
@@ -121,7 +124,7 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
 <h4 id="installera-nginx"><a href="#installera-nginx">Installera nginx</a></h4>
 <p>Vi installerar webbservern nginx med hjälp av kommandot <code>sudo apt-get install nginx</code>. Du ska nu kunna gå till din domän-adress och där se Welcome to nginx! Ibland kan det ta en liten stund innan alla ändringar slå igenom, så nu är att bra tillfälle att hämta kaffe eller gå en runda om det inte fungerar direkt.</p>
 <h4 id="installera-nodejs-och-npm"><a href="#installera-nodejs-och-npm">Installera nodejs och npm</a></h4>
-<p>Vi vill ha nodejs och npm installerat så vi kan köra en backend på vår server. Vi installerar LTS (Long Term Support) versionen då detta är vår produktionsserver. Vi kommer i kommande kursmoment se hur vi kan testa i olika versioner av nodejs. Vi installerar nodejs och npm med följande kommandon.</p>
+<p>Vi vill ha nodejs och npm installerat så vi kan köra en backend på vår server. Vi installerar LTS (Long Term Support) versionen då detta är vår produktionsserver. Vi installerar nodejs och npm med följande kommandon.</p>
 <pre><code class="language-bash">sudo apt update
 sudo apt install curl
 cd ~
@@ -196,7 +199,7 @@ Connection: keep-alive
 </code></pre>
 <p>Pröva nu samma routes via din webbläsare. Du bör få motsvarande svar även i din webbläsare.</p>
 <p>Det verkar som allt gick bra och Express är uppe och snurrar och svarar på tilltal.</p>
-<h4 id="lat-npm-kora-dina-skript-skript"><a href="#lat-npm-kora-dina-skript-skript">Låt npm köra dina skript {#skript}</a></h4>
+<h4 id="lat-npm-kora-dina-skript"><a href="#lat-npm-kora-dina-skript">Låt npm köra dina skript</a></h4>
 <p>I filen <code>package.json</code> kan du lägga in skript och köra dem via <code>npm</code>. Du kan till exempel lägga till skriptet för att starta servern så här.</p>
 <pre><code class="language-json">{
     &quot;scripts&quot;: {
@@ -229,6 +232,17 @@ app.listen(port, () =&gt; console.log(`Example API listening on port ${port}!`))
 <p>I exemplet ovan skickar vi ett JSON objekt när vi skickar en förfrågan till <code>/</code>. Vi startar om servern och vi får följande svar om vi testar med curl i terminalen.</p>
 <pre><code class="language-bash">$ curl localhost:1337
 {&quot;data&quot;:{&quot;msg&quot;:&quot;Hello World&quot;}}
+</code></pre>
+<h4 id="automatisk-omstart-av-node-appen"><a href="#automatisk-omstart-av-node-appen">Automatisk omstart av node-appen</a></h4>
+<p>Vi det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat, så låt oss göra nått åt detta. Vi använder oss av npm modulen <code>nodemon</code> (<a href="https://www.npmjs.com/package/nodemon">Dokumentation</a>) för att starta om vår node applikation varje gång vi sparar. Vi installerar <code>nodemon</code> som ett globalt paket, så vi kan använda det för alla vår node applikationer.</p>
+<pre><code class="language-bash">npm install -g nodemon
+</code></pre>
+<p>För att starta vår applikation i nodemon kontext ändrar vi vårt <code>npm start</code> skript.</p>
+<pre><code class="language-json">{
+    &quot;scripts&quot;: {
+        &quot;start&quot;: &quot;nodemon app.js&quot;
+    }
+}
 </code></pre>
 <h4 id="routing-mot-olika-request-metoder"><a href="#routing-mot-olika-request-metoder">Routing mot olika request metoder</a></h4>
 <p>En route sätts upp för att svara mot en speciell request metod såsom GET, POST, PUT, DELETE. Det är på det sättet man bygger upp en RESTful tjänst.</p>
@@ -392,7 +406,7 @@ if (process.env.NODE_ENV !== 'test') {
     app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
 }
 </code></pre>
-<h4 id="cross-origin-resource-sharing-(cors)-cors"><a href="#cross-origin-resource-sharing-(cors)-cors">Cross-Origin Resource Sharing (CORS) {#cors}</a></h4>
+<h4 id="cross-origin-resource-sharing-(cors)"><a href="#cross-origin-resource-sharing-(cors)">Cross-Origin Resource Sharing (CORS)</a></h4>
 <p>Då vi vill att vårt API ska kunna konsumeras av många olika klienter vill vi tillåta att klienter från andra domäner kan hämta information från vårt API. Vi gör även detta med en tredjepartsmodul <code>cors</code>, som vi installerade i början av artikeln. På samma sätt som för <code>morgan</code> använder vi den inbyggda middleware och använder funktionen <code>use</code>.</p>
 <pre><code class="language-javascript">const express = require('express');
 const cors = require('cors');
@@ -495,7 +509,7 @@ app.use('/', index);
 app.use('/hello', hello);
 </code></pre>
 <p>På det sättet håller vi <code>app.js</code> liten i storlek och var sak har sin plats.</p>
-<h4 id="driftsattning"><a href="#driftsattning">Driftsättning</a></h4>
+</section><section id="driftsattning"><h3><a href="#driftsattning">Driftsättning</a></h3>
 <p>Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog <code>~/git</code> där jag klonar mitt repo till. När du har klonat repot kan du göra <code>npm install</code> så alla moduler är installerat.</p>
 <p>För att våra klienter ska komma åt API:t ser vi till att driftsätta det på vår server. Vi ska använda oss av det som kallas en nginx reverse proxy för att trafiken utifrån på port 80 eller 443 (vanliga portarna för HTTP och HTTPS) ska skickas till vårt API som ligger och lyssnar på en annan port.</p>
 <p>När vi installerade nginx fick vi med oss ett antal olika kataloger och konfigurationsfiler. I katalogen <code>/var/www</code> kommer vi skapa kataloger för de webbplatser vi vill skapa på vår server. Vi börjar med att logga in på servern som <code>deploy</code> och skapar en katalog för vårt API.</p>

@@ -1,12 +1,20 @@
 # Backend
 
-Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.
+Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.
 
 
 
 ## Läsa
 
 Vi vänder oss nu till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.
+
+
+
+## Titta
+
+Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite extra bra koll på hur "Event-loop" fungerar i JavaScript. Denna video ger en bra introduktion till hur det fungerar både för frontend och backend.
+
+<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/8aGhZQkoFbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 
 
@@ -38,7 +46,7 @@ Gå sedan till första sidan och tryck 'Get started with a Droplet'. Instruktion
 
 
 
-### Första 10 minuter på en server
+#### Första 10 minuter på en server
 
 Med utgångspunkt i artiklar som [My First 5 Minutes On A Server; Or, Essential Security for Linux Servers](https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers) och [My First 10 Minutes On a Server - Primer for Securing Ubuntu](https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/) ska vi i följande stycke titta på hur vi säkrar upp en Linux-baserad server av Ubuntu eller Debian variant.
 
@@ -175,7 +183,7 @@ Vårt sista steg är att installera verktyget fail2ban som används för att aut
 
 
 
-### En domän till din server
+#### En domän till din server
 
 Som en del av Github Education Pack får du som student även ett domän-namn på top-domänen .me från registratorn namecheap gratis under ett år. Om du vill använda en annan registrator är det fritt fram.
 
@@ -209,7 +217,7 @@ Vi installerar webbservern nginx med hjälp av kommandot `sudo apt-get install n
 
 #### Installera nodejs och npm
 
-Vi vill ha nodejs och npm installerat så vi kan köra en backend på vår server. Vi installerar LTS (Long Term Support) versionen då detta är vår produktionsserver. Vi kommer i kommande kursmoment se hur vi kan testa i olika versioner av nodejs. Vi installerar nodejs och npm med följande kommandon.
+Vi vill ha nodejs och npm installerat så vi kan köra en backend på vår server. Vi installerar LTS (Long Term Support) versionen då detta är vår produktionsserver. Vi installerar nodejs och npm med följande kommandon.
 
 ```bash
 sudo apt update
@@ -240,8 +248,6 @@ Du öppnar en tmux session genom att skriva `tmux` i terminalen. I sitt grundutf
 
 
 För att lättare kunna driftsätta våra git-repon installerar vi även git med kommandot `sudo apt-get install git`.
-
-
 
 
 
@@ -336,7 +342,7 @@ Det verkar som allt gick bra och Express är uppe och snurrar och svarar på til
 
 
 
-#### Låt npm köra dina skript {#skript}
+#### Låt npm köra dina skript
 
 I filen `package.json` kan du lägga in skript och köra dem via `npm`. Du kan till exempel lägga till skriptet för att starta servern så här.
 
@@ -349,6 +355,8 @@ I filen `package.json` kan du lägga in skript och köra dem via `npm`. Du kan t
 ```
 
 Nu kan du starta servern via `npm start`. Det blir ett sätt att samla enklare skript in i din `package.json`.
+
+
 
 #### Svara med JSON
 
@@ -380,6 +388,26 @@ I exemplet ovan skickar vi ett JSON objekt när vi skickar en förfrågan till `
 ```bash
 $ curl localhost:1337
 {"data":{"msg":"Hello World"}}
+```
+
+
+
+#### Automatisk omstart av node-appen
+
+Vi det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
+
+```bash
+npm install -g nodemon
+```
+
+För att starta vår applikation i nodemon kontext ändrar vi vårt `npm start` skript.
+
+```json
+{
+    "scripts": {
+        "start": "nodemon app.js"
+    }
+}
 ```
 
 
@@ -603,7 +631,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 
 
-#### Cross-Origin Resource Sharing (CORS) {#cors}
+#### Cross-Origin Resource Sharing (CORS)
 
 Då vi vill att vårt API ska kunna konsumeras av många olika klienter vill vi tillåta att klienter från andra domäner kan hämta information från vårt API. Vi gör även detta med en tredjepartsmodul `cors`, som vi installerade i början av artikeln. På samma sätt som för `morgan` använder vi den inbyggda middleware och använder funktionen `use`.
 
@@ -627,7 +655,6 @@ if (process.env.NODE_ENV !== 'test') {
 
 
 #### 404 med routes
-
 
 När användaren försöker nå en route som inte finns så blir det ett svar med statuskod 404.
 
@@ -678,7 +705,6 @@ När vi utvecklar så blir det enklast att köra development läge (standard). M
 
 
 #### En egen hanterare för felutskrift
-
 
 Vi kan skapa vår egen felhanterare och skicka felmeddelandet som JSON.
 
@@ -753,7 +779,7 @@ På det sättet håller vi `app.js` liten i storlek och var sak har sin plats.
 
 
 
-#### Driftsättning
+### Driftsättning
 
 Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog `~/git` där jag klonar mitt repo till. När du har klonat repot kan du göra `npm install` så alla moduler är installerat.
 
@@ -863,17 +889,17 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa ett Me-API med nedanstående router.
 
-1. Se till att det finns en `package.json` i katalogen. Filen skall innehålla alla beroenden som krävs.
+2. Se till att det finns en `package.json` i katalogen. Filen skall innehålla alla beroenden som krävs.
 
-1. Skapa routen `/` där du ger en presentation av dig själv.
+3. Skapa routen `/` där du ger en presentation av dig själv.
 
-1. Skapa routen `/reports/kmom01` där du ger din redovisningstext för kmom01.
+4. Skapa routen `/reports/kmom01` där du ger din redovisningstext för kmom01.
 
-1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.
+5. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.
 
-1. Pusha upp repot till GitHub, inklusive taggarna.
+6. Pusha upp repot till GitHub, inklusive taggarna.
 
-1. Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.
+7. Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.
 
 
 
