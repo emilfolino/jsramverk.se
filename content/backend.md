@@ -783,6 +783,8 @@ På det sättet håller vi `app.js` liten i storlek och var sak har sin plats.
 
 Vi vill koppla vårt API mot en databas för att vi ska kunna hämta och spara data där istället för att bara ha statisk data. I denna del av kursen väljer vi att använda den filbaserade relationsdatabasen SQLite. Senare i kursen kommer vi bekanta oss med [Dokument-orienterade databaser](nosql).
 
+Om du 
+
 
 
 ### Driftsättning
