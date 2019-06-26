@@ -16,6 +16,14 @@
     <noscript>
         <link rel="stylesheet" href="style.min.css">
     </noscript>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f0db4f">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
     <header class="header">
@@ -113,12 +121,12 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
 <h4 id="en-doman-till-din-server"><a href="#en-doman-till-din-server">En domän till din server</a></h4>
 <p>Som en del av Github Education Pack får du som student även ett domän-namn på top-domänen .me från registratorn namecheap gratis under ett år. Om du vill använda en annan registrator är det fritt fram.</p>
 <p>För att använda namecheap tryck på länken “Get access by connecting your GitHub account on Namecheap” och knyta ihop ditt GitHub konto med namecheap och skapa en användare.</p>
-<p>När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valda ‘<a href="http://jsramverk.me">jsramverk.me</a>’.</p>
-<p>[FIGURE src=/image/ramverk2/namecheap-nameservers.png?w=w3 caption=“Fyll i nameservers hos namecheap.”]</p>
+<p>När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valde ‘<a href="http://jsramverk.me">jsramverk.me</a>’.</p>
+<p>![Fyll i nameservers hos namecheap.](<a href="https://dbwebb.se">https://dbwebb.se</a> src=/image/ramverk2/namecheap-nameservers.png?w=w3)</p>
 <p>Gå sedan till Digital Ocean och välj Networking&gt;Domains. Här Väljer du att skapa den valda domänen.</p>
-<p>[FIGURE src=/image/ramverk2/do-domains.png?w=w3 caption=“Skapa domän på Digital Ocean.”]</p>
+<p><img src="https://dbwebb.se/image/ramverk2/do-domains.png?w=w3" alt="Skapa domän på Digital Ocean."></p>
 <p>Vi vill sedan peka domänen till vår droplet och för att komma åt root-domänen anger vi @. Vill vi ange en subdomän anger vi subdomänen.</p>
-<p>[FIGURE src=/image/ramverk2/do-domain-names.png?w=w3 caption=“Peka domän till droplet på Digital Ocean.”]</p>
+<p><img src="https://dbwebb.se/image/ramverk2/do-domain-names.png?w=w3" alt="Peka domän till droplet på Digital Ocean."></p>
 </section><section id="installera-programvara"><h3><a href="#installera-programvara">Installera programvara</a></h3>
 <p>Vi ska i denna del installera programvara för att vi kan köra både frontend och backend applikationer på vår server.</p>
 <h4 id="installera-nginx"><a href="#installera-nginx">Installera nginx</a></h4>
@@ -511,7 +519,113 @@ app.use('/hello', hello);
 <p>På det sättet håller vi <code>app.js</code> liten i storlek och var sak har sin plats.</p>
 </section><section id="en-databas"><h3><a href="#en-databas">En databas</a></h3>
 <p>Vi vill koppla vårt API mot en databas för att vi ska kunna hämta och spara data där istället för att bara ha statisk data. I denna del av kursen väljer vi att använda den filbaserade relationsdatabasen SQLite. Senare i kursen kommer vi bekanta oss med <a href="nosql">Dokument-orienterade databaser</a>.</p>
-<p>Om du</p>
+<p>Om du inte har SQLite installerat på din utvecklingsdator installera det via XAMPP eller pakethanteraren i ditt operativsystem.</p>
+<p>För att kunna spara användare och så småningom redovisningstexter installerar vi npm modulen node-sqlite3 i vårt me-api repo med följande kommando. <a href="https://www.npmjs.com/package/sqlite3">Dokumentationen för modulen</a> är som alltid vår bästa vän.</p>
+<pre><code class="language-bash">npm install sqlite3 --save
+</code></pre>
+<p>Vi skapar sedan katalogen <code>db</code> i vårt repo och i den katalogen filen <code>texts.sqlite</code>. Vi ville inte att denna och andra sqlite filer är under versionshantering då de isåfall skriver över vår produktions databas när vi driftsätter så vi lägger till <code>*.sqlite</code> i <code>.gitignore</code>.</p>
+<p>Ett smart drag i detta skedet är att skapa en migrations-fil <code>db/migrate.sql</code> som du kan använda för att skapa tabeller. Min migrate-fil innehåller än så länge följande SQL.</p>
+<pre><code class="language-bash">CREATE TABLE IF NOT EXISTS users (
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(60) NOT NULL,
+    UNIQUE(email)
+);
+</code></pre>
+<p>Vi har alltså två kolumner <code>email</code> och <code>password</code> och vi vill att <code>email</code> är unik. Vi kan nu med hjälp av följande kommandon skapa tabellen i vår <code>texts.sqlite</code> databas.</p>
+<pre><code class="language-bash">cd db
+sqlite3 texts.sqlite
+sqlite&gt; .read migrate.sql
+sqlite&gt; .exit
+</code></pre>
+<p>Vi kan nu använda <code>sqlite3</code> modulen för att lägga till en användare i vår <code>texts.sqlite</code> databas på följande sätt.</p>
+<pre><code class="language-javascript">const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./db/texts.sqlite');
+
+db.run(&quot;INSERT INTO users (email, password) VALUES (?, ?)&quot;,
+    &quot;user@example.com&quot;,
+    &quot;superlonghashedpasswordthatwewillseehowtohashinthenextsection&quot;, (err) =&gt; {
+    if (err) {
+        // returnera error
+    }
+
+    // returnera korrekt svar
+});
+</code></pre>
+<h4 id="sqlite3-pa-servern"><a href="#sqlite3-pa-servern">sqlite3 på servern</a></h4>
+<p>För att detta ska fungera på din droplet måste vi installera <code>sqlite3</code> innan vi kör <code>npm install</code>. Vi gör detta med <code>sudo apt-get install sqlite3</code> som vår <code>deploy</code> användare. Vi kan nu hämta senaste versionen av vårt API med <code>git pull</code> och köra <code>npm install</code> för att installera det nya paketet. Vi behöver även skapa databas filen <code>db/texts.sqlite</code> och köra migrations filen.</p>
+<h4 id="saker-hantering-av-losenord"><a href="#saker-hantering-av-losenord">Säker hantering av lösenord</a></h4>
+<p>När vi sparar lösenord i en databas vill göra det så säkert som möjligt. Därför använder vi <a href="https://codahale.com/how-to-safely-store-a-password/">bcrypt</a>.</p>
+<p>Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från <a href="https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows">installationsmanualen för bcrypt</a> är att installare npm paketet <code>windows-build-tools</code> med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.</p>
+<pre><code class="language-bash">npm install --global --production windows-build-tools
+</code></pre>
+<p>Vi installerar bcrypt paketet med npm med hjälp av kommandot <code>npm install bcrypt --save</code>. <a href="https://www.npmjs.com/package/bcrypt">Dokumentationen för modulen</a> är som alltid vår bästa vän.</p>
+<p>För att hasha ett lösenord med bcrypt modulen importerar vi först modulen och sedan använder vi <code>bcrypt.hash</code> funktionen. Antal <code>saltRounds</code> definierar hur svåra lösenord vi vill skapa. Ju fler <code>saltRounds</code> är svårare att knäcka, men tar också längre tid att skapa och jämföra.</p>
+<pre><code class="language-javascript">const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 'longandhardP4$$w0rD';
+
+bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+    // spara lösenord i databasen.
+});
+</code></pre>
+<p>Det finns även en promise version av biblioteket om man gillar promise eller async/await teknikerna. Läs mer om det i dokumentationen.</p>
+<p>För att jämföra ett sparad lösenord med det användaren skrivit in använder vi <code>bcrypt.compare</code>.</p>
+<pre><code class="language-javascript">const bcrypt = require('bcrypt');
+const myPlaintextPassword = 'longandhardP4$$w0rD';
+const hash = 'superlonghashedpasswordfetchedfromthedatabase';
+
+bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+    // res innehåller nu true eller false beroende på om det är rätt lösenord.
+});
+</code></pre>
+<h4 id="json-web-tokens"><a href="#json-web-tokens">JSON Web Tokens</a></h4>
+<p>Vi har i tidigare kurser använt både sessioner och tokens för att autentisera klienter mot en server. Vi ska i detta stycke titta på hur vi implementerar logiken bakom att skicka JSON Web Tokens från servern till en klient. Vi använder modulen jsonwebtoken som vi installerar med kommandot <code>npm install jsonwebtoken --save</code> och <a href="https://www.npmjs.com/package/jsonwebtoken">dokumentationen finns på npm</a>.</p>
+<p>Vi använder här de två funktioner <code>sign</code> och <code>verify</code>.</p>
+<pre><code class="language-javascript">const jwt = require('jsonwebtoken');
+
+const payload = { email: &quot;user@example.com&quot; };
+const secret = process.env.JWT_SECRET;
+
+const token = jwt.sign(payload, secret, { expiresIn: '1h'});
+</code></pre>
+<p>I ovanstående exempel skapar vi <code>payload</code> som i detta fallet enbart innehåller klientens e-post. Vi hämtar sedan ut vår <code>JWT_SECRET</code> från environment variablerna. En environment variabel sätts i terminalen, både lokalt på din dator och på servern med kommandot <code>export JWT_SECRET='longsecret'</code>, där du byter ‘longsecret’ mot nått långt och slumpmässigt. Se till att denna secret är lång och slumpmässig, gärna 64 karaktärer. <code>payload</code> och <code>secret</code> blir sedan tillsammans med ett konfigurationsobjekt argument till funktionen <code>jwt.sign</code> och returvärdet är vår <code>token</code>.</p>
+<p>När vi sen vill verifiera en token använder vi funktionen <code>jwt.verify</code>. Här skickar vi med token och vår secret som argument. Om token kan verifieras får vi dekrypterat payload och annars ett felmeddelande.</p>
+<pre><code class="language-javascript">jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+    if (err) {
+        // not a valid token
+    }
+
+    // valid token
+});
+</code></pre>
+<h4 id="jwt-middleware"><a href="#jwt-middleware">JWT middleware</a></h4>
+<p>Vi såg i guiden <a href="kunskap/nodejs-api-med-express">Node.js API med Express</a> hur vi kan skapa routes som tar emot POST anrop och hur vi kan använda middleware för att köra en funktion varje gång vi har ett anrop till specifika routes. Om vi skapar nedanstående route i vår me-api ser vi hur middleware funktionen <code>checkToken</code> ligger som första funktion på routen. Den anropas först och beroende på om <code>next()</code> anropas funktionen efter middleware. Vi observerar även hur vi från klientens sida har skickat med token som en del av headers och hur vi hämtar ut det från request-objektet <code>req</code>.</p>
+<pre><code class="language-javascript">router.post(&quot;/reports&quot;,
+    (req, res, next) =&gt; checkToken(req, res, next),
+    (req, res) =&gt; reports.addReport(res, req.body));
+
+function checkToken(req, res, next) {
+    const token = req.headers['x-access-token'];
+
+    jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+        if (err) {
+            // send error response
+        }
+
+        // Valid token send on the request
+        next();
+    });
+}
+</code></pre>
+<p>Vi ser i kodexemplet ovan att vi använder <code>req.body</code> när vi tar emot en POST request från en klient och skickar med det in till modulen/modellen vi använder för att skapa rapporten. För att kunna använda <code>req.body</code> har vi dessa två rader längst upp i vår <code>app.js</code>. Vi har även sett detta i artikeln <a href="kunskap/nodejs-api-med-express#dynamiskt">Node.js API med Express</a>.</p>
+<pre><code class="language-javascript">app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+</code></pre>
+<p>I Postman väljer vi att fylla i body fliken istället för params fliken.</p>
+<p>Vi såg i artikeln <a href="kunskap/login-med-jwt">Login med JWT</a> kursen webapp hur man kan skicka lösenord med <a href="https://www.getpostman.com/">postman</a>. postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.</p>
+<p><img src="https://dbwebb.se/image/ramverk2/postman-headers.png?w=c18" alt="Postman"></p>
+<h4 id="exempelkod"><a href="#exempelkod">Exempelkod</a></h4>
+<p>Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är <a href="https://github.com/emilfolino/order_api">Lager API:t</a> från webapp kursen ett bra exempel.</p>
 </section><section id="driftsattning"><h3><a href="#driftsattning">Driftsättning</a></h3>
 <p>Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog <code>~/git</code> där jag klonar mitt repo till. När du har klonat repot kan du göra <code>npm install</code> så alla moduler är installerat.</p>
 <p>För att våra klienter ska komma åt API:t ser vi till att driftsätta det på vår server. Vi ska använda oss av det som kallas en nginx reverse proxy för att trafiken utifrån på port 80 eller 443 (vanliga portarna för HTTP och HTTPS) ska skickas till vårt API som ligger och lyssnar på en annan port.</p>
@@ -553,7 +667,7 @@ sudo ln -s /etc/nginx/sites-available/me-api.jsramverk.me
 sudo service nginx restart
 </code></pre>
 <p>För att internet ska veta att vi har en server som ligger här och vill svara på förfrågningar skapar vi en subdomän i Digital Ocean gränssnittet. Gå till Networking och välj din domän skriv sedan in din subdomän välj din droplet och skapa subdomänen.</p>
-<p>[FIGURE src=image/ramverk2/do-subdomain.png?w=w3 caption=“Digital Ocean subdomän”]</p>
+<p><img src="https://dbwebb.se/image/ramverk2/do-subdomain.png?w=w3" alt="Digital Ocean subdomän"></p>
 <p>Det ska nu gå att se ett JSON svar från API:t om vi går till vår subdomän. Ibland kan det ta en liten stund innan subdomäner kommer på plats, så avvakta lite grann om det inte syns direkt.</p>
 <h4 id="process-manager"><a href="#process-manager">Process manager</a></h4>
 <p>Vi vill i mångt och mycket automatisera hur vi startar, uppdaterar och startar om våra nodejs applikationer. För detta ändamålet använder vi en process manager. Det finns ett antal olika <a href="https://expressjs.com/en/advanced/pm.html">process managers för express applikationer</a>, men jag har valt att använda <a href="http://pm2.keymetrics.io/">PM2</a>.</p>
@@ -581,10 +695,13 @@ deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib no
 <p>Se till att det finns en <code>package.json</code> i katalogen. Filen skall innehålla alla beroenden som krävs.</p>
 </li>
 <li>
-<p>Skapa routen <code>/</code> där du ger en presentation av dig själv.</p>
+<p>Skapa routen <code>GET /</code> där du ger en presentation av dig själv.</p>
 </li>
 <li>
-<p>Skapa routen <code>/reports/kmom01</code> där du ger din redovisningstext för kmom01.</p>
+<p>Skapa routerna <code>GET /reports/kmom01</code>, <code>GET /reports/kmom02</code> och <code>GET /reports/kmom03</code> där du ger din redovisningstext för kmom01.</p>
+</li>
+<li>
+<p>Skapa routen <code>POST /reports</code> för att lägga till en redovisningstext. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.</p>
 </li>
 <li>
 <p>Committa alla filer och lägg till en tagg (1.0.0) med hjälp av <code>npm version 1.0.0</code>. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.</p>

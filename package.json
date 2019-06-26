@@ -21,10 +21,11 @@
     "build-client-js": "webpack -p && cp dist/bundle.js output/",
     "sitemap": "node sitemap.js",
     "local": "npm test && npm run fast-local",
-    "fast-local": "npm run clean-output && npm run build-style && npm run build && npm run build-client-js && npm run cp-font",
+    "fast-local": "npm run clean-output && npm run build-style && npm run build && npm run build-client-js && npm run cp-font && npm run icons",
     "production": "npm run local && npm run publish",
     "postproduction": "npm run sitemap",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "icons": "cp icons/*.png icons/*.svg output/"
   },
   "repository": {
     "type": "git",
