@@ -20,6 +20,12 @@ I nedanstående artikel introducerar Nathan Kontny konceptet LUFO och hur han sk
 
 ## Titta
 
+Ofta fokuserar vi inom webbutvecklingen på det allra senaste inom en given teknologi. Det viktiga att lära sig är dock i långt större grad vad som inte ändrar, vilka tekniker, metoder och verktyg är det som består och som även om 20 år kommer användas. I nedanstående keynote pratar UX gurun Jakob Nielsen från Nielsen Norman Group om de bestående tekniker inom User Experience.
+
+<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/OtBeg5eyEHU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+
+
 ## Kravspecifikation
 
 ## Skriva

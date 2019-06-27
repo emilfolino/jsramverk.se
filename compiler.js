@@ -17,23 +17,6 @@ const compiler = {
                 console.error(err.message);
             }
 
-            let jsScripts = "";
-
-            additionalJS.forEach(function(js) {
-                jsScripts += `<script defer src='${js}'></script>\n`;
-            });
-
-            data = data.replace("{{jsScripts}}", jsScripts);
-
-            let cssFiles = "";
-
-            additionalCSS.forEach(function(css) {
-                cssFiles += `<link rel="stylesheet" href="${css}"` +
-                    `media="none" onload="if(media!='all')media='all'">\n`;
-            });
-
-            data = data.replace("{{cssFiles}}", cssFiles);
-
             fs.readFile(`${output}inline.min.css`, 'utf8', (err, cssData) => {
                 next(data.replace("{{inline-style}}", cssData));
             });
