@@ -50,10 +50,10 @@
 <p>I nedanstående video berättar John Papa om hur man kan tänka när man väljer ett JavaScript-ramverk.</p>
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/dHptnyroFNA" frameborder="0" allowfullscreen></iframe></div>
 </section><section id="material-och-tekniker"><h2><a href="#material-och-tekniker">Material och tekniker</a></h2>
-<h4 id="rader-skriven-kod-i-exempelprogrammen"><a href="#rader-skriven-kod-i-exempelprogrammen">Rader skriven kod i exempelprogrammen</a></h4>
 <p>I <a href="https://github.com/emilfolino/jsramverk">kursrepot</a> finns två olika exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I <code>/tic-tac-toe</code> finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I <code>/calculator</code> är en simpel miniräknare implementerad.</p>
-<p>Dessutom finns det samma Me-sida som konsumerar me-api:t från tidigare kursmoment implementerad i de 5 olika teknikerna. <a href="https://github.com/emilfolino?utf8=%E2%9C%93&amp;tab=repositories&amp;q=me-&amp;type=&amp;language=">GitHub repon</a> för dessa 5 Me-sidor samt me-api:t finns tillgängligt. Dessa är även driftsatta på <code>me-{angular, mithril, react, vanilla, vue}.jsramverk.me</code>.</p>
+<p>Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. <a href="https://github.com/emilfolino?utf8=%E2%9C%93&amp;tab=repositories&amp;q=me-&amp;type=&amp;language=">GitHub repon</a> för dessa 5 Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på <code>me-{angular, mithril, react, vanilla, vue}.jsramverk.me</code>. Du kommer under <a href="backend">vecka 3</a> bygga ett eget Me-API.</p>
 <p>Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.</p>
+<h4 id="rader-skriven-kod-i-exempelprogrammen"><a href="#rader-skriven-kod-i-exempelprogrammen">Rader skriven kod i exempelprogrammen</a></h4>
 <p>I nedanstående tabell listas de rader kod som utvecklaren har skrivit för att implementera exempelprogrammen. De rader som är räknade är enbart de rader som innehåller källkod, så rader med kommentarer och tomma rader är borttagna.</p>
 <table>
 <thead>
@@ -137,7 +137,7 @@
 <h4 id="realworld"><a href="#realworld">RealWorld</a></h4>
 <p>För att ytterligare utvärdera våra valda ramverk tar vi en titt i GitHub repot <a href="https://github.com/gothinkster/realworld">RealWorld Example</a>. RealWorld Example repon är både backend och frontend som uppfyller vissa specifikationer och därför kan sättas ihop villkorligt. Använd dessa repon för att skapa dig en uppfattning om hur frontend ramverken samspelar med backends.</p>
 <h4 id="john-papa's-heroes"><a href="#john-papa's-heroes">John Papa’s Heroes</a></h4>
-<p>Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk. Som förberedelse för presentationen hade han skapat samma app i “The Big Three” och de tre apparna ligger som open source kod på GitHub. <a href="https://github.com/johnpapa/heroes-angular">heroes-angular</a>, <a href="https://github.com/johnpapa/heroes-react">heroes-react</a> och <a href="https://github.com/johnpapa/heroes-vue">heroes-vue</a> är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.</p>
+<p>Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk, videon är länkat ovan. Som förberedelse för presentationen hade han skapat samma app i “The Big Three” och de tre apparna ligger som open source kod på GitHub. <a href="https://github.com/johnpapa/heroes-angular">heroes-angular</a>, <a href="https://github.com/johnpapa/heroes-react">heroes-react</a> och <a href="https://github.com/johnpapa/heroes-vue">heroes-vue</a> är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.</p>
 <p>Titta igenom repon och se hur John Papa har strukturerat apparna i de olika ramverken.</p>
 </section><section id="tekniska-koncept"><h2><a href="#tekniska-koncept">Tekniska koncept</a></h2>
 <p>Vi tittar i denna del av artikeln på några tekniska koncept som används i de olika ramverken. Vi tittar på hur man har vald att implementera dessa koncept i de olika ramverken och utvärderar vilka fördelar och nackdelar som finns med att göra på det viset.</p>
@@ -150,7 +150,7 @@
 
 document.getElementById(&quot;element&quot;).textContent = data;
 </code></pre>
-<p>I många ramverk är detta nått man försöker förenkla genom att uppdatera vyn direkt varje gång data ändras. Detta är en av de magiska sakerna med JavaScript ramverk och vi ska nedan se exempel på hur detta kan göras. I de flesta ramverken definierar vi medlemsvariabler i komponenter och vi kan sedan använda dessa medlemsvariabler i templates. I nedanstående exempel ser vi hur vi använder medlemsvariabler i Vue.</p>
+<p>I många ramverk är detta nått man försöker förenkla genom att uppdatera vyn direkt varje gång data ändras. Detta är en av de magiska sakerna med JavaScript ramverk och vi ska nedan se exempel på hur detta kan göras. I de flesta ramverken definierar vi medlemsvariabler i komponenter och vi kan sedan använda dessa medlemsvariabler i templates. I nedanstående exempel ser vi hur vi använder medlemsvariabler i Vue. Exemplet är tagit från exempelprogrammet <code>/calculator</code>.</p>
 <pre><code>&lt;template&gt;
     &lt;div class=&quot;calculator&quot;&gt;
         &lt;div class=&quot;display&quot;&gt;{{ current || 0 }}&lt;/div&gt;
@@ -169,17 +169,17 @@ export default {
 </code></pre>
 <p>Om medlemsvariabeln <code>current</code> får ett nytt värde ändras den direkt i den kopplade template. I vanilla JavaScript gör vi en explicit koppling och uppdatering av data och i de ramverk som har valts ut är det en implicit koppling och uppdatering.</p>
 <h4 id="routing"><a href="#routing">Routing</a></h4>
-<p>I de flesta applikationer vi vill kunna gå mellan olika sidor och då är en router ett bra sätt att delegera och strukturera detta förfarande. I många fall av klient-sida routing använder man hashbang (#!) routing där de två tecknen #! används för att markera att detta är en route. Me-applikationer som har redovisats ovan använder alla någon form av routing.</p>
+<p>I de flesta applikationer vill vi kunna gå mellan olika sidor och då är en router ett bra sätt att delegera och strukturera detta förfarande. I många fall av klient-sida routing använder man hashbang (#!) routing där de två tecknen #! används för att markera att detta är en route. Me-applikationerna som redovisas ovan använder alla någon form av routing.</p>
 <p>I angular och mithril finns det inbyggda routers, i Angular importerar man ett paket och i mithril används funktionen <code>m.route()</code>. I react och vue installeras ytterligare paket <code>react-router-dom</code> och <code>vue-router</code>.</p>
-<p>I angular (<code>app.module.ts</code>), mithril (<code>index.js</code>) och vue (<code>router/index.js</code>) definieras alla router i en JavaScript kontext och man använder sedan ett element för att visa de olika komponenter kopplat till routen. Filerna inom parentes är de filer där routerna är difinierat i Me-applikationerna. I react anges router och vad som ska visas på de olika router i filen <code>App.js</code> med hjälp av JSX.</p>
+<p>I angular (<code>app.module.ts</code>), mithril (<code>index.js</code>) och vue (<code>router/index.js</code>) definieras alla router i en JavaScript kontext och man använder sedan ett element för att visa de olika komponenter kopplat till routen. Filerna inom parentes är de filer där routerna är definierat i Me-applikationerna. I react anges router och vad som ska visas på de olika router i filen <code>App.js</code> med hjälp av JSX.</p>
 <p>Ett exempel på en enkel router i vanilla JavaScript kan ses i me-vanilla exemplet där funktioner används för att skriva ut de enskilda vyerna.</p>
 <h4 id="eventhantering-och-delegering"><a href="#eventhantering-och-delegering">Eventhantering och delegering</a></h4>
-<p>JavaScript tillför det dynamiska lagret till webben och en stor del av detta är att hantera användarens klick, skrivande osv. I vanilla JavaScript sköter vi detta med EventListeners till exempel.</p>
+<p>JavaScript tillför det dynamiska lagret till webben och en stor del av detta är att hantera användarens klick, skrivande osv. I vanilla JavaScript sköter vi detta med EventListeners.</p>
 <pre><code class="language-javascript">document.getElementById(&quot;my-btn&quot;).addEventListener(&quot;click&quot;, function (event) {
     // do the thing needed when a button is clicked.
 });
 </code></pre>
-<p>Ramverken försöker förenkla detta förfarandet genom att förkorta ner syntaxen för EventListeners. tic-tac-toc exempelprogrammen är bra exempel både på Eventhantering och delegering och vi kan titta på hur detta lösas i de olika ramverk.</p>
+<p>Ramverken försöker förenkla detta förfarandet genom att förkorta ner syntaxen för EventListeners. <code>/tic-tac-toe</code> exempelprogrammen är bra exempel både på Eventhantering och delegering och vi kan titta på hur detta lösas i de olika ramverk.</p>
 <pre><code>// angular
 &lt;div class=&quot;square&quot; (click)=&quot;click()&quot;&gt;
   {{ squareValue }}
@@ -207,22 +207,21 @@ return m(&quot;div.square&quot;,
 </code></pre>
 <p>I react och vue har vi skickat med en click-callback funktion från en annan komponent och när den sen klickas anropas den ursprungliga funktionen. I mithril används en funktion i modellen <code>game</code> som får hantera click-callbacken. I angular använder vi oss istället av en <code>EventEmitter</code>, som i sin tur skickar eventet upp i trädet av komponenter istället för att man som i react och vue skickar med en funktion ner i trädet.</p>
 <h4 id="http-anrop"><a href="#http-anrop">HTTP-anrop</a></h4>
-<p>För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch</a>, som vi känner igen från tidigare. I mithril används den inbyggda funktionen <code>m.request()</code>, som introducerades tillsammans med mithril i webapp.</p>
-<p>I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna <code>src/app/report</code> och <code>src/app/me</code>.</p>
+<p>För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch</a>, som vi känner igen från tidigare. I många fall använder ytterligare paket som till exempel <a href="https://www.npmjs.com/package/axios">axios</a> för att kommunicera med en backend, vilket ökar komplexiteten och beroenden ytterligare. I mithril används den inbyggda funktionen <code>m.request()</code>, som introducerades tillsammans med mithril i webapp. I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna <code>src/app/report</code> och <code>src/app/me</code>.</p>
 </section><section id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
 <p>Nedan finns kravspecifikationen för veckans inlämningsuppgift:</p>
 <ol>
 <li>
-<p>Skapa en me-applikation i ditt valda ramverk med följande routes: “/”, “/reports/kmom01”.</p>
+<p>Skapa en Me-applikation i ditt valda ramverk med följande routes: <code>/</code>, <code>/reports/skriva1</code>.</p>
 </li>
 <li>
-<p>“/” ska visa en kort beskrivning av dig själv hämtat från ditt me-api.</p>
+<p><code>/</code> ska visa en kort beskrivning av dig själv hämtat från ditt me-api.</p>
 </li>
 <li>
-<p>“/reports/kmom01” ska visa texten beskriven i <a href="#skriva">Skriva</a>.</p>
+<p><code>/reports/skriva1</code> ska visa texten beskriven i <a href="#skriva">Skriva</a>.</p>
 </li>
 <li>
-<p>Skapa en <a href="http://README.md">README.md</a> fil i ditt repo som beskriver hur man installerar moduler och starter din me-applikation.</p>
+<p>Skapa en <a href="http://README.md">README.md</a> fil i ditt repo som beskriver hur man installerar moduler och starter din Me-applikation.</p>
 </li>
 <li>
 <p>Committa alla filer och lägg till en tagg (1.0.*).</p>
@@ -238,7 +237,7 @@ return m(&quot;div.square&quot;,
 <p>Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1, 2 &amp; 3 fokusera på bakgrund och introduktion. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb.</p>
 <p>I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktionen. Introduktionen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till nuvarande forskning. Därför är det viktigt att vi i introduktionen berättar för vår läsare om läget på den nuvarande forskningen i området.</p>
 <p>Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt. Se denna texten som ett första utkast, vi kommer under de kommande två veckorna förbättra texten.</p>
-<p>Du får skriva inttroduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med teknik du vill skriva texten. Under föreläsningen går Emil igenom ett antal olika sätt att skriva texten.</p>
+<p>Du får skriva introduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med teknik du vill skriva texten. Under föreläsningen går Emil igenom ett antal olika sätt att skriva texten.</p>
 </section><section id="sammanfattning"><h2><a href="#sammanfattning">Sammanfattning</a></h2>
 <p>Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för <a href="https://www.djangoproject.com/">django</a> pratar om hur vi inte alltid behöver ett JavaScript ramverk.</p>
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/k7n2xnOiWI8" frameborder="0" allowfullscreen></iframe></div>

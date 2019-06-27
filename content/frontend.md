@@ -26,13 +26,13 @@ I nedanstående video berättar John Papa om hur man kan tänka när man väljer
 
 ## Material och tekniker
 
-#### Rader skriven kod i exempelprogrammen
-
 I [kursrepot](https://github.com/emilfolino/jsramverk) finns två olika exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
 
-Dessutom finns det samma Me-sida som konsumerar me-api:t från tidigare kursmoment implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa 5 Me-sidor samt me-api:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.me`.
+Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa 5 Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.me`. Du kommer under [vecka 3](backend) bygga ett eget Me-API.
 
 Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.
+
+#### Rader skriven kod i exempelprogrammen
 
 I nedanstående tabell listas de rader kod som utvecklaren har skrivit för att implementera exempelprogrammen. De rader som är räknade är enbart de rader som innehåller källkod, så rader med kommentarer och tomma rader är borttagna.
 
@@ -66,7 +66,7 @@ För att ytterligare utvärdera våra valda ramverk tar vi en titt i GitHub repo
 
 #### John Papa's Heroes
 
-Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk. Som förberedelse för presentationen hade han skapat samma app i "The Big Three" och de tre apparna ligger som open source kod på GitHub. [heroes-angular](https://github.com/johnpapa/heroes-angular), [heroes-react](https://github.com/johnpapa/heroes-react) och [heroes-vue](https://github.com/johnpapa/heroes-vue) är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.
+Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk, videon är länkat ovan. Som förberedelse för presentationen hade han skapat samma app i "The Big Three" och de tre apparna ligger som open source kod på GitHub. [heroes-angular](https://github.com/johnpapa/heroes-angular), [heroes-react](https://github.com/johnpapa/heroes-react) och [heroes-vue](https://github.com/johnpapa/heroes-vue) är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.
 
 Titta igenom repon och se hur John Papa har strukturerat apparna i de olika ramverken.
 
@@ -96,7 +96,7 @@ var data = 42;
 document.getElementById("element").textContent = data;
 ```
 
-I många ramverk är detta nått man försöker förenkla genom att uppdatera vyn direkt varje gång data ändras. Detta är en av de magiska sakerna med JavaScript ramverk och vi ska nedan se exempel på hur detta kan göras. I de flesta ramverken definierar vi medlemsvariabler i komponenter och vi kan sedan använda dessa medlemsvariabler i templates. I nedanstående exempel ser vi hur vi använder medlemsvariabler i Vue.
+I många ramverk är detta nått man försöker förenkla genom att uppdatera vyn direkt varje gång data ändras. Detta är en av de magiska sakerna med JavaScript ramverk och vi ska nedan se exempel på hur detta kan göras. I de flesta ramverken definierar vi medlemsvariabler i komponenter och vi kan sedan använda dessa medlemsvariabler i templates. I nedanstående exempel ser vi hur vi använder medlemsvariabler i Vue. Exemplet är tagit från exempelprogrammet `/calculator`.
 
 ```
 <template>
@@ -122,11 +122,11 @@ Om medlemsvariabeln `current` får ett nytt värde ändras den direkt i den kopp
 
 #### Routing
 
-I de flesta applikationer vi vill kunna gå mellan olika sidor och då är en router ett bra sätt att delegera och strukturera detta förfarande. I många fall av klient-sida routing använder man hashbang (#!) routing där de två tecknen #! används för att markera att detta är en route. Me-applikationer som har redovisats ovan använder alla någon form av routing.
+I de flesta applikationer vill vi kunna gå mellan olika sidor och då är en router ett bra sätt att delegera och strukturera detta förfarande. I många fall av klient-sida routing använder man hashbang (#!) routing där de två tecknen #! används för att markera att detta är en route. Me-applikationerna som redovisas ovan använder alla någon form av routing.
 
 I angular och mithril finns det inbyggda routers, i Angular importerar man ett paket och i mithril används funktionen `m.route()`. I react och vue installeras ytterligare paket `react-router-dom` och `vue-router`.
 
-I angular (`app.module.ts`), mithril (`index.js`) och vue (`router/index.js`) definieras alla router i en JavaScript kontext och man använder sedan ett element för att visa de olika komponenter kopplat till routen. Filerna inom parentes är de filer där routerna är difinierat i Me-applikationerna. I react anges router och vad som ska visas på de olika router i filen `App.js` med hjälp av JSX.
+I angular (`app.module.ts`), mithril (`index.js`) och vue (`router/index.js`) definieras alla router i en JavaScript kontext och man använder sedan ett element för att visa de olika komponenter kopplat till routen. Filerna inom parentes är de filer där routerna är definierat i Me-applikationerna. I react anges router och vad som ska visas på de olika router i filen `App.js` med hjälp av JSX.
 
 Ett exempel på en enkel router i vanilla JavaScript kan ses i me-vanilla exemplet där funktioner används för att skriva ut de enskilda vyerna.
 
@@ -134,7 +134,7 @@ Ett exempel på en enkel router i vanilla JavaScript kan ses i me-vanilla exempl
 
 #### Eventhantering och delegering
 
-JavaScript tillför det dynamiska lagret till webben och en stor del av detta är att hantera användarens klick, skrivande osv. I vanilla JavaScript sköter vi detta med EventListeners till exempel.
+JavaScript tillför det dynamiska lagret till webben och en stor del av detta är att hantera användarens klick, skrivande osv. I vanilla JavaScript sköter vi detta med EventListeners.
 
 ```javascript
 document.getElementById("my-btn").addEventListener("click", function (event) {
@@ -142,7 +142,7 @@ document.getElementById("my-btn").addEventListener("click", function (event) {
 });
 ```
 
-Ramverken försöker förenkla detta förfarandet genom att förkorta ner syntaxen för EventListeners. tic-tac-toc exempelprogrammen är bra exempel både på Eventhantering och delegering och vi kan titta på hur detta lösas i de olika ramverk.
+Ramverken försöker förenkla detta förfarandet genom att förkorta ner syntaxen för EventListeners. `/tic-tac-toe` exempelprogrammen är bra exempel både på Eventhantering och delegering och vi kan titta på hur detta lösas i de olika ramverk.
 
 ```
 // angular
@@ -177,9 +177,7 @@ I react och vue har vi skickat med en click-callback funktion från en annan kom
 
 #### HTTP-anrop
 
-För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i webapp.
-
-I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
+För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I många fall använder ytterligare paket som till exempel [axios](https://www.npmjs.com/package/axios) för att kommunicera med en backend, vilket ökar komplexiteten och beroenden ytterligare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i webapp. I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
 
 
 
@@ -187,19 +185,19 @@ I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad 
 
 Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
-1. Skapa en me-applikation i ditt valda ramverk med följande routes: "/", "/reports/kmom01".
+1. Skapa en Me-applikation i ditt valda ramverk med följande routes: `/`, `/reports/skriva1`.
 
-1. "/" ska visa en kort beskrivning av dig själv hämtat från ditt me-api.
+2. `/` ska visa en kort beskrivning av dig själv hämtat från ditt me-api.
 
-1. "/reports/kmom01" ska visa texten beskriven i [Skriva](#skriva).
+3. `/reports/skriva1` ska visa texten beskriven i [Skriva](#skriva).
 
-1. Skapa en README.md fil i ditt repo som beskriver hur man installerar moduler och starter din me-applikation.
+4. Skapa en README.md fil i ditt repo som beskriver hur man installerar moduler och starter din Me-applikation.
 
-1. Committa alla filer och lägg till en tagg (1.0.\*).
+5. Committa alla filer och lägg till en tagg (1.0.\*).
 
-1. Pusha upp repot till GitHub, inklusive taggarna.
+6. Pusha upp repot till GitHub, inklusive taggarna.
 
-1. Länka till ditt GitHub repo i din inlämning på Canvas.
+7. Länka till ditt GitHub repo i din inlämning på Canvas.
 
 
 
@@ -211,7 +209,7 @@ I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktione
 
 Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt. Se denna texten som ett första utkast, vi kommer under de kommande två veckorna förbättra texten.
 
-Du får skriva inttroduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med teknik du vill skriva texten. Under föreläsningen går Emil igenom ett antal olika sätt att skriva texten.
+Du får skriva introduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med teknik du vill skriva texten. Under föreläsningen går Emil igenom ett antal olika sätt att skriva texten.
 
 
 
