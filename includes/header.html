@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{title}}</title>
     <style>{{inline-style}}</style>
-    <link rel="stylesheet" href="inter-ui.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="preload" href="Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
     <script src="bundle.js" defer></script>
     <noscript>
@@ -22,10 +24,11 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f0db4f">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <header class="header">
-        <h1><a href="/">jsramverk.me</a></h1>
+        <h1><a href="/" aria-label="jsramverk.me">jsramverk.me</a></h1>
     </header>
 
     <main class="container">

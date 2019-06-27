@@ -7,9 +7,11 @@
     <meta name="keywords" content="JavaScript,javascript,ramverk,framework,frontend,backend,BTH,webbprogrammering">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>jsramverk.me</title>
-    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%}body{font-family:sans-serif;font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.68rem}h1{font-size:3.6rem;margin-bottom:1.68rem}h2{font-size:2.88rem;margin-bottom:1.68rem}h3{font-size:2.4rem;margin-bottom:1.68rem}h4{font-size:2.04rem;margin-bottom:1.68rem}p{font-size:1.2rem;margin-bottom:1.68rem}blockquote{margin-bottom:1.68rem}blockquote p{font-size:1.44rem;margin-bottom:0}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%;font-family:sans-serif}body{font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}.main-title{font-size:3rem;margin-bottom:1.4rem}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.68rem}h1{font-size:3.6rem;margin-bottom:1.68rem}h2{font-size:2.88rem;margin-bottom:1.68rem}h3{font-size:2.4rem;margin-bottom:1.68rem}h4{font-size:2.04rem;margin-bottom:1.68rem}p{font-size:1.2rem;margin-bottom:1.68rem}blockquote{margin-bottom:1.68rem}blockquote p{font-size:1.44rem;margin-bottom:0}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
 </style>
-    <link rel="stylesheet" href="inter-ui.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="preload" href="Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="style.min.css" media="none" onload="if(media!='all')media='all'">
     <script src="bundle.js" defer></script>
     <noscript>
@@ -23,113 +25,114 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f0db4f">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <header class="header">
-        <h1><a href="/">jsramverk.me</a></h1>
+        <h1><a href="/" aria-label="jsramverk.me">jsramverk.me</a></h1>
     </header>
 
     <main class="container">
 <h2 class="main-title">Välkommen till jsramverk</h2>
 <p>Detta är kursen DV1612 JavaScript-baserade webbramverk. Vi ska i denna kurs använda oss av JavaScript ramverk både på frontend och backend för att skapa användarvänliga webbplatser.</p>
-<p>Kursen ges till webbprogrammeringsstudenter vid <a href="https://bth.se" target="_blank"></a>Blekinge Tekniska Högskola</a>. Och är en av Sveriges enda högskolekurser i JavaScript ramverk. Materialet på denna sida är licensierad under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License och källkoden till denna webbplats finns på <a href="https://github.com/emilfolino/jsramverk.me">GitHub emilfolino/jsramverk.me</a></p>
+<p>Kursen ges till webbprogrammeringsstudenter vid <a aria-label="Blekinge Tekniska Högskola" href="https://bth.se" target="_blank" rel="noopener"></a>Blekinge Tekniska Högskola</a>. Och är en av Sveriges enda högskolekurser i JavaScript ramverk. Materialet på denna sida är licensierad under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License och källkoden till denna webbplats finns på <a aria-label="" href="https://github.com/emilfolino/jsramverk.me">GitHub emilfolino/jsramverk.me</a></p>
 <p>Nedan finns inlämningsuppgifterna tillsammans med material om de tekniker och verktyg som används i kursen.</p>
 
 <section class="assignments">
     <div class="assignment-box">
         <div class="assignment-header">
-            <h3><a href="frontend">1: Frontend</a></h3>
+            <h3><a aria-label="Vecka 1: Frontend" href="frontend">1: Frontend</a></h3>
         </div>
         <div class="assignment-body">
             <p>Vi utvärderar frontend ramverk och skapar en me-applikation i det JavaScript ramverk du valde.</p>
 
-            <p><a href="frontend">Gå till uppgiften</a></p>
+            <p><a aria-label="Vecka 1: Frontend" href="frontend">Gå till uppgiften</a></p>
         </div>
     </div>
     <div class="assignment-box">
         <div class="assignment-header">
-            <h3><a href="ux">2: UX</a></h3>
+            <h3><a aria-label="Vecka 2: UX" href="ux">2: UX</a></h3>
         </div>
         <div class="assignment-body">
             <p>Vi bygger vidare på vår me-applikation och tittar på hur användarens upplevelse sätts i fokus.</p>
 
-            <p><a href="ux">Gå till uppgiften</a></p>
+            <p><a aria-label="Vecka 2: UX" href="ux">Gå till uppgiften</a></p>
         </div>
     </div>
     <div class="assignment-box">
         <div class="assignment-header">
-            <h3><a href="backend">3: Backend</a></h3>
+            <h3><a aria-label="Vecka 3: Backend" href="backend">3: Backend</a></h3>
         </div>
         <div class="assignment-body">
             <p>Vi skaffar oss en server och driftsätter ett API som vi använder i vår me-applikation.</p>
 
-            <p><a href="backend">Gå till uppgiften</a></p>
+            <p><a aria-label="Vecka 3: Backend" href="backend">Gå till uppgiften</a></p>
         </div>
     </div>
     <div class="assignment-box">
         <div class="assignment-header">
-            <h3><a href="test">4: Test</a></h3>
+            <h3><a aria-label="Vecka 4: Test" href="test">4: Test</a></h3>
         </div>
         <div class="assignment-body">
             <p>Vi skapar en testmiljö för våra repon, samt ett flöde för Continouos Integration.</p>
 
-            <p><a href="test">Gå till uppgiften</a></p>
+            <p><a aria-label="Vecka 4: Test" href="test">Gå till uppgiften</a></p>
         </div>
     </div>
     <div class="assignment-box">
         <div class="assignment-header">
-            <h3><a href="realtid">5: Realtid</a></h3>
+            <h3><a aria-label="Vecka 5: Realtid" href="realtid">5: Realtid</a></h3>
         </div>
         <div class="assignment-body">
             <p>Vi tittar på hur vi kan använda websockets för realtidsprogrammering på webben.</p>
 
-            <p><a href="realtid">Gå till uppgiften</a></p>
+            <p><a aria-label="Vecka 5: Realtid" href="realtid">Gå till uppgiften</a></p>
         </div>
     </div>
     <div class="assignment-box">
         <div class="assignment-header">
-            <h3><a href="nosql">6: NoSQL</a></h3>
+            <h3><a aria-label="Vecka 6: Nosql" href="nosql">6: NoSQL</a></h3>
         </div>
         <div class="assignment-body">
             <p>Vi användar en NoSQL databas för att spara data och jämför med relationsdatabaser.</p>
 
-            <p><a href="nosql">Gå till uppgiften</a></p>
+            <p><a aria-label="Vecka 6: Nosql" href="nosql">Gå till uppgiften</a></p>
         </div>
     </div>
     <div class="assignment-box project">
         <div class="assignment-header">
-            <h3><a href="project">Projekt: Trading plattform</a></h3>
+            <h3><a aria-label="Projekt" href="project">Projekt: Trading plattform</a></h3>
         </div>
         <div class="assignment-body">
             <p>Du använder dina kunskaper från tidigare i kursen till att skapa en trading plattform.</p>
 
-            <p><a href="project">Gå till projektet</a></p>
+            <p><a aria-label="Projekt" href="project">Gå till projektet</a></p>
         </div>
     </div>
 </section>
 
 <section class="general-information" id="general-information">
-    <h2><a href="#general-information">Generell information</a></h2>
+    <h2><a aria-label="Generell information" href="#general-information">Generell information</a></h2>
 
     <section id="repo">
-        <h3><a href="#repo">Exempelprogram</a></h3>
+        <h3><a aria-label="Exempelprogram" href="#repo">Exempelprogram</a></h3>
 
-        <p>Exempelprogrammen som används i kursen finns i GitHub-repot <a href="https://github.com/emilfolino/jsramverk" target="_blank">emilfolino/jsramverk</a>.</p>
+        <p>Exempelprogrammen som används i kursen finns i GitHub-repot <a aria-label="" href="https://github.com/emilfolino/jsramverk" target="_blank" rel="noopener">emilfolino/jsramverk</a>.</p>
     </section>
 
     <section id="courseplan">
-        <h3><a href="#courseplan">Kursplan</a></h3>
+        <h3><a aria-label="Kursplan" href="#courseplan">Kursplan</a></h3>
 
-        <p>Kursplanen hittas genom att söka på <a href="http://edu.bth.se/utbildning/utb_kursplaner.asp?KKurskod=DV1612" target="_blank">DV1612</a> via BTH's webbplats.</p>
+        <p>Kursplanen hittas genom att söka på <a aria-label="" href="http://edu.bth.se/utbildning/utb_kursplaner.asp?KKurskod=DV1612" target="_blank" rel="noopener">DV1612</a> via BTH's webbplats.</p>
     </section>
 
     <section id="schema">
-        <h3><a href="#schema">Schema</a></h3>
-        <p>Schema för kursen finns via <a href="https://cloud.timeedit.net/bth/web/sched1/ri10745QX76Z54Q5Z16g2740y0096Y7Y409gQY5Q5.html">schema.bth.se</a>.</p>
+        <h3><a aria-label="Schema" href="#schema">Schema</a></h3>
+        <p>Schema för kursen finns via <a aria-label="" href="https://cloud.timeedit.net/bth/web/sched1/ri10745QX76Z54Q5Z16g2740y0096Y7Y409gQY5Q5.html" target="_blank" rel="noopener">schema.bth.se</a>.</p>
     </section>
 
     <section id="ladok">
-        <h3><a href="#ladok">Ladok och betygsättning</a></h3>
+        <h3><a aria-label="Ladok" href="#ladok">Ladok och betygsättning</a></h3>
         <p>Enligt kursplanen finns det 3 Ladok-moment. Dessa är kopplade till inlämningsuppgifterna enligt nedan.</p>
 
         <table>
@@ -198,7 +201,7 @@
     </section>
 
     <section id="evaluation">
-        <h3><a href="#evaluation">Kursvärdering</a></h3>
+        <h3><a aria-label="Kursvärdering" href="#evaluation">Kursvärdering</a></h3>
         <p>Kursvärdering är ett viktigt verktyg för återkoppling och utvärdering
             av kurser både för Blekinge Tekniska Högskola men främst för
             kursorganisationen och kursansvarige. I slutet av kursen skickas kursvärderingen
@@ -211,9 +214,9 @@
 
     <footer class="footer" id="footer">
         <div class="inner-footer">
-            <p>&copy; <a href="https://emilfolino.se" target="_blank">Emil Folino</a></p>
+            <p>&copy; <a href="https://emilfolino.se" target="_blank" rel="noopener">Emil Folino</a></p>
             <p>This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</p>
-            <p>The source code can be found at <a href="https://github.com/emilfolino/jsramverk.me">GitHub emilfolino/jsramverk.me</a></p>
+            <p>The source code can be found at <a href="https://github.com/emilfolino/jsramverk.me" target="_blank" rel="noopener">GitHub emilfolino/jsramverk.me</a></p>
         </div>
     </footer>
 </body>

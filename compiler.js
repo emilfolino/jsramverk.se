@@ -12,7 +12,7 @@ const output = "./output/";
 const mainTitle = "jsramverk.me";
 
 const compiler = {
-    createHeader: function (next, additionalCSS=[], additionalJS=[]) {
+    createHeader: function (next) {
         fs.readFile(`${includes}header.html`, 'utf8', (err, data) => {
             if (err) {
                 console.error(err.message);
@@ -54,13 +54,18 @@ const compiler = {
                         return header.replace(/<\/?h\d>/g, '');
                     });
 
-
                     parsed = compiler.makeSections(parsed);
 
                     let breadcrumb = compiler.createBreadCrumbs(h1);
                     let main = compiler.createMain(headers, parsed);
-                    let result = header.replace("{{title}}", mainTitle + " - " + h1) + breadcrumb + main;
                     let filename = file.replace("md", "html");
+
+                    header = header.replace(
+                        "{{title}}",
+                        mainTitle + " - " + h1
+                    );
+
+                    let result = header + breadcrumb + main;
 
                     compiler.addFooterAndWriteToFile(result, filename);
                 });

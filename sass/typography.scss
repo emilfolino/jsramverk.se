@@ -1,9 +1,15 @@
 html {
     font-size: 100%;
+    font-family: $mainFont;
 }
 
+// @supports (font-variation-settings: normal) {
+//     html {
+//         font-family: 'Inter var', sans-serif;
+//     }
+// }
+
 body {
-    font-family: $mainFont;
     color: $mainFontColor;
     line-height: $mainLineHeight;
     font-display: auto;
