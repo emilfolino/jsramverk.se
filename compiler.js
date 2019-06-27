@@ -9,6 +9,7 @@ const slugify = require("slugify");
 const includes = "./includes/";
 const content = "./content/";
 const output = "./output/";
+const mainTitle = "jsramverk.me";
 
 const compiler = {
     createHeader: function (next, additionalCSS=[], additionalJS=[]) {
@@ -29,7 +30,7 @@ const compiler = {
                 console.error(err.message);
             }
 
-            let outputContent = header + data;
+            let outputContent = header.replace("{{title}}", mainTitle) + data;
 
             compiler.addFooterAndWriteToFile(outputContent, "index.html");
         });
@@ -58,7 +59,7 @@ const compiler = {
 
                     let breadcrumb = compiler.createBreadCrumbs(h1);
                     let main = compiler.createMain(headers, parsed);
-                    let result = header + breadcrumb + main;
+                    let result = header.replace("{{title}}", mainTitle + " - " + h1) + breadcrumb + main;
                     let filename = file.replace("md", "html");
 
                     compiler.addFooterAndWriteToFile(result, filename);
