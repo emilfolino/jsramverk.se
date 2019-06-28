@@ -15,6 +15,13 @@ body {
     font-display: auto;
 }
 
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+}
+
 h1 {
     font-size: $mainH1FontSize;
     margin-bottom: $mainLineHeight * $mainPFontSize;
