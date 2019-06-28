@@ -24,7 +24,7 @@ document.addEventListener("turbolinks:load", function () {
         }, 12000);
     }
 
-    function addSign () {
+    function addSign() {
         var element = document.createElement("img");
 
         element.src = "under-construction.png";
@@ -34,7 +34,7 @@ document.addEventListener("turbolinks:load", function () {
         ucElement.prepend(element);
     }
 
-    function addBlinking () {
+    function addBlinking() {
         var element = document.createElement("img");
 
         element.src = "blinking.gif";
@@ -44,7 +44,7 @@ document.addEventListener("turbolinks:load", function () {
         document.getElementById("main-container").prepend(element);
     }
 
-    function addBar () {
+    function addBar() {
         var element = document.createElement("img");
 
         element.src = "bar.gif";
@@ -54,7 +54,7 @@ document.addEventListener("turbolinks:load", function () {
         document.getElementById("main-container").prepend(element);
     }
 
-    function addWorker () {
+    function addWorker() {
         var element = document.createElement("img");
 
         element.src = "worker.gif";
@@ -63,7 +63,7 @@ document.addEventListener("turbolinks:load", function () {
         ucElement.append(element);
     }
 
-    function addSmallTruck () {
+    function addSmallTruck() {
         var element = document.createElement("img");
 
         element.src = "truck.gif";
@@ -73,7 +73,7 @@ document.addEventListener("turbolinks:load", function () {
         document.getElementById("main-container").prepend(element);
     }
 
-    function addBigTruck () {
+    function addBigTruck() {
         var element = document.createElement("img");
         var truckHeight = ucElement.offsetTop;
 
@@ -85,7 +85,7 @@ document.addEventListener("turbolinks:load", function () {
         document.getElementById("main-container").prepend(element);
     }
 
-    function ohComeOn () {
+    function ohComeOn() {
         var element = document.createElement("div");
 
         element.textContent = "Oh Come On, it's not the 90's anymore";
