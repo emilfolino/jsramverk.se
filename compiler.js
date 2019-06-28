@@ -19,6 +19,10 @@ const compiler = {
             }
 
             fs.readFile(`${output}inline.min.css`, 'utf8', (err, cssData) => {
+                if (err) {
+                    console.error(err.message);
+                }
+
                 next(data.replace("{{inline-style}}", cssData));
             });
         });
@@ -38,6 +42,10 @@ const compiler = {
 
     createAssignments: function (header) {
         fs.readdir(content, (err, files) => {
+            if (err) {
+                console.error(err.message);
+            }
+
             files.forEach(file => {
                 fs.readFile(`${content}${file}`, 'utf8', (err, data) => {
                     if (err) {
@@ -60,12 +68,12 @@ const compiler = {
                     let main = compiler.createMain(headers, parsed);
                     let filename = file.replace("md", "html");
 
-                    header = header.replace(
+                    let customHeader = header.replace(
                         "{{title}}",
                         mainTitle + " - " + h1
                     );
 
-                    let result = header + breadcrumb + main;
+                    let result = customHeader + breadcrumb + main;
 
                     compiler.addFooterAndWriteToFile(result, filename);
                 });
