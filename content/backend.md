@@ -1,5 +1,12 @@
 # Backend
 
+<div class="under-construction" id="under-construction">
+    <div class="under-construction-text">
+        <p><strong>Uppdatering</strong></p>
+        <p>Denna inlämningsuppgift uppdateras och kravspecifikation samt material kan ändras.</p>
+    </div>
+</div>
+
 Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.
 
 
@@ -839,7 +846,7 @@ För att detta ska fungera på din droplet måste vi installera `sqlite3` innan 
 
 #### Säker hantering av lösenord
 
-När vi sparar lösenord i en databas vill göra det så säkert som möjligt. Därför använder vi [bcrypt](https://codahale.com/how-to-safely-store-a-password/). 
+När vi sparar lösenord i en databas vill göra det så säkert som möjligt. Därför använder vi [bcrypt](https://codahale.com/how-to-safely-store-a-password/).
 
 Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från [installationsmanualen för bcrypt](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows) är att installare npm paketet `windows-build-tools` med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.
 
@@ -1030,7 +1037,7 @@ Vi installerar PM2 med kommandot:
 npm install -g pm2
 ```
 
-Vi går sedan till katalogen där vi startade vårt me-api och 
+Vi går sedan till katalogen där vi startade vårt me-api och
 
 
 

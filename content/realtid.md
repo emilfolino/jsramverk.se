@@ -1,5 +1,12 @@
 # Realtid
 
+<div class="under-construction" id="under-construction">
+    <div class="under-construction-text">
+        <p><strong>Uppdatering</strong></p>
+        <p>Denna inlämningsuppgift uppdateras och kravspecifikation samt material kan ändras.</p>
+    </div>
+</div>
+
 Vi tittar på hur vi kan använda websockets för realtidsprogrammering på webben.
 
 
