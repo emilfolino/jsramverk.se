@@ -6,7 +6,7 @@
     <meta name="description" content="Kursplats för kursen DV1612 JavaScript-baserade webbramverk också kallad jsramverk vid Blekinge Tekniska Högskola. Kursen handlar om JavaScript ramverk både på frontend och backend.">
     <meta name="keywords" content="JavaScript,javascript,ramverk,framework,frontend,backend,BTH,webbprogrammering">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>jsramverk.me - Projekt</title>
+    <title>jsramverk.me - NoSQL</title>
     <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%;font-family:sans-serif}body{font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.68rem}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
 </style>
     <link rel="preload" href="Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -416,7 +416,7 @@ if (process.env.NODE_ENV !== 'test') {
     app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
 }
 </code></pre>
-<h4 id="cross-origin-resource-sharing-(cors)"><a href="#cross-origin-resource-sharing-(cors)">Cross-Origin Resource Sharing (CORS)</a></h4>
+<h4 id="cross-origin-resource-sharing-cors"><a href="#cross-origin-resource-sharing-cors">Cross-Origin Resource Sharing (CORS)</a></h4>
 <p>Då vi vill att vårt API ska kunna konsumeras av många olika klienter vill vi tillåta att klienter från andra domäner kan hämta information från vårt API. Vi gör även detta med en tredjepartsmodul <code>cors</code>, som vi installerade i början av artikeln. På samma sätt som för <code>morgan</code> använder vi den inbyggda middleware och använder funktionen <code>use</code>.</p>
 <pre><code class="language-javascript">const express = require('express');
 const cors = require('cors');
@@ -688,7 +688,7 @@ deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib no
 <p>Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.</p>
 </section><section id="kravspecifikation"><h2><a href="#kravspecifikation">Kravspecifikation</a></h2>
 <p>Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och en del om hur din frontend applikation ska konsumera backend API:t.</p>
-<h4 id="del-1:-backend"><a href="#del-1:-backend">Del 1: Backend</a></h4>
+<h4 id="del-1-backend"><a href="#del-1-backend">Del 1: Backend</a></h4>
 <ol>
 <li>
 <p>Skapa ett Me-API med nedanstående router.</p>
@@ -715,7 +715,7 @@ deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib no
 <p>Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.</p>
 </li>
 </ol>
-<h4 id="del-2:-frontend"><a href="#del-2:-frontend">Del 2: Frontend</a></h4>
+<h4 id="del-2-frontend"><a href="#del-2-frontend">Del 2: Frontend</a></h4>
 <ol>
 <li>
 <p>Din frontend Me-applikation från vecka 1 och 2 ska hämta redovisningstexter från Me-API:t.</p>

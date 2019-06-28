@@ -80,7 +80,13 @@ const compiler = {
         matches.forEach(function (stringMatch, index) {
             let replaceString = "";
             let title = stringMatch.replace(/<\/?h\d>/g, '');
-            let slug = slugify(title.toLowerCase());
+            let slug = slugify(
+                title.toLowerCase(),
+                {
+                    remove: /[*+~.()'"!:@]/g,
+                    lower: true
+                }
+            );
             let level = stringMatch[2];
 
             if (level <= 3) {
@@ -125,7 +131,13 @@ const compiler = {
         let output = "<nav class='toc' id='toc'><ul>";
 
         headers.forEach((header) => {
-            let slug = slugify(header.toLowerCase());
+            let slug = slugify(
+                header.toLowerCase(),
+                {
+                    remove: /[*+~.()'"!:@]/g,
+                    lower: true
+                }
+            );
 
             output += `<li><a href='#${slug}'>${header}</a></li>`;
         });

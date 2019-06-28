@@ -6,7 +6,7 @@
     <meta name="description" content="Kursplats för kursen DV1612 JavaScript-baserade webbramverk också kallad jsramverk vid Blekinge Tekniska Högskola. Kursen handlar om JavaScript ramverk både på frontend och backend.">
     <meta name="keywords" content="JavaScript,javascript,ramverk,framework,frontend,backend,BTH,webbprogrammering">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>jsramverk.me - Projekt</title>
+    <title>jsramverk.me - NoSQL</title>
     <style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;font-size:100%;font-family:sans-serif}body{font-display:auto;line-height:1.4}.header{width:100%;padding:1.4rem 1rem;background:linear-gradient(45deg, #f0db4f, #f4e57e);box-shadow:2px 2px 5px 0 rgba(0,0,0,.2);z-index:1000}.header h1{margin-bottom:0}.header a{color:#323330;text-decoration:none}.header a:hover{text-decoration:underline}.container,.inner-footer{width:100%;margin-top:2rem;padding:1.4rem 1rem;overflow:auto}::selection,::-moz-selection{background:#f0db4f}.main-title{font-size:2.4rem;margin-bottom:1.4rem}.toc{display:none}@media(min-width: 768px){.container,.inner-footer{width:740px;margin-left:auto;margin-right:auto}}@media(min-width: 992px){.container,.inner-footer{width:960px}.week-container{width:100%;margin-bottom:16rem}.week{width:auto;margin-left:350px}.main-title{font-size:4rem;margin-bottom:1.68rem}.toc{width:310px;display:block;text-align:right;position:fixed;top:14.5rem}.toc ul{list-style-type:none;font-size:1.4rem}}@media(min-width: 1200px){.container,.inner-footer{width:1160px}}/*# sourceMappingURL=inline.min.css.map */
 </style>
     <link rel="preload" href="Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -33,7 +33,7 @@
     </header>
 
     <main class="container">
-<p class='breadcrump'><a href='/'>jsramverk.me</a> / Test</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#test'>Test</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#material-och-tekniker'>Material och tekniker</a></li><li><a href='#testverktyg-for-javascript'>Testverktyg för JavaScript</a></li><li><a href='#statisk-kodvalidering'>Statisk kodvalidering</a></li><li><a href='#continuous-integration-(ci)'>Continuous integration (CI)</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="test"><h1><a href="#test">Test</a></h1>
+<p class='breadcrump'><a href='/'>jsramverk.me</a> / Test</p><div class='week-container'><nav class='toc' id='toc'><ul><li><a href='#test'>Test</a></li><li><a href='#lasa'>Läsa</a></li><li><a href='#material-och-tekniker'>Material och tekniker</a></li><li><a href='#testverktyg-for-javascript'>Testverktyg för JavaScript</a></li><li><a href='#statisk-kodvalidering'>Statisk kodvalidering</a></li><li><a href='#continuous-integration-ci'>Continuous integration (CI)</a></li><li><a href='#kravspecifikation'>Kravspecifikation</a></li><li><a href='#skriva'>Skriva</a></li></ul></nav><article class='week'><section id="test"><h1><a href="#test">Test</a></h1>
 <p>Vi skapar en testmiljö för både frontend och backend kod, samt ett flöde för Continouos Integration.</p>
 <p>Tanken är att vi förbereder oss för ett större utvecklingsprojekt i JavaScript och vi vill säkerställa att vi har en utvecklingsmiljö där vi kan testa vår programvara.</p>
 <p>Vilken typ av tester vill vi göra och vilka verktyg kan hjälpa oss med detta? Låt oss gå igenom läget i JavaScript och använda några testrelaterade verktyg för att sätta en grund.</p>
@@ -175,7 +175,7 @@ cp node_modules/javascript-style-guide/.eslint* .
 }
 </code></pre>
 <p>När enhetstester körs så genereras kodtäckningen till katalogen <code>build/</code>. Det är för att undvika att skräpa ned i katalogen och samla bygg-relaterade filer i en katalog som är enkel att ta bort vid behov. Du kan se detaljer för hur <code>nyc</code> konfigureras i dess konfigfil <code>.nycrc</code>.</p>
-</section><section id="continuous-integration-(ci)"><h2><a href="#continuous-integration-(ci)">Continuous integration (CI)</a></h2>
+</section><section id="continuous-integration-ci"><h2><a href="#continuous-integration-ci">Continuous integration (CI)</a></h2>
 <p>Nu när vi har en <code>package.json</code> på plats kan vi fortsätta och sätta igång en CI-kedja för att automatisera våra tester.</p>
 <p>Det som sammanhåller alla tester är nu sekvensen <code>npm install test</code> som installerar det som behövs via <code>package.json</code> och sen kör testerna.</p>
 <pre><code class="language-bash">npm install   # Installerar allt som finns i package.json
