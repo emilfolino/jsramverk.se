@@ -27,11 +27,6 @@
         margin-left: auto;
         margin-right: auto;
     }
-
-    .main-title {
-        font-size: 3rem;
-        margin-bottom: 1.4rem;
-    }
 }
 
 @media (min-width: 992px) {
@@ -53,40 +48,6 @@
     .main-title {
         font-size: 4rem;
         margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
-    }
-
-    h1 {
-        font-size: $mainH1FontSize * $fontScaleFactor;
-        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
-    }
-
-    h2 {
-        font-size: $mainH2FontSize * $fontScaleFactor;
-        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
-    }
-
-    h3 {
-        font-size: $mainH3FontSize * $fontScaleFactor;
-        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
-    }
-
-    h4 {
-        font-size: $mainH4FontSize * $fontScaleFactor;
-        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
-    }
-
-    p {
-        font-size: $mainPFontSize * $fontScaleFactor;
-        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
-    }
-
-    blockquote {
-        margin-bottom: $mainLineHeight * $mainPFontSize * $fontScaleFactor;
-    }
-
-    blockquote p {
-        font-size: $mainPFontSize * $fontScaleFactor * $fontScaleFactor;
-        margin-bottom: 0;
     }
 
     .toc {
