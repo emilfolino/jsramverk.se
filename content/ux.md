@@ -1,5 +1,12 @@
 # UX
 
+<div class="under-construction" id="under-construction">
+    <div class="under-construction-text">
+        <p><strong>Uppdatering</strong></p>
+        <p>Denna inlämningsuppgift uppdateras och kravspecifikation samt material kan ändras.</p>
+    </div>
+</div>
+
 Vi fortsätter med att bekanta oss med vårt valda JavaScript frontend ramverk, men tittar denna veckan på hur vi kan använda ramverket för att skapa goda användareupplevelser. Vi ska titta på hur vi byggar ett registreringsformulär med validering och hur vi i det sambandet utnyttjar en modell i ramverket. Vi tittar även på hur vi kan förbättra användandet av dropdowns med hjälp av konceptet Last-Used-First-Out (LUFO).
 
 

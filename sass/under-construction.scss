@@ -1,0 +1,75 @@
+.under-construction {
+    border-left: 4px solid $minionYellow;
+    background-color: lighten($minionYellow, 25%);
+    padding: $mainPFontSize * $mainLineHeight;
+    margin-bottom: $mainPFontSize * $mainLineHeight;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fade-in {
+    animation: fadein 2s;
+    margin-right: $mainPFontSize * $mainLineHeight;
+}
+
+.blinking {
+    position: absolute;
+    top: 200px;
+    right: 50px;
+}
+
+.bar {
+    position: absolute;
+    top: 150px;
+    left: 50px;
+}
+
+.truck {
+    position: absolute;
+    top: 400px;
+    left: 50px;
+}
+
+.big-truck {
+    position: absolute;
+    z-index: 5000;
+    right: -371px;
+    animation: move-truck 10s;
+}
+
+.oh-come-on {
+    position: absolute;
+    top: 200px;
+    left: 50px;;
+    transform: rotate(-45deg);
+    font-size: 2.6rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    background: linear-gradient(45deg, hsl(0, 100%, 50%), hsl(50, 100%, 50%), hsl(300, 100%, 50%));
+    padding: 1.4rem;
+    z-index: 10000;
+    width: 70%;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes move-truck {
+    from { right: -371px; }
+    to   { right: 1200px; }
+}
+
+@media (min-width: 992px) {
+    .under-construction {
+        padding: $mainPFontSize * $mainLineHeight * $fontScaleFactor;
+        margin-bottom: $mainPFontSize * $mainLineHeight * $fontScaleFactor;
+    }
+
+    @keyframes move-truck {
+        from { right: -371px; }
+        to   { right: 2500px; }
+    }
+}

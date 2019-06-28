@@ -25,7 +25,7 @@
     "production": "npm run local && npm run publish",
     "postproduction": "npm run sitemap",
     "watch": "npm-watch",
-    "icons": "cp icons/*.png icons/*.svg site.webmanifest output/"
+    "icons": "cp icons/*.png icons/*.svg icons/*.gif site.webmanifest output/"
   },
   "repository": {
     "type": "git",

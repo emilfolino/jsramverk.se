@@ -1,4 +1,5 @@
 import "./client-js/scroll.js";
+import "./client-js/under-construction.js";
 
 import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
