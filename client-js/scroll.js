@@ -1,14 +1,26 @@
+let mainNavLinks;
+
+document.addEventListener("turbolinks:before-visit", function () {
+    let tmpElement = document.getElementById("toc");
+
+    if (tmpElement) {
+        tmpElement.remove();
+    }
+
+    mainNavLinks = null;
+});
+
 document.addEventListener("turbolinks:load", function () {
-    var mainNavLinks = document.querySelectorAll(".toc ul li a");
-    var footer = document.getElementById("footer");
-    var toc = document.getElementById("toc");
-    var topToToc = 14.5 * parseFloat(getComputedStyle(document.body).fontSize);
+    mainNavLinks = document.querySelectorAll(".toc ul li a");
+    let footer = document.getElementById("footer");
+    let toc = document.getElementById("toc");
+    let topToToc = 14.5 * parseFloat(getComputedStyle(document.body).fontSize);
 
     if (toc) {
         window.addEventListener("scroll", function() {
-            var fromTop = window.scrollY + 200;
-            var tocAbsoluteBottom = window.scrollY + topToToc + toc.clientHeight;
-            var limit = document.body.clientHeight - footer.clientHeight;
+            let fromTop = window.scrollY + 200;
+            let tocAbsoluteBottom = window.scrollY + topToToc + toc.clientHeight;
+            let limit = document.body.clientHeight - footer.clientHeight;
 
             if (tocAbsoluteBottom > limit) {
                 toc.style.top = "0px";
@@ -17,7 +29,7 @@ document.addEventListener("turbolinks:load", function () {
             }
 
             mainNavLinks.forEach(function(link) {
-                var section = document.querySelector(link.hash);
+                let section = document.querySelector(link.hash);
 
                 if (
                     section.offsetTop <= fromTop &&

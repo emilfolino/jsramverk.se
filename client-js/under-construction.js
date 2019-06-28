@@ -1,5 +1,21 @@
+let ucElement;
+let count = 0;
+let ucInterval;
+
+document.addEventListener("turbolinks:before-visit", function () {
+    let tmpElement = document.getElementById("under-construction");
+
+    if (tmpElement) {
+        tmpElement.remove();
+    }
+
+    ucElement = null;
+    count = 0;
+    clearInterval(ucInterval);
+});
+
 document.addEventListener("turbolinks:load", function () {
-    var animationFunctions = [
+    const animationFunctions = [
         addSign,
         addBlinking,
         addBar,
@@ -8,13 +24,12 @@ document.addEventListener("turbolinks:load", function () {
         addBigTruck,
         ohComeOn
     ];
-    var ucElement = document.getElementById("under-construction");
+
+    ucElement = document.getElementById("under-construction");
 
     if (ucElement) {
-        var count = 0;
-
         setTimeout(function() {
-            var ucInterval = setInterval(function () {
+            ucInterval = setInterval(function () {
                 animationFunctions[count++]();
 
                 if (count >= animationFunctions.length) {
@@ -25,7 +40,7 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     function addSign() {
-        var element = document.createElement("img");
+        let element = document.createElement("img");
 
         element.src = "under-construction.png";
         element.alt = "Under Construction";
@@ -35,7 +50,7 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     function addBlinking() {
-        var element = document.createElement("img");
+        let element = document.createElement("img");
 
         element.src = "blinking.gif";
         element.alt = "Blinking Lamps";
@@ -45,7 +60,7 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     function addBar() {
-        var element = document.createElement("img");
+        let element = document.createElement("img");
 
         element.src = "bar.gif";
         element.alt = "Under Construction Bar";
@@ -55,7 +70,7 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     function addWorker() {
-        var element = document.createElement("img");
+        let element = document.createElement("img");
 
         element.src = "worker.gif";
         element.alt = "Working Hard";
@@ -64,7 +79,7 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     function addSmallTruck() {
-        var element = document.createElement("img");
+        let element = document.createElement("img");
 
         element.src = "truck.gif";
         element.alt = "Small Truck";
@@ -74,8 +89,8 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     function addBigTruck() {
-        var element = document.createElement("img");
-        var truckHeight = ucElement.offsetTop;
+        let element = document.createElement("img");
+        let truckHeight = ucElement.offsetTop;
 
         element.src = "big-truck.gif";
         element.alt = "Big Truck";
@@ -86,7 +101,7 @@ document.addEventListener("turbolinks:load", function () {
     }
 
     function ohComeOn() {
-        var element = document.createElement("div");
+        let element = document.createElement("div");
 
         element.textContent = "Oh Come On, it's not the 90's anymore";
         element.className = "oh-come-on";
