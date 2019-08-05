@@ -33,23 +33,29 @@ Om man vill se detaljer om Websocket protokollet så finns en [RFC 6455](https:/
 
 För att se guider med exempelkod för både klient och servrar implementerade i olika språk så vänder vi oss till [MDN WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
+Vi kommer denna vecka främst använda [socket.io](https://socket.io/) för realtidskommunikation. Till grund för detta paketet finns grund implementationen av websocket. I artikeln [Realtidsprogrammering med paketet ws](realtid-med-ws) beskrivs hur man kan använda paketet ws för realtidskommunikation. Läs igenom artikeln för ytterligare information om websockets och se exempel på hur man kan implementera realtidsprogrammering utan socket.io.
+
+
+
+## socket.io
+
+[socket.io](https://socket.io/) är ett paket för _"real-time, bidirectional and event-based communication"_ och underlättar processen för att skapa och driftsätta tjänster med realtidskommunikation. Vi ska i följande avsnitt bekanta oss med både server och klient implementationer av en chatt med websocket kommunikation.
 
 
 ## Kravspecifikation
 
-1. Skapa en klient och en server för chatt. Välj en teknik som grundar sig på websockets. Visa att klienten fungerar genom att integrera den i din me-applikation.
+1. Skapa en klient och en server för chatt med hjälp av socket.io.
 
-2. Bygg ett eget applikationsprotokoll ovanpå websockets. Förslagsvis använder du JSON (eller annat du väljer).
+1. Integrera klienten i ditt valda ramverk som en del av din me-sida.
 
-3. Använd subprotokoll i din lösning, på så vis är du förberedd om du behöver göra en ny version av ditt applikationsprotokoll.
+1. Gör ett medvetet val om chatt backend ska ligga som egen driftsatt server med egen domän eller som en del av me-api:t.
 
-4. När man kopplar upp sig så identifierar man sig med ett nick, ett smeknamn.
+1. När man kopplar upp sig så identifierar man sig med ett nick, ett smeknamn.
 
-5. Flera klienter kan koppla sig till chatten. När någon skriver något ser alla andra det. Man ser nicket tillsammans med meddelandet.
+1. Flera klienter kan koppla sig till chatten. När någon skriver något ser alla andra det. Man ser nicket tillsammans med meddelandet.
 
-6. Committa, tagga och pusha relevanta repon samt driftsätta på din server.
+1. Committa, tagga och pusha relevanta repon samt driftsätta på din server.
 
 
 
 ## Skriva
-
