@@ -32,7 +32,7 @@ För att se guider med exempelkod för både klient och servrar implementerade i
 
 Det finns ett exempel av en [echo-server](http://demos.kaazing.com/echo/) som använder sig av websockets. Pröva den så ser du klienten koppla upp sig till servern och sedan kan man skicka ett meddelande. Servern skickar tillbaka samma meddelande, som en ekande-server, en echo-server.
 
-[FIGURE src=image/snapht17/kaazing-echo-server.png?w=w2 caption="Testa konceptet av en echo-server med websockets."]
+<img src="https://dbwebb.se/image/snapht17/kaazing-echo-server.png?w=w2""altesta konceptet av en echo-server med websockets.">
 
 Du kan även pröva att koppla upp dig mot en annan echo-server som finns på `ws://dbwebb.se:1337/`. Pröva att det fungerar på samma sätt och att klienten du använder fungerar även mot en annan server.
 
@@ -44,7 +44,7 @@ Tanken är att vi bygger upp en egen klient och en egen server, för att se vilk
 
 Låt se vilken kod som behövs för att sätta upp en server och en klient motsvarande en echo-server. Vi börjar med klienten i webbläsaren. I kursrepot under `example/websocket/connect` finns sidan `client.html` som är grunden till en klient.
 
-[FIGURE src=image/snapht17/websocket-client.png?w=w2 caption="En klient som kan koppla upp sig mot en server via websocket."]
+<img src="https://dbwebb.se/image/snapht17/websocket-client.png?w=w2" alt="En klient som kan koppla upp sig mot en server via websocket.">
 
 Klienten kan bara göra en uppkoppling, den kan inte skicka eller ta emot några meddelanden. Men det är en start.
 
@@ -58,25 +58,25 @@ För att se vad som händer när du trycker på "Connect" så öppnar du devtool
 
 Bekanta dig med hur det ser ut i olika webbläsare. Här ser du Firefox och Chrome.
 
-[FIGURE src=image/snapht17/websocket-connect-firefox.png?w=w2 caption="Firefox visar detaljer i Console när uppkopplingen sker för websockets."]
+<img src="https://dbwebb.se/image/snapht17/websocket-connect-firefox.png?w=w2" alt="Firefox visar detaljer i Console när uppkopplingen sker för websockets.">
 
-[FIGURE src=image/snapht17/websocket-connect-chrome.png?w=w2 caption="Chrome visar detaljer i Console när uppkopplingen sker för websockets."]
+<img src="https://dbwebb.se/image/snapht17/websocket-connect-chrome.png?w=w2" alt="Chrome visar detaljer i Console när uppkopplingen sker för websockets.">
 
 Vi kan se vad som händer i Consolen, dels saker som vi själva skriver ut men även detaljer som webbläsaren kan välja att skriva ut (Firefox).
 
 Du kan också se hur uppkopplingen för en websocket ser ut under fliken "Networks".
 
-[FIGURE src=image/snapht17/websocket-connect-firefox-network.png?w=w2 caption="Firefox i fliken Networks vid uppkoppling för websockets."]
+<img src="https://dbwebb.se/image/snapht17/websocket-connect-firefox-network.png?w=w2" alt="Firefox i fliken Networks vid uppkoppling för websockets.">
 
-[FIGURE src=image/snapht17/websocket-connect-chrome-network.png?w=w2 caption="Chrome i fliken Networks vid uppkoppling för websockets."]
+<img src="https://dbwebb.se/image/snapht17/websocket-connect-chrome-network.png?w=w2" alt="Chrome i fliken Networks vid uppkoppling för websockets.">
 
 Det du ser är status 101 "Switching Protocols" för själva requesten som görs vid uppkopplingen av websocketen.
 
 Om du klickar på requesten så ser du detaljer om dess header information. Det du ser (bilder nedan) är att webbläsaren gör en request header för att uppgradera protokollet mot servern till "websocket". Servern svarar om den accepterar uppgraderingen. I dessa fallen gick det bra.
 
-[FIGURE src=image/snapht17/websocket-upgrade-firefox.png?w=w2 caption="Firefox visar hur request och response header innehåller detaljer om uppgradering till protokoll websocket."]
+<img src="https://dbwebb.se/image/snapht17/websocket-upgrade-firefox.png?w=w2" alt="Firefox visar hur request och response header innehåller detaljer om uppgradering till protokoll websocket.">
 
-[FIGURE src=image/snapht17/websocket-upgrade-chrome.png?w=w2 caption="Chrome visar hur request och response header innehåller detaljer om uppgradering till protokoll websocket."]
+<img src="https://dbwebb.se/image/snapht17/websocket-upgrade-chrome.png?w=w2" alt="Chrome visar hur request och response header innehåller detaljer om uppgradering till protokoll websocket.">
 
 När webbläsaren, eller webappen, kopplar upp sig sker det alltså via HTTP-protokollet och webbläsaren ber att få uppgradera protokollet till websocket. Servern svarar om det går bra. Därefter är uppkopplingen etablerad och övrig kommunikation sker över websocket.
 
@@ -143,7 +143,7 @@ Vi bygger vidare på vår klient så att den kan koppla upp sig, koppla ned sig 
 
 Så här kan det se ut i klienten när du kopplar upp dig, skickar ett meddelande och avslutar uppkopplingen.
 
-[FIGURE src=image/snapht17/websocket-echo-client.png?w=w2 caption="En session mot en echo-server."]
+<img src="https://dbwebb.se/image/snapht17/websocket-echo-client.png?w=w2" alt="En session mot en echo-server.">
 
 Låt oss titta på grundstrukturen över hur vi använder `WebSocket`.
 
@@ -287,7 +287,7 @@ Kanske vill vi inte enbart att servern skall prata websockets utan även svara p
 
 I vårt exempel så svarar servern alltid "Hello World", oavsett vilken route vi använder.
 
-[FIGURE src=image/snapht17/node-httpd-server.png?w=w2 caption="Den inbyggda webbservern svarar alltid Hello World."]
+<img src="https://dbwebb.se/image/snapht17/node-httpd-server.png?w=w2" alt="Den inbyggda webbservern svarar alltid Hello World.">
 
 Då tittar vi hur vi kan kombinera en websocket server med en HTTP-server.
 
@@ -405,7 +405,7 @@ Där hade vi ett par olika alternativ till hur man kan sätta upp en kombination
 
 
 
-#### En echo server {#echo-server}
+#### En echo server
 
 För att implementera en websocket echo-server behöver vi ta emot en uppkoppling, ta emot meddelande och skicka tillbaka samma meddelande till samma klient. Koden för detta kan se ut så här.
 
@@ -509,7 +509,7 @@ I exempelkatalogen `example/websocket/subprotocol` finns en klient och en broadc
 
 Klienten som sådan har en dropdown där du kan välja olika subprotokoll. Beroende på vilken server du väljer att koppla upp dig mot så har de stöd för olika subprotokoll (eller inget subprotokoll).
 
-[FIGURE src=image/snapht17/websocket-subprotocols.png?w=w2 caption="En klient där man kan välja subprotokoll."]
+<img src="https://dbwebb.se/image/snapht17/websocket-subprotocols.png?w=w2" alt="En klient där man kan välja subprotokoll.">
 
 Om du startar upp servern i exempelkatalogen så kan du koppla upp dig med antingen `text` eller `json`. Det är två olika subprotokoll som servern känner igen och skillnaden är hur svaret skickas till klienten. Klienten känner igen vilket protokoll som används men skriver bara ut svaret utan att göra någon skillnad på vilket subprotokoll som används.
 
