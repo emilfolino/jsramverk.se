@@ -30,11 +30,11 @@ body {
 }
 
 .assignment-header {
-    background: linear-gradient(45deg, $blueGem, lighten($blueGem, 20%));
+    background-color: $lightCharcoal;
 
     ::selection,
     ::-moz-selection {
-        background: $blueGem;
+        background: $lightCharcoal;
     }
 
     a {
