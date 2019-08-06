@@ -15,7 +15,6 @@ Vi börjar med att installera Docker för att se hur det fungerar.
 
 ## Installera Docker
 
-
 Webbplatsen för Docker innehåller en del där du kan ladda hem och installera Docker. Det finns en Community Edition (CE) versioner för Windows, Mac och Linux. Kör igenom installationen enligt anvisningarna.
 
 Docker är en virtualiseringsmiljö så den kräver att din datorn är kapabel att köra vissa virtualiseringstekniker.
@@ -28,27 +27,25 @@ Du kan välja att skapa ett konto på Docker. Det kan vara en bra idé om du vil
 
 #### Windows, Docker och bcrypt
 
-
 Ibland kan kombinationen av Windows, Docker och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från [installationsmanualen för bcrypt](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows) är att installare npm paketet `windows-build-tools` med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.
 
-```bash
-npm install --global --production windows-build-tools
+```shell
+$npm install --global --production windows-build-tools
 ```
 
 
 
 ## Testa Docker
 
-
 När du installerat Docker så kommer du åt verktygen via terminalen. Installationsfasen brukar sluta med att du kör följande för att verifiera installationen.
 
-```bash
-docker --version
-docker-compose --version
-docker run hello-world
-docker run -it ubuntu bash
+```shell
+$docker --version
+$docker-compose --version
+$docker run hello-world
+$docker run -it ubuntu bash
 ```
-
+$
 Det kan se ut så här.
 
 [ASCIINEMA src=143319 caption="Kom igång och verifiera att docker fungerar."]
@@ -57,9 +54,9 @@ Det som händer i sista steget är att vi startar upp en kontainer med Ubuntu oc
 
 Lär dig mer om kommandot med den inbyggda hjälpen.
 
-```bash
-docker help
-docker help run
+```shell
+$docker help
+$docker help run
 ```
 
 
@@ -69,8 +66,8 @@ docker help run
 
 En image är alltså en samling av operativsystemet och programvarar som installerats. Det finns många färdiga images och vi kan söka bland dem på [Docker Store](https://store.docker.com/). När vi kör dem, eller hämtar dem, så laddas de ned till vår dator och vi kan se vilka som finns installerade lokalt.
 
-```bash
-$ docker images
+```shell
+$docker images
 REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
 ubuntu                latest              747cb2d60bbe        9 days ago          122MB
 hello-world           latest              05a3bd381fc2        5 weeks ago         1.84kB
@@ -78,18 +75,18 @@ hello-world           latest              05a3bd381fc2        5 weeks ago       
 
 Om vi söker på Docker Store, till exempel på PHP, så kan vi hitta images som innehåller [olika versioner av PHP](https://store.docker.com/images/php). Vi kan ladda hem den imagen och starta den.
 
-```bash
-$ docker pull php
-$ docker images php
+```shell
+$docker pull php
+$docker images php
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 php                 latest              c342f917459a        10 days ago         371MB
 ```
 
 Sedan kan vi köra imagen i en kontainer.
 
-```bash
-docker run -it php
-docker run -it php bash
+```shell
+$docker run -it php
+$docker run -it php bash
 ```
 
 Det kan se ut så här.
@@ -104,27 +101,27 @@ Det var alltså två olika sätt att koppla sig till kontainern på ett interakt
 
 En image kan ha många taggar som ger olika innehåll. Tittar vi på imagen för PHP så hittar vi olika taggar/versioner, med eller utan Apache installerat. Låt oss pröva att köra en variant som har Apache installerat.
 
-```bash
-docker run php:7.1-apache
+```shell
+$docker run php:7.1-apache
 ```
 
 Nåväl, men hur kopplar jag mig till Apache? Hur får jag en webbsida att visas?
 
 
 
-###Kör en detached kontainer
+#### Kör en detached kontainer
 
 Låt oss starta upp kontainern i detached mode och montera katalogen vi står i, som basen för Apache, samt koppla en specifik port 8080 (lokal dator) till Apaches standardport 80 (inuti kontainern).
 
-```bash
-docker run --detach --publish 8080:80 --name my-php-app --volume "$PWD":/var/www/html php:7.1-apache
+```shell
+$docker run --detach --publish 8080:80 --name my-php-app --volume "$PWD":/var/www/html php:7.1-apache
 ```
 
 Nu snurrar kontainern och via porten 8080 kan vi nå Apache som snurrar på port 80 inuti kontainern. Om vi skapar en fil i vår lokala katalog så kan vi visa den via `curl`.
 
-```bash
-$ echo "Moped" > test.php
-$ curl localhost:8080/test.php
+```shell
+$echo "Moped" > test.php
+$curl localhost:8080/test.php
 Moped
 ```
 
@@ -132,11 +129,11 @@ Ah, nu börjar det se trevligt ut. Vi kan alltså koppla vårt lokala filsystem 
 
 För att stänga ned kontainern så använder vi `docker container`.
 
-```bash
-$ docker container ls
+```shell
+$docker container ls
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
 1c4add957e71        php:7.1-apache      "docker-php-entryp..."   43 seconds ago      Up 41 seconds       0.0.0.0:8080->80/tcp   myapp
-$ docker container stop my-php-app
+$docker container stop my-php-app
 ```
 
 Så här kan det se ut.
@@ -145,8 +142,8 @@ Så här kan det se ut.
 
 Glöm inte hjälpkommandot.
 
-```bash
-docker help container
+```shell
+$docker help container
 ```
 
 
@@ -157,29 +154,29 @@ Det ser ju spännande ut att kunna ha flera kontainerar, med olika version av pr
 
 Låt oss göra ett kort test och se hur det fungerar. Jag startar upp två kontainerar med olika versioner av PHP och kopplar dem mot samma katalog på disken.
 
-```bash
-docker run --detach --publish 8071:80 --name php71-app --volume "$PWD":/var/www/html php:7.1-apache
-docker run --detach --publish 8070:80 --name php70-app --volume "$PWD":/var/www/html php:7.0-apache
+```shell
+$docker run --detach --publish 8071:80 --name php71-app --volume "$PWD":/var/www/html php:7.1-apache
+$docker run --detach --publish 8070:80 --name php70-app --volume "$PWD":/var/www/html php:7.0-apache
 ```
 
 Jag kan se att de är uppe och snurrar.
 
-```bash
-docker container ls
+```shell
+$docker container ls
 ```
 
 Jag skapar en testfil och accessar den via de båda kontainrarna.
 
-```bash
-echo '<?php echo PHP_VERSION . "\n";' > version.php
-curl localhost:8071/version.php
-curl localhost:8070/version.php
+```shell
+$echo '<?php echo PHP_VERSION . "\n";' > version.php
+$curl localhost:8071/version.php
+$curl localhost:8070/version.php
 ```
 
 Det ser ut att fungera bra. Då stänger jag ned kontainrarna.
 
-```bash
-docker container stop php71-app php70-app
+```shell
+$docker container stop php71-app php70-app
 ```
 
 Så här kan det se ut när du kör kommandona i en sekvens.
@@ -196,7 +193,7 @@ Låt oss se vad kommandot `docker-compose` kan göra för att underlätta att k�
 
 Först skapar vi en fil `docker-compose.yml` som innehåller följande.
 
-```bash
+```shell
 version: "3"
 services:
     php71:
@@ -221,30 +218,30 @@ services:
 
 Sen startar vi samtliga kontainrar med kommandot `docker-compose` med eller utan detached läge.
 
-```bash
-docker-compose up
-docker-compose up -d
+```shell
+$docker-compose up
+$docker-compose up -d
 ```
 
 Vi kan se att de kör med kommandot `docker ps` eller `docker container`.
 
-```bash
-docker ps
-docker container ls
+```shell
+$docker ps
+$docker container ls
 ```
 
 Vi kan testa att ladda en fil från respektive server/kontainer.
 
-```bash
-curl localhost:8071/version.php
-curl localhost:8070/version.php
-curl localhost:8056/version.php
+```shell
+$curl localhost:8071/version.php
+$curl localhost:8070/version.php
+$curl localhost:8056/version.php
 ```
 
 Sen stänger vi ned dem.
 
-```bash
-docker-compose down
+```shell
+$docker-compose down
 ```
 
 Så här kan det se ut.
@@ -259,11 +256,11 @@ Visst känns det rätt behagligt och kraftfullt att jobba med kontainrar?
 
 Låt oss kika på ett repo som har inkluderat detta sätt att jobba för att testa repot. Vi kikar på [`mos/cimage`](https://packagist.org/packages/mos/cimage). Vi gör ett snabbt test genom att klona repot och köra igång kontainrar med `docker-compose`.
 
-```bash
-git clone https://github.com/mosbth/cimage.git
-cd cimage
-chmod 777 cache
-docker-compose up -d
+```shell
+$git clone https://github.com/mosbth/cimage.git
+$cd cimage
+$chmod 777 cache
+$docker-compose up -d
 ```
 
 Nu kan du öppna länken `localhost:8071/webroot/imgd.php?src=car.png` i din webbläsare. Öppna sedan två flikar till och justera porten till `8070` respektive `8056`.
@@ -304,47 +301,46 @@ För att allt skall fungera så behöver du ditt konto på Docker. Så här ser 
 
 
 
-Docker mot olika versioner av Node {#docker}
---------------------------------------------------------------------
+### Docker mot olika versioner av Node
 
 Ibland vill man välja vilken version av Node man använder för sina enhetstester. Det kan vara bra att kunna köra testerna mot godtycklig version av Node, eventuellt kombinerad med specifika versioner av andra programvaror. Här kan Docker hjälpa oss.
 
 
 
-### Kör enhetstester mot olika versioner {#testversion}
+#### Kör enhetstester mot olika versioner
 
 I katalogen `example/test/unittest-docker` har jag förberett ett exempel som kör samma testfall som tidigare men man kan välja att köra dem mot en Docker kontainer som kör en specifik installation av Node.
 
 Du kan köra testerna mot en specifik kontainer på något av följande sätt.
 
-```text
-docker-compose run node_alpine npm test
-npm run docker-latest
+```shell
+$docker-compose run node_alpine npm test
+$npm run docker-latest
 ```
 
 Du kan sedan köra testerna mot en äldre version av Node på följande sätt.
 
-```text
+```shell
 # Node version 8
-docker-compose run node_8_alpine npm test
-npm run docker-8
+$docker-compose run node_8_alpine npm test
+$npm run docker-8
 
 # Node version 6
-docker-compose run node_6_alpine npm test
-npm run docker-6
+$docker-compose run node_6_alpine npm test
+$npm run docker-6
 ```
 
 Nu har du alltså möjligheten att köra tester med samma kodbas mot flera versioner av Node. Det är kraftfullt och kan spara dig tid när du utvecklar och måste ha koll på att koden fungerar på olika versioner.
 
 
 
-### Tjänsterna kontrolleras av docker-compose {#service}
+#### Tjänsterna kontrolleras av docker-compose
 
 Det är filen `docker-compose.yml` som styr vilka kontainrar som startas upp. I `package.json` ligger de kommandon som körs och `npm run` erbjuder därmed en kortare väg att starta upp testerna mot olika versioner av Node.
 
 Så här ser `docker-compose.yml` ut för ett par av de tjänster som definieras.
 
-```text
+```shell
 version: "3"
 services:
     node_alpine:
@@ -370,7 +366,7 @@ När docker-compose använder en image för att starta upp en kontainer så kan 
 
 Följande rader monterar hela katalogen in i kontainern, men den använder katalogen `app/node_modules/` som finns i imagen, även om det finns en lokal katalog som heter `node_modules`.
 
-```text
+```shell
 volumes:
     - ./:/app/
     - /app/node_modules/
@@ -380,11 +376,11 @@ På så vis kan du både ha en lokal installation av alla dina node moduler och 
 
 
 
-### Docker-filer ger images {#dockerfile}
+### Docker-filer ger images
 
 Grunden till varje image är en Dockerfile som i exemplet ligger i katalogen `docker/`. De ger basen för imagens innehåll. När en image byggs, i samband med att den refereras av docker-compose, så byggs den i ett context av katalogen vi står i.
 
-```text
+```shell
 build:
     context: .
     dockerfile: docker/Dockerfile-node-alpine
@@ -392,7 +388,7 @@ build:
 
 En Dockerfile kan se ut så här, exemplet är från `docker/Dockerfile-node-alpine`.
 
-```text
+```shell
 # Use a base image
 FROM node:alpine
 
@@ -409,19 +405,19 @@ De sista raderna kopierar filen `package.json` från byggets context, in i image
 
 Om du gör ändringar i en image-fil kan det kräva att du bygger om den, till exempel via `docker-compose build node_alpine`.
 
-```text
+```shell
 # Bygg om en image om du gjort ändringar i dess Dockerfile
-docker-compose build node_alpine
+$docker-compose build node_alpine
 ```
 
 
 
-### Inspektera en image {#inspectdocker}
+#### Inspektera en image
 
 Du kan starta en terminal (bash, sh) mot en kontainer för att inspektera den och se vad den innehåller.
 
-```text
-$ docker-compose run node_alpine sh
+```shell
+$docker-compose run node_alpine sh
 /app # pwd
 /app
 /app # ls
@@ -434,14 +430,14 @@ De images som slutar på `alpine` innehåller bara `sh` medans du kan använda `
 
 
 
-### Varför alpine versus debian? {#alpine}
+#### Varför alpine versus debian?
 
 Alpine är en minimal [bas-image alpine](https://store.docker.com/images/alpine) vars storlek är väldigt liten jämfört med en image baserad på debian eller ubuntu.
 
 Här kan du se storleken på de images som bygger på alpine och de andra som bygger på debian.
 
-```text
-$ docker image ls
+```shell
+$docker image ls
 REPOSITORY                     TAG         SIZE
 unittestdocker_node_latest     latest      690MB
 unittestdocker_node_8          latest      695MB
@@ -455,12 +451,12 @@ Som du ser så finns det utrymma att spara med hjälp av alpine-images.
 
 
 
-### Dubbelkolla vilken version som körs {#nodeversion}
+#### Dubbelkolla vilken version som körs
 
 Om du vill dubbelkolla vilken version av Node som körs i en kontainer, bara för att vara säker, så kan du starta upp en interaktiv session och kontrollera versionerna.
 
-```bash
-$ docker-compose run node_alpine node
+```shell
+$docker-compose run node_alpine node
 > process.version
 'v8.8.1'
 > process.versions

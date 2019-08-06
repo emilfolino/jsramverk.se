@@ -19,7 +19,7 @@ Vilken typ av tester vill vi göra och vilka verktyg kan hjälpa oss med detta? 
 
 1. Verktyget [Istanbul](https://istanbul.js.org/) kan kopplas till Mocha för att hantera kodtäckning vid enhetstester.
 
-1. Det finns en forumtråd med tips om [artiklar för testning](t/6984). Kika där för inspiration.
+1. Det finns en forumtråd med tips om [artiklar för testning](https://dbwebb.se/t/6984). Kika där för inspiration.
 
 
 
@@ -77,7 +77,7 @@ Dessa features, berättelser om hur systemet skall fungera, kan sedan automatgen
 
 Så här kan en feature vara skriven, exemplet är taget från [`mosbth/cimage`](https://github.com/mosbth/cimage/tree/resize/features).
 
-```bash
+```shell
 Feature: src
     Display an image by selecting its source.
 
@@ -141,6 +141,8 @@ När jag väl bestämt mig för verktygen behövs en testrunner som kör mina te
 
 Allt som allt, någonstans här är namnen på några vanliga testverktyg inom JavaScript och jag tänker välja bland dessa.
 
+Docker kan vara ett kraftfullt verktyg för att testa vår kod mot olika versioner av programvara och uppsättningar. För bakgrundsinformation om Docker och hur det kan användas finns artikeln [Docker som utvecklingsmiljö](/docker). Docker kan vara svårt att få till att fungera smärtfritt på alla operativsystem, så fundera om du vill lägga ner kraft och energi för att lära dig om detta verktyg.
+
 
 
 #### Kodmoduler att testa
@@ -159,7 +161,7 @@ Låt oss då titta på de olika tester som körs på systemet och vilka verktyg 
 
 Det första testverktyget jag valde är för enhetstester. De verktygen jag valde mellan var främst [Mocha](https://mochajs.org/), [Yasmine](https://jasmine.github.io/) och [Jest](http://facebook.github.io/jest/). Mitt val föll på Mocha och jag gjorde ett testprogram i `/test/unittest-mocha` för att se hur det fungerade.
 
-```bash
+```shell
 /test/unittest-mocha$ tree .
 .
 ├── package.json
@@ -178,9 +180,9 @@ Koden som testas är en klass `Card` som skall fungera som ett kort i en vanlig 
 
 Innan vi kan köra testerna så behöver vi installera Mocha. Det går att installera med `npm install mocha --save-dev` eller bara `npm install` eftersom filen `package.json` redan innehåller en referens till Mocha. När installationen är klar kan du köra testfallen med `npm test` eftersom `package.json` redan är konfigurerad för att köra Mocha med enhetstesterna.
 
-```bash
-npm install
-npm test
+```shell
+$npm install
+$npm test
 ```
 
 Resultatet du ser är körningen av samtliga enhetstester. Men hur väl lyckas vi med kodtäckningen?
@@ -193,9 +195,9 @@ När man kör enhetstester är man i princip beroende av ett verktyg som kan vis
 
 För att kunna köra testerna med kodtäckning behöver du först installera kommandoradsklienten [`nyc`](https://github.com/istanbuljs/nyc) via `npm install nyc --save-dev` eller bara `npm install`. Sedan kan du köra testerna igen, nu med kodtäckning inkluderat.
 
-```bash
-npm install
-npm test
+```shell
+$npm install
+$npm test
 ```
 
 I filen `package.json` körs nu kommandot `nyc --reporter=html --reporter=text mocha 'test/**/*.js'` där `nyc` sköter kodtäckningen för alla testfall som `mocha` exekverar. Vi får en rapport i ren text och i katalogen `cover` genereras en HTML-rapport.
@@ -211,8 +213,8 @@ Dessa verktyg skapar en del filer och kataloger, som vi inte är intresserade av
 
 Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från [installationsmanualen för bcrypt](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows) är att installare npm paketet `windows-build-tools` med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.
 
-```bash
-npm install --global --production windows-build-tools
+```shell
+$npm install --global --production windows-build-tools
 ```
 
 
@@ -222,23 +224,23 @@ Vi är ju inne på tester, men låt oss ta ett litet sidospår och säkerställa
 
 Eftersom vi utgår från kodstilen som definieras i [`javascript-style-guide`](https://www.npmjs.com/package/javascript-style-guide) så hämtar vi hem den och använder dess konfigurationsfil.
 
-```bash
-npm install javascript-style-guide --save-dev
-cp node_modules/javascript-style-guide/.eslint* .
+```shell
+$npm install javascript-style-guide --save-dev
+$cp node_modules/javascript-style-guide/.eslint* .
 ```
 
 Vi behöver installera validatorn som löser både kodstil och linter.
 
-```bash
-npm install eslint eslint-plugin-react --save-dev
+```shell
+$npm install eslint eslint-plugin-react --save-dev
 ```
 
 Verktyget har flera plugins som kan vara relevanta att lägga till, lite beroende på vilken typ av kod (REACT, `.jsx`, `.pug`, etc) du utvecklar. Jag väljer att lägga till en plugin för REACT, även om den inte används i exemplet. Det finns en referens i konfigurationsfilen som vi lånat, som behöver pluginen.
 
 Nu kan vi köra validatorn och eftersom den redan finns definierade i `package.json` så köra via npm.
 
-```bash
-npm run eslint
+```shell
+$npm run eslint
 ```
 
 Vill du köra validatorn som en del av din `npm test` så kan du lägga till följande i din `package.json`.
@@ -259,9 +261,9 @@ Nu när vi har en `package.json` på plats kan vi fortsätta och sätta igång e
 
 Det som sammanhåller alla tester är nu sekvensen `npm install test` som installerar det som behövs via `package.json` och sen kör testerna.
 
-```bash
-npm install   # Installerar allt som finns i package.json
-npm test      # Exekvera validatorer och testfall
+```shell
+$npm install   # Installerar allt som finns i package.json
+$npm test      # Exekvera validatorer och testfall
 ```
 
 Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `/test/ci` och jag använder ett repo [janaxs/blackjack](https://github.com/janaxs/blackjack) för att demonstrera hur det ser ut.

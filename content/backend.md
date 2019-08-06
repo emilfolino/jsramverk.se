@@ -71,8 +71,8 @@ Vi loggar in på servern genom att använda SSH via terminalen med kommandot. `s
 
 När du har skapat ett slumpmässigt och komplext lösenord skriv följande kommando och följ instruktionerna.
 
-```bash
-passwd
+```shell
+$passwd
 ```
 
 
@@ -81,9 +81,9 @@ passwd
 
 Nästa steg är att uppdatera serverns programvara till senaste version genom att använda verktyget `apt-get`.
 
-```bash
-apt-get update
-apt-get upgrade
+```shell
+$apt-get update
+$apt-get upgrade
 ```
 
 
@@ -92,19 +92,19 @@ apt-get upgrade
 
 Vi vill aldrig logga in som `root` då `root` har tillgång till för mycket. Så vi skapar en egen användare `deploy` med följande kommandon. Du kan byta ut `deploy` mot vad som helst, men då ska du göra det i alla följande kommandon. De två första kommandon är för att rensa bort en befintlig användare Digital Ocean lägger till när debian installeras.
 
-```bash
-apt-get remove --purge unscd
-userdel -r debian
-useradd deploy
-mkdir /home/deploy
-mkdir /home/deploy/.ssh
-chmod 700 /home/deploy/.ssh
+```shell
+$apt-get remove --purge unscd
+$userdel -r debian
+$useradd deploy
+$mkdir /home/deploy
+$mkdir /home/deploy/.ssh
+$chmod 700 /home/deploy/.ssh
 ```
 
 Vi passar på att i samma veva ställa in vilken förvald terminal vår nya använda ska använda, vi väljer `bash` då vi är vana vid den.
 
-```bash
-usermod -s /bin/bash deploy
+```shell
+$usermod -s /bin/bash deploy
 ```
 
 
@@ -117,9 +117,9 @@ Därför använder vi istället SSH nycklar för att autentisera oss mot servern
 
 När du har lagt till nyckeln kör du följande två kommandon för att sätta korrekta rättigheter på katalogen och filen.
 
-```bash
-chmod 400 /home/deploy/.ssh/authorized_keys
-chown deploy:deploy /home/deploy -R
+```shell
+$chmod 400 /home/deploy/.ssh/authorized_keys
+$chown deploy:deploy /home/deploy -R
 ```
 
 Testa nu att logga in i ett nytt terminalfönster med kommandot `ssh deploy@[IP]`. Vi har kvar terminal fönstret där vi loggade in som root om något skulle gå fel.
@@ -130,10 +130,10 @@ Som vi sagt tidigare vill vi bara kunna logga in med SSH nycklar. Vi gör detta 
 
 Hitta raderna nedan och se till att ändra från yes till no. Raderna ligger inte på samma ställe i filer, så ibland får man leta en liten stund. Den sista raden nedan får du skriva in själv.
 
-```bash
-PermitRootLogin no
-PasswordAuthentication no
-AllowUsers deploy
+```shell
+$PermitRootLogin no
+$PasswordAuthentication no
+$AllowUsers deploy
 ```
 
 Spara filen och starta om SSH med hjälp av kommandot `service ssh restart`. Testa nu att logga ut och in i ditt andra terminal fönster där du tidigare var inloggat som `deploy`.
@@ -148,12 +148,12 @@ Vi använder oss av brandväggen `ufw` för att stänga och öppna portar till v
 
 Vi vill nu öppna upp för trafik på 3 portar 22 för SSH, 80 för HTTP och 443 för HTTPS. Vi gör det med hjälp av följande kommandon.
 
-```bash
-sudo ufw allow 22
-sudo ufw allow 80
-sudo ufw allow 443
-sudo ufw disable
-sudo ufw enable
+```shell
+$sudo ufw allow 22
+$sudo ufw allow 80
+$sudo ufw allow 443
+$sudo ufw disable
+$sudo ufw enable
 ```
 
 
@@ -164,7 +164,7 @@ Vi vill inte hålla på att manuellt uppdatera vår server, men vi vill inte hel
 
 Uppdatera filen `/etc/apt/apt.conf.d/10periodic` så den innehåller nedanstående.
 
-```bash
+```shell
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Download-Upgradeable-Packages "1";
 APT::Periodic::AutocleanInterval "7";
@@ -173,7 +173,7 @@ APT::Periodic::Unattended-Upgrade "1";
 
 Uppdatera även filen `/etc/apt/apt.conf.d/50unattended-upgrades` så den ser ut som nedan.
 
-```bash
+```shell
 Unattended-Upgrade::Allowed-Origins {
     "${distro_id}:${distro_codename}";
     "${distro_id}:${distro_codename}-security";
@@ -226,14 +226,14 @@ Vi installerar webbservern nginx med hjälp av kommandot `sudo apt-get install n
 
 Vi vill ha nodejs och npm installerat så vi kan köra en backend på vår server. Vi installerar LTS (Long Term Support) versionen då detta är vår produktionsserver. Vi installerar nodejs och npm med följande kommandon.
 
-```bash
-sudo apt update
-sudo apt install curl
-cd ~
-curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-sudo apt install nodejs
-nodejs -v
+```shell
+$sudo apt update
+$sudo apt install curl
+$cd ~
+$curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
+$sudo bash nodesource_setup.sh
+$sudo apt install nodejs
+$nodejs -v
 ```
 
 Här ska du gärna se en utskrift med ett versionsnummer som inledas med `v10.`.
@@ -264,17 +264,17 @@ Modulen [Express finns på npm](https://www.npmjs.com/package/express). Express 
 
 Innan vi börjar så skapar vi en `package.json` som kan spara information om de moduler vi nu skall använda.
 
-```bash
+```shell
 # Ställ dig i katalogen du vill jobba
-npm init
+$npm init
 ```
 
 När du ombeds döpa paketet så ange "me-api" eller något liknande (det spelar ingen roll). Använd bara inte "express" eftersom det paketnamnet redan finns och du får problem i nästa steg. Du kan köra om `npm init` om du vill ändra namn, eller redigera namnet direkt i filen `package.json`.
 
 Nu kan vi installera paketen vi skall använda `express`, `cors` och `morgan`. Vi väljer att spara dem i vår `package.json`.
 
-```bash
-npm install express cors morgan --save
+```shell
+$npm install express cors morgan --save
 ```
 
 Vi använder oss av `cors` för att hantera Cross-Origin Sharing problematik och `morgan` för loggning av händelser i API:t.
@@ -307,22 +307,22 @@ app.listen(port, () => console.log(`Example API listening on port ${port}!`));
 
 Sedan startar jag servern.
 
-```bash
-$ node app.js
+```shell
+$node app.js
 Example API listening on port 1337!
 ```
 
 Nu kan jag skicka requester till servern via curl.
 
-```bash
-$ curl localhost:1337
+```shell
+$curl localhost:1337
 Hello World
 ```
 
 Om jag använder en route som inte finns så får jag en 404 tillsammans med ett svar som säger att routen inte finns.
 
-```bash
-$ curl -i localhost:1337/asd
+```shell
+$curl -i localhost:1337/asd
 HTTP/1.1 404 Not Found
 X-Powered-By: Express
 Content-Security-Policy: default-src 'self'
@@ -392,8 +392,8 @@ app.listen(port, () => console.log(`Example API listening on port ${port}!`));
 
 I exemplet ovan skickar vi ett JSON objekt när vi skickar en förfrågan till `/`. Vi startar om servern och vi får följande svar om vi testar med curl i terminalen.
 
-```bash
-$ curl localhost:1337
+```shell
+$curl localhost:1337
 {"data":{"msg":"Hello World"}}
 ```
 
@@ -403,8 +403,8 @@ $ curl localhost:1337
 
 Vi det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
 
-```bash
-npm install -g nodemon
+```shell
+$npm install -g nodemon
 ```
 
 För att starta vår applikation i nodemon kontext ändrar vi vårt `npm start` skript.
@@ -542,7 +542,7 @@ app.listen(port, () => console.log(`Example API listening on port ${port}!`));
 
 Vi kan nu använda följande routes och se vad som händer.
 
-```bash
+```shell
 /
 /hello/Hello-World
 /hello/Hello World
@@ -557,7 +557,7 @@ I webbsidan ser det ut som det ska.
 
 I terminalen där servern kör ser det ut så här.
 
-```bash
+```shell
 GET
 /hello/Jag%20kan%20svenska%20%C3%85%C3%84%C3%96
 ```
@@ -568,8 +568,8 @@ Webbläsaren konverterar länken, urlencodar, så att mellanslagen byts ut mot `
 
 Det fungerar så här, om man översätter det till ren JavaScript.
 
-```bash
-$ node
+```shell
+$node
 > a = encodeURIComponent("Jag kan svenska åäö")
 'Jag%20kan%20svenska%20%C3%A5%C3%A4%C3%B6'
 > b = decodeURIComponent(a)
@@ -688,8 +688,8 @@ Det finns alltså en inbyggd felhanterare som visar upp information om felet, ti
 
 När node startar upp Express så är det default i utvecklingsläge. Du kan testa att starta upp i produktionsläge, det ger mindre information i felmeddelandena.
 
-```bash
-$ NODE_ENV="production" node app.js
+```shell
+$NODE_ENV="production" node app.js
 ```
 
 Nu försvann stacktracen från klienten, men den syns fortfarande i terminalen där servern körs.
@@ -794,15 +794,15 @@ Om du inte har SQLite installerat på din utvecklingsdator installera det via XA
 
 För att kunna spara användare och så småningom redovisningstexter installerar vi npm modulen node-sqlite3 i vårt me-api repo med följande kommando. [Dokumentationen för modulen](https://www.npmjs.com/package/sqlite3) är som alltid vår bästa vän.
 
-```bash
-npm install sqlite3 --save
+```shell
+$npm install sqlite3 --save
 ```
 
 Vi skapar sedan katalogen `db` i vårt repo och i den katalogen filen `texts.sqlite`. Vi ville inte att denna och andra sqlite filer är under versionshantering då de isåfall skriver över vår produktions databas när vi driftsätter så vi lägger till `*.sqlite` i `.gitignore`.
 
 Ett smart drag i detta skedet är att skapa en migrations-fil `db/migrate.sql` som du kan använda för att skapa tabeller. Min migrate-fil innehåller än så länge följande SQL.
 
-```bash
+```shell
 CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(60) NOT NULL,
@@ -812,9 +812,9 @@ CREATE TABLE IF NOT EXISTS users (
 
 Vi har alltså två kolumner `email` och `password` och vi vill att `email` är unik. Vi kan nu med hjälp av följande kommandon skapa tabellen i vår `texts.sqlite` databas.
 
-```bash
-cd db
-sqlite3 texts.sqlite
+```shell
+$cd db
+$sqlite3 texts.sqlite
 sqlite> .read migrate.sql
 sqlite> .exit
 ```
@@ -850,8 +850,8 @@ När vi sparar lösenord i en databas vill göra det så säkert som möjligt. D
 
 Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från [installationsmanualen för bcrypt](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows) är att installare npm paketet `windows-build-tools` med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.
 
-```bash
-npm install --global --production windows-build-tools
+```shell
+$npm install --global --production windows-build-tools
 ```
 
 Vi installerar bcrypt paketet med npm med hjälp av kommandot `npm install bcrypt --save`. [Dokumentationen för modulen](https://www.npmjs.com/package/bcrypt) är som alltid vår bästa vän.
@@ -976,15 +976,15 @@ Jag har satt i gång API:t med kommandot `npm run production` och API:t ligger o
 
 I katalogen `/etc/nginx/sites-available` skapar vi en konfigurationsfil `me-api.jsramverk.me` genom att kopiera standard konfiguration från filen `default` och öppna upp filen i text editorn nano. Vi gör det med följande kommandon.
 
-```bash
-cd /etc/nginx/sites-available
-sudo cp default me-api.jsramverk.me
-sudo nano me-api.jsramverk.me
+```shell
+$cd /etc/nginx/sites-available
+$sudo cp default me-api.jsramverk.me
+$sudo nano me-api.jsramverk.me
 ```
 
 I filen klistrar vi in följande konfiguration. Först skapar vi en server med namnet me-api.jsramverk.me. Vi skapar därefter två stycken `location`. Det är routes där vi vill att nått speciellt ska hända. Den första är för en fil relaterad till det certifikat vi ska installera om ett ögonblick för att fixa HTTPS till vår server. Den andra `location /` är alla andra routes som ska skickas till `http://localhost:8333` där vårt API ligger och lyssnar. Detta kallas en reverse proxy och användas i många sammanhang för att kopplat förfrågningar på port 80 till en annan port. En reverse proxy används då man inte vill öppna portarna utåt, men vill låta nginx ta hand om detta.
 
-```bash
+```shell
 server {
     server_name me-api.jsramverk.me;
 
@@ -1007,16 +1007,16 @@ server {
 
 Vi sparar filen genom att trycka `Ctrl-X` och skriva in ett y + Enter. Vi skapar sedan en symbolisk länk i katalogen `/etc/nginx/sites-enabled` till vår konfigurations fil för att sidan blir tillgänglig.
 
-```bash
-cd /etc/nginx/sites-enabled
-sudo ln -s /etc/nginx/sites-available/me-api.jsramverk.me
+```shell
+$cd /etc/nginx/sites-enabled
+$sudo ln -s /etc/nginx/sites-available/me-api.jsramverk.me
 ```
 
 Vi vill sedan testa om konfigurationen är korrekt och sedan starta om nginx och det gör vi med följande kommandon.
 
-```bash
-sudo nginx -t
-sudo service nginx restart
+```shell
+$sudo nginx -t
+$sudo service nginx restart
 ```
 
 För att internet ska veta att vi har en server som ligger här och vill svara på förfrågningar skapar vi en subdomän i Digital Ocean gränssnittet. Gå till Networking och välj din domän skriv sedan in din subdomän välj din droplet och skapa subdomänen.
@@ -1033,11 +1033,17 @@ Vi vill i mångt och mycket automatisera hur vi startar, uppdaterar och startar 
 
 Vi installerar PM2 med kommandot:
 
-```bash
-npm install -g pm2
+```shell
+$npm install -g pm2
 ```
 
-Vi går sedan till katalogen där vi startade vårt me-api och
+Vi går sedan till katalogen där vi startade vårt me-api och stänger av den node-process vi startade med `npm start` eller `node app.js`. Vi startar istället processen som en pm2 kontext så vi får automatisk omstart och kan göra uppdateringar utan neretid. Vi startar appen i pm2 kontext med följande kommando.
+
+```shell
+$pm2 start app.js --name me-api
+```
+
+Flaggan --name me-api används för att ge processen ett namn. Kan vara bra inför framtiden när vi vill ha flera olika processer igång samtidigt.
 
 
 
@@ -1047,9 +1053,9 @@ Då vi är medvetna om våra användares privatliv vill vi att alla anslutningar
 
 Vi behöver först öppna upp så vi kan installera paket från det som heter APT backports. Vi öppnar upp filen `/etc/apt/sources.list` och letar reda på följande två rader som vi avkommenterar. Raderne brukar finnas längst ner i filen.
 
-```bash
-deb http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
-deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
+```shell
+$deb http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
+$deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
 ```
 
 Uppdatera apt-get med `sudo apt-get update`. Vi kan nu installera verktyget certbot med kommandot `sudo apt-get install python-certbot-nginx -t stretch-backports`.

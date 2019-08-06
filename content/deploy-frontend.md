@@ -20,7 +20,7 @@ För att driftsätta en Angular app krävs att vi har en statisk fil webbserver 
 
 Vi skapar en site i nginx med följande konfiguration, där du byter ut `[SERVER_NAME]` med det server namn du vill använda. Vi skapar även root katalogen `/var/www/[SERVER_NAME]/html` med kommandot `sudo mkdir -p /var/www/[SERVER_NAME]/html`.
 
-```bash
+```shell
 server {
 
         root /var/www/[SERVER_NAME]/html;
@@ -43,9 +43,9 @@ Skapa en symbolisk länk från `/etc/nginx/sites-enabled` katalogen till din kon
 
 Då jag inte vill installera och bygga applikationer på servern väljer jag att använda `rsync` för att överföra filer till servern. Först behöver dock `deploy`-användaren äga och få skriva till katalogen `/var/www/[SERVER_NAME]/html`. Det gör vi med följande kommandon.
 
-```bash
-sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
-sudo chmod 775 /var/www/[SERVER_NAME]/html
+```shell
+$sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+$sudo chmod 775 /var/www/[SERVER_NAME]/html
 ```
 
 Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare, `[APP_NAME]` är namnet på din applikation.
@@ -80,8 +80,8 @@ Då vi i mithril använder webpack för att bygga våra JavaScript fil skapar vi
 
 Vi kan nu köra kommandot med `npm run production` och då skapas en ny `bundle.js` fil, som är redo för produktion. På samma sätt som för vanilla JavaScript appen använder vi rsync för att föra över de tre filerna till servern. Jag utgår från fil och katalog strukturen som finns exempel katalogen.
 
-```bash
-rsync -av index.html ../style.css dist/bundle.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
+```shell
+$rsync -av index.html ../style.css dist/bundle.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
 ```
 
 På servern skapar vi en likadan nginx konfigurationsfil, som för ramverken.
@@ -94,7 +94,7 @@ För att driftsätta en React app krävs att vi har en statisk fil webbserver (s
 
 Vi skapar en site i nginx med följande konfiguration, där du byter ut `[SERVER_NAME]` med det server namn du vill använda. Vi skapar även root katalogen `/var/www/[SERVER_NAME]/html` med kommandot `sudo mkdir -p /var/www/[SERVER_NAME]/html`.
 
-```bash
+```shell
 server {
 
         root /var/www/[SERVER_NAME]/html;
@@ -117,9 +117,9 @@ Skapa en symbolisk länk från `/etc/nginx/sites-enabled` katalogen till din kon
 
 Då jag inte vill installera och bygga applikationer på servern väljer jag att använda `rsync` för att överföra filer till servern. Först behöver dock `deploy`-användaren äga och få skriva till katalogen `/var/www/[SERVER_NAME]/html`. Det gör vi med följande kommandon.
 
-```bash
-sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
-sudo chmod 775 /var/www/[SERVER_NAME]/html
+```shell
+$sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+$sudo chmod 775 /var/www/[SERVER_NAME]/html
 ```
 
 Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare.
@@ -142,9 +142,9 @@ Vi kan nu köra kommandot `npm run deploy` och applikationen byggas för produkt
 
 För att driftsätta vanilla JavaScript applikationen använde jag uglifyjs för att minifiera koden. Sedan är det ett liknande `rsync` kommando som för de andra apparna. Jag utgår från fil och katalog strukturen som finns exempel katalogen.
 
-```bash
-uglifyjs main.js -o bundle.min.js
-rsync -av index.html ../style.css bundle.min.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
+```shell
+$uglifyjs main.js -o bundle.min.js
+$rsync -av index.html ../style.css bundle.min.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
 ```
 
 På servern skapar vi en likadan nginx konfigurationsfil, som för ramverken.
@@ -157,7 +157,7 @@ För att driftsätta en Vue app krävs att vi har en statisk fil webbserver (sta
 
 Vi skapar en site i nginx med följande konfiguration, där du byter ut `[SERVER_NAME]` med det server namn du vill använda. Vi skapar även root katalogen `/var/www/[SERVER_NAME]/html` med kommandot `sudo mkdir -p /var/www/[SERVER_NAME]/html`.
 
-```bash
+```shell
 server {
 
         root /var/www/[SERVER_NAME]/html;
@@ -180,9 +180,9 @@ Skapa en symbolisk länk från `/etc/nginx/sites-enabled` katalogen till din kon
 
 Då jag inte vill installera och bygga applikationer på servern väljer jag att använda `rsync` för att överföra filer till servern. Först behöver dock `deploy`-användaren äga och få skriva till katalogen `/var/www/[SERVER_NAME]/html`. Det gör vi med följande kommandon.
 
-```bash
-sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
-sudo chmod 775 /var/www/[SERVER_NAME]/html
+```shell
+$sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+$sudo chmod 775 /var/www/[SERVER_NAME]/html
 ```
 
 Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare.
