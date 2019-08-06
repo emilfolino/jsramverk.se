@@ -10,6 +10,17 @@ code {
     padding: 0.2rem 0.6rem;
 }
 
+.hljs-meta {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.hljs-meta::after {
+    content: "\00a0";
+}
+
 @media (min-width: 992px) {
     pre code {
         font-size: $mainPFontSize * $fontScaleFactor;

@@ -42,11 +42,28 @@ Vi kommer denna vecka främst använda [socket.io](https://socket.io/) för real
 [socket.io](https://socket.io/) är ett paket för _"real-time, bidirectional and event-based communication"_ och underlättar processen för att skapa och driftsätta tjänster med realtidskommunikation. Vi ska i följande avsnitt bekanta oss med både server och klient implementationer av en chatt med websocket kommunikation.
 
 
+
+#### Server
+
+Vi vill skapa en socket.io server i express kontext och därför börjar vi med att skapa en katalog och ett npm projekt. I detta projektet installerar vi express och socket.io.
+
+```shell
+$mkdir socket-server
+$cd socket-server
+$npm init --yes
+$npm install --save express socket.io
+```
+
+#### Klient
+
+
+
+
 ## Kravspecifikation
 
-1. Skapa en klient och en server för chatt med hjälp av socket.io.
+1. Skapa en klient och en server för chatt.
 
-1. Integrera klienten i ditt valda ramverk som en del av din me-sida.
+1. Integrera klienten i ditt valda ramverk som en del av din me-sida. Kolla om det finns paket eller integrationer i ditt ramverk som stödjer websockets eller socket.io.
 
 1. Gör ett medvetet val om chatt backend ska ligga som egen driftsatt server med egen domän eller som en del av me-api:t.
 
@@ -55,6 +72,8 @@ Vi kommer denna vecka främst använda [socket.io](https://socket.io/) för real
 1. Flera klienter kan koppla sig till chatten. När någon skriver något ser alla andra det. Man ser nicket tillsammans med meddelandet.
 
 1. Committa, tagga och pusha relevanta repon samt driftsätta på din server.
+
+1. Länka till GitHub repon och driftsatta klienten i din inlämning på Canvas.
 
 
 
