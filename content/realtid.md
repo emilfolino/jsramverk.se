@@ -37,13 +37,17 @@ Vi kommer denna vecka främst använda [socket.io](https://socket.io/) för real
 
 
 
-## socket.io
+<h2>socket.io</h2>
 
 [socket.io](https://socket.io/) är ett paket för _"real-time, bidirectional and event-based communication"_ och underlättar processen för att skapa och driftsätta tjänster med realtidskommunikation. Vi ska i följande avsnitt bekanta oss med både server och klient implementationer av en chatt med websocket kommunikation.
+
+Exempelkod för både server och klienter finns under `/socket` i GitHub-repot [emilfolino/jsramverk](https://github.com/emilfolino/jsramverk).
 
 
 
 #### Server
+
+socket.io [server API dokumentationen](https://socket.io/docs/server-api/) är en bra start för att bekanta sig med vilket API socket.io servern exponerar.
 
 Vi vill skapa en socket.io server i express kontext och därför börjar vi med att skapa en katalog och ett npm projekt. I detta projektet installerar vi express och socket.io.
 
@@ -52,10 +56,92 @@ $mkdir socket-server
 $cd socket-server
 $npm init --yes
 $npm install --save express socket.io
+$touch app.js
 ```
+
+Vi instantierar sedan app objektet i express och kopplar socket.io till app objektet. Än så länge ser vi till att bara
+
+```javascript
+// app.js
+const express = require('express');
+const app = express();
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+
+io.on('connection', function () {
+    console.info("User connected");
+});
+
+server.listen(3000);
+```
+
+Starta servern med kommandot `node app.js` och sen tar vi en titt på hur vi med hjälp av en klient kan koppla oss mot servern.
+
+
 
 #### Klient
 
+socket.io [klient API dokumentationen](https://socket.io/docs/client-api/) är en bra start för att bekanta sig med vilket API socket.io klienten exponerar.
+
+Vi skapar en ny katalog på samma nivå som socker-server katalogen och installerar socket.io-client npm-paketet. Vi installerar även webpack för att kunna packa ihop filerna.
+
+```shell
+$mkdir socket-client
+$cd socket-client
+$npm init --yes
+$npm install --save socket.io-client
+$npm install --save-dev webpack webpack-cli
+$touch client.js index.html webpack.config.js
+```
+
+Som det sista skapar vi tre filer. I `index.html` skapar vi grunden för webbplats med följande HTML. Observera att vi inkluderar JavaScript filen `dist/bundle.js`, som skapas med hjälp av webpack.
+
+```html
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Websocket chatt</title>
+</head>
+<body>
+    <h1>Websocket chatt</h1>
+
+    <script type="text/javascript" src="dist/bundle.js"></script>
+</body>
+</html>
+```
+
+Webpack konfigurationen är enkel och det enda vi gör i den är att specificera `entry` och `output`.
+
+```javascript
+module.exports = {
+    entry: "./client.js",
+    output: {
+        filename: "bundle.js"
+    }
+};
+```
+
+I `client.js` importerar vi `socket.io-client` och skapar en `socket` instans, som är kopplat mot localhost. Per automatik kopplas den mot port 3000, men vi kan ange en villkorlig port. Vi använder sedan två stycken socket.io-client event `connect` och `disconnect` för att än så länge skriva ut status för förbindelsen till servern till konsollen.
+
+```javascript
+import io from 'socket.io-client';
+
+const socket = io('http://localhost');
+
+socket.on('connect', function() {
+    console.info("Connected");
+});
+
+socket.on('disconnect', function() {
+    console.info("Disconnected");
+});
+```
+
+Om vi bundlar ihop JavaScript filen med hjälp av npm-skriptet `"start": "webpack -d"` och öppnar `index.html` i en webbläsare ska vi i konsollen nu kunna se _Connected_. Om du inte ser detta, kolla så att servern ligger och snurrar.
 
 
 
