@@ -38,3 +38,5 @@ Ofta fokuserar vi inom webbutvecklingen på det allra senaste inom en given tekn
 ## Skriva
 
 Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på första veckans text och förbättra din introduktion.
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**

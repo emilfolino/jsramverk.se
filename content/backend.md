@@ -1107,3 +1107,5 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 ## Skriva
 
 Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på första och andra veckans text och förbättra din introduktion.
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**

@@ -185,19 +185,19 @@ För att vi ska kunna prata med en backend behöver vi kunna kommunicera över H
 
 Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
-1. Skapa en Me-applikation i ditt valda ramverk med följande routes: `/`, `/reports/skriva1`.
+1. Skapa en Me-applikation i ditt valda ramverk med följande routes: `/`, `/reports/week/1`.
 
-2. `/` ska visa en kort beskrivning av dig själv hämtat från ditt me-api.
+1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och starter din Me-applikation.
 
-3. `/reports/skriva1` ska visa texten beskriven i [Skriva](#skriva).
+1. `/` ska visa en kort beskrivning av dig själv.
 
-4. Skapa en README.md fil i ditt repo som beskriver hur man installerar moduler och starter din Me-applikation.
+1. `/reports/week/1` ska innehålla en länk till GitHub repot och innehållet från din `README.md` fil.
 
-5. Committa alla filer och lägg till en tagg (1.0.\*).
+1. Committa alla filer och lägg till en tagg (1.0.\*).
 
-6. Pusha upp repot till GitHub, inklusive taggarna.
+1. Pusha upp repot till GitHub, inklusive taggarna.
 
-7. Länka till ditt GitHub repo i din inlämning på Canvas.
+1. Länka till ditt GitHub repo i din inlämning på Canvas.
 
 
 
@@ -211,7 +211,9 @@ Skriv en kort introduktion till det ramverk som du har valt. Använd referenser 
 
 Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång.
 
-Du får skriva introduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Microsoft Word, [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
+Du får skriva introduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Textbehandlare (Microsoft Word, Google Docs, Apple Pages, LibreOffice Writer eller liknande), [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
 
 
 
