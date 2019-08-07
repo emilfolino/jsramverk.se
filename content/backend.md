@@ -1080,7 +1080,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa routen `GET /` där du ger en presentation av dig själv.
 
-1. Skapa routerna `GET /reports/kmom01`, `GET /reports/kmom02` och `GET /reports/kmom03` där du ger din redovisningstext för kmom01.
+1. Skapa routen `GET /reports/week/1`, `GET /reports/week/2` och `GET /reports/week/3`, som innehåller data för att fylla motsvarande sidor i din Me-applikation.
 
 1. Skapa routen `POST /reports` för att lägga till en redovisningstext. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.
 
@@ -1094,7 +1094,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 #### Del 2: Frontend
 
-1. Din frontend Me-applikation från vecka 1 och 2 ska hämta redovisningstexter från Me-API:t.
+1. Din frontend Me-applikation ska hämta innehåll från Me-API:t.
 
 1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 3.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
