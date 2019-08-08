@@ -127,12 +127,12 @@ module.exports = {
 };
 ```
 
-I `client.js` importerar vi `socket.io-client` och skapar en `socket` instans, som är kopplat mot localhost. Per automatik kopplas den mot port 3000, men vi kan ange en villkorlig port. Vi använder sedan två stycken socket.io-client event `connect` och `disconnect` för att än så länge skriva ut status för förbindelsen till servern till konsollen.
+I `client.js` importerar vi `socket.io-client` och skapar en `socket` instans, som är kopplat mot localhost på port 3000. Vi använder sedan två stycken socket.io-client event `connect` och `disconnect` för att än så länge skriva ut status för förbindelsen till servern till konsollen.
 
 ```javascript
 import io from 'socket.io-client';
 
-const socket = io('http://localhost');
+const socket = io('http://localhost:3000');
 
 socket.on('connect', function() {
     console.info("Connected");
@@ -147,6 +147,158 @@ Om vi bundlar ihop JavaScript filen med hjälp av npm-skriptet `"start": "webpac
 
 Men ett meddelande i konsollen kommer vi inte så långt med. Så låt oss skapa möjlighet för att kunna skicka ett meddelande till servern. Vi skapar ett input fält och ett element där vi senare kan lägga till meddelanden som har skickats till servern och tillbaka ut till klienten.
 
+```html
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Websocket chatt</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Websocket chatt</h1>
+
+    <h2>Messages:</h2>
+    <div id="all-messages" class="all-messages"></div>
+
+    <p><strong>Write new message:</strong></p>
+    <input id="new-message" class="new-message" value=""/>
+
+
+    <script type="text/javascript" src="dist/bundle.js"></script>
+</body>
+</html>
+```
+
+Vi lägger även till lite CSS för att få chatten till att se lite trevligare ut.
+
+```css
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.8rem;
+    margin: 2rem auto;
+    width: 60%;
+}
+
+.all-messages {
+    width: 100%;
+    height: 30vh;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
+.all-messages p:nth-child(2n) {
+    background-color: #ccc;
+}
+
+.new-message {
+    width: 100%;
+    height: 5vh;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+```
+
+Vi kopplar sedan ett event till händelsen `keyup` för input fältet. När vi trycker på enter i det fältet vill vi att meddelandet som just nu är skrivit i fältet skickas till servern. Vi vill bara att meddelandet ska skickas när vi är uppkopplade mot servern och därför lägger vi event hanteraren inuti vårt connect anrop. Notera att vi ger det data vi skickar ett namn `'chat message'` och skickar med värdet från fältet.
+
+```javascript
+const newMessage = document.getElementById("new-message");
+
+...
+
+socket.on('connect', function() {
+    newMessage.addEventListener("keyup", function (event) {
+        if (event.code === "Enter") {
+            socket.emit('chat message', event.target.value);
+            event.target.value = "";
+        }
+    });
+});
+```
+
+#### Tillbaka till servern
+
+På servern använder vi sedan eventet `socket.on('chat message')` för att ta emot meddelandet från klienten. För enkelhetens skull skickar vi sedan tillbaka meddelandet till samtliga uppkopplade klienter, inklusive den klienten som skickade meddelandet, med hjälp av `emit` funktionen. Nedan syns koden för servern i sin helhet.
+
+```javascript
+const express = require('express');
+const app = express();
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+    console.info("User connected");
+
+    socket.on('chat message', function (message) {
+        io.emit('chat message', message);
+    });
+});
+
+server.listen(3000);
+```
+
+
+
+#### Visa nya meddelanden i klienten
+
+En chatt är inte till mycket nytta om vi inte ser vad de andra klienter skriver. Så varje gång vi får ett meddelande från servern vill vi skriva ut detta. Vi gör detta med eventet `socket.on('chat message')` där meddelandet är skickat med som data till callbacken för eventet. Vi lägger sedan till meddelandet i elementet som visar upp alla meddelanden. Nedan syns koden för klienten i sin helhet.
+
+```javascript
+import io from 'socket.io-client';
+
+const newMessage = document.getElementById("new-message");
+const allMessages = document.getElementById("all-messages");
+
+const socket = io('http://localhost:3000');
+
+socket.on('connect', function() {
+    socket.on('chat message', function (message) {
+        let addedMessage = document.createElement("p");
+
+        addedMessage.textContent = message;
+
+        allMessages.appendChild(addedMessage);
+    });
+
+    newMessage.addEventListener("keyup", function (event) {
+        if (event.code === "Enter") {
+            socket.emit('chat message', event.target.value);
+            event.target.value = "";
+        }
+    });
+});
+
+socket.on('disconnect', function() {
+    console.info("Disconnected");
+});
+```
+
+
+
+## Exempelprogram med socket.io
+
+I kursrepot finns ett exempel `simulate-prices` som använder sig av `socket.io` för att visualisera simulerade priser på kakor. Detta är ett annat exempel på hur man kan använda realtidsprogrammering för annat än det klassiska chatt exemplet.
+
+I exempelprogrammet skapar vi både en server och en klient för att kommunicera över websockets. Servern broadcaster sedan priserna för de olika kakorna var 5:e sekund och klienterna kan sedan fånga upp priserna. I filen `stock.js` används en [Wiener-process](https://en.wikipedia.org/wiki/Wiener_process) för att simulera priserna på kakorna. En Wiener-process är det närmaste vi kommer att kunna simulera aktiekurser matematisk.
+
+För att visualisera priserna används en graf modul kallad `Rickshaw`. Graferna visar realtidsdata med hjälp att rita ut en SVG bild.
+
+Titta igenom exemplet och se hur `socket.io` kan användas för annat än en chatt. Titta speciellt noga på hur servern och klienterna kommunicerar med hjälp av JSON data. Detta kan vara mycket användbart i veckans inlämningsuppgift.
+
 
 
 ## Kravspecifikation
@@ -159,7 +311,9 @@ Men ett meddelande i konsollen kommer vi inte så långt med. Så låt oss skapa
 
 1. När man kopplar upp sig så identifierar man sig med ett nick, ett smeknamn.
 
-1. Flera klienter kan koppla sig till chatten. När någon skriver något ser alla andra det. Man ser nicket tillsammans med meddelandet.
+1. Flera klienter kan koppla sig till chatten. När någon kopplar upp sig i chatten skicka ett meddelande om detta till alla uppkopplade klienter.
+
+1. När någon skriver något ser alla andra det. Man ser nicket och tiden för meddelandet tillsammans med meddelandet.
 
 1. Committa, tagga och pusha relevanta repon samt driftsätta på din server.
 

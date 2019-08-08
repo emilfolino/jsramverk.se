@@ -6,8 +6,6 @@ Vi skall se hur JavaScript och Websockets kan kombineras till något som motsvar
 
 Vi ser koden som krävs för att sätta upp en klient och en server som utför echo och broadcast. Det ger oss en grund att stå på. Som server använder vi en inbyggd HTTP-server, en standalone websocket server och applikationsservern Express.
 
-<!--more-->
-
 
 
 #### Förkunskaper
