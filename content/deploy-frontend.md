@@ -1,5 +1,7 @@
 # Driftsättning av frontend
 
+<p class="author">Emil Folino</p>
+
 Vi ska i denna artikel titta på hur vi driftsätter appar vi har skapat med hjälp av dessa ramverk på vår server.
 
 

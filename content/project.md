@@ -1,5 +1,7 @@
 # Projekt
 
+<p class="author">Emil Folino</p>
+
 Du jobbar som teknisk arkitekt och teamledare i en framstormande startup där du har [Carte Blanche](https://en.wikipedia.org/wiki/Carte_blanche) att välja teknik inför ett nytt spännande projekt, som är tänkt skaka om trading-branchen. Du har stor påtryckning från eran investor [a12o](https://a12o.emilfolino.se) att detta projekt måste lyckas för att de ska kunna glida resten av livet.
 
 Du har valt att bygga ihop en väl fungerande applikation som påvisar alla de tekniker du tror på. När du är klar så är tanken att du presenterar projektet och teknikerna för dina medlemmar i teamet och din applikation fungerar som utvärderings- och utbildningsmaterial för ditt team.

@@ -1,5 +1,7 @@
 # Frontend
 
+<p class="author">Emil Folino</p>
+
 Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tittar på en föreläsning om hur man väljer JavaScript ramverk.
 
 

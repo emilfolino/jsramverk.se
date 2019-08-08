@@ -1,11 +1,6 @@
 # Backend
 
-<div class="under-construction" id="under-construction">
-    <div class="under-construction-text">
-        <p><strong>Uppdatering</strong></p>
-        <p>Denna inlämningsuppgift uppdateras och kravspecifikation samt material kan ändras.</p>
-    </div>
-</div>
+<p class="author">Emil Folino</p>
 
 Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.
 
@@ -1080,9 +1075,9 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa routen `GET /` där du ger en presentation av dig själv.
 
-1. Skapa routen `GET /reports/week/1`, `GET /reports/week/2` och `GET /reports/week/3`, som innehåller data för att fylla motsvarande sidor i din Me-applikation.
+1. Skapa routerna `GET /reports/week/1`, `GET /reports/week/2` och `GET /reports/week/3`, som innehåller data för att fylla motsvarande sidor i din Me-applikation.
 
-1. Skapa routen `POST /reports` för att lägga till en redovisningstext. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.
+1. Skapa routen `POST /reports` för att lägga till data. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.
 
 1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.
 
@@ -1095,6 +1090,10 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 #### Del 2: Frontend
 
 1. Din frontend Me-applikation ska hämta innehåll från Me-API:t.
+
+1. Skapa ett inloggningsformulär för att kunna autentisera användare mot API:t.
+
+1. När en användare är inloggat ska det gå att skapa nya texter för kommande veckor och redigera befintliga texter.
 
 1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 3.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 

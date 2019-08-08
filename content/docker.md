@@ -1,5 +1,6 @@
 # Docker som utvecklingsmiljö
 
+<p class="author">Emil Folino, Mikael Roos</p>
 
 ![Docker logga](https://dbwebb.se/image/snapht17/docker-logo.png?w=c5)
 

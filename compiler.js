@@ -62,6 +62,22 @@ const compiler = {
                         return header.replace(/<\/?h\d>/g, '');
                     });
 
+                    let authorPattern = /<p class="author">(.*?)<\/p>/i;
+                    let match = parsed.match(authorPattern);
+
+                    if (match) {
+                        let author = match[1];
+                        let updated = new Date(
+                            fs.statSync(`${content}${file}`).mtime)
+                            .toJSON()
+                            .substring(0, 10
+                            );
+                        let authorIntro = `<p class="author">Skriven av:` +
+                            ` ${author}. Uppdaterat: ${updated}</p>`;
+
+                        parsed = parsed.replace(authorPattern, authorIntro);
+                    }
+
                     parsed = compiler.makeSections(parsed);
 
                     let breadcrumb = compiler.createBreadCrumbs(h1);

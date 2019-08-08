@@ -1,5 +1,7 @@
 # Realtidsprogrammering med paketet ws
 
+<p class="author">Emil Folino, Mikael Roos</p>
+
 Vi skall se hur JavaScript och Websockets kan kombineras till något som motsvarar realtidsprogrammering i webbsammanhanget.
 
 Vi ser koden som krävs för att sätta upp en klient och en server som utför echo och broadcast. Det ger oss en grund att stå på. Som server använder vi en inbyggd HTTP-server, en standalone websocket server och applikationsservern Express.
@@ -13,18 +15,6 @@ Vi ser koden som krävs för att sätta upp en klient och en server som utför e
 Du kan grunderna i JavaScript på klient och server samt har tillgång till en labbmiljö med Node, npm och Express.
 
 Exempelprogram ligger i kursrepot för [ramverk2 under `example/websocket`](https://github.com/dbwebb-se/ramverk2/tree/master/example/websocket).
-
-
-
-## Websockets
-
-HTML5 Websockets skapar nya möjligheter där webbläsaren kan ha en konstant uppkoppling mot en server där meddelanden både kan skickas och tas emot med minimal overhead. Möjligheten öppnar sig för att bättre bygga webbapplikationer som agerar i realtid.
-
-Det finns en W3C standard för [The Websocket API](https://www.w3.org/TR/websockets/), det ger grunden till vad utvecklare av webbläsare och liknande behöver förhålla sig till.
-
-Om man vill se detaljer om Websocket protokollet så finns en [RFC 6455](https://tools.ietf.org/html/rfc6455) som beskriver protokollet och hur klienten och servern kopplar upp sig, sköter kommunikationen och stänger ned kopplingen.
-
-För att se guider med exempelkod för både klient och servrar implementerade i olika språk så vänder vi oss till [MDN WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
 
 

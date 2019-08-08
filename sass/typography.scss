@@ -77,6 +77,11 @@ a {
     display: inline;
 }
 
+.author {
+    color: $lightCharcoal;
+    font-style: italic;
+}
+
 blockquote {
     border-left: 4px solid $minionYellow;
     padding: 2rem;

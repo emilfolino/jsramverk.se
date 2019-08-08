@@ -1,5 +1,7 @@
 # Realtid
 
+<p class="author">Emil Folino</p>
+
 <div class="under-construction" id="under-construction">
     <div class="under-construction-text">
         <p><strong>Uppdatering</strong></p>
@@ -142,6 +144,8 @@ socket.on('disconnect', function() {
 ```
 
 Om vi bundlar ihop JavaScript filen med hjälp av npm-skriptet `"start": "webpack -d"` och öppnar `index.html` i en webbläsare ska vi i konsollen nu kunna se _Connected_. Om du inte ser detta, kolla så att servern ligger och snurrar.
+
+Men ett meddelande i konsollen kommer vi inte så långt med. Så låt oss skapa möjlighet för att kunna skicka ett meddelande till servern. Vi skapar ett input fält och ett element där vi senare kan lägga till meddelanden som har skickats till servern och tillbaka ut till klienten.
 
 
 
