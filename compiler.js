@@ -73,7 +73,7 @@ const compiler = {
                             .substring(0, 10
                             );
                         let authorIntro = `<p class="author">Skriven av:` +
-                            ` ${author}. Uppdaterat: ${updated}</p>`;
+                            ` ${author}. Uppdaterad: ${updated}</p>`;
 
                         parsed = parsed.replace(authorPattern, authorIntro);
                     }
