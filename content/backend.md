@@ -1084,6 +1084,8 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa routerna `GET /reports/week/1`, `GET /reports/week/2` och `GET /reports/week/3`, som innehåller data för att fylla motsvarande sidor i din Me-applikation.
 
+1. Skapa routerna `POST /register` och `POST /login` för att registrera en användare och logga in. Data du sparar om användare ska vara samma om du hade i registreringsformuläret förra veckan.
+
 1. Skapa routen `POST /reports` för att lägga till data. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.
 
 1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.
@@ -1097,6 +1099,8 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 #### Del 2: Frontend
 
 1. Din frontend Me-applikation ska hämta innehåll från Me-API:t.
+
+1. Koppla registreringsformuläret från förra vecka till Me-API:t.
 
 1. Skapa ett inloggningsformulär för att kunna autentisera användare mot API:t.
 
