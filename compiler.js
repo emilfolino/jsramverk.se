@@ -5,6 +5,7 @@ const md = require('markdown-it')({
     typographer: true
 });
 const slugify = require("slugify");
+const minify = require('html-minifier').minify;
 
 const includes = "./includes/";
 const content = "./content/";
@@ -181,6 +182,13 @@ const compiler = {
             }
 
             outputContent += data;
+
+            outputContent = minify(outputContent, {
+                removeAttributeQuotes: true,
+                removeComments: true,
+                collapseBooleanAttributes: true,
+                collapseWhitespace: true
+            });
 
             fs.writeFile(`${output}${filename}`, outputContent, (err) => {
                 if (err) {
