@@ -205,15 +205,15 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 ## Skriva
 
-Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1, 2 & 3 fokusera på bakgrund och introduktion. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
+Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1, 2 & 3 fokusera på inledningen. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
 
-I ett akademiskt arbete fyller bakgrunden och introduktionen en viktig funktion. Introduktionen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till aktuell forskning. Därför är det viktigt att vi i introduktionen berättar för vår läsare om läget på den aktuella forskningen inom området.
+I ett akademiskt arbete fyller inledningen en viktig funktion. Bakgrunden som är en del av inledningen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till aktuell forskning. Därför är det viktigt att vi i bakgrunden berättar för vår läsare om läget på den aktuella forskningen inom området.
 
-Skriv en kort introduktion till det ramverk som du har valt. Använd referenser på ett akademiskt sätt. Se denna texten som ett första utkast, vi kommer under de kommande två veckorna förbättra texten.
+Skriv en kort inledning till det ramverk som du har valt. Använd referenser på ett akademiskt sätt. Se denna texten som ett första utkast, vi kommer under de kommande två veckorna förbättra texten.
 
-Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång.
+Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång. Denna och kommande veckor är avsnittet [Inledning](http://skrivguiden.se/skriva/uppsatsens_delar/#inledning) en bra start.
 
-Du får skriva introduktionen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Textbehandlare (Microsoft Word, Google Docs, Apple Pages, LibreOffice Writer eller liknande), [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
+Du får skriva inledningen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Textbehandlare (Microsoft Word, Google Docs, Apple Pages, LibreOffice Writer eller liknande), [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
 
