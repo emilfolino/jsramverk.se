@@ -94,6 +94,11 @@ blockquote p {
     margin-bottom: 0;
 }
 
+.optional {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
 @media (min-width: 768px) {
     .main-title {
         font-size: 3rem;

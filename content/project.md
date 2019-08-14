@@ -54,7 +54,9 @@ I dina README beskriver du i ett eget stycke om hur du implementerade realtidsas
 
 ### Krav 4: Tester backend
 
-<p class="optional">Optionellt krav</p>
+<div class="under-construction" id="under-construction">
+    <p class="optional">Optionellt krav</p>
+</div>
 
 Du har god kodtäckning i enhetstester och funktionstester på både backend och frontend. Sträva efter 70% där det är rimligt, men se det som en riktlinje och inte ett hårt krav.
 
@@ -74,7 +76,9 @@ Berätta om du är nöjd eller inte med de betyg som tjänsten för kodkvalitet 
 
 ### Krav 5: Tester frontend
 
-<p class="optional">Optionellt krav</p>
+<div class="under-construction" id="under-construction">
+    <p class="optional">Optionellt krav</p>
+</div>
 
 I din README beskriver du 5 stycken use-cases för din applikation, som du sedan använder Selenium för att testa.
 
@@ -84,9 +88,15 @@ Man kan köra hela din testsuite lokalt via `npm test`.
 
 ### Krav 6: Skrivande
 
-<p class="optional">Optionellt krav</p>
+<div class="under-construction" id="under-construction">
+    <p class="optional">Optionellt krav</p>
+</div>
 
 Skriv en akademisk sammanfattning av de lärdomar du har gjort under projektets gång. Sammanfatta vilka fördelar och nackdelar som dina valda tekniker och verktyg har gett dig under projektet.
+
+En beskriv av hur du gör en akademisk sammanfattning finns i skrivguiden under [Uppsatsens delar](http://skrivguiden.se/skriva/uppsatsens_delar) titta under Avslutning.
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
 
 
 
@@ -94,7 +104,7 @@ Skriv en akademisk sammanfattning av de lärdomar du har gjort under projektets 
 
 Gör en inlämning på Canvas med följande innehåll:
 
-1. Länka till ditt GitHub repo och berätta om vilka optionella krav du gjort. Och om du gjorde nya vägval rörande tekniker inför projektet.
+1. Länka till dina GitHub repon och berätta om vilka optionella krav du gjort. Och om du gjorde nya vägval rörande tekniker inför projektet.
 
 1. Skriv ett allmänt stycke om hur projektet gick att genomföra. Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. Var projektet lätt eller svårt? Tog det lång tid? Vad var svårt och vad gick lätt? Var det ett bra och rimligt projekt för denna kursen?
 
