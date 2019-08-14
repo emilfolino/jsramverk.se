@@ -322,3 +322,9 @@ Titta igenom exemplet och se hur `socket.io` kan användas för annat än en cha
 
 
 ## Skriva
+
+Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på förra veckans text och förbättra din forskningsfråga och metod.
+
+Gå tillbaka till skrivguiden och titta under [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod) för bra tips.
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**

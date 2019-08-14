@@ -732,12 +732,10 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 ## Skriva
 
-Vi flyttar denna och kommande två veckorna fokus från bakgrund och introduktion till metod. I metod beskrivs hur man har tänkt att svara på sina forskningsfrågor. I skrivguiden beskrivs under Uppsatsens delar [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod).
+Vi flyttar denna och kommande två veckorna fokus från inledning till forskningsfrågor och metod. Forskningsfrågor är till för att avgränsa arbetet och för att fokusera vad man ska arbeta med under studiens gång. För mer kunskap om hur en forskningsfråga ska formuleras titta under skrivguiden [syfte](http://skrivguiden.se/skriva/skrivprocessen/#syfte).
 
-Du ska nu välja metod och beskriva hur du använder den metoden till följande forskningsfråga.
+I metod beskrivs hur man har tänkt att svara på sina forskningsfrågor. I skrivguiden beskrivs under Uppsatsens delar [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod).
 
-> _"Vilken effekt har tester för mängden av fel i ett program?"_
-
-För mer kunskap om hu en forskningsfråga ska formuleras titta under skrivguiden [syfte](http://skrivguiden.se/skriva/skrivprocessen/#syfte).
+Du ska nu formulera en forskningsfråga relaterad till testning. Välj sedan en en metod som kan användas för att svara på forskningsfrågan och beskriv hur du använder metoden.
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**

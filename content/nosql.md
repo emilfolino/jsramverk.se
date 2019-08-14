@@ -400,4 +400,8 @@ I denna veckans inlämningsuppgift ska både backend och frontend uppdateras så
 
 ## Skriva
 
-Metod del 3
+Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på de två föregående veckornas texter och förbättra din forskningsfråga och metod.
+
+Gå tillbaka till skrivguiden och titta under [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod) för bra tips.
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
