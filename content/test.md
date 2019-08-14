@@ -2,13 +2,6 @@
 
 <p class="author">Emil Folino, Mikael Roos</p>
 
-<div class="under-construction" id="under-construction">
-    <div class="under-construction-text">
-        <p><strong>Uppdatering</strong></p>
-        <p>Denna inlämningsuppgift uppdateras och kravspecifikation samt material kan ändras.</p>
-    </div>
-</div>
-
 Vi skapar en testmiljö för både frontend och backend kod, samt ett flöde för Continuous Integration.
 
 Tanken är att vi förbereder oss för ett större utvecklingsprojekt i JavaScript och vi vill säkerställa att vi har en utvecklingsmiljö där vi kan testa vår programvara.

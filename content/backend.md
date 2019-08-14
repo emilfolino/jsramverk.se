@@ -2,13 +2,6 @@
 
 <p class="author">Emil Folino</p>
 
-<div class="under-construction" id="under-construction">
-    <div class="under-construction-text">
-        <p><strong>Uppdatering</strong></p>
-        <p>Denna inlämningsuppgift uppdateras och kravspecifikation samt material kan ändras.</p>
-    </div>
-</div>
-
 Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.
 
 Vi vänder oss nu till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.
