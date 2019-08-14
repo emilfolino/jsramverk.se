@@ -11,10 +11,6 @@
 
 Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.
 
-
-
-## Läsa
-
 Vi vänder oss nu till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.
 
 
@@ -33,7 +29,7 @@ Vi ska i följande stycken först titta på hur vi med hjälp av GitHub Educatio
 
 
 
-### En server i molnet
+#### En server i molnet
 
 Se till att ha din student e-postadress nära till hands då den behövs för att få tillgång till GitHub Education Pack.
 
@@ -212,7 +208,7 @@ Vi vill sedan peka domänen till vår droplet och för att komma åt root-domän
 
 
 
-### Installera programvara
+#### Installera programvara
 
 Vi ska i denna del installera programvara för att vi kan köra både frontend och backend applikationer på vår server.
 

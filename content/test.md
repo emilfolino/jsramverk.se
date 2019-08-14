@@ -17,19 +17,15 @@ Vilken typ av tester vill vi göra och vilka verktyg kan hjälpa oss med detta? 
 
 
 
-## Läsa
+## Material och tekniker
+
+Vi börjar med att skapa oss en överblick över olika verktyg för testning och olika typer av test.
 
 1. Webbplatsen för [Mocha](https://mochajs.org/) ger dig en översikt av ett verktyg för att testa din JavaScript-kod med enhetstester. Du skall själv välja ett eget testverktyg att använda, Mocha är en av möjligheterna.
 
 1. Verktyget [Istanbul](https://istanbul.js.org/) kan kopplas till Mocha för att hantera kodtäckning vid enhetstester.
 
 1. Det finns en forumtråd med tips om [artiklar för testning](https://dbwebb.se/t/6984). Kika där för inspiration.
-
-
-
-## Material och tekniker
-
-Vi börjar med att skapa oss en överblick över olika typer av test.
 
 
 
@@ -414,14 +410,14 @@ Min källkod finns i `src/multipage` och mina selenium tester ligger i `test/mul
 
 Om ni kollar i `package.json` ser ni att vi använder paketen mocha, selenium-webdriver och http-server. Mocha och selenium-webdriver är självförklarande, http-server använder vi bara för att köra koden i `src` som om det låg på en server och URL:erna i testerna ser likadana ut för alla. Börja med att installera paketen.
 
-```bash
-$ npm install
+```shell
+$npm install
 ```
 
 **Notera** versionen på selenium-webdriver, när jag installerade det första gången fick jag en alpha build som inte fungerar så kolla att ni har ex. `3.6.0`. Vi går vidare med att starta upp servern och kollar på hur webbsidan ser ut. Efter kommandot öppna din webbläsare och gå till `localhost:8082`.
 
-```bash
-$ npm start
+```shell
+$npm start
 ```
 
 [FIGURE src=image/ramverk2/multipage.png class="right" caption="Multipage exempel i Javascript."]
@@ -604,7 +600,7 @@ Det ska gå att få kodtäckning av Selenium tester med hjälp av [Istanbul](htt
 
 
 
-## Statisk kodvalidering
+#### Statisk kodvalidering
 
 Denna vecka handlar om tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under `/test/validate`.
 
@@ -641,7 +637,7 @@ När enhetstester körs så genereras kodtäckningen till katalogen `build/`. De
 
 
 
-## Continuous integration
+## Continuous Integration
 
 Nu när vi har en `package.json` på plats kan vi fortsätta och sätta igång en CI-kedja för att automatisera våra tester.
 

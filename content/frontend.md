@@ -219,7 +219,7 @@ Du får skriva inledningen på antigen svenska eller engelska. Du väljer själv
 
 
 
-## Sammanfattning
+#### Sammanfattning
 
 Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för [django](https://www.djangoproject.com/) pratar om hur vi inte alltid behöver ett JavaScript ramverk.
 

@@ -289,7 +289,7 @@ socket.on('disconnect', function() {
 
 
 
-## Exempelprogram med socket.io
+## Exempelprogram
 
 I kursrepot finns ett exempel `simulate-prices` som använder sig av `socket.io` för att visualisera simulerade priser på kakor. Detta är ett annat exempel på hur man kan använda realtidsprogrammering för annat än det klassiska chatt exemplet.
 

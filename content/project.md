@@ -10,7 +10,7 @@ Tänk på att ditt team till största del består av PHP-utvecklare kritiska mot
 
 
 
-## Projektspecifikation
+#### Projektspecifikation
 
 Du ska utveckla och driftsätta en trading plattform baserad på följande kravspecifikation. Du ska själv välja objekt att sälja exempel på objekt kan vara råvaror, värdepapper, antikviteter eller varför inte kakor & tårtor?
 
@@ -52,7 +52,9 @@ I dina README beskriver du i ett eget stycke om hur du implementerade realtidsas
 
 
 
-### Krav 4: Tester backend (optionell)
+### Krav 4: Tester backend
+
+<p class="optional">Optionellt krav</p>
 
 Du har god kodtäckning i enhetstester och funktionstester på både backend och frontend. Sträva efter 70% där det är rimligt, men se det som en riktlinje och inte ett hårt krav.
 
@@ -70,7 +72,9 @@ Berätta om du är nöjd eller inte med de betyg som tjänsten för kodkvalitet 
 
 
 
-### Krav 5: Tester frontend (optionell)
+### Krav 5: Tester frontend
+
+<p class="optional">Optionellt krav</p>
 
 I din README beskriver du 5 stycken use-cases för din applikation, som du sedan använder Selenium för att testa.
 
@@ -78,7 +82,9 @@ Man kan köra hela din testsuite lokalt via `npm test`.
 
 
 
-### Krav 6: Skrivande (optionell)
+### Krav 6: Skrivande
+
+<p class="optional">Optionellt krav</p>
 
 Skriv en akademisk sammanfattning av de lärdomar du har gjort under projektets gång. Sammanfatta vilka fördelar och nackdelar som dina valda tekniker och verktyg har gett dig under projektet.
 

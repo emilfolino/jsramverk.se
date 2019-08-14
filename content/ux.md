@@ -59,7 +59,7 @@ Smashing Magazine samlar praktiska artiklar om webb design och utveckling och [D
 
 
 
-## Last Used First Out
+#### Last Used First Out
 
 Som ytterligare ett exempel på hur JavaScript kan användas för att förbättra användareupplevelsen introducerar Nathan Kontny konceptet [Lufo, Last Used First Out](https://m.signalvnoise.com/lufo--last-used-first-out---an-easy-way-to-drastically-improve-the-user-experience-of-long-select/) och hur han skapade ett jQuery plugin för detta. På detta sätt kan man förbättra användandet av dropdowns med hjälp av konceptet Last-Used-First-Out (LUFO).
 

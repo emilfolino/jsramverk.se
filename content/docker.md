@@ -36,7 +36,7 @@ $npm install --global --production windows-build-tools
 
 
 
-## Testa Docker
+#### Testa Docker
 
 När du installerat Docker så kommer du åt verktygen via terminalen. Installationsfasen brukar sluta med att du kör följande för att verifiera installationen.
 
@@ -46,10 +46,6 @@ $docker-compose --version
 $docker run hello-world
 $docker run -it ubuntu bash
 ```
-$
-Det kan se ut så här.
-
-[ASCIINEMA src=143319 caption="Kom igång och verifiera att docker fungerar."]
 
 Det som händer i sista steget är att vi startar upp en kontainer med Ubuntu och startar bash i kontainern. Optionen `-it` står för `--interactive` och `-tty`, vi startar upp en interaktiv session med kontainern och allokerar en tty som agerar som terminalen.
 
@@ -89,10 +85,6 @@ Sedan kan vi köra imagen i en kontainer.
 $docker run -it php
 $docker run -it php bash
 ```
-
-Det kan se ut så här.
-
-[ASCIINEMA src=143327 caption="Kom igång och verifiera att docker fungerar."]
 
 Det var alltså två olika sätt att koppla sig till kontainern på ett interaktivt sätt.
 
@@ -137,10 +129,6 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 $docker container stop my-php-app
 ```
 
-Så här kan det se ut.
-
-[ASCIINEMA src=143333 caption="Starta upp och koppla dig till Apache i en Docker kontainer."]
-
 Glöm inte hjälpkommandot.
 
 ```shell
@@ -149,7 +137,7 @@ $docker help container
 
 
 
-## Flera kontainer till samma filsystem
+#### Flera kontainer till samma filsystem
 
 Det ser ju spännande ut att kunna ha flera kontainerar, med olika version av programvara, körande mot samma volym, samma källkod på disk.
 
@@ -179,10 +167,6 @@ Det ser ut att fungera bra. Då stänger jag ned kontainrarna.
 ```shell
 $docker container stop php71-app php70-app
 ```
-
-Så här kan det se ut när du kör kommandona i en sekvens.
-
-[ASCIINEMA src=143337 caption="Två kontainrar kopplade mot samma volym."]
 
 Det känns som detta kan vara ett bra verktyg för test och utveckling.
 
@@ -245,10 +229,6 @@ Sen stänger vi ned dem.
 $docker-compose down
 ```
 
-Så här kan det se ut.
-
-[ASCIINEMA src=143344 caption="Starta och stoppa flera kontainrar samtidigt med docker-compose."]
-
 Visst känns det rätt behagligt och kraftfullt att jobba med kontainrar?
 
 
@@ -302,7 +282,7 @@ För att allt skall fungera så behöver du ditt konto på Docker. Så här ser 
 
 
 
-### Docker mot olika versioner av Node
+#### Docker mot olika versioner av Node
 
 Ibland vill man välja vilken version av Node man använder för sina enhetstester. Det kan vara bra att kunna köra testerna mot godtycklig version av Node, eventuellt kombinerad med specifika versioner av andra programvaror. Här kan Docker hjälpa oss.
 
@@ -377,7 +357,7 @@ På så vis kan du både ha en lokal installation av alla dina node moduler och 
 
 
 
-### Docker-filer ger images
+#### Docker-filer ger images
 
 Grunden till varje image är en Dockerfile som i exemplet ligger i katalogen `docker/`. De ger basen för imagens innehåll. När en image byggs, i samband med att den refereras av docker-compose, så byggs den i ett context av katalogen vi står i.
 
