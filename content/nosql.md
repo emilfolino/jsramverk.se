@@ -30,6 +30,8 @@ Vi låter Chief Technical Officer Eliot Horowitz hos [MongoDB](https://www.mongo
 
 I denna artikel installerar vi MongoDB lokalt på din utvecklingsdator, om du vill och har möjligt kan du använda MongoDB i Docker. Artikeln [MongoDB i Docker](mongodb-docker) visar hur det kan gå till.
 
+I kursrepot finns exempelkod under [db/mongodb](https://github.com/emilfolino/jsramverk/tree/master/db/mongodb).
+
 
 
 ### Installera MongoDB
@@ -42,7 +44,7 @@ Gå till [MongoDB Community Server](https://www.mongodb.com/download-center/comm
 
 #### MacOS
 
-Installera med hjälp av pakethanteraren brew med kommandot `breew install mongodb`. Starta sedan mongodb med hjälp av kommandot `brew services start mongodb`.
+Installera med hjälp av pakethanteraren brew med kommandot `brew install mongodb`. Starta sedan mongodb med hjälp av kommandot `brew services start mongodb`.
 
 
 
@@ -170,7 +172,7 @@ Vi kan läsa om [MongoBD Node.JS Driver i dokumentationen](https://mongodb.githu
 
 
 
-#### Setup med grunddata {#setup}
+#### Setup med grunddata
 
 I filen `src/setup.js` finns kod som kopplar upp sig mot MongoDB och skapar databasen mumin, rensar den från innehåll och lägger in en del av befolkningen från mumindalen i en collection `crowd` genom att hämta data från filen `src/setup.json`.
 
@@ -299,7 +301,7 @@ Vi hade också kunnat tänka oss en variant av `findInCollection()` som jobbar m
 
 
 
-#### Vilken asynkron programmeringsteknik är bäst? {#bast}
+#### Vilken asynkron programmeringsteknik är bäst?
 
 Att koda i Node.js innebär asynkron programmering. Det finns olika alternativ till att serialisera flödet där det behövs, eller att göra det mer öppet för parallell exekvering. Asynkron programmering kan kräva lite tid att anpassa sig till, om man är ovan. Man behöver få en känsla för var som är synkront och vad som är asynkront. Man vill få en känsla för hur man kan debugga flödet i en asynkron applikation.
 

@@ -189,7 +189,7 @@ För att använda namecheap tryck på länken "Get access by connecting your Git
 
 När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valde 'jsramverk.me'.
 
-![Fyll i nameservers hos namecheap.](https://dbwebb.se src=/image/ramverk2/namecheap-nameservers.png?w=w3)
+![Fyll i nameservers hos namecheap.](https://dbwebb.se/image/ramverk2/namecheap-nameservers.png?w=w3)
 
 Gå sedan till Digital Ocean och välj Networking>Domains. Här Väljer du att skapa den valda domänen.
 
