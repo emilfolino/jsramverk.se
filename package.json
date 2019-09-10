@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "",
-    "posttest": "npm run eslint && npm run stylelint",
+    "stop-posttest": "npm run eslint && npm run stylelint",
     "eslint": "eslint .",
     "stylelint": "stylelint **/*.*css",
     "style": "sass base.scss output/style.min.css --style compressed",
@@ -21,11 +21,13 @@
     "build-client-js": "webpack -p && cp dist/bundle.js output/",
     "sitemap": "node sitemap.js",
     "local": "npm test && npm run fast-local",
-    "fast-local": "npm run clean-output && npm run build-style && npm run build && npm run build-client-js && npm run cp-font && npm run icons",
+    "fast-local": "npm run clean-output && npm run build-style && npm run build && npm run build-client-js && npm run cp-font && npm run icons && npm run slides && npm run examples",
     "production": "npm run local && npm run publish",
     "postproduction": "npm run sitemap",
     "watch": "npm-watch",
-    "icons": "cp icons/*.png icons/*.svg icons/*.gif site.webmanifest output/"
+    "icons": "cp icons/*.png icons/*.svg icons/*.gif site.webmanifest output/",
+    "slides": "rsync -av --exclude 'node_modules' slides output/",
+    "examples": "rsync -av --exclude 'node_modules' examples output/"
   },
   "repository": {
     "type": "git",
@@ -40,7 +42,7 @@
   "homepage": "https://github.com/emilfolino/jsramverk.me#readme",
   "devDependencies": {
     "css-loader": "^2.1.1",
-    "eslint": "^5.14.1",
+    "eslint": "^6.3.0",
     "eslint-plugin-react": "^7.12.4",
     "html-minifier": "^4.0.0",
     "javascript-style-guide": "^0.9.10",
@@ -53,6 +55,7 @@
     "webpack-cli": "^3.3.0"
   },
   "dependencies": {
+    "eslint-config-standard": "^14.1.0",
     "highlight.js": "^9.15.6",
     "markdown-it": "^8.4.2",
     "normalize.css": "^8.0.1",
