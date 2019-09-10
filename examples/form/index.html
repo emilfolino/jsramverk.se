@@ -9,14 +9,37 @@
 </head>
 <body>
     <div id="root" class="root">
+        <h1>Registrera</h1>
+        <p>När du registrerar dig här kan du skriva redovisningstexter i ett formulärfält.</p>
         <form>
-            <input type="text" name="name">
+            <label class="input-label">Namn<br>
+                <input type="text" name="name" class="input-field" required>
+            </label>
 
-            <input type="text" name="birthday">
+            <label class="input-label">Födelsedag<br>
+                <input type="date" name="birthday" class="input-field">
+            </label>
 
-            <input type="text" name="email">
+            <label class="input-label">E-post<br>
+                <input type="email" name="email" class="input-field" required>
+            </label>
 
-            <input type="text" name="password">
+            <label class="input-label">Lösenord<br>
+                <input type="password" name="password" class="input-field">
+            </label>
+
+            <label class="input-label">Ingrediens<br>
+                <select name="" id="ingredient">
+                    
+                </select>
+            </label>
+
+
+            <label class="input-label">
+                <input type="checkbox" name="gdpr">&nbsp;Jag godkänner
+            </label>
+
+
 
             <input type="submit" value="Register">
         </form>

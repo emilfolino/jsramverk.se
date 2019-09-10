@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.root {
+    margin: 2rem auto;
+    width: 70vw;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.4rem 1rem;
+    font-size: 1.25rem;
+}
+
+
+
+.input-field:valid {
+    background-color: lightgreen;
+}
+
+.input-field:invalid {
+    background-color: #fcc;
+    outline: 3px solid #c00;
+}
+
+.input-field:focus {
+    outline: 3px solid green;
+}
+
+@media (min-width: 768px) {
+    .input-field {
+        width: 50vw;
+    }
+}
