@@ -845,12 +845,14 @@ Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stor
 $npm install --global --production windows-build-tools
 ```
 
-Vi installerar bcrypt paketet med npm med hjälp av kommandot `npm install bcrypt --save`. [Dokumentationen för modulen](https://www.npmjs.com/package/bcrypt) är som alltid vår bästa vän.
+Vi installerar bcrypt paketet med npm med hjälp av kommandot `npm install bcryptjs --save`. [Dokumentationen för modulen](https://www.npmjs.com/package/bcryptjs) är som alltid vår bästa vän.
+
+
 
 För att hasha ett lösenord med bcrypt modulen importerar vi först modulen och sedan använder vi `bcrypt.hash` funktionen. Antal `saltRounds` definierar hur svåra lösenord vi vill skapa. Ju fler `saltRounds` är svårare att knäcka, men tar också längre tid att skapa och jämföra.
 
 ```javascript
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const myPlaintextPassword = 'longandhardP4$$w0rD';
 
@@ -864,7 +866,7 @@ Det finns även en promise version av biblioteket om man gillar promise eller as
 För att jämföra ett sparad lösenord med det användaren skrivit in använder vi `bcrypt.compare`.
 
 ```javascript
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const myPlaintextPassword = 'longandhardP4$$w0rD';
 const hash = 'superlonghashedpasswordfetchedfromthedatabase';
 
@@ -872,6 +874,10 @@ bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
     // res innehåller nu true eller false beroende på om det är rätt lösenord.
 });
 ```
+
+<div class="under-construction">
+    <p>Tidigare användes npm-modulen <code>bcrypt</code>, men verkar finnas installationsproblem med modulen i produktion. Därför används nu bcryptjs istället.</p>
+</div>
 
 
 
