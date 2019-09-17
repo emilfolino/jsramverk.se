@@ -429,7 +429,7 @@ app.get("/user", (req, res) => {
 app.post("/user", (req, res) => {
     res.json({
         data: {
-            msg: "Got a POST request");
+            msg: "Got a POST request"
         }
     });
 });
@@ -437,7 +437,7 @@ app.post("/user", (req, res) => {
 app.put("/user", (req, res) => {
     res.json({
         data: {
-            msg: "Got a PUT request");
+            msg: "Got a PUT request"
         }
     });
 });
@@ -445,7 +445,7 @@ app.put("/user", (req, res) => {
 app.delete("/user", (req, res) => {
     res.json({
         data: {
-            msg: "Got a DELETE request");
+            msg: "Got a DELETE request"
         }
     });
 });
@@ -939,7 +939,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 I Postman väljer vi att fylla i body fliken istället för params fliken.
 
-Vi såg i artikeln [Login med JWT](kunskap/login-med-jwt) kursen webapp hur man kan skicka lösenord med [postman](https://www.getpostman.com/). postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.
+Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kursen webapp hur man kan skicka lösenord med [postman](https://www.getpostman.com/). postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.
 
 ![Postman](https://dbwebb.se/image/ramverk2/postman-headers.png?w=c18)
 
