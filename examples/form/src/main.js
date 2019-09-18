@@ -1,11 +1,17 @@
 import ingredients from "./ingredients.js";
+import datepicker from "./datepicker.js";
 
 
 (function IIFE() {
     'use strict';
+
+    datepicker.init("date-picker"); 
+
+
+
+
+
     let selectedIngredients = [];
-
-
 
     let dropdown = document.getElementById("ingredient");
     const allIngredients = ingredients.getSortedIngredients();

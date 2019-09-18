@@ -20,8 +20,6 @@
     font-size: 1.25rem;
 }
 
-
-
 .input-field:valid {
     background-color: lightgreen;
 }
@@ -35,8 +33,54 @@
     outline: 3px solid green;
 }
 
+.date-label {
+    position:relative;
+}
+
+.date-picker {
+    display: none;
+    position:absolute;
+    top: 102%;
+    height: 300px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    padding: 4px;
+}
+
+.picker {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.number {
+    height: 150px;
+    font-size: 6rem;
+    align-self: center;
+    line-height: 1.5;
+}
+
+.arrow {
+    align-self: center;
+    width: 30px;
+    height: 20px;
+    background-color: #444;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    font-family: monospace;
+    line-height: 1;
+}
+
+.next {
+    align-self: flex-end;
+}
+
 @media (min-width: 768px) {
-    .input-field {
-        width: 50vw;
+    .input-field,
+    .date-picker {
+        width: 30vw;
     }
 }
