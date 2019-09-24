@@ -450,7 +450,7 @@ $npm install
 $npm start
 ```
 
-[FIGURE src=image/ramverk2/multipage.png class="right" caption="Multipage exempel i Javascript."]
+<img src="https://dbwebb.se/image/ramverk2/multipage.png" alt="Multipage exempel i Javascript.">
 
 Om du redan kör en annan tjänst på port 8082 kan du ändra vilken port som ska användas i `package.json`.
 Det är en väldigt simpel sida vi ska testa, det enda som är lite avancerat är kalkylatorn. När vi skriver tester nu vill vi testa användarnas upplevelse. T.ex. att knappar och länkar fungerar och saker har rätt färg m.m.
