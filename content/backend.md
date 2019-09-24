@@ -251,6 +251,8 @@ För att lättare kunna driftsätta våra git-repon installerar vi även git med
 
 ### Ett Express API
 
+**Från detta steget utvecklar du lokalt på din dator.**
+
 Modulen [Express finns på npm](https://www.npmjs.com/package/express). Express är en del av [MEAN](http://mean.io/) som är en samling moduler för att bygga webbapplikationer med Node.js. I denna artikeln kommer vi att använda Express (E) och Node.js (N) i MEAN.
 
 Innan vi börjar så skapar vi en `package.json` som kan spara information om de moduler vi nu skall använda.

@@ -358,6 +358,43 @@ I [repot för Lager API:t](https://github.com/emilfolino/order_api/tree/master/t
 
 
 
+#### Statisk kodvalidering
+
+Denna vecka handlar om tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under `/test/validate`.
+
+Eftersom vi utgår från kodstilen som definieras i [`javascript-style-guide`](https://www.npmjs.com/package/javascript-style-guide) så hämtar vi hem den och använder dess konfigurationsfil.
+
+```shell
+$npm install javascript-style-guide --save-dev
+$cp node_modules/javascript-style-guide/.eslint* .
+```
+
+Vi behöver installera validatorn som löser både kodstil och linter.
+
+```shell
+$npm install eslint eslint-plugin-react --save-dev
+```
+
+Verktyget har flera plugins som kan vara relevanta att lägga till, lite beroende på vilken typ av kod (REACT, `.jsx`, `.pug`, etc) du utvecklar. Jag väljer att lägga till en plugin för REACT, även om den inte används i exemplet. Det finns en referens i konfigurationsfilen som vi lånat, som behöver pluginen.
+
+Nu kan vi köra validatorn och eftersom den redan finns definierade i `package.json` så köra via npm.
+
+```shell
+$npm run eslint
+```
+
+Vill du köra validatorn som en del av din `npm test` så kan du lägga till följande i din `package.json`.
+
+```json
+"scripts": {
+    "posttest": "npm run eslint"
+}
+```
+
+När enhetstester körs så genereras kodtäckningen till katalogen `build/`. Det är för att undvika att skräpa ned i katalogen och samla bygg-relaterade filer i en katalog som är enkel att ta bort vid behov. Du kan se detaljer för hur `nyc` konfigureras i dess konfigfil `.nycrc`.
+
+
+
 ## Funktionstestning
 
 Selenium kan sammanfattas lite kort med: _"Selenium is an umbrella project for a range of tools and libraries that enable and support the automation of web browsers."_
@@ -382,10 +419,10 @@ Vi behöver en kodbas att testa, jag har klippt och klistrat ihop två av exempe
 
 #### Selenium i JavaScript
 
-Jag gjorde ett testprogram i `example/test/functiontest-selenium` för att se hur det fungerade.
+Jag gjorde ett testprogram i `test/functiontest-selenium` för att se hur det fungerade.
 
-```text
-example/test/functiontest-selenium$ tree .
+```shell
+test/functiontest-selenium $ tree .
 .
 ├── package.json
 ├── src
@@ -590,43 +627,6 @@ Ni borde ha testat köra testerna några gånger nu och har märkt att det går 
 #### Kodtäckning med Selenium
 
 Det ska gå att få kodtäckning av Selenium tester med hjälp av [Istanbul](https://github.com/gotwarlost/istanbul/issues/132). Det krävs lite eget arbete och vi vet inte om det funkar, om någon är intresserad är det fritt fram att försöka. Gör gärna ett forum inlägg om det lyckas.
-
-
-
-#### Statisk kodvalidering
-
-Denna vecka handlar om tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under `/test/validate`.
-
-Eftersom vi utgår från kodstilen som definieras i [`javascript-style-guide`](https://www.npmjs.com/package/javascript-style-guide) så hämtar vi hem den och använder dess konfigurationsfil.
-
-```shell
-$npm install javascript-style-guide --save-dev
-$cp node_modules/javascript-style-guide/.eslint* .
-```
-
-Vi behöver installera validatorn som löser både kodstil och linter.
-
-```shell
-$npm install eslint eslint-plugin-react --save-dev
-```
-
-Verktyget har flera plugins som kan vara relevanta att lägga till, lite beroende på vilken typ av kod (REACT, `.jsx`, `.pug`, etc) du utvecklar. Jag väljer att lägga till en plugin för REACT, även om den inte används i exemplet. Det finns en referens i konfigurationsfilen som vi lånat, som behöver pluginen.
-
-Nu kan vi köra validatorn och eftersom den redan finns definierade i `package.json` så köra via npm.
-
-```shell
-$npm run eslint
-```
-
-Vill du köra validatorn som en del av din `npm test` så kan du lägga till följande i din `package.json`.
-
-```json
-"scripts": {
-    "posttest": "npm run eslint"
-}
-```
-
-När enhetstester körs så genereras kodtäckningen till katalogen `build/`. Det är för att undvika att skräpa ned i katalogen och samla bygg-relaterade filer i en katalog som är enkel att ta bort vid behov. Du kan se detaljer för hur `nyc` konfigureras i dess konfigfil `.nycrc`.
 
 
 
