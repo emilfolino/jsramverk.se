@@ -10,7 +10,7 @@ Vi ska i denna artikel titta på hur vi driftsätter appar vi har skapat med hj�
 
 Vi vill i de flesta fall lägga våra alster på en domän eller subdomän. Vi har redan pekat al trafik från registratorn namecheap till vårt Cloud i Digital Ocean. Vi behöver därför bara skapa en subdomän i Digital Ocean. Vi gör det på samma sätt som i "[Node.js API med Express](kunskap/nodejs-api-med-express)". Gå till Networking och välj din domän skriv sedan in din subdomän välj din droplet och skapa subdomänen.
 
-[FIGURE src=image/ramverk2/do-subdomain.png?w=w3 caption="Digital Ocean subdomän"]
+<img src="https://dbwebb.se/image/ramverk2/do-subdomain.png?w=w3" alt="Digital Ocean subdomän">
 
 Ibland kan det ta en liten stund innan subdomäner kommer på plats, så avvakta lite grann om det inte syns direkt.
 
