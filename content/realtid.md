@@ -282,6 +282,91 @@ socket.on('disconnect', function() {
 
 
 
+#### Driftsättning
+
+När vi vill driftsätta vår server och klient ändrar vi de URL'er vi vill koppla oss mot.
+
+I klienten ändrar vi från `localhost:3000` till en fast URL där du vill driftsätta på servern.
+
+```javascript
+const socket = io('https://socket-server.jsramverk.me');
+```
+
+Vi kan sedan driftsätta klienten med samma typ av konfiguration som frontend appen i vecka 3. Så här ser min konfiguration ut på `https://socket-client.jsramverk.me`.
+
+```bash
+server {
+        root /var/www/socket-client.jsramverk.me/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name socket-client.jsramverk.me;
+
+        charset utf-8;
+
+        error_page 404 /index.html;
+
+        location / {
+        }
+
+        listen 80;
+}
+```
+
+Och använder liknande rsync skript för att skicka upp till servern som i [Driftsättning av frontend](https://jsramverk.me/deploy-frontend#driftsattning-av-frontend).
+
+I server appen måste vi tillåta inkommande trafik från `https://socket-client.jsramverk.me:443` för att klienten ska kunna kommunicera med servern. Det gör vi genom raden `io.origins(['https://socket-client.jsramverk.me:443']);`, nedan syns hela min server.
+
+
+```javascript
+const express = require('express');
+const app = express();
+
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+io.origins(['https://socket-client.jsramverk.me:443']);
+
+io.on('connection', function (socket) {
+    console.info("User connected");
+
+    socket.on('chat message', function (message) {
+        io.emit('chat message', message);
+    });
+});
+
+server.listen(8300);
+```
+
+Vi behöver sedan konfigurera nginx på liknande sätt som vårt API från tidigare i kursen. Nedan syns min konfiguration.
+
+```bash
+server {
+    server_name socket-server.jsramverk.me;
+
+    location /.well-known {
+        alias /var/www/socket-server.jsramverk.me/html/.well-known;
+    }
+
+    location / {
+        proxy_pass http://localhost:8300;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    listen 80;
+}
+```
+
+Vi kör igång servern med kommandot `pm2 start app.js --name socket-server` notera att servern i mitt fall lyssnar på port 8300. Som avslutning hämtar vi hem certifikat så vi kan köra över https med kommandot `sudo certbot --nginx`.
+
+
+
 ## Exempelprogram
 
 I kursrepot finns ett exempel `simulate-prices` som använder sig av `socket.io` för att visualisera simulerade priser på kakor. Detta är ett annat exempel på hur man kan använda realtidsprogrammering för annat än det klassiska chatt exemplet.
@@ -300,7 +385,7 @@ Titta igenom exemplet och se hur `socket.io` kan användas för annat än en cha
 
 1. Integrera klienten i ditt valda ramverk som en del av din me-sida. Kolla om det finns paket eller integrationer i ditt ramverk som stödjer websockets eller socket.io.
 
-1. Gör ett medvetet val om chatt backend ska ligga som egen driftsatt server med egen domän eller som en del av me-api:t.
+1. Gör ett medvetet val om chatt backend/server ska ligga som egen driftsatt service med egen domän eller som en del av me-api:t.
 
 1. När man kopplar upp sig så identifierar man sig med ett nick, ett smeknamn.
 
