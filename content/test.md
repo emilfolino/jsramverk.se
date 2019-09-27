@@ -324,7 +324,15 @@ describe('Reports', () => {
 
 Vi ser här hur vi använder `should` tillsammans med andra nyckelord, som `be` och `above`. För en lista av alla dessa nyckelord se [BDD Dokumentationen för chai](https://www.chaijs.com/api/bdd/) och hur vi kan sätta ihop de.
 
-Vi kör testarna på samma sätt som tidigare med `npm test` och får på samma sätt som tidigare kodtäckning med Istanbul.
+Vi kör testarna på samma sätt som tidigare med `npm test` och får på samma sätt som tidigare kodtäckning med Istanbul. chai testerna körs via mocha så vi behöver inte explicit ange chai när vi kör testerna. Mitt `script` block i `package.json` ser nu ut som följande:
+
+```json
+"scripts": {
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
+    "start": "node app.js",
+    "clean": "rm -rf node_modules package-lock.json",
+},
+```
 
 
 
@@ -349,6 +357,26 @@ Vi kan sedan hämta korrekt databas genom att anropa `database.js`.
 ```javascript
 const db = require("../db/database.js");
 ```
+
+För att skapa om en tom test databas för varje körning av testerna kan vi använda följande i vårt script block i `package.json`.
+
+```json
+"scripts": {
+    "pretest": "bash db/reset_test_db.bash",
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
+    "start": "node app.js",
+    "clean": "rm -rf node_modules package-lock.json",
+},
+```
+
+Och bash-skriptet `db/reset_test_db.bash` är som nedan.
+
+```bash
+$(> db/test.sqlite)
+cat db/migrate.sql | sqlite3 db/test.sqlite
+```
+
+Där `db/migrate.sql` innehåller kod för att skapa tabeller i databasen.
 
 
 
@@ -383,12 +411,17 @@ Nu kan vi köra validatorn och eftersom den redan finns definierade i `package.j
 $npm run eslint
 ```
 
-Vill du köra validatorn som en del av din `npm test` så kan du lägga till följande i din `package.json`.
+Vill du köra validatorn som en del av din `npm test` så kan du lägga till det under "posttest" scriptet i `package.json`.
 
 ```json
 "scripts": {
-    "posttest": "npm run eslint"
-}
+    "pretest": "bash db/reset_test_db.bash",
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
+    "posttest": "npm run eslint",
+    "start": "node app.js",
+    "clean": "rm -rf node_modules package-lock.json",
+    "eslint": "eslint ."
+},
 ```
 
 När enhetstester körs så genereras kodtäckningen till katalogen `build/`. Det är för att undvika att skräpa ned i katalogen och samla bygg-relaterade filer i en katalog som är enkel att ta bort vid behov. Du kan se detaljer för hur `nyc` konfigureras i dess konfigfil `.nycrc`.
