@@ -58,15 +58,13 @@ I dina README beskriver du i ett eget stycke om hur du implementerade realtidsas
     <p class="optional">Optionellt krav</p>
 </div>
 
-Du har god kodtäckning i enhetstester och funktionstester på både backend och frontend. Sträva efter 70% där det är rimligt, men se det som en riktlinje och inte ett hårt krav.
-
 I din README skriver du ett stycke om vilka verktyg du använt för din testsuite och om det är delar av applikationen som inte täcks av tester. Du reflekterar kort över hur dina teknikval fungerat för dig. Du reflekterar också över hur lätt/svårt det är att få kodtäckning på din applikation.
 
 Man kan köra hela din testsuite lokalt via `npm test`.
 
-I README visar du hur man kan se kodtäckningen lokalt i webbläsaren.
+Du har god kodtäckning i enhetstester och integrationstester på backend. Sträva efter 70% där det är rimligt, men se det som en riktlinje och inte ett hårt krav.
 
-Dina repon har en CI-kedja och automatiserade tester med tillhörande badges för byggtjänst, kodtäckning och tjänst för kodkvalitet.
+Ditt repo har en CI-kedja och automatiserade tester med tillhörande badges för byggtjänst, kodtäckning och tjänst för kodkvalitet.
 
 I din README skriver du ett stycke om CI-kedjan, vilka tjänster du valt och varför samt eventuella begränsningar i hur CI-kedjan kan hantera din applikation. Du gör en kort reflektion över din syn på den hjälpen liknande verktyg ger dig.
 
@@ -104,8 +102,10 @@ En beskriv av hur du gör en akademisk sammanfattning finns i skrivguiden under 
 
 Gör en inlämning på Canvas med följande innehåll:
 
-1. Länka till dina GitHub repon och berätta om vilka optionella krav du gjort. Och om du gjorde nya vägval rörande tekniker inför projektet.
+1. Länka till dina GitHub repon och driftsatta sidor i en kommentar till din inlämning. Berätta om vilka optionella krav du har gjort och om du gjorde nya vägval rörande tekniker inför projektet.
 
-1. Skriv ett allmänt stycke om hur projektet gick att genomföra. Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. Var projektet lätt eller svårt? Tog det lång tid? Vad var svårt och vad gick lätt? Var det ett bra och rimligt projekt för denna kursen?
+På sidan `/reports/week/10` i din me-applikation skriv följande (länka till me-applikationen i en kommentar till inlämningen):
 
-1. Avsluta med ett sista stycke med dina tankar om kursen och vad du anser om materialet och handledningen (ca 5-10 meningar). Ge feedback till lärarna och förslå eventuella förbättringsförslag till kommande kurstillfällen. Är du nöjd/missnöjd? Kommer du att rekommendera kursen till dina vänner/kollegor? På en skala 1-10, vilket betyg ger du kursen?
+2. Skriv ett allmänt stycke om hur projektet gick att genomföra. Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. Var projektet lätt eller svårt? Tog det lång tid? Vad var svårt och vad gick lätt? Var det ett bra och rimligt projekt för denna kursen?
+
+3. Avsluta med ett sista stycke med dina tankar om kursen och vad du anser om materialet och handledningen (ca 5-10 meningar). Ge feedback till lärarna och förslå eventuella förbättringsförslag till kommande kurstillfällen. Är du nöjd/missnöjd? Kommer du att rekommendera kursen till dina vänner/kollegor? På en skala 1-10, vilket betyg ger du kursen?
