@@ -109,3 +109,9 @@ På sidan `/reports/week/10` i din me-applikation skriv följande (länka till m
 2. Skriv ett allmänt stycke om hur projektet gick att genomföra. Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. Var projektet lätt eller svårt? Tog det lång tid? Vad var svårt och vad gick lätt? Var det ett bra och rimligt projekt för denna kursen?
 
 3. Avsluta med ett sista stycke med dina tankar om kursen och vad du anser om materialet och handledningen (ca 5-10 meningar). Ge feedback till lärarna och förslå eventuella förbättringsförslag till kommande kurstillfällen. Är du nöjd/missnöjd? Kommer du att rekommendera kursen till dina vänner/kollegor? På en skala 1-10, vilket betyg ger du kursen?
+
+#### Presentation
+
+**Campus:** Presenterar och diskuterar projekten i H430 mellan 10-12 onsdag den 30:e oktober.
+
+**Distans:** Antigen är ni med på campus presentationerna via Hangout mellan 10-12 onsdag den 30:e oktober. Eller så spelar ni in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.
