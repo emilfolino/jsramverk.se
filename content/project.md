@@ -120,4 +120,4 @@ På sidan `/reports/week/10` i din me-applikation skriv följande (länka till m
 
 **Campus:** Presenterar och diskuterar projekten i H430 mellan 10-12 onsdag den 30:e oktober.
 
-**Distans:** Antigen är ni med på campus presentationerna via Hangout mellan 10-12 onsdag den 30:e oktober. Eller så spelar ni in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.
+**Distans:** Antigen är ni med på campus presentationerna via [Hangout1](https://hangouts.google.com/call/y7r6gvdu4rehpfxeenuk5qujzee) mellan 10-12 onsdag den 30:e oktober. Eller så spelar ni in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.
