@@ -11,7 +11,7 @@ generator.on('done', () => {
     // sitemaps created
 
     console.log("sitemap generated");
-    exec('rsync -av sitemap.xml efo@jsramverk.se:/var/www/jsramverk.se/html/', (error) => {
+    exec('rsync -av sitemap.xml efo@emilfolino.se:/var/www/jsramverk.me/html/', (error) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
