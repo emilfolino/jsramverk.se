@@ -373,7 +373,7 @@ $sudo cat /var/log/mongodb/mongod.log | grep 27017
 
 I utskriften ser vi (förhoppningsvis) längst ner: `I NETWORK  [initandlisten] waiting for connections on port 27017`.
 
-Nu kan vi köra kommandot `mongo` och använda mongodb databasen och mongodb skalet precis som tidigare, när mongodb låg i Docker. Ett fungerande driftsatt exempel finns på följande sida [https://mongodb.jsramverk.me/](https://mongodb.jsramverk.me/).
+Nu kan vi köra kommandot `mongo` och använda mongodb databasen och mongodb skalet precis som tidigare, när mongodb låg i Docker. Ett fungerande driftsatt exempel finns på följande sida [https://mongodb.jsramverk.se/](https://mongodb.jsramverk.se/).
 
 
 

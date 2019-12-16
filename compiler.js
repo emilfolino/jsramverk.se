@@ -10,7 +10,7 @@ const minify = require('html-minifier').minify;
 const includes = "./includes/";
 const content = "./content/";
 const output = "./output/";
-const mainTitle = "jsramverk.me";
+const mainTitle = "jsramverk.se";
 
 const compiler = {
     createHeader: function (next) {
@@ -149,7 +149,7 @@ const compiler = {
     },
 
     createBreadCrumbs: function (current) {
-        return `<p class='breadcrump'><a href='/'>jsramverk.me</a> / ${current}</p>`;
+        return `<p class='breadcrump'><a href='/'>jsramverk.se</a> / ${current}</p>`;
     },
 
     createTOC: function (headers) {

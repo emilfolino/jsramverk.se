@@ -90,9 +90,15 @@ Man kan köra hela din testsuite lokalt via `npm test`.
     <p class="optional">Optionellt krav</p>
 </div>
 
-Skriv en akademisk sammanfattning av de lärdomar du har gjort under projektets gång. Sammanfatta vilka fördelar och nackdelar som dina valda tekniker och verktyg har gett dig under projektet.
+Skriv en sammanfattning av de lärdomar du har gjort under projektets gång. Sammanfatta vilka fördelar och nackdelar som dina valda tekniker och verktyg har gett dig under projektet.
 
-En beskriv av hur du gör en akademisk sammanfattning finns i skrivguiden under [Uppsatsens delar](http://skrivguiden.se/skriva/uppsatsens_delar) titta under Avslutning.
+En beskrivning av hur du gör en akademisk sammanfattning finns i skrivguiden under [Uppsatsens delar](http://skrivguiden.se/skriva/uppsatsens_delar) titta under Avslutning.
+
+I skrivguiden beskrivs att en sammanfattning eller summering utgår från problemformuleringen i studien. I detta fallet har vi inte gjort en konkret studie, men sammanfattningen ska innehålla reflektioner om de tekniker som har använts i projektet. Samt hur det har gått att implementera specificerade krav med hjälp av de teknologier.
+
+Vi kan därför formulera problemet som vi ska sammanfatta som:
+
+> _"Hur har dina valda tekniker underlättat eller försvårat implementationen av ovanstående krav 1-5?"_
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
 
@@ -114,4 +120,4 @@ På sidan `/reports/week/10` i din me-applikation skriv följande (länka till m
 
 **Campus:** Presenterar och diskuterar projekten i H430 mellan 10-12 onsdag den 30:e oktober.
 
-**Distans:** Antigen är ni med på campus presentationerna via Hangout mellan 10-12 onsdag den 30:e oktober. Eller så spelar ni in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.
+**Distans:** Antigen är ni med på campus presentationerna via [Hangout1](https://hangouts.google.com/call/y7r6gvdu4rehpfxeenuk5qujzee) mellan 10-12 onsdag den 30:e oktober. Eller så spelar ni in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.

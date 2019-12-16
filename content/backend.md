@@ -187,7 +187,7 @@ Som en del av Github Education Pack får du som student även ett domän-namn p�
 
 För att använda namecheap tryck på länken "Get access by connecting your GitHub account on Namecheap" och knyta ihop ditt GitHub konto med namecheap och skapa en användare.
 
-När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valde 'jsramverk.me'.
+När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valde 'jsramverk.se'.
 
 ![Fyll i nameservers hos namecheap.](https://dbwebb.se/image/ramverk2/namecheap-nameservers.png?w=w3)
 
@@ -967,28 +967,28 @@ För att våra klienter ska komma åt API:t ser vi till att driftsätta det på 
 
 När vi installerade nginx fick vi med oss ett antal olika kataloger och konfigurationsfiler. I katalogen `/var/www` kommer vi skapa kataloger för de webbplatser vi vill skapa på vår server. Vi börjar med att logga in på servern som `deploy` och skapar en katalog för vårt API.
 
-Jag kommer i följande exempel utgå ifrån min konfiguration på servern [jsramverk.me](https://jsramverk.me) där mitt API ligger på subdomänen [me-api.jsramverk.me](https://me-api.jsramverk.me).
+Jag kommer i följande exempel utgå ifrån min konfiguration på servern [jsramverk.se](https://jsramverk.se) där mitt API ligger på subdomänen [me-api.jsramverk.se](https://me-api.jsramverk.se).
 
-Jag skapar alltså katalogen `/var/www/me-api.jsramverk.me/html` enklast med kommandot `sudo mkdir -p /var/www/me-api.jsramverk.me/html`. Denna katalog kommer inte användas för filer, men vi kommer använda den i ett senare skede när vi vill spara ett certifikat för HTTPS trafik till vårt API.
+Jag skapar alltså katalogen `/var/www/me-api.jsramverk.se/html` enklast med kommandot `sudo mkdir -p /var/www/me-api.jsramverk.se/html`. Denna katalog kommer inte användas för filer, men vi kommer använda den i ett senare skede när vi vill spara ett certifikat för HTTPS trafik till vårt API.
 
 Jag har satt i gång API:t med kommandot `npm run production` och API:t ligger och lyssnar på port 8333. Den reverse proxy som vi skapar i följande stycke lyssnar i första skedet på port 80 och skickar vidare förfrågningarna till 8333.
 
-I katalogen `/etc/nginx/sites-available` skapar vi en konfigurationsfil `me-api.jsramverk.me` genom att kopiera standard konfiguration från filen `default` och öppna upp filen i text editorn nano. Vi gör det med följande kommandon.
+I katalogen `/etc/nginx/sites-available` skapar vi en konfigurationsfil `me-api.jsramverk.se` genom att kopiera standard konfiguration från filen `default` och öppna upp filen i text editorn nano. Vi gör det med följande kommandon.
 
 ```shell
 $cd /etc/nginx/sites-available
-$sudo cp default me-api.jsramverk.me
-$sudo nano me-api.jsramverk.me
+$sudo cp default me-api.jsramverk.se
+$sudo nano me-api.jsramverk.se
 ```
 
-I filen klistrar vi in följande konfiguration. Först skapar vi en server med namnet me-api.jsramverk.me. Vi skapar därefter två stycken `location`. Det är routes där vi vill att nått speciellt ska hända. Den första är för en fil relaterad till det certifikat vi ska installera om ett ögonblick för att fixa HTTPS till vår server. Den andra `location /` är alla andra routes som ska skickas till `http://localhost:8333` där vårt API ligger och lyssnar. Detta kallas en reverse proxy och användas i många sammanhang för att kopplat förfrågningar på port 80 till en annan port. En reverse proxy används då man inte vill öppna portarna utåt, men vill låta nginx ta hand om detta.
+I filen klistrar vi in följande konfiguration. Först skapar vi en server med namnet me-api.jsramverk.se. Vi skapar därefter två stycken `location`. Det är routes där vi vill att nått speciellt ska hända. Den första är för en fil relaterad till det certifikat vi ska installera om ett ögonblick för att fixa HTTPS till vår server. Den andra `location /` är alla andra routes som ska skickas till `http://localhost:8333` där vårt API ligger och lyssnar. Detta kallas en reverse proxy och användas i många sammanhang för att kopplat förfrågningar på port 80 till en annan port. En reverse proxy används då man inte vill öppna portarna utåt, men vill låta nginx ta hand om detta.
 
 ```shell
 server {
-    server_name me-api.jsramverk.me;
+    server_name me-api.jsramverk.se;
 
     location /.well-known {
-        alias /var/www/me-api.jsramverk.me/html/.well-known;
+        alias /var/www/me-api.jsramverk.se/html/.well-known;
     }
 
     location / {
@@ -1008,7 +1008,7 @@ Vi sparar filen genom att trycka `Ctrl-X` och skriva in ett y + Enter. Vi skapar
 
 ```shell
 $cd /etc/nginx/sites-enabled
-$sudo ln -s /etc/nginx/sites-available/me-api.jsramverk.me
+$sudo ln -s /etc/nginx/sites-available/me-api.jsramverk.se
 ```
 
 Vi vill sedan testa om konfigurationen är korrekt och sedan starta om nginx och det gör vi med följande kommandon.

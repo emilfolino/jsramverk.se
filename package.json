@@ -1,5 +1,5 @@
 {
-  "name": "jsramverk.me",
+  "name": "jsramverk.se",
   "version": "1.0.0",
   "description": "Possible new home for course jsramverk.",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "inline-style": "sass inline.scss output/inline.min.css --style compressed",
     "build-style": "npm run inline-style && npm run style",
     "build": "node app.js",
-    "publish": "rsync -av output/* efo@jsramverk.se:/var/www/jsramverk.me/html/",
+    "publish": "rsync -av output/* efo@emilfolino.se:/var/www/jsramverk.me/html",
     "cp-font": "cp inter-ui/*.woff* output/",
     "clean-output": "rm -rf output/*",
     "build-client-js": "webpack -p && cp dist/bundle.js output/",
@@ -59,7 +59,7 @@
     "highlight.js": "^9.15.6",
     "markdown-it": "^8.4.2",
     "normalize.css": "^8.0.1",
-    "sitemap-generator": "^8.4.0",
+    "sitemap-generator": "^8.4.2",
     "slugify": "^1.3.4",
     "turbolinks": "^5.2.0"
   }

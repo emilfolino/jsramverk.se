@@ -1,4 +1,4 @@
-# jsramverk.me
+# jsramverk.se
 
 Possible new home for course jsramverk.
 
