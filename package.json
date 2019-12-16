@@ -15,7 +15,7 @@
     "inline-style": "sass inline.scss output/inline.min.css --style compressed",
     "build-style": "npm run inline-style && npm run style",
     "build": "node app.js",
-    "publish": "rsync -av output/* efo@jsramverk.me:/var/www/jsramverk.me/html/",
+    "publish": "rsync -av output/* efo@jsramverk.se:/var/www/jsramverk.me/html/",
     "cp-font": "cp inter-ui/*.woff* output/",
     "clean-output": "rm -rf output/*",
     "build-client-js": "webpack -p && cp dist/bundle.js output/",
@@ -31,15 +31,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emilfolino/jsramverk.me.git"
+    "url": "git+https://github.com/emilfolino/jsramverk.se.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/emilfolino/jsramverk.me/issues"
+    "url": "https://github.com/emilfolino/jsramverk.se/issues"
   },
-  "homepage": "https://github.com/emilfolino/jsramverk.me#readme",
+  "homepage": "https://github.com/emilfolino/jsramverk.se#readme",
   "devDependencies": {
     "css-loader": "^2.1.1",
     "eslint": "^6.3.0",
