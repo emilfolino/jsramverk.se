@@ -289,19 +289,19 @@ När vi vill driftsätta vår server och klient ändrar vi de URL'er vi vill kop
 I klienten ändrar vi från `localhost:3000` till en fast URL där du vill driftsätta på servern.
 
 ```javascript
-const socket = io('https://socket-server.jsramverk.me');
+const socket = io('https://socket-server.jsramverk.se');
 ```
 
-Vi kan sedan driftsätta klienten med samma typ av konfiguration som frontend appen i vecka 3. Så här ser min konfiguration ut på `https://socket-client.jsramverk.me`.
+Vi kan sedan driftsätta klienten med samma typ av konfiguration som frontend appen i vecka 3. Så här ser min konfiguration ut på `https://socket-client.jsramverk.se`.
 
 ```bash
 server {
-        root /var/www/socket-client.jsramverk.me/html;
+        root /var/www/socket-client.jsramverk.se/html;
 
         # Add index.php to the list if you are using PHP
         index index.html index.htm index.nginx-debian.html;
 
-        server_name socket-client.jsramverk.me;
+        server_name socket-client.jsramverk.se;
 
         charset utf-8;
 
@@ -314,9 +314,9 @@ server {
 }
 ```
 
-Och använder liknande rsync skript för att skicka upp till servern som i [Driftsättning av frontend](https://jsramverk.me/deploy-frontend#driftsattning-av-frontend).
+Och använder liknande rsync skript för att skicka upp till servern som i [Driftsättning av frontend](https://jsramverk.se/deploy-frontend#driftsattning-av-frontend).
 
-I server appen måste vi tillåta inkommande trafik från `https://socket-client.jsramverk.me:443` för att klienten ska kunna kommunicera med servern. Det gör vi genom raden `io.origins(['https://socket-client.jsramverk.me:443']);`, nedan syns hela min server.
+I server appen måste vi tillåta inkommande trafik från `https://socket-client.jsramverk.se:443` för att klienten ska kunna kommunicera med servern. Det gör vi genom raden `io.origins(['https://socket-client.jsramverk.se:443']);`, nedan syns hela min server.
 
 
 ```javascript
@@ -327,7 +327,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-io.origins(['https://socket-client.jsramverk.me:443']);
+io.origins(['https://socket-client.jsramverk.se:443']);
 
 io.on('connection', function (socket) {
     console.info("User connected");
@@ -344,10 +344,10 @@ Vi behöver sedan konfigurera nginx på liknande sätt som vårt API från tidig
 
 ```bash
 server {
-    server_name socket-server.jsramverk.me;
+    server_name socket-server.jsramverk.se;
 
     location /.well-known {
-        alias /var/www/socket-server.jsramverk.me/html/.well-known;
+        alias /var/www/socket-server.jsramverk.se/html/.well-known;
     }
 
     location / {
