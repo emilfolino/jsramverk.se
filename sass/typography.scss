@@ -1,16 +1,10 @@
 html {
     font-size: 100%;
-    font-family: $mainFont;
 }
 
-// @supports (font-variation-settings: normal) {
-//     html {
-//         font-family: 'Inter var', sans-serif;
-//     }
-// }
-
 body {
-    color: $mainFontColor;
+    font-family: $bodyFont;
+    color: $fontColor;
     line-height: $mainLineHeight;
     font-display: auto;
 }
@@ -19,6 +13,7 @@ h1,
 h2,
 h3,
 h4 {
+    font-family: $titleFont;
     font-weight: 700;
 }
 

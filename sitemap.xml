@@ -3,4 +3,37 @@
   <url>
     <loc>https://jsramverk.se/</loc>
   </url>
+  <url>
+    <loc>https://jsramverk.se/frontend</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/ux</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/backend</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/test</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/realtid</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/nosql</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/project</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/deploy-frontend</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/docker</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/realtid-med-ws</loc>
+  </url>
+  <url>
+    <loc>https://jsramverk.se/mongodb-docker</loc>
+  </url>
 </urlset>
