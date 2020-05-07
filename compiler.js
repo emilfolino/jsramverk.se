@@ -79,6 +79,7 @@ const compiler = {
                         parsed = parsed.replace(authorPattern, authorIntro);
                     }
 
+                    parsed = compiler.codeHighlighting(parsed);
                     parsed = compiler.makeSections(parsed);
 
                     let breadcrumb = compiler.createBreadCrumbs(h1);
@@ -96,6 +97,15 @@ const compiler = {
                 });
             });
         });
+    },
+
+    codeHighlighting: function (parsed) {
+        let codePattern = /<pre><code class=\"(.*?)\">(.*?)<\/code><\/pre>/sgi;
+        let matches = parsed.match(codePattern);
+
+        console.info(matches);
+
+        return parsed;
     },
 
     makeSections: function (parsed) {
