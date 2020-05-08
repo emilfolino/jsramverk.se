@@ -7,6 +7,11 @@ const md = require('markdown-it')({
 const slugify = require("slugify");
 const minify = require('html-minifier').minify;
 
+const hljs = require('highlight.js');
+const Entities = require('html-entities').AllHtmlEntities;
+
+const entities = new Entities();
+
 const includes = "./includes/";
 const content = "./content/";
 const output = "./output/";
@@ -47,7 +52,7 @@ const compiler = {
                 console.error(err.message);
             }
 
-            files.forEach(file => {
+            [files[0]].forEach(file => {
                 fs.readFile(`${content}${file}`, 'utf8', (err, data) => {
                     if (err) {
                         console.error(err.message);
@@ -103,7 +108,23 @@ const compiler = {
         let codePattern = /<pre><code class=\"(.*?)\">(.*?)<\/code><\/pre>/sgi;
         let matches = parsed.match(codePattern);
 
-        console.info(matches);
+        if (matches) {
+            matches.forEach(function(match) {
+                let classPattern = /<code class=\"language-(.*?)\">/i;
+                let language = classPattern.exec(match)[1];
+
+                let codePattern = /<code class=\"[a-zA-Z\-]*\">(.*?)<\/code>/si;
+                let code = codePattern.exec(match)[1];
+
+                code = entities.decode(code);
+
+                let highlightedCode = hljs.highlight(language, code).value;
+
+                let replaceCodeSnippet = `<pre><code class="language-${language} hljs">${highlightedCode}</code></pre>`;
+
+                parsed = parsed.replace(match, replaceCodeSnippet);
+            });
+        }
 
         return parsed;
     },
