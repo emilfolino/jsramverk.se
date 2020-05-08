@@ -100,7 +100,7 @@ document.getElementById("element").textContent = data;
 
 I många ramverk är detta nått man försöker förenkla genom att uppdatera vyn direkt varje gång data ändras. Detta är en av de magiska sakerna med JavaScript ramverk och vi ska nedan se exempel på hur detta kan göras. I de flesta ramverken definierar vi medlemsvariabler i komponenter och vi kan sedan använda dessa medlemsvariabler i templates. I nedanstående exempel ser vi hur vi använder medlemsvariabler i Vue. Exemplet är tagit från exempelprogrammet `/calculator`.
 
-```
+```html
 <template>
     <div class="calculator">
         <div class="display">{{ current || 0 }}</div>
@@ -115,7 +115,6 @@ export default {
             current: 0,
         }
     },
-    ...
 ```
 
 Om medlemsvariabeln `current` får ett nytt värde ändras den direkt i den kopplade template. I vanilla JavaScript gör vi en explicit koppling och uppdatering av data och i de ramverk som har valts ut är det en implicit koppling och uppdatering.
@@ -146,7 +145,7 @@ document.getElementById("my-btn").addEventListener("click", function (event) {
 
 Ramverken försöker förenkla detta förfarandet genom att förkorta ner syntaxen för EventListeners. `/tic-tac-toe` exempelprogrammen är bra exempel både på Eventhantering och delegering och vi kan titta på hur detta lösas i de olika ramverk.
 
-```
+```html
 // angular
 <div class="square" (click)="click()">
   {{ squareValue }}

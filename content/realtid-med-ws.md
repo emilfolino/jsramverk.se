@@ -206,8 +206,8 @@ Vi behöver en extern modul för att lösa implementationen av serverdelen av We
 
 Installera med npm.
 
-```text
-npm install ws
+```shell
+$npm install ws
 ```
 
 I exempelkatalogen finns en `package.json` så du kan installera allt som behövs till exemplet via `npm install`.

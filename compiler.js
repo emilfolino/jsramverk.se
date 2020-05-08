@@ -52,7 +52,7 @@ const compiler = {
                 console.error(err.message);
             }
 
-            [files[0]].forEach(file => {
+            files.forEach(file => {
                 fs.readFile(`${content}${file}`, 'utf8', (err, data) => {
                     if (err) {
                         console.error(err.message);
