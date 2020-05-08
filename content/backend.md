@@ -2,9 +2,7 @@
 
 <p class="author">Emil Folino</p>
 
-Vi börjar denna veckan med att skaffa oss en droplet, en server i molnet. På vår server installerar vi programvara och konfigurerar servern för att säkra upp servern och för att vi kan köra nodejs applikationer. Vi tittar sedan på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Som avslutning på denna veckan driftsätter vi både vår backend och den frontend applikation vi skapade tidigare i kursen.
-
-Vi vänder oss nu till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express och hur man sätter upp en applikationsserver som även kan fungera som en vanlig webbserver.
+Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Vi vänder oss till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express.
 
 
 
@@ -17,241 +15,6 @@ Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite 
 
 
 ## Material
-
-Vi ska i följande stycken först titta på hur vi med hjälp av GitHub Education Pack och DigitalOcean skapar en droplet. I slutet av veckan har vi driftsatt både vår frontend applikation och en simpel backend applikation.
-
-
-
-#### En server i molnet
-
-Se till att ha din student e-postadress nära till hands då den behövs för att få tillgång till GitHub Education Pack.
-
-
-
-#### GitHub Education Pack
-
-För att få tillgång till rabatter och rabattkoder som erbjuds i [GitHub Education Pack](https://education.github.com/pack) behöver du GitHub veta att du är student. Gå till den länkade sidan och tryck på den blåa knappen "Get your Pack". Viktigt att du använder din student mail när du registrerar dig då mailen måste vara kopplat till en undervisningsinstitution.
-
-
-
-#### Digital Ocean
-
-När du är verifierad via GitHub får du tillgång till en rabattkod för Digital Ocean. Efter det går du till [Digital Ocean Sign Up](https://cloud.digitalocean.com/registrations/new) och skapar ett konto. Du behöver ange ett kreditkort, men vi kommer sedan använda rabattkoden så det kommer inte kosta något.
-
-När du har skapat kontot gå till Account längst upp till höger under din användare logga. Gå sedan till Billing fliken och scrolla ner till Promo Code. Här lägger du in rabattkoden du fick från Github Education Pack när du tryckte på länken 'request your offer code'.
-
-Gå sedan till första sidan och tryck 'Get started with a Droplet'. Instruktioner i kommande stycken och resten av kursen kommer utgå från en Debian Stretch (9.x) droplet, så en stark rekommendation är att välja en sån droplet. Jag rekommenderar att ni kör en 10$/månad droplet, då man får bra prestanda och samtidigt inte använder hela rabatten under kursens gång. Välj Frankfurt eller London som region och lägg till din `id_rsa.pub` SSH nyckel så du kan logga in på servern.
-
-
-
-#### Första 10 minuter på en server
-
-Med utgångspunkt i artiklar som [My First 5 Minutes On A Server; Or, Essential Security for Linux Servers](https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers) och [My First 10 Minutes On a Server - Primer for Securing Ubuntu](https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/) ska vi i följande stycke titta på hur vi säkrar upp en Linux-baserad server av Ubuntu eller Debian variant.
-
-
-
-#### Logga in på servern
-
-Vi loggar in på servern genom att använda SSH via terminalen med kommandot. `ssh root@[IP]` ersätt din [IP] med den IP som visas för din droplet.
-
-
-
-#### Lösenord
-
-Än så länge har vi inte ens ett lösenord till vår `root` användare så låt oss se till att sätter ett lösenord. Välj ett säkert lösenord och med säkert lösenord menas ett slumpat och komplext lösenord. Jag rekommenderar starkt att använda en Password Manager och skapa lösenordet med hjälp av denna Password Manager inställt på den mest komplexa inställningen du kan hitta. För Mac och Linux rekommenderas [pass](https://www.passwordstore.org) och för Windows verkar [LastPass](https://www.lastpass.com) vara det mest använda gratis programmet som finns.
-
-När du har skapat ett slumpmässigt och komplext lösenord skriv följande kommando och följ instruktionerna.
-
-```shell
-$passwd
-```
-
-
-
-#### Uppdatera servern
-
-Nästa steg är att uppdatera serverns programvara till senaste version genom att använda verktyget `apt-get`.
-
-```shell
-$apt-get update
-$apt-get upgrade
-```
-
-
-
-#### Skapa din egen användare
-
-Vi vill aldrig logga in som `root` då `root` har tillgång till för mycket. Så vi skapar en egen användare `deploy` med följande kommandon. Du kan byta ut `deploy` mot vad som helst, men då ska du göra det i alla följande kommandon. De två första kommandon är för att rensa bort en befintlig användare Digital Ocean lägger till när debian installeras.
-
-```shell
-$apt-get remove --purge unscd
-$userdel -r debian
-$useradd deploy
-$mkdir /home/deploy
-$mkdir /home/deploy/.ssh
-$chmod 700 /home/deploy/.ssh
-```
-
-Vi passar på att i samma veva ställa in vilken förvald terminal vår nya använda ska använda, vi väljer `bash` då vi är vana vid den.
-
-```shell
-$usermod -s /bin/bash deploy
-```
-
-
-
-#### Stänga av inloggning med lösenord
-
-Lösenord kan knäckas.
-
-Därför använder vi istället SSH nycklar för att autentisera oss mot servern. Skapa och öppna filen med kommandot `nano /home/deploy/.ssh/authorized_keys` och lägg innehållet av din lokala `.ssh/id_rsa.pub` nyckel i den filen på en rad.
-
-När du har lagt till nyckeln kör du följande två kommandon för att sätta korrekta rättigheter på katalogen och filen.
-
-```shell
-$chmod 400 /home/deploy/.ssh/authorized_keys
-$chown deploy:deploy /home/deploy -R
-```
-
-Testa nu att logga in i ett nytt terminalfönster med kommandot `ssh deploy@[IP]`. Vi har kvar terminal fönstret där vi loggade in som root om något skulle gå fel.
-
-Vi skapar sedan ett lösenord för `deploy` användaren från root terminalfönstret, `passwd deploy`, använd igen ett långt och slumpmässigt lösenord. Och vi lägger till `deploy` som sudo användare med kommandot `usermod -aG sudo deploy`.
-
-Som vi sagt tidigare vill vi bara kunna logga in med SSH nycklar. Vi gör detta genom att ändra tre rader i filen `/etc/ssh/sshd_config`. Öppna filen med din texteditor på din server till exempel nano med kommandot `nano /etc/ssh/sshd_config`.
-
-Hitta raderna nedan och se till att ändra från yes till no. Raderna ligger inte på samma ställe i filer, så ibland får man leta en liten stund. Den sista raden nedan får du skriva in själv.
-
-```shell
-$PermitRootLogin no
-$PasswordAuthentication no
-$AllowUsers deploy
-```
-
-Spara filen och starta om SSH med hjälp av kommandot `service ssh restart`. Testa nu att logga ut och in i ditt andra terminal fönster där du tidigare var inloggat som `deploy`.
-
-
-
-#### Brandvägg
-
-Först stänger vi ner uppkopplingen för användaren root genom att skriva exit i terminalfönstret. Alla kommandon vi kommer köra från och med nu körs som användaren deploy.
-
-Vi använder oss av brandväggen `ufw` för att stänga och öppna portar till vår server. Installera med kommandot `sudo apt-get install ufw`.
-
-Vi vill nu öppna upp för trafik på 3 portar 22 för SSH, 80 för HTTP och 443 för HTTPS. Vi gör det med hjälp av följande kommandon.
-
-```shell
-$sudo ufw allow 22
-$sudo ufw allow 80
-$sudo ufw allow 443
-$sudo ufw disable
-$sudo ufw enable
-```
-
-
-
-#### Automagiska uppdateringar
-
-Vi vill inte hålla på att manuellt uppdatera vår server, men vi vill inte heller sakna en patch när de kommer så vi kommer använda oss av verktyget unattended-upgrades. Vi installerar med `sudo apt-get install unattended-upgrades`.
-
-Uppdatera filen `/etc/apt/apt.conf.d/10periodic` så den innehåller nedanstående.
-
-```shell
-APT::Periodic::Update-Package-Lists "1";
-APT::Periodic::Download-Upgradeable-Packages "1";
-APT::Periodic::AutocleanInterval "7";
-APT::Periodic::Unattended-Upgrade "1";
-```
-
-Uppdatera även filen `/etc/apt/apt.conf.d/50unattended-upgrades` så den ser ut som nedan.
-
-```shell
-Unattended-Upgrade::Allowed-Origins {
-    "${distro_id}:${distro_codename}";
-    "${distro_id}:${distro_codename}-security";
-    "${distro_id}ESM:${distro_codename}";
-    //"${distro_id}:${distro_codename}-updates";
-};
-```
-
-
-
-#### fail2ban
-
-Vårt sista steg är att installera verktyget fail2ban som används för att automatiskt kolla logfiler och stoppa aktivitet som vi inte vill ha på vår server. Vi installerar och låter ursprungsinställningarna göra sitt jobb. Vi installerar med `sudo apt-get install fail2ban`.
-
-
-
-#### En domän till din server
-
-Som en del av Github Education Pack får du som student även ett domän-namn på top-domänen .me från registratorn namecheap gratis under ett år. Om du vill använda en annan registrator är det fritt fram.
-
-För att använda namecheap tryck på länken "Get access by connecting your GitHub account on Namecheap" och knyta ihop ditt GitHub konto med namecheap och skapa en användare.
-
-När du har kopplat din användare kommer du till en sida där du skapar ditt domännamn. Skriv in din text i kommande bilder har jag använt det domännamn jag valde 'jsramverk.se'.
-
-![Fyll i nameservers hos namecheap.](https://dbwebb.se/image/ramverk2/namecheap-nameservers.png?w=w3)
-
-Gå sedan till Digital Ocean och välj Networking>Domains. Här Väljer du att skapa den valda domänen.
-
-![Skapa domän på Digital Ocean.](https://dbwebb.se/image/ramverk2/do-domains.png?w=w3)
-
-Vi vill sedan peka domänen till vår droplet och för att komma åt root-domänen anger vi @. Vill vi ange en subdomän anger vi subdomänen.
-
-![Peka domän till droplet på Digital Ocean.](https://dbwebb.se/image/ramverk2/do-domain-names.png?w=w3)
-
-
-
-#### Installera programvara
-
-Vi ska i denna del installera programvara för att vi kan köra både frontend och backend applikationer på vår server.
-
-
-
-#### Installera nginx
-
-Vi installerar webbservern nginx med hjälp av kommandot `sudo apt-get install nginx`. Du ska nu kunna gå till din domän-adress och där se Welcome to nginx! Ibland kan det ta en liten stund innan alla ändringar slå igenom, så nu är att bra tillfälle att hämta kaffe eller gå en runda om det inte fungerar direkt.
-
-
-
-#### Installera nodejs och npm
-
-Vi vill ha nodejs och npm installerat så vi kan köra en backend på vår server. Vi installerar LTS (Long Term Support) versionen då detta är vår produktionsserver. Vi installerar nodejs och npm med följande kommandon.
-
-```shell
-$sudo apt update
-$sudo apt install curl
-$cd ~
-$curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
-$sudo bash nodesource_setup.sh
-$sudo apt install nodejs
-$nodejs -v
-```
-
-Här ska du gärna se en utskrift med ett versionsnummer som inledas med `v10.`.
-
-Om du kör kommandot `npm -v` ser du att du även har Node Package Manager npm installerat med ett versionsnummer över 6. För att vissa program ska kunna installeras via npm behöver vi även installera build-essentials. Vi gör det med kommandot `sudo apt install build-essential`.
-
-
-
-#### Installera tmux
-
-
-tmux är ett oerhört trevligt verktyg att använda om man vill komma tillbaka till samma vy när man loggar in på en server från ett antal olika servrar. Installera med kommandot `sudo apt-get install tmux`.
-
-Du öppnar en tmux session genom att skriva `tmux` i terminalen. I sitt grundutförande är Ctrl-b kommandotangenten, du trycker alltså in Ctrl-b släpper och en knapp till för att utföra kommandot. Du kan skapa nya fönster med Ctrl-b följd av c, du kopplar ner från sessionen med Ctrl-b d och vill du tillbaka till sessionen kan du skriva `tmux a -t 0`. Bra och smidigt när man vill logga in från flera olika datorer, men ändå se samma bild.
-
-
-
-#### Installera git
-
-
-För att lättare kunna driftsätta våra git-repon installerar vi även git med kommandot `sudo apt-get install git`.
-
-
-
-### Ett Express API
-
-**Från detta steget utvecklar du lokalt på din dator.**
 
 Modulen [Express finns på npm](https://www.npmjs.com/package/express). Express är en del av [MEAN](http://mean.io/) som är en samling moduler för att bygga webbapplikationer med Node.js. I denna artikeln kommer vi att använda Express (E) och Node.js (N) i MEAN.
 
@@ -831,12 +594,6 @@ db.run("INSERT INTO users (email, password) VALUES (?, ?)",
 
 
 
-#### sqlite3 på servern
-
-För att detta ska fungera på din droplet måste vi installera `sqlite3` innan vi kör `npm install`. Vi gör detta med `sudo apt-get install sqlite3` som vår `deploy` användare. Vi kan nu hämta senaste versionen av vårt API med `git pull` och köra `npm install` för att installera det nya paketet. Vi behöver även skapa databas filen `db/texts.sqlite` och köra migrations filen.
-
-
-
 #### Säker hantering av lösenord
 
 När vi sparar lösenord i en databas vill göra det så säkert som möjligt. Därför använder vi [bcrypt](https://codahale.com/how-to-safely-store-a-password/).
@@ -959,112 +716,6 @@ Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa t
 
 
 
-### Driftsättning
-
-Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog `~/git` där jag klonar mitt repo till. När du har klonat repot kan du göra `npm install` så alla moduler är installerat.
-
-För att våra klienter ska komma åt API:t ser vi till att driftsätta det på vår server. Vi ska använda oss av det som kallas en nginx reverse proxy för att trafiken utifrån på port 80 eller 443 (vanliga portarna för HTTP och HTTPS) ska skickas till vårt API som ligger och lyssnar på en annan port.
-
-När vi installerade nginx fick vi med oss ett antal olika kataloger och konfigurationsfiler. I katalogen `/var/www` kommer vi skapa kataloger för de webbplatser vi vill skapa på vår server. Vi börjar med att logga in på servern som `deploy` och skapar en katalog för vårt API.
-
-Jag kommer i följande exempel utgå ifrån min konfiguration på servern [jsramverk.se](https://jsramverk.se) där mitt API ligger på subdomänen [me-api.jsramverk.se](https://me-api.jsramverk.se).
-
-Jag skapar alltså katalogen `/var/www/me-api.jsramverk.se/html` enklast med kommandot `sudo mkdir -p /var/www/me-api.jsramverk.se/html`. Denna katalog kommer inte användas för filer, men vi kommer använda den i ett senare skede när vi vill spara ett certifikat för HTTPS trafik till vårt API.
-
-Jag har satt i gång API:t med kommandot `npm run production` och API:t ligger och lyssnar på port 8333. Den reverse proxy som vi skapar i följande stycke lyssnar i första skedet på port 80 och skickar vidare förfrågningarna till 8333.
-
-I katalogen `/etc/nginx/sites-available` skapar vi en konfigurationsfil `me-api.jsramverk.se` genom att kopiera standard konfiguration från filen `default` och öppna upp filen i text editorn nano. Vi gör det med följande kommandon.
-
-```shell
-$cd /etc/nginx/sites-available
-$sudo cp default me-api.jsramverk.se
-$sudo nano me-api.jsramverk.se
-```
-
-I filen klistrar vi in följande konfiguration. Först skapar vi en server med namnet me-api.jsramverk.se. Vi skapar därefter två stycken `location`. Det är routes där vi vill att nått speciellt ska hända. Den första är för en fil relaterad till det certifikat vi ska installera om ett ögonblick för att fixa HTTPS till vår server. Den andra `location /` är alla andra routes som ska skickas till `http://localhost:8333` där vårt API ligger och lyssnar. Detta kallas en reverse proxy och användas i många sammanhang för att kopplat förfrågningar på port 80 till en annan port. En reverse proxy används då man inte vill öppna portarna utåt, men vill låta nginx ta hand om detta.
-
-```shell
-server {
-    server_name me-api.jsramverk.se;
-
-    location /.well-known {
-        alias /var/www/me-api.jsramverk.se/html/.well-known;
-    }
-
-    location / {
-        proxy_pass http://localhost:8333;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    listen 80;
-}
-```
-
-Vi sparar filen genom att trycka `Ctrl-X` och skriva in ett y + Enter. Vi skapar sedan en symbolisk länk i katalogen `/etc/nginx/sites-enabled` till vår konfigurations fil för att sidan blir tillgänglig.
-
-```shell
-$cd /etc/nginx/sites-enabled
-$sudo ln -s /etc/nginx/sites-available/me-api.jsramverk.se
-```
-
-Vi vill sedan testa om konfigurationen är korrekt och sedan starta om nginx och det gör vi med följande kommandon.
-
-```shell
-$sudo nginx -t
-$sudo service nginx restart
-```
-
-För att internet ska veta att vi har en server som ligger här och vill svara på förfrågningar skapar vi en subdomän i Digital Ocean gränssnittet. Gå till Networking och välj din domän skriv sedan in din subdomän välj din droplet och skapa subdomänen.
-
-![Digital Ocean subdomän](https://dbwebb.se/image/ramverk2/do-subdomain.png?w=w3)
-
-Det ska nu gå att se ett JSON svar från API:t om vi går till vår subdomän. Ibland kan det ta en liten stund innan subdomäner kommer på plats, så avvakta lite grann om det inte syns direkt.
-
-
-
-#### Process manager
-
-Vi vill i mångt och mycket automatisera hur vi startar, uppdaterar och startar om våra nodejs applikationer. För detta ändamålet använder vi en process manager. Det finns ett antal olika [process managers för express applikationer](https://expressjs.com/en/advanced/pm.html), men jag har valt att använda [PM2](http://pm2.keymetrics.io/).
-
-Vi installerar PM2 med kommandot:
-
-```shell
-$npm install -g pm2
-```
-
-Vi går sedan till katalogen där vi startade vårt me-api och stänger av den node-process vi startade med `npm start` eller `node app.js`. Vi startar istället processen som en pm2 kontext så vi får automatisk omstart och kan göra uppdateringar utan neretid. Vi startar appen i pm2 kontext med följande kommando.
-
-```shell
-$pm2 start app.js --name me-api
-```
-
-Flaggan --name me-api används för att ge processen ett namn. Kan vara bra inför framtiden när vi vill ha flera olika processer igång samtidigt.
-
-
-
-#### HTTPS
-
-Då vi är medvetna om våra användares privatliv vill vi att alla anslutningar till våra tjänster och services sker över HTTPS, som krypterar den data som skickas. Vi behöver därför installera ett certifikat. Vi väljer att använda ett certifikat från [Let's Encrypt](https://letsencrypt.org/) och vi installerar det med tjänsten [Certbot](https://certbot.eff.org/) då vi har tillgång till serverns CLI.
-
-Vi behöver först öppna upp så vi kan installera paket från det som heter APT backports. Vi öppnar upp filen `/etc/apt/sources.list` och letar reda på följande två rader som vi avkommenterar. Raderne brukar finnas längst ner i filen.
-
-```shell
-$deb http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
-$deb-src http://mirrors.digitalocean.com/debian stretch-backports main contrib non-free
-```
-
-Uppdatera apt-get med `sudo apt-get update`. Vi kan nu installera verktyget certbot med kommandot `sudo apt-get install python-certbot-nginx -t stretch-backports`.
-
-Vi startar verktyget genom att köra kommandot `sudo certbot --nginx`. Vi får då välja för vilka domäner och subdomäner vi vill installera certifikat. Efter att vi har vald domänerna får vi frågan om vi vill omdirigera all trafik till HTTPS istället för HTTP och det svarar vi ja till (i certbot gränssnittet motsvarar det en tvåa).
-
-Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.
-
-
-
 ## Kravspecifikation
 
 Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och en del om hur din frontend applikation ska konsumera backend API:t.
@@ -1089,8 +740,6 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
-1. Publicera ditt API publikt och lägg den publika adressen i din inlämning på Canvas.
-
 
 
 #### Del 2: Frontend
@@ -1106,8 +755,6 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 3.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
-
-1. Publicera din Me-applikation publikt och lägg den publika adressen i din inlämning på Canvas. I artikeln [Driftsätta din Me-applikation](deploy-frontend) finns information om hur du driftsätter en Me-applikation i ditt valda frontend ramverk.
 
 
 
