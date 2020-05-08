@@ -54,12 +54,16 @@
         display: block;
         text-align: right;
         position: fixed;
-        top: 13rem;
+        top: 10rem;
     }
 
     .toc ul {
         list-style-type: none;
         font-size: 1.4rem;
+    }
+
+    .breadcrump {
+        margin-bottom: 0;
     }
 }
 
