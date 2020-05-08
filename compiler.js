@@ -63,9 +63,14 @@ const compiler = {
                     let h1Pattern = /<h1>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h1>/gi;
                     let h1 = parsed.match(h1Pattern)[0].replace(/<\/?h1>/g, '');
 
-                    let headerPattern = /<h[1-3]>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h[1-3]>/gi;
+                    let headerPattern = /<h[1-4]>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h[1-4]>/gi;
                     let headers = parsed.match(headerPattern).map((header) => {
-                        return header.replace(/<\/?h\d>/g, '');
+                        let headerNumber = header.match(/\d/i)[0];
+                        let headerText = header.replace(/<\/?h\d>/g, '');
+                        return {
+                            number: headerNumber,
+                            text: headerText,
+                        };
                     });
 
                     let authorPattern = /<p class="author">(.*?)<\/p>/i;
@@ -188,14 +193,14 @@ const compiler = {
 
         headers.forEach((header) => {
             let slug = slugify(
-                header.toLowerCase(),
+                header.text.toLowerCase(),
                 {
                     remove: /[*+~.()'"!:@]/g,
                     lower: true
                 }
             );
 
-            output += `<li><a href='#${slug}'>${header}</a></li>`;
+            output += `<li class='${header.number > 3 ? "small" : ""}'><a href='#${slug}'>${header.text}</a></li>`;
         });
         output += "</ul></nav>";
 
