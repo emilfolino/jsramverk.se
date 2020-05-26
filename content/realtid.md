@@ -40,7 +40,7 @@ Exempelkod för både server och klienter finns under `/socket` i GitHub-repot [
 
 
 
-#### Server
+### Server
 
 socket.io [server API dokumentationen](https://socket.io/docs/server-api/) är en bra start för att bekanta sig med vilket API socket.io servern exponerar.
 
@@ -76,7 +76,7 @@ Starta servern med kommandot `node app.js` och sen tar vi en titt på hur vi med
 
 
 
-#### Klient
+### Klient
 
 socket.io [klient API dokumentationen](https://socket.io/docs/client-api/) är en bra start för att bekanta sig med vilket API socket.io klienten exponerar.
 
@@ -222,7 +222,7 @@ socket.on('connect', function() {
 });
 ```
 
-#### Tillbaka till servern
+### Tillbaka till servern
 
 På servern använder vi sedan eventet `socket.on('chat message')` för att ta emot meddelandet från klienten. För enkelhetens skull skickar vi sedan tillbaka meddelandet till samtliga uppkopplade klienter, inklusive den klienten som skickade meddelandet, med hjälp av `emit` funktionen. Nedan syns koden för servern i sin helhet.
 
@@ -246,7 +246,7 @@ server.listen(3000);
 
 
 
-#### Visa nya meddelanden i klienten
+### Visa nya meddelanden i klienten
 
 En chatt är inte till mycket nytta om vi inte ser vad de andra klienter skriver. Så varje gång vi får ett meddelande från servern vill vi skriva ut detta. Vi gör detta med eventet `socket.on('chat message')` där meddelandet är skickat med som data till callbacken för eventet. Vi lägger sedan till meddelandet i elementet som visar upp alla meddelanden. Nedan syns koden för klienten i sin helhet.
 
@@ -282,7 +282,7 @@ socket.on('disconnect', function() {
 
 
 
-#### Driftsättning
+### Driftsättning
 
 När vi vill driftsätta vår server och klient ändrar vi de URL'er vi vill koppla oss mot.
 

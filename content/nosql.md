@@ -54,7 +54,7 @@ Följ installationsinstruktionerna under [Driftsättning på servern](#driftsatt
 
 
 
-#### Starta klienten
+### Starta klienten
 
 Det ska nu gå att starta mongodb klienten med kommandot `mongo` i din terminal. Kommandot `help` inne i mongodb klienten ger en översikt över tillgängliga kommandon.
 
@@ -91,7 +91,7 @@ Det finns en manual som hjälper dig igång med [grunderna och baskommandona](ht
 
 
 
-#### Skapa en databas
+### Skapa en databas
 
 Vi prövar att använda klienten för att skapa en databas och lägga in ett dokument i en collection.
 
@@ -159,7 +159,7 @@ Låt oss gå vidare och skapa ett program som använder vår nyskapade databas.
 
 
 
-#### Node till MongoDB
+### Node till MongoDB
 
 Först installerar vi npm-paketet `mongodb` som är en Node driver till databasen MongoDB. Det finns redan i `package.json` så följande kommandon fungerar.
 
@@ -301,7 +301,7 @@ Vi hade också kunnat tänka oss en variant av `findInCollection()` som jobbar m
 
 
 
-#### Vilken asynkron programmeringsteknik är bäst?
+### Vilken asynkron programmeringsteknik är bäst?
 
 Att koda i Node.js innebär asynkron programmering. Det finns olika alternativ till att serialisera flödet där det behövs, eller att göra det mer öppet för parallell exekvering. Asynkron programmering kan kräva lite tid att anpassa sig till, om man är ovan. Man behöver få en känsla för var som är synkront och vad som är asynkront. Man vill få en känsla för hur man kan debugga flödet i en asynkron applikation.
 
@@ -318,7 +318,7 @@ När man tänker asynkrona enhetstester så är det inget större bekymmer. Titt
 
 
 
-#### Express till MongoDB
+### Express till MongoDB
 
 Hur kan det se ut om vi kopplar in databasen MongoDB mot en instans av Express? Låt oss titta på ett exempel i `src/server.js` som exponerar en route `/list` som visar allt innehåll i en collection i databasen.
 

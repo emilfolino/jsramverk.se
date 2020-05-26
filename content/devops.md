@@ -14,7 +14,7 @@ Vi ska i följande stycken först titta på hur vi med hjälp av GitHub Educatio
 
 
 
-#### En server i molnet
+### En server i molnet
 
 Se till att ha din student e-postadress nära till hands då den behövs för att få tillgång till GitHub Education Pack.
 
@@ -36,7 +36,7 @@ Gå sedan till första sidan och tryck 'Get started with a Droplet'. Instruktion
 
 
 
-#### Första 10 minuter på en server
+### Första 10 minuter på en server
 
 Med utgångspunkt i artiklar som [My First 5 Minutes On A Server; Or, Essential Security for Linux Servers](https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers) och [My First 10 Minutes On a Server - Primer for Securing Ubuntu](https://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/) ska vi i följande stycke titta på hur vi säkrar upp en Linux-baserad server av Ubuntu eller Debian variant.
 
@@ -173,7 +173,7 @@ Vårt sista steg är att installera verktyget fail2ban som används för att aut
 
 
 
-#### En domän till din server
+### En domän till din server
 
 Som en del av Github Education Pack får du som student även ett domän-namn på top-domänen .me från registratorn namecheap gratis under ett år. Om du vill använda en annan registrator är det fritt fram.
 
@@ -193,7 +193,7 @@ Vi vill sedan peka domänen till vår droplet och för att komma åt root-domän
 
 
 
-#### Installera programvara
+### Installera programvara
 
 Vi ska i denna del installera programvara för att vi kan köra både frontend och backend applikationer på vår server.
 
@@ -241,7 +241,7 @@ För att lättare kunna driftsätta våra git-repon installerar vi även git med
 
 
 
-### Driftsättning
+## Driftsättning
 
 Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog `~/git` där jag klonar mitt repo till. När du har klonat repot kan du göra `npm install` så alla moduler är installerat.
 
@@ -308,13 +308,13 @@ Det ska nu gå att se ett JSON svar från API:t om vi går till vår subdomän. 
 
 
 
-#### sqlite3 på servern
+### sqlite3 på servern
 
 För att detta ska fungera på din droplet måste vi installera `sqlite3` innan vi kör `npm install`. Vi gör detta med `sudo apt-get install sqlite3` som vår `deploy` användare. Vi kan nu hämta senaste versionen av vårt API med `git pull` och köra `npm install` för att installera det nya paketet. Vi behöver även skapa databas filen `db/texts.sqlite` och köra migrations filen.
 
 
 
-#### Process manager
+### Process manager
 
 När vi har sett till att vår applikation fungerar precis som tänkt vill vi i mångt och mycket automatisera hur vi startar, uppdaterar och startar om våra nodejs applikationer. För detta ändamålet använder vi en process manager. Det finns ett antal olika [process managers för express applikationer](https://expressjs.com/en/advanced/pm.html), men jag har valt att använda [PM2](http://pm2.keymetrics.io/).
 
@@ -334,7 +334,7 @@ Flaggan --name me-api används för att ge processen ett namn. Kan vara bra inf�
 
 
 
-#### HTTPS
+### HTTPS
 
 Då vi är medvetna om våra användares privatliv vill vi att alla anslutningar till våra tjänster och services sker över HTTPS, som krypterar den data som skickas. Vi behöver därför installera ett certifikat. Vi väljer att använda ett certifikat från [Let's Encrypt](https://letsencrypt.org/) och vi installerar det med tjänsten [Certbot](https://certbot.eff.org/) då vi har tillgång till serverns CLI.
 

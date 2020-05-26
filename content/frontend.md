@@ -60,13 +60,13 @@ I nedanstående tabell listas storleken på produktionsfilerna som skapas av ant
 
 ## Flera exempelprogram
 
-#### RealWorld
+### RealWorld
 
 För att ytterligare utvärdera våra valda ramverk tar vi en titt i GitHub repot [RealWorld Example](https://github.com/gothinkster/realworld). RealWorld Example repon är både backend och frontend som uppfyller vissa specifikationer och därför kan sättas ihop villkorligt. Använd dessa repon för att skapa dig en uppfattning om hur frontend ramverken samspelar med backends.
 
 
 
-#### John Papa's Heroes
+### John Papa's Heroes
 
 Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk, videon är länkat ovan. Som förberedelse för presentationen hade han skapat samma app i "The Big Three" och de tre apparna ligger som open source kod på GitHub. [heroes-angular](https://github.com/johnpapa/heroes-angular), [heroes-react](https://github.com/johnpapa/heroes-react) och [heroes-vue](https://github.com/johnpapa/heroes-vue) är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.
 
@@ -80,7 +80,7 @@ Vi tittar i denna del av artikeln på några tekniska koncept som används i de 
 
 
 
-#### Komponenter
+### Komponenter
 
 De fyra ramverk som har valts ut i denna artikel är alla byggda runt komponenter. Komponenter är återanvändbara delar av koden, som i bästa fall inte har några externa beroenden.
 
@@ -88,7 +88,7 @@ I mithril och React är allt JavaScript och komponenterna definieras i JavaScrip
 
 
 
-#### Länkning av data
+### Länkning av data
 
 Vi vill i många applikationer och speciellt i applikationer där data uppdateras ofta länka data i våra modeller till representationen i en vy. I vanilla JavaScript hade vi gjort det genom att varje gång data uppdateras sätta ett nytt värde för ett specifikt element i DOM'en.
 
@@ -123,7 +123,7 @@ Om medlemsvariabeln `current` får ett nytt värde ändras den direkt i den kopp
 
 
 
-#### Routing
+### Routing
 
 I de flesta applikationer vill vi kunna gå mellan olika sidor och då är en router ett bra sätt att delegera och strukturera detta förfarande. I många fall av klient-sida routing använder man hashbang (#!) routing där de två tecknen #! används för att markera att detta är en route. Me-applikationerna som redovisas ovan använder alla någon form av routing.
 
@@ -135,7 +135,7 @@ Ett exempel på en enkel router i vanilla JavaScript kan ses i me-vanilla exempl
 
 
 
-#### Eventhantering och delegering
+### Eventhantering och delegering
 
 JavaScript tillför det dynamiska lagret till webben och en stor del av detta är att hantera användarens klick, skrivande osv. I vanilla JavaScript sköter vi detta med EventListeners.
 
@@ -178,7 +178,7 @@ I react och vue har vi skickat med en click-callback funktion från en annan kom
 
 
 
-#### HTTP-anrop
+### HTTP-anrop
 
 För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I många fall använder ytterligare paket som till exempel [axios](https://www.npmjs.com/package/axios) för att kommunicera med en backend, vilket ökar komplexiteten och beroenden ytterligare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i webapp. I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
 

@@ -192,15 +192,17 @@ const compiler = {
         let output = "<nav class='toc' id='toc'><ul>";
 
         headers.forEach((header) => {
-            let slug = slugify(
-                header.text.toLowerCase(),
-                {
-                    remove: /[*+~.()'"!:@]/g,
-                    lower: true
-                }
-            );
+            if (header.number < 4) {
+                let slug = slugify(
+                    header.text.toLowerCase(),
+                    {
+                        remove: /[*+~.()'"!:@]/g,
+                        lower: true
+                    }
+                );
 
-            output += `<li class='${header.number > 3 ? "small" : ""}'><a href='#${slug}'>${header.text}</a></li>`;
+                output += `<li class='${header.number > 2 ? "small" : ""}'><a href='#${slug}'>${header.text}</a></li>`;
+            }
         });
         output += "</ul></nav>";
 

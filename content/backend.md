@@ -358,7 +358,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 
 
-#### Middleware - CORS och loggning
+### Middleware - CORS och loggning
 
 I express finns termen "middleware" som benämning på callbacks som anropas innan själva routens hanterare anropas. En middleware kan också vara en hanterare som alltid anropas för alla routes.
 
@@ -404,7 +404,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 
 
-#### Cross-Origin Resource Sharing (CORS)
+### Cross-Origin Resource Sharing (CORS)
 
 Då vi vill att vårt API ska kunna konsumeras av många olika klienter vill vi tillåta att klienter från andra domäner kan hämta information från vårt API. Vi gör även detta med en tredjepartsmodul `cors`, som vi installerade i början av artikeln. På samma sätt som för `morgan` använder vi den inbyggda middleware och använder funktionen `use`.
 
@@ -511,7 +511,7 @@ Kom ihåg att en sådan här felhanterare är som all annan middleware och det �
 
 
 
-#### Uppdelning av routes
+### Uppdelning av routes
 
 Med tanke på de få routes vi kommer ha tillgängliga i våra API:er hade det inte varit helt orimligt att ha al hantering i `app.js`, men vi väljer ändå att dela upp våra routes då vi gillar bra struktur inför framtida uppskalningar.
 
@@ -604,7 +604,7 @@ db.run("INSERT INTO users (email, password) VALUES (?, ?)",
 
 
 
-#### Säker hantering av lösenord
+### Säker hantering av lösenord
 
 När vi sparar lösenord i en databas vill göra det så säkert som möjligt. Därför använder vi [bcrypt](https://codahale.com/how-to-safely-store-a-password/).
 
@@ -648,7 +648,7 @@ bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
 
 
 
-#### JSON Web Tokens
+### JSON Web Tokens
 
 Vi har i tidigare kurser använt både sessioner och tokens för att autentisera klienter mot en server. Vi ska i detta stycke titta på hur vi implementerar logiken bakom att skicka JSON Web Tokens från servern till en klient. Vi använder modulen `jsonwebtoken` som vi installerar med kommandot `npm install jsonwebtoken --save` och [dokumentationen finns på npm](https://www.npmjs.com/package/jsonwebtoken).
 
@@ -717,7 +717,7 @@ Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kurs
 
 
 
-#### Exempelkod
+### Exempelkod
 
 Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth](https://github.com/emilfolino/auth) eller [Lager API:t](https://github.com/emilfolino/order_api) från [webapp-kursen](https://dbwebb.se/kurser/webapp-v3) bra exempel.
 
@@ -729,7 +729,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 
 
-#### Del 1: Backend
+### Del 1: Backend
 
 1. Skapa ett Me-API med nedanstående router.
 
@@ -753,7 +753,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 
 
-#### Del 2: Frontend
+### Del 2: Frontend
 
 1. Din frontend Me-applikation ska hämta innehåll från Me-API:t.
 

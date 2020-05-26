@@ -22,7 +22,7 @@ Vi börjar med att skapa oss en överblick över olika verktyg för testning och
 
 
 
-#### Enhetstestning
+### Enhetstestning
 
 På engelska blir det _unit testing_ ([Wikipedia om Unit Testing](https://en.wikipedia.org/wiki/Unit_testing)) och det handlar om att testa varje enhet av kod för sig själv. Det är _white box testing_ ([Wikipedia om White box testing](https://en.wikipedia.org/wiki/White-box_testing)) eftersom vi har full insyn i koden vi testar. Vi kan se källkoden och vi kan se att våra testfall verkligen exekverar alla delar av koden, förutsatt att vi använder oss av verktyg för kodtäckning, code coverage ([Wikipedia om Code Coverage](https://en.wikipedia.org/wiki/Code_coverage)). Att se kodtäckningen är viktigt i enhetstesterna, annars gör vi det onödigt svårt för oss. Kodtäckning är också ett sätt att visa för utomstående hur mycket av kodbasen som är testad via enhetstester. Att nå 100% i kodtäckning är bra, men man nöjer sig ofta med 70%. Hur mycket kodtäckning man kan få är också beroende av hur testbar koden är. Är koden inte skriven för att vara testbar så kan man ge sig på att det är svårt att skriva testfall i enhetstester och uppnå hög kodtäckning.
 
@@ -40,7 +40,7 @@ Varje testfall skall kunna köras isolerat från alla andra testfall. Man behöv
 
 
 
-#### Testdriven utveckling
+### Testdriven utveckling
 
 TDD är förkortningen av testdriven utveckling ([Wikipedia om Test-driven development](https://en.wikipedia.org/wiki/Test-driven_development)) som är en utvecklingsprocess som säger att man börjar skriva ett eller flera testfall och därefter skriver man koden för att lösa testfallen.
 
@@ -61,7 +61,7 @@ TDD får oss att skriva koden som löser testfallen, möjligen får det oss att 
 
 
 
-#### Behaviour driven utveckling
+### Behaviour driven utveckling
 
 BDD är en vidareutveckling av TDD och står för Beteende-driven utveckling ([Wikipedia om Behavior-driven development](https://en.wikipedia.org/wiki/Behavior-driven_development))
 BDD. En intressant del i BDD är att man diskuterar systemet i features som skrivs ned i ett textdokument. Dessa features dokumenteras på ett sätt så att både programmerare och systemets slutanvändare och ledning kan förstå dem. Det blir ett material där verksamhetens olika roller kan diskutera hur systemet skall fungera. Man får ett egen språk att samtala om systemet.
@@ -92,7 +92,7 @@ BDD kan vara en bra utvecklingmetodik som driven utvecklingen via testbar kod oc
 
 
 
-#### Funktionstester
+### Funktionstester
 
 Låt oss benämna funktionstester ([Wikipedia om Functional testing](https://en.wikipedia.org/wiki/Functional_testing)) som testar en feature, en systemfunktion. Ta ett exempel att "registrera en ny användare". Ett sådant test innebär att man utför de steg som krävs för att registrera en användare. Det kan vara genom att använda ett grafiskt användargränssnitt (GUI), eller genom ett CLI-interface (Commandline interface) eller via ett API i koden eller ett publikt API via REST.
 
@@ -182,7 +182,7 @@ Resultatet du ser är körningen av samtliga enhetstester. Men hur väl lyckas v
 
 
 
-#### Kodtäckning vid enhetstestning
+### Kodtäckning vid enhetstestning
 
 När man kör enhetstester är man i princip beroende av ett verktyg som kan visa kodtäckningen för testfallen. Här väljer jag verktygen [Istanbul](https://istanbul.js.org/). I katalogen `/test/unittest-mocha-istanbul` har jag utökat mitt exempel med att använda Istanbul tillsammans med Mocha.
 
@@ -336,7 +336,7 @@ Vi kör testarna på samma sätt som tidigare med `npm test` och får på samma 
 
 
 
-#### Testdatabas
+### Testdatabas
 
 Om vi har tester som påverkar databasen vill inte att dessa ska påverka utvecklingsdatabasen och definitivt inte produktionsdatabasen. Därför är det starkt rekommenderat att du skapar en testdatabas. Ett enkelt sätt att returnera korrekt databas beroende på `NODE_ENV` är att skapa en fil `db/database.js`, som gör precis detta. Ett exempel syns nedan där rätt databas returneras beroende på `NODE_ENV`.
 
@@ -380,13 +380,13 @@ Där `db/migrate.sql` innehåller kod för att skapa tabeller i databasen.
 
 
 
-#### Exempel
+### Exempel
 
-I [repot för Lager API:t](https://github.com/emilfolino/order_api/tree/master/test) som användes i kursen webapp finns det integrationstester med `chai` och `chai-http`. Ta en titt på detta för att se hur det kan se ut med fler testfall.
+I repona för [auth](https://github.com/emilfolino/auth/tree/master/test) och [Lager API:t](https://github.com/emilfolino/order_api/tree/master/v2/test) som användes i kursen webapp finns det integrationstester med `chai` och `chai-http`. Ta en titt på detta för att se hur det kan se ut med fler testfall.
 
 
 
-#### Statisk kodvalidering
+### Statisk kodvalidering
 
 Denna vecka handlar om tester, men låt oss ta ett litet sidospår och säkerställa att vi även har validering av koden vi skriver, vi vill ha validering av kodstil och en linter. Det finns ett förberett exempel under `/test/validate`.
 
@@ -450,7 +450,7 @@ Vi behöver en kodbas att testa, jag har klippt och klistrat ihop två av exempe
 
 
 
-#### Selenium i JavaScript
+### Selenium i JavaScript
 
 Jag gjorde ett testprogram i `test/functiontest-selenium` för att se hur det fungerade.
 
@@ -678,7 +678,7 @@ Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `/test/ci` och
 
 
 
-#### Byggverktyget Travis
+### Byggverktyget Travis
 
 Först tar vi en titt på byggsystemet [Travis](https://travis-ci.org/janaxs/blackjack). Syftet med et byggsystem är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
 
@@ -692,7 +692,7 @@ Mikael visar i följande video hur han gör det för modulen rem-server.
 
 
 
-#### Kodkvalitet och kodtäckning med Scrutinizer
+### Kodkvalitet och kodtäckning med Scrutinizer
 
 Avslutningsvis integrerar jag mitt repo mot [Scrutinizer](https://scrutinizer-ci.com/g/janaxs/blackjack/) som är ett verktyg för kodkvalitet och kodtäckning. Verktyget kan exekvera mina tester, visa kodtäckning och analysera min kod ur olika aspekter.
 
@@ -706,7 +706,7 @@ Mikael visar i följande video hur han gör det för modulen rem-server.
 
 
 
-#### CI kedja klar
+### CI kedja klar
 
 Då var vår CI kedja klar med flera alternativ för byggsystem, kodtäckning och kodkvalitet.
 
@@ -722,7 +722,7 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 
 
-#### Backend
+### Backend
 
 1. Allt som behövs i ditt repo skall installeras vid `npm install`.
 
@@ -740,7 +740,7 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 
 
-#### Frontend
+### Frontend
 
 1. Lägg till routen `/reports/week/4` där beskriver tre (3) stycken simpla use-cases och skriv sedan Selenium tester för att testa dessa use-cases. Data att fylla sidan sidan ska som vanligt komma från Me-API:t.
 
