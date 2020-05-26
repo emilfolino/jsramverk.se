@@ -1,7 +1,11 @@
 .footer {
     background-color: $lightCharcoal;
-    padding: 2rem;
+    padding: 1rem;
     color: white;
+
+    p {
+        margin-bottom: 0;
+    }
 
     a {
         color: white;
