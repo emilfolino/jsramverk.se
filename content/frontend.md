@@ -115,6 +115,8 @@ export default {
             current: 0,
         }
     },
+}
+</script>
 ```
 
 Om medlemsvariabeln `current` får ett nytt värde ändras den direkt i den kopplade template. I vanilla JavaScript gör vi en explicit koppling och uppdatering av data och i de ramverk som har valts ut är det en implicit koppling och uppdatering.
@@ -198,7 +200,7 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
-1. Länka till ditt GitHub repo i din inlämning på Canvas.
+1. Länka till ditt GitHub repo i en kommentar till din inlämning på Canvas.
 
 
 
@@ -218,7 +220,7 @@ Du får skriva inledningen på antigen svenska eller engelska. Du väljer själv
 
 
 
-#### Sammanfattning
+## Sammanfattning
 
 Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för [django](https://www.djangoproject.com/) pratar om hur vi inte alltid behöver ett JavaScript ramverk.
 

@@ -6,6 +6,16 @@ Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjä
 
 
 
+## Läsa
+
+Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation från förra veckan med ett formulär. Nielsen Norman Group är världsledande inom forskningsbaserad User Experience (UX). Följande två artiklar har bra riktlinjer för att skapa formulär.
+
+[Website Forms Usability: Top 10 Recommendations](https://www.nngroup.com/articles/web-form-design/)
+
+[A Checklist for Registration and Login Forms on Mobile](https://www.nngroup.com/articles/checklist-registration-login/)
+
+
+
 ## Titta
 
 Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite extra bra koll på hur "Event-loop" fungerar i JavaScript. Denna video ger en bra introduktion till hur det fungerar både för frontend och backend.
@@ -157,7 +167,7 @@ $curl localhost:1337
 
 #### Automatisk omstart av node-appen
 
-Vi det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
+Vid det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
 
 ```shell
 $npm install -g nodemon
@@ -257,7 +267,7 @@ app.delete("/user", (req, res) => {
 });
 ```
 
-Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. För se innebörden av alla HTTP status koder finns [följande lista](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. Innebörden av alla HTTP status koder finns [följande lista](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 
 
@@ -546,7 +556,7 @@ På det sättet håller vi `app.js` liten i storlek och var sak har sin plats.
 
 Vi vill koppla vårt API mot en databas för att vi ska kunna hämta och spara data där istället för att bara ha statisk data. I denna del av kursen väljer vi att använda den filbaserade relationsdatabasen SQLite. Senare i kursen kommer vi bekanta oss med [Dokument-orienterade databaser](nosql).
 
-Om du inte har SQLite installerat på din utvecklingsdator installera det via XAMPP eller pakethanteraren i ditt operativsystem.
+Om du inte har SQLite installerat på din utvecklingsdator installera det via ett installationspaket eller pakethanteraren i ditt operativsystem.
 
 För att kunna spara användare och så småningom redovisningstexter installerar vi npm modulen node-sqlite3 i vårt me-api repo med följande kommando. [Dokumentationen för modulen](https://www.npmjs.com/package/sqlite3) är som alltid vår bästa vän.
 
@@ -606,8 +616,6 @@ $npm install --global --production windows-build-tools
 
 Vi installerar bcrypt paketet med npm med hjälp av kommandot `npm install bcryptjs --save`. [Dokumentationen för modulen](https://www.npmjs.com/package/bcryptjs) är som alltid vår bästa vän.
 
-
-
 För att hasha ett lösenord med bcrypt modulen importerar vi först modulen och sedan använder vi `bcrypt.hash` funktionen. Antal `saltRounds` definierar hur svåra lösenord vi vill skapa. Ju fler `saltRounds` är svårare att knäcka, men tar också längre tid att skapa och jämföra.
 
 ```javascript
@@ -642,8 +650,7 @@ bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
 
 #### JSON Web Tokens
 
-Vi har i tidigare kurser använt både sessioner och tokens för att autentisera klienter mot en server. Vi ska i detta stycke titta på hur vi implementerar logiken bakom att skicka JSON Web Tokens från servern till en klient. Vi använder modulen jsonwebtoken som vi installerar med kommandot `npm install jsonwebtoken --save` och [dokumentationen finns på npm](https://www.npmjs.com/package/jsonwebtoken).
-
+Vi har i tidigare kurser använt både sessioner och tokens för att autentisera klienter mot en server. Vi ska i detta stycke titta på hur vi implementerar logiken bakom att skicka JSON Web Tokens från servern till en klient. Vi använder modulen `jsonwebtoken` som vi installerar med kommandot `npm install jsonwebtoken --save` och [dokumentationen finns på npm](https://www.npmjs.com/package/jsonwebtoken).
 
 Vi använder här de två funktioner `sign` och `verify`.
 
@@ -712,7 +719,7 @@ Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kurs
 
 #### Exempelkod
 
-Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [Lager API:t](https://github.com/emilfolino/order_api) från webapp kursen ett bra exempel.
+Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth](https://github.com/emilfolino/auth) eller [Lager API:t](https://github.com/emilfolino/order_api) från [webapp-kursen](https://dbwebb.se/kurser/webapp-v3) bra exempel.
 
 
 
@@ -728,11 +735,15 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Se till att det finns en `package.json` i katalogen. Filen skall innehålla alla beroenden som krävs.
 
+1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och starter ditt Me-API.
+
 1. Skapa routen `GET /` där du ger en presentation av dig själv.
 
-1. Skapa routerna `GET /reports/week/1`, `GET /reports/week/2` och `GET /reports/week/3`, som innehåller data för att fylla motsvarande sidor i din Me-applikation.
+1. Skapa routerna `GET /reports/week/1`, `GET /reports/week/2`, som innehåller data/text för att fylla motsvarande sidor i din Me-applikation.
 
-1. Skapa routerna `POST /register` och `POST /login` för att registrera en användare och logga in. Data du sparar om användare ska vara samma om du hade i registreringsformuläret förra veckan.
+1. `GET /reports/week/2` ska innehålla en länk till GitHub repot och innehållet från din `README.md` fil.
+
+1. Skapa routerna `POST /register` och `POST /login` för att registrera en användare och logga in.
 
 1. Skapa routen `POST /reports` för att lägga till data. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.
 
@@ -746,15 +757,17 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Din frontend Me-applikation ska hämta innehåll från Me-API:t.
 
-1. Koppla registreringsformuläret från förra vecka till Me-API:t.
+1. Skapa ett registreringsformulär för registrering av användare i Me-API:t.
 
 1. Skapa ett inloggningsformulär för att kunna autentisera användare mot API:t.
 
 1. När en användare är inloggat ska det gå att skapa nya texter för kommande veckor och redigera befintliga texter.
 
-1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 3.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
+1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 2.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
+
+1. Länka till båda dina GitHub repon i en kommentar till din inlämning på Canvas.
 
 
 
