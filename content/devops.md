@@ -316,7 +316,7 @@ För att detta ska fungera på din droplet måste vi installera `sqlite3` innan 
 
 #### Process manager
 
-Vi vill i mångt och mycket automatisera hur vi startar, uppdaterar och startar om våra nodejs applikationer. För detta ändamålet använder vi en process manager. Det finns ett antal olika [process managers för express applikationer](https://expressjs.com/en/advanced/pm.html), men jag har valt att använda [PM2](http://pm2.keymetrics.io/).
+När vi har sett till att vår applikation fungerar precis som tänkt vill vi i mångt och mycket automatisera hur vi startar, uppdaterar och startar om våra nodejs applikationer. För detta ändamålet använder vi en process manager. Det finns ett antal olika [process managers för express applikationer](https://expressjs.com/en/advanced/pm.html), men jag har valt att använda [PM2](http://pm2.keymetrics.io/).
 
 Vi installerar PM2 med kommandot:
 
