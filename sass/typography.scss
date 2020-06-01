@@ -95,8 +95,17 @@ blockquote p {
 }
 
 .optional {
+    border-left: 4px solid $minionYellow;
+    background-color: lighten($minionYellow, 25%);
+    padding: $mainPFontSize * $mainLineHeight;
+    margin-bottom: $mainPFontSize * $mainLineHeight;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     font-weight: bold;
 }
+
+
 
 @media (min-width: 768px) {
     .main-title {
@@ -138,5 +147,10 @@ blockquote p {
     blockquote p {
         font-size: $mainPFontSize * $fontScaleFactor * $fontScaleFactor;
         margin-bottom: 0;
+    }
+
+    .optional {
+        padding: $mainPFontSize * $mainLineHeight * $fontScaleFactor;
+        margin-bottom: $mainPFontSize * $mainLineHeight * $fontScaleFactor;
     }
 }
