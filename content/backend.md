@@ -1,6 +1,6 @@
 # Backend
 
-<p class="author">Emil Folino</p>
+<p class="author">Emil Folino och Mikael Roos</p>
 
 Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Vi vänder oss till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express.
 
@@ -21,6 +21,12 @@ Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation f
 Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite extra bra koll på hur "Event-loop" fungerar i JavaScript. Denna video ger en bra introduktion till hur det fungerar både för frontend och backend.
 
 <div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/8aGhZQkoFbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+
+
+## Exempelkod
+
+Om ni vill titta på två fullständiga exempelprogram som använder alla dessa tekniker är [auth](https://github.com/emilfolino/auth) eller [Lager API:t](https://github.com/emilfolino/order_api) från [webapp-kursen](https://dbwebb.se/kurser/webapp-v3) bra exempel.
 
 
 
@@ -167,7 +173,7 @@ $curl localhost:1337
 
 #### Automatisk omstart av node-appen
 
-Vid det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
+Vid det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat i koden, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
 
 ```shell
 $npm install -g nodemon
@@ -267,7 +273,7 @@ app.delete("/user", (req, res) => {
 });
 ```
 
-Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. Innebörden av alla HTTP status koder finns [följande lista](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. Innebörden av alla HTTP status koder finns i [följande lista](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 
 
@@ -714,12 +720,6 @@ I Postman väljer vi att fylla i body fliken istället för params fliken.
 Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kursen webapp hur man kan skicka lösenord med [postman](https://www.getpostman.com/). postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.
 
 ![Postman](https://dbwebb.se/image/ramverk2/postman-headers.png?w=c18)
-
-
-
-### Exempelkod
-
-Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth](https://github.com/emilfolino/auth) eller [Lager API:t](https://github.com/emilfolino/order_api) från [webapp-kursen](https://dbwebb.se/kurser/webapp-v3) bra exempel.
 
 
 
