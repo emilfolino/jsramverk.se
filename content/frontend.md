@@ -8,13 +8,7 @@ Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och 
 
 ## Läsa
 
-Följande länkar är bra att ha för undersökande och implementation.
-
-1. [Angular](https://angular.io/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
-
-1. [React](https://reactjs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
-
-1. [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
+Följande länkar är bra att ha för undersökande och implementation. [Angular](https://angular.io/), [React](https://reactjs.org/) och [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
 
 
 
@@ -28,9 +22,9 @@ I nedanstående video berättar John Papa om hur man kan tänka när man väljer
 
 ## Material och tekniker
 
-I [kursrepot](https://github.com/emilfolino/jsramverk) finns två olika exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
+I [kursrepot](https://github.com/emilfolino/jsramverk) finns två exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
 
-Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa 5 Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.se`. Du kommer under [vecka 3](backend) bygga ett eget Me-API.
+Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa fem Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.se`. Du kommer under [vecka 2](backend) bygga ett eget Me-API.
 
 Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.
 
@@ -41,8 +35,8 @@ I nedanstående tabell listas de rader kod som utvecklaren har skrivit för att 
 |  | Angular | Mithril | React | Vue | Vanilla JS |
 |-----|--------|--------|--------|---------|--------|
 | calculator  | 112 | 103 | 133 | 98 | 118 |
-| me   | 166 | 107 | 117 | 134 | 92 |
 | tic-tac-toe | 196 | 136 | 146 | 172 | 126 |
+| me   | 166 | 107 | 117 | 134 | 92 |
 
 
 
@@ -53,8 +47,8 @@ I nedanstående tabell listas storleken på produktionsfilerna som skapas av ant
 |  | Angular | Mithril | React | Vue | Vanilla JS |
 |-----|--------|--------|--------|---------|--------|
 | calculator  | 217K | 30K | 115K | 83K | 2.6K |
-| me   | 329K | 29K | 134K | 106K | 2.2K |
 | tic-tac-toe | 222K | 29K | 37K | 87K | 2.8K |
+| me   | 329K | 29K | 134K | 106K | 2.2K |
 
 
 
@@ -180,7 +174,7 @@ I react och vue har vi skickat med en click-callback funktion från en annan kom
 
 ### HTTP-anrop
 
-För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I många fall använder ytterligare paket som till exempel [axios](https://www.npmjs.com/package/axios) för att kommunicera med en backend, vilket ökar komplexiteten och beroenden ytterligare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i webapp. I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
+För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I många fall används ytterligare paket som till exempel [axios](https://www.npmjs.com/package/axios) för att kommunicera med en backend, vilket ökar komplexiteten och beroenden ytterligare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i kursen webapp. I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
 
 
 
