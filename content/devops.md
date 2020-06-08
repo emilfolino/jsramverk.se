@@ -241,11 +241,13 @@ För att lättare kunna driftsätta våra git-repon installerar vi även git med
 
 
 
-## Driftsättning
+## Driftsättning av backend
 
-Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog `~/git` där jag klonar mitt repo till. När du har klonat repot kan du göra `npm install` så alla moduler är installerat.
+Vi börjar med att klona vårt repo till servern. Använd https länken när du klonar för enklast hantering. Jag har skapat en katalog `~/git` där jag klonar mitt repo till.
 
-För att våra klienter ska komma åt API:t ser vi till att driftsätta det på vår server. Vi ska använda oss av det som kallas en nginx reverse proxy för att trafiken utifrån på port 80 eller 443 (vanliga portarna för HTTP och HTTPS) ska skickas till vårt API som ligger och lyssnar på en annan port.
+Vi installerar först `sqlite3` på servern innan vi kan köra `npm install`. Vi gör detta med `sudo apt-get install sqlite3` som vår `deploy` användare. Vi kan nu hämta senaste versionen av vårt API med `git pull` och köra `npm install` för att installera det nya paketet. Vi behöver även skapa databas filen `db/texts.sqlite` och köra migrations filen.
+
+För att våra klienter ska komma åt API:t ser vi till att driftsätta det på vår server. Vi ska använda oss av det som kallas en "nginx reverse proxy" för att trafiken utifrån på port 80 eller 443 (vanliga portarna för HTTP och HTTPS) ska skickas till vårt API som ligger och lyssnar på en annan port.
 
 När vi installerade nginx fick vi med oss ett antal olika kataloger och konfigurationsfiler. I katalogen `/var/www` kommer vi skapa kataloger för de webbplatser vi vill skapa på vår server. Vi börjar med att logga in på servern som `deploy` och skapar en katalog för vårt API.
 
@@ -308,12 +310,6 @@ Det ska nu gå att se ett JSON svar från API:t om vi går till vår subdomän. 
 
 
 
-### sqlite3 på servern
-
-För att detta ska fungera på din droplet måste vi installera `sqlite3` innan vi kör `npm install`. Vi gör detta med `sudo apt-get install sqlite3` som vår `deploy` användare. Vi kan nu hämta senaste versionen av vårt API med `git pull` och köra `npm install` för att installera det nya paketet. Vi behöver även skapa databas filen `db/texts.sqlite` och köra migrations filen.
-
-
-
 ### Process manager
 
 När vi har sett till att vår applikation fungerar precis som tänkt vill vi i mångt och mycket automatisera hur vi startar, uppdaterar och startar om våra nodejs applikationer. För detta ändamålet använder vi en process manager. Det finns ett antal olika [process managers för express applikationer](https://expressjs.com/en/advanced/pm.html), men jag har valt att använda [PM2](http://pm2.keymetrics.io/).
@@ -334,7 +330,209 @@ Flaggan --name me-api används för att ge processen ett namn. Kan vara bra inf�
 
 
 
-### HTTPS
+## Driftsättning av frontend
+
+Vi vill även driftsätta vår frontend applikation vi har skapat med hjälp av dessa ramverken på vår server.
+
+
+
+#### Domän
+
+Vi vill i de flesta fall lägga våra alster på en domän eller subdomän. Vi har redan pekat al trafik från registratorn namecheap till vårt Cloud i Digital Ocean. Vi behöver därför bara skapa en subdomän i Digital Ocean. Vi gör det på samma sätt som i "[Node.js API med Express](kunskap/nodejs-api-med-express)". Gå till Networking och välj din domän skriv sedan in din subdomän välj din droplet och skapa subdomänen.
+
+<img src="https://dbwebb.se/image/ramverk2/do-subdomain.png?w=w3" alt="Digital Ocean subdomän">
+
+Ibland kan det ta en liten stund innan subdomäner kommer på plats, så avvakta lite grann om det inte syns direkt.
+
+
+
+### Angular
+
+För att driftsätta en Angular app krävs att vi har en statisk fil webbserver (static file web server) till exempel nginx. Om appen är skapat med hjälp av `ng` kan vi skapa produktionsfilerna med hjälp av kommandot `ng build --prod`. Vi har då en `dist/` katalog som innehåller en katalog med applikationens namn och där finns filerna som ska användas när vi vill driftsätta.
+
+Vi skapar en site i nginx med följande konfiguration, där du byter ut `[SERVER_NAME]` med det server namn du vill använda. Vi skapar även root katalogen `/var/www/[SERVER_NAME]/html` med kommandot `sudo mkdir -p /var/www/[SERVER_NAME]/html`.
+
+```shell
+server {
+
+        root /var/www/[SERVER_NAME]/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name [SERVER_NAME];
+
+        charset utf-8;
+
+        error_page 404 /index.html;
+
+        location / {
+        }
+}
+```
+
+Skapa en symbolisk länk från `/etc/nginx/sites-enabled` katalogen till din konfigurations-fil i `sites-available`. Kör sedan kommandot `sudo nginx -t` för att testa konfigurationen och `sudo service nginx restart` för att starta om nginx.
+
+Då jag inte vill installera och bygga applikationer på servern väljer jag att använda `rsync` för att överföra filer till servern. Först behöver dock `deploy`-användaren äga och få skriva till katalogen `/var/www/[SERVER_NAME]/html`. Det gör vi med följande kommandon.
+
+```shell
+$sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+$sudo chmod 775 /var/www/[SERVER_NAME]/html
+```
+
+Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare, `[APP_NAME]` är namnet på din applikation.
+
+```json
+"scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "deploy": "ng build --prod && rsync -av dist/[APP_NAME]/* deploy@[SERVER]:/var/www/[SERVER_NAME]/html/"
+},
+```
+
+Vi kan nu köra kommandot `npm run deploy` och applikationen byggas för produktion samt överföras till rätt katalog på servern.
+
+
+
+### Mithril
+
+Då vi i mithril använder webpack för att bygga våra JavaScript fil skapar vi ytterligare ett npm script för att göra en produktionsfil.
+
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "webpack -d",
+  "production": "webpack -p"
+},
+```
+
+Vi kan nu köra kommandot med `npm run production` och då skapas en ny `bundle.js` fil, som är redo för produktion. På samma sätt som för vanilla JavaScript appen använder vi rsync för att föra över de tre filerna till servern. Jag utgår från fil och katalog strukturen som finns exempel katalogen.
+
+```shell
+$rsync -av index.html ../style.css dist/bundle.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
+```
+
+På servern skapar vi en likadan nginx konfigurationsfil, som för ramverken.
+
+
+
+### React
+
+För att driftsätta en React app krävs att vi har en statisk fil webbserver (static file web server) till exempel nginx. Om appen är skapat med hjälp av `create.react-app` kan vi skapa produktionsfilerna med hjälp av kommandot `npm run build`. Vi har då en `build/` katalog som är de filerna som ska användas när vi vill driftsätta.
+
+Vi skapar en site i nginx med följande konfiguration, där du byter ut `[SERVER_NAME]` med det server namn du vill använda. Vi skapar även root katalogen `/var/www/[SERVER_NAME]/html` med kommandot `sudo mkdir -p /var/www/[SERVER_NAME]/html`.
+
+```shell
+server {
+
+        root /var/www/[SERVER_NAME]/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name [SERVER_NAME];
+
+        charset utf-8;
+
+        error_page 404 /index.html;
+
+        location / {
+        }
+}
+```
+
+Skapa en symbolisk länk från `/etc/nginx/sites-enabled` katalogen till din konfigurations-fil i `sites-available`. Kör sedan kommandot `sudo nginx -t` för att testa konfigurationen och `sudo service nginx restart` för att starta om nginx.
+
+Då jag inte vill installera och bygga applikationer på servern väljer jag att använda `rsync` för att överföra filer till servern. Först behöver dock `deploy`-användaren äga och få skriva till katalogen `/var/www/[SERVER_NAME]/html`. Det gör vi med följande kommandon.
+
+```shell
+$sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+$sudo chmod 775 /var/www/[SERVER_NAME]/html
+```
+
+Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare.
+
+```json
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "deploy": "npm run build && rsync -av build/* deploy@[SERVER]:/var/www/[SERVER_NAME]/html/"
+},
+```
+
+Vi kan nu köra kommandot `npm run deploy` och applikationen byggas för produktion samt överföras till rätt katalog på servern.
+
+
+
+### Vanilla JavaScript
+
+För att driftsätta vanilla JavaScript applikationen använde jag uglifyjs för att minifiera koden. Sedan är det ett liknande `rsync` kommando som för de andra apparna. Jag utgår från fil och katalog strukturen som finns exempel katalogen.
+
+```shell
+$uglifyjs main.js -o bundle.min.js
+$rsync -av index.html ../style.css bundle.min.js deploy@[SERVER]:/var/www/[SERVER_NAME]/html/
+```
+
+På servern skapar vi en likadan nginx konfigurationsfil, som för ramverken.
+
+
+
+### Vue
+
+För att driftsätta en Vue app krävs att vi har en statisk fil webbserver (static file web server) till exempel nginx. Om appen är skapat med hjälp av `vue-cli` kan vi skapa produktionsfilerna med hjälp av kommandot `npm run build`. Vi har då en `dist/` katalog som är de filerna som ska användas när vi vill driftsätta.
+
+Vi skapar en site i nginx med följande konfiguration, där du byter ut `[SERVER_NAME]` med det server namn du vill använda. Vi skapar även root katalogen `/var/www/[SERVER_NAME]/html` med kommandot `sudo mkdir -p /var/www/[SERVER_NAME]/html`.
+
+```shell
+server {
+
+        root /var/www/[SERVER_NAME]/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name [SERVER_NAME];
+
+        charset utf-8;
+
+        error_page 404 /index.html;
+
+        location / {
+        }
+}
+```
+
+Skapa en symbolisk länk från `/etc/nginx/sites-enabled` katalogen till din konfigurations-fil i `sites-available`. Kör sedan kommandot `sudo nginx -t` för att testa konfigurationen och `sudo service nginx restart` för att starta om nginx.
+
+Då jag inte vill installera och bygga applikationer på servern väljer jag att använda `rsync` för att överföra filer till servern. Först behöver dock `deploy`-användaren äga och få skriva till katalogen `/var/www/[SERVER_NAME]/html`. Det gör vi med följande kommandon.
+
+```shell
+$sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
+$sudo chmod 775 /var/www/[SERVER_NAME]/html
+```
+
+Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare.
+
+```json
+"scripts": {
+  "serve": "vue-cli-service serve",
+  "build": "vue-cli-service build",
+  "lint": "vue-cli-service lint",
+  "deploy": "npm run build && rsync -av dist/* deploy@[SERVER]:/var/www/[SERVER_NAME]/html/"
+},
+```
+
+Vi kan nu köra kommandot `npm run deploy` och applikationen byggas för produktion samt överföras till rätt katalog på servern.
+
+
+
+## HTTPS
 
 Då vi är medvetna om våra användares privatliv vill vi att alla anslutningar till våra tjänster och services sker över HTTPS, som krypterar den data som skickas. Vi behöver därför installera ett certifikat. Vi väljer att använda ett certifikat från [Let's Encrypt](https://letsencrypt.org/) och vi installerar det med tjänsten [Certbot](https://certbot.eff.org/) då vi har tillgång till serverns CLI.
 
@@ -359,7 +557,7 @@ Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.
 
 1. Driftsätt din Me-applikation och lägg den publika adressen i din inlämning på Canvas.
 
-I artikeln [Driftsätta din Me-applikation](deploy-frontend) finns information om hur du driftsätter en Me-applikation i ditt valda frontend ramverk.
+1. Skriv på routen `/reports/week/3` om hur det gick med driftsättningen av dina applikationer. Vad är den största lärdom om devops-delen av en webbprogrammerares liv du har gjort?
 
 
 
