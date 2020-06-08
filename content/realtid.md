@@ -314,7 +314,7 @@ server {
 }
 ```
 
-Och använder liknande rsync skript för att skicka upp till servern som i [Driftsättning av frontend](https://jsramverk.se/deploy-frontend#driftsattning-av-frontend).
+Och använder liknande rsync skript för att skicka upp till servern som i [Driftsättning av frontend](devops#driftsattning-av-frontend).
 
 I server appen måste vi tillåta inkommande trafik från `https://socket-client.jsramverk.se:443` för att klienten ska kunna kommunicera med servern. Det gör vi genom raden `io.origins(['https://socket-client.jsramverk.se:443']);`, nedan syns hela min server.
 
