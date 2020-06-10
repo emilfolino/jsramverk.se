@@ -214,7 +214,7 @@ Forskningsfrågor skapar grunden för studien och är de frågor vi söker svar 
 
 Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång. Första 4 veckorna är speciellt "[Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte)" ett bra ställe att titta i guiden.
 
-Denna första veckan formulerar du två stycken forskningsfrågor. Frågorna ska ligga inom de ämnen som du ska skriva ditt kommande exjobb inom, dvs. programvaruteknik, datavetenskap eller webbprogrammering. Så ni kan basera frågorna runt mycket av det vi har gått igenom i utbildningen. Exempel på hur man formulerar bra forskningsfrågor kommer visas på föreläsningen.
+Denna första veckan formulerar du två stycken forskningsfrågor. Frågorna ska ligga inom de ämnen som du ska skriva ditt kommande exjobb inom, dvs. programvaruteknik, datavetenskap eller webbprogrammering. Så ni kan basera frågorna runt mycket av det vi har gått igenom i utbildningen. Exempel på hur man formulerar bra forskningsfrågor kommer visas på föreläsningen. Se till att numrera forskningsfrågorna med titeln RQ1 för research question 1.
 
 Se forskningsfrågorna som ett första utkast denna veckan, du får möjlighet att förbättra frågorna kommande veckan.
 

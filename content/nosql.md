@@ -395,7 +395,7 @@ I denna veckans inlämningsuppgift ska både backend och frontend uppdateras så
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på de två föregående veckornas texter och förbättra din forskningsfråga och metod.
+Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på förra veckans metodbeskrivning och förbättra beskrivningen.
 
 Gå tillbaka till skrivguiden och titta under [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod) för bra tips.
 

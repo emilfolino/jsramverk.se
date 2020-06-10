@@ -401,8 +401,12 @@ Titta igenom exemplet och se hur `socket.io` kan användas för annat än en cha
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på förra veckans text och förbättra din forskningsfråga och metod.
+Vi flyttar denna och kommande två veckorna fokus från forskningsfrågorna och syftet till metod. Vi ska nu beskriva för läsaren **HUR** vi har tänkt att genomföra studien.
 
-Gå tillbaka till skrivguiden och titta under [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod) för bra tips.
+I metod beskrivs hur man har tänkt att svara på sina forskningsfrågor. I skrivguiden beskrivs under Uppsatsens delar [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod).
+
+Under föreläsningen presenterar Emil ett antal olika metoder, som kan vara intressanta för området. Nedan finns en översikt, som kan vara bra att luta sig mot. Din uppgift är att för varje forskningsfråga detaljerat beskriva hur du har tänkt besvara frågan. En bra struktur är att börja stycken i metodbeskrivningen med: "För att besvara RQ1 används ...".
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
+
+![Forskningsmetoder](slides/img/metod-all.png)

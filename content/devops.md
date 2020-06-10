@@ -553,9 +553,9 @@ Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.
 
 ## Kravspecifikation
 
-1. Driftsätt ditt me-api enligt ovan och lägg den publika adressen i din inlämning på Canvas.
+1. Driftsätt ditt me-api enligt ovan och lägg den publika adressen i en kommentar till din inlämning på Canvas.
 
-1. Driftsätt din Me-applikation och lägg den publika adressen i din inlämning på Canvas.
+1. Driftsätt din Me-applikation och lägg den publika adressen i en kommentar till din inlämning på Canvas.
 
 1. Skriv på routen `/reports/week/3` om hur det gick med driftsättningen av dina applikationer. Vad är den största lärdom om devops-delen av en webbprogrammerares liv du har gjort?
 
@@ -563,8 +563,12 @@ Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på första och andra veckans text och förbättra din inledning.
+Vi fortsätter med grunden för vår studie. Vi har med forskningsfrågorna beskrivit för våra läsare **VAD** vi vill undersöka. Vi ska denna och kommande veckan beskriva **VARFÖR** och därigenom formulera ett syfte till de två forskningsfrågor vi gjorde tidigare.
 
-Gå tillbaka till skrivguiden och titta under [Inledning](http://skrivguiden.se/skriva/uppsatsens_delar/#inledning) för bra tips.
+Ett syfte i en akademisk text förklarar för läsaren varför studien genomförs och hur de tänkta resultaten kan bidra till att föra området, som studien görs inom vidare. Gå tillbaka till skrivguiden och titta under [Syfte](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips.
+
+För varje forskningsfråga skriver du en text på 5-10 meningar som förklarar **VARFÖR** denna forskningsfrågan är viktig att belysa. Skriv syftet direkt under frågan så man ser att de hör ihop.
+
+I och med att vi börjar få lite mer text blir inlämningen av texten denna och kommande veckor i PDF format. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Textbehandlare (Microsoft Word, Google Docs, Apple Pages, LibreOffice Writer eller liknande), [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
