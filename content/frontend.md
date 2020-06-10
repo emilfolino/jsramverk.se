@@ -198,24 +198,24 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 
 
-## Skriva
-
-Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1, 2 & 3 fokusera på inledningen. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
-
-I ett akademiskt arbete fyller inledningen en viktig funktion. Bakgrunden som är en del av inledningen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till aktuell forskning. Därför är det viktigt att vi i bakgrunden berättar för vår läsare om läget på den aktuella forskningen inom området.
-
-Skriv en kort inledning till det ramverk som du har valt. Använd referenser på ett akademiskt sätt. Se denna texten som ett första utkast, vi kommer under de kommande två veckorna förbättra texten.
-
-Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång. Denna och kommande veckor är avsnittet [Inledning](http://skrivguiden.se/skriva/uppsatsens_delar/#inledning) en bra start.
-
-Du får skriva inledningen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Textbehandlare (Microsoft Word, Google Docs, Apple Pages, LibreOffice Writer eller liknande), [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
-
-**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
-
-
-
 ## Sammanfattning
 
 Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för [django](https://www.djangoproject.com/) pratar om hur vi inte alltid behöver ett JavaScript ramverk.
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/k7n2xnOiWI8" frameborder="0" allowfullscreen></iframe></div>
+
+
+
+## Skriva
+
+Vi ska i denna kurs träna på akademiskt skrivande och förbereda för en studie. Vi kommer i vecka 1 & 2 fokusera på forskningsfrågor. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
+
+Forskningsfrågor skapar grunden för studien och är de frågor vi söker svar på i studien. Al forskning och den vetenskapliga metoden handlar i grunden om att ställa intressanta frågor och sedan på ett metodiskt och reproducerbart sätt jobba fram svaren till dessa frågor. Viktigt med forskningsfrågor är att de är avgränsade, inte är ja/nej frågor och att de är mätbara.
+
+Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång. Första 4 veckorna är speciellt "[Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte)" ett bra ställe att titta i guiden.
+
+Denna första veckan formulerar du två stycken forskningsfrågor. Frågorna ska ligga inom de ämnen som du ska skriva ditt kommande exjobb inom, dvs. programvaruteknik, datavetenskap eller webbprogrammering. Så ni kan basera frågorna runt mycket av det vi har gått igenom i utbildningen. Exempel på hur man formulerar bra forskningsfrågor kommer visas på föreläsningen.
+
+Se forskningsfrågorna som ett första utkast denna veckan, du får möjlighet att förbättra frågorna kommande veckan.
+
+**Lämna in dina frågor som en del av inlämningen på Canvas.**

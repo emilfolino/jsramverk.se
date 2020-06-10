@@ -773,8 +773,8 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på första och andra veckans text och förbättra din inledning.
+Vi fortsätter iterativt med att förbättra våra forskningsfrågor. Använd den återkopplingen du fick på första veckans frågor och förbättra frågorna.
 
-Gå tillbaka till skrivguiden och titta under [Inledning](http://skrivguiden.se/skriva/uppsatsens_delar/#inledning) för bra tips.
+Gå tillbaka till skrivguiden och titta under [Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips.
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
