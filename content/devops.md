@@ -32,7 +32,7 @@ När du är verifierad via GitHub får du tillgång till en rabattkod för Digit
 
 När du har skapat kontot gå till Account längst upp till höger under din användare logga. Gå sedan till Billing fliken och scrolla ner till Promo Code. Här lägger du in rabattkoden du fick från Github Education Pack när du tryckte på länken 'request your offer code'.
 
-Gå sedan till första sidan och tryck 'Get started with a Droplet'. Instruktioner i kommande stycken och resten av kursen kommer utgå från en Debian Stretch (9.x) droplet, så en stark rekommendation är att välja en sån droplet. Jag rekommenderar att ni kör en 10$/månad droplet, då man får bra prestanda och samtidigt inte använder hela rabatten under kursens gång. Välj Frankfurt eller London som region och lägg till din `id_rsa.pub` SSH nyckel så du kan logga in på servern.
+Gå sedan till första sidan och tryck 'Get started with a Droplet'. Instruktioner i kommande stycken och resten av kursen kommer utgå från en Debian Stretch (9.x) droplet, så en stark rekommendation är att välja en sån droplet. Jag rekommenderar att ni kör en 5$/månad droplet, då man får bra prestanda och samtidigt inte använder hela rabatten under kursens gång. Välj Frankfurt eller London som region och lägg till din `id_rsa.pub` SSH nyckel så du kan logga in på servern.
 
 
 
@@ -565,7 +565,9 @@ Vi ska nu se en hänglås i adressfältet om vi uppdaterar i webbläsaren.
 
 Vi fortsätter med grunden för vår studie. Vi har med forskningsfrågorna beskrivit för våra läsare **VAD** vi vill undersöka. Vi ska denna och kommande veckan beskriva **VARFÖR** och därigenom formulera ett syfte till de två forskningsfrågor vi gjorde tidigare.
 
-Ett syfte i en akademisk text förklarar för läsaren varför studien genomförs och hur de tänkta resultaten kan bidra till att föra området, som studien görs inom vidare. Gå tillbaka till skrivguiden och titta under [Syfte](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips.
+Ett syfte i en akademisk text förklarar för läsaren varför studien genomförs och hur de tänkta resultaten kan bidra till att föra området, som studien görs inom vidare. Gå tillbaka till skrivguiden och titta under [Syfte](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips. I [mallen](https://dbwebb.se/kurser/exjobb/guide/mall-for-thesis-dokumentet) som används i [kommande exjobbskurs](https://dbwebb.se/kurser/exjobb) står följande om forskningsfrågor och syfte:
+
+> State the RQ:s, and motivate each of them! Describe the goals/objectives with your study, and the expected outcome. The evaluation of the thesis will be very much towards the clarity of the RQ:s and if you answer the RQ:s in your thesis.
 
 För varje forskningsfråga skriver du en text på 5-10 meningar som förklarar **VARFÖR** denna forskningsfrågan är viktig att belysa. Skriv syftet direkt under frågan så man ser att de hör ihop.
 

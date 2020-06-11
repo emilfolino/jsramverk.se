@@ -407,6 +407,10 @@ I metod beskrivs hur man har tänkt att svara på sina forskningsfrågor. I skri
 
 Under föreläsningen presenterar Emil ett antal olika metoder, som kan vara intressanta för området. Nedan finns en översikt, som kan vara bra att luta sig mot. Din uppgift är att för varje forskningsfråga detaljerat beskriva hur du har tänkt besvara frågan. En bra struktur är att börja stycken i metodbeskrivningen med: "För att besvara RQ1 används ...".
 
+Från exjobbsmallen läser vi följande om den emperiska metoden:
+
+> The method for realisation shall be described in detail! Describe the connection between each research question to be answered and the process of realisation you use for answering each question. It should be possible to understand your set-up for the thesis, and it shall be possible to replicate your study.
+
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
 
 ![Forskningsmetoder](slides/img/metod-all.png)
