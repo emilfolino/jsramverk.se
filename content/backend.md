@@ -466,7 +466,7 @@ $NODE_ENV="production" node app.js
 
 Nu försvann stacktracen från klienten, men den syns fortfarande i terminalen där servern körs.
 
-![I produktion så visas inte stacktrace för klienten.](image/snapvt17/express-error-handling-production.png?w=w2)
+![I produktion så visas inte stacktrace för klienten.](https://dbwebb.se/image/snapvt17/express-error-handling-production.png?w=w2)
 
 Vi ser till att även skapa ett npm skript för att köra i produktion som vi sedan kan använda på servern. Vi kan då köra `npm run production` för att starta i i produktion.
 
