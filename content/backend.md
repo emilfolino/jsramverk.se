@@ -437,7 +437,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 När användaren försöker nå en route som inte finns så blir det ett svar med statuskod 404.
 
-![Ett standard felmeddelande när routen saknas.](image/snapvt17/express-default-404.png?w=w2)
+![Ett standard felmeddelande när routen saknas.](https://dbwebb.se/image/snapvt17/express-default-404.png?w=w2)
 
 Man kan lägga till en egen route som blir en "catch all" och agerar kontrollerad hantering av 404.
 
