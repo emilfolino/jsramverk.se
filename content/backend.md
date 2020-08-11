@@ -763,7 +763,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. När en användare är inloggat ska det gå att skapa nya texter för kommande veckor och redigera befintliga texter.
 
-1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 2.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
+1. Committa alla filer och lägg till en tagg (2.0.0) med hjälp av `npm version 2.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
