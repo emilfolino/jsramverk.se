@@ -257,7 +257,7 @@ app.get("/user", (req, res) => {
 app.post("/user", (req, res) => {
     res.status(201).json({
         data: {
-            msg: "Got a POST request, sending back 201 Created");
+            msg: "Got a POST request, sending back 201 Created"
         }
     });
 });
