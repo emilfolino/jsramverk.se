@@ -301,7 +301,7 @@ Vi hade också kunnat tänka oss en variant av `findInCollection()` som jobbar m
 
 
 
-### Vilken asynkron programmeringsteknik är bäst?
+<!-- ### Vilken asynkron programmeringsteknik är bäst?
 
 Att koda i Node.js innebär asynkron programmering. Det finns olika alternativ till att serialisera flödet där det behövs, eller att göra det mer öppet för parallell exekvering. Asynkron programmering kan kräva lite tid att anpassa sig till, om man är ovan. Man behöver få en känsla för var som är synkront och vad som är asynkront. Man vill få en känsla för hur man kan debugga flödet i en asynkron applikation.
 
@@ -314,7 +314,7 @@ Mitt bästa tips är att ge den asynkrona programmeringsmodellen tid att sätta 
 #### Asynkrona enhetstester
 
 
-När man tänker asynkrona enhetstester så är det inget större bekymmer. Tittar vi på Mocha så ser vi att [deras asynkrona enhetester](https://mochajs.org/#asynchronous-code) fungerar med både callbacks, Promise och async/await.
+När man tänker asynkrona enhetstester så är det inget större bekymmer. Tittar vi på Mocha så ser vi att [deras asynkrona enhetester](https://mochajs.org/#asynchronous-code) fungerar med både callbacks, Promise och async/await. -->
 
 
 
@@ -395,7 +395,7 @@ I denna veckans inlämningsuppgift ska både backend och frontend uppdateras så
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på de två föregående veckornas texter och förbättra din forskningsfråga och metod.
+Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på förra veckans metodbeskrivning och förbättra beskrivningen.
 
 Gå tillbaka till skrivguiden och titta under [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod) för bra tips.
 

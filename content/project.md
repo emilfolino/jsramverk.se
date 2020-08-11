@@ -84,21 +84,19 @@ Man kan köra hela din testsuite lokalt via `npm test`.
 
 
 
-### Krav 6: Skrivande
+### Krav 6: Akademiskt skrivande
 
 <div class="under-construction" id="under-construction">
     <p class="optional">Optionellt krav</p>
 </div>
 
-Skriv en sammanfattning av de lärdomar du har gjort under projektets gång. Sammanfatta vilka fördelar och nackdelar som dina valda tekniker och verktyg har gett dig under projektet.
+En viktig del av forskning är att veta vad som har gjorts inom området tidigare och vad din studie bidrar med. Därför behöver man söka upp vad som har gjorts innan inom området. Som en del av exjobbet görs en literatur genomgång där du som författare samlar de viktigaste källor inom området och sammanställer nuvarande forskningen inom området.
 
-En beskrivning av hur du gör en akademisk sammanfattning finns i skrivguiden under [Uppsatsens delar](http://skrivguiden.se/skriva/uppsatsens_delar) titta under Avslutning.
+Från exjobbsmallen tar vi följande text:
 
-I skrivguiden beskrivs att en sammanfattning eller summering utgår från problemformuleringen i studien. I detta fallet har vi inte gjort en konkret studie, men sammanfattningen ska innehålla reflektioner om de tekniker som har använts i projektet. Samt hur det har gått att implementera specificerade krav med hjälp av de teknologier.
+> Review the possible references. Write with your own words and refer to the selected references. Describe when references are supporting each other, and describe when they are in conflict with each other. Tie the references together and make your (theoretical) conclusion based on your interpretation.
 
-Vi kan därför formulera problemet som vi ska sammanfatta som:
-
-> _"Hur har dina valda tekniker underlättat eller försvårat implementationen av ovanstående krav 1-5?"_
+I spellistan [Referenshantering](https://www.youtube.com/playlist?list=PLKtP9l5q3ce-2gQ9hDzqlW_K62GbfpZa_) på youtube finns det bra tips och trix för att hantera referenser.
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
 
@@ -108,16 +106,18 @@ Vi kan därför formulera problemet som vi ska sammanfatta som:
 
 Gör en inlämning på Canvas med följande innehåll:
 
-1. Länka till dina GitHub repon och driftsatta sidor i en kommentar till din inlämning. Berätta om vilka optionella krav du har gjort och om du gjorde nya vägval rörande tekniker inför projektet.
+Länka till dina GitHub repon och driftsatta sidor i en kommentar till din inlämning.
 
 På sidan `/reports/week/10` i din me-applikation skriv följande (länka till me-applikationen i en kommentar till inlämningen):
+
+1. Berätta om vilka optionella krav du har gjort och om du gjorde nya vägval rörande tekniker inför projektet.
 
 2. Skriv ett allmänt stycke om hur projektet gick att genomföra. Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. Var projektet lätt eller svårt? Tog det lång tid? Vad var svårt och vad gick lätt? Var det ett bra och rimligt projekt för denna kursen?
 
 3. Avsluta med ett sista stycke med dina tankar om kursen och vad du anser om materialet och handledningen (ca 5-10 meningar). Ge feedback till lärarna och förslå eventuella förbättringsförslag till kommande kurstillfällen. Är du nöjd/missnöjd? Kommer du att rekommendera kursen till dina vänner/kollegor? På en skala 1-10, vilket betyg ger du kursen?
 
-#### Presentation
 
-**Campus:** Presenterar och diskuterar projekten i H430 mellan 10-12 onsdag den 30:e oktober.
 
-**Distans:** Antigen är ni med på campus presentationerna via [Hangout1](https://hangouts.google.com/call/y7r6gvdu4rehpfxeenuk5qujzee) mellan 10-12 onsdag den 30:e oktober. Eller så spelar ni in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.
+### Presentation
+
+Spela in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.

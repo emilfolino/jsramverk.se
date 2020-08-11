@@ -8,13 +8,7 @@ Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och 
 
 ## Läsa
 
-Följande länkar är bra att ha för undersökande och implementation.
-
-1. [Angular](https://angular.io/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
-
-1. [React](https://reactjs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
-
-1. [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
+Följande länkar är bra att ha för undersökande och implementation. [Angular](https://angular.io/), [React](https://reactjs.org/) och [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
 
 
 
@@ -28,9 +22,9 @@ I nedanstående video berättar John Papa om hur man kan tänka när man väljer
 
 ## Material och tekniker
 
-I [kursrepot](https://github.com/emilfolino/jsramverk) finns två olika exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
+I [kursrepot](https://github.com/emilfolino/jsramverk) finns två exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
 
-Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa 5 Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.se`. Du kommer under [vecka 3](backend) bygga ett eget Me-API.
+Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa fem Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.se`. Du kommer under [vecka 2](backend) bygga ett eget Me-API.
 
 Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.
 
@@ -41,8 +35,8 @@ I nedanstående tabell listas de rader kod som utvecklaren har skrivit för att 
 |  | Angular | Mithril | React | Vue | Vanilla JS |
 |-----|--------|--------|--------|---------|--------|
 | calculator  | 112 | 103 | 133 | 98 | 118 |
-| me   | 166 | 107 | 117 | 134 | 92 |
 | tic-tac-toe | 196 | 136 | 146 | 172 | 126 |
+| me   | 166 | 107 | 117 | 134 | 92 |
 
 
 
@@ -53,8 +47,8 @@ I nedanstående tabell listas storleken på produktionsfilerna som skapas av ant
 |  | Angular | Mithril | React | Vue | Vanilla JS |
 |-----|--------|--------|--------|---------|--------|
 | calculator  | 217K | 30K | 115K | 83K | 2.6K |
-| me   | 329K | 29K | 134K | 106K | 2.2K |
 | tic-tac-toe | 222K | 29K | 37K | 87K | 2.8K |
+| me   | 329K | 29K | 134K | 106K | 2.2K |
 
 
 
@@ -76,7 +70,7 @@ Titta igenom repon och se hur John Papa har strukturerat apparna i de olika ramv
 
 ## Tekniska koncept
 
-Vi tittar i denna del av artikeln på några tekniska koncept som används i de olika ramverken. Vi tittar på hur man har vald att implementera dessa koncept i de olika ramverken och utvärderar vilka fördelar och nackdelar som finns med att göra på det viset.
+Vi tittar i denna del av artikeln på några tekniska koncept som används i de olika ramverken. Vi tittar på hur man har valt att implementera dessa koncept i de olika ramverken och utvärderar vilka fördelar och nackdelar som finns med att göra på det viset.
 
 
 
@@ -180,7 +174,7 @@ I react och vue har vi skickat med en click-callback funktion från en annan kom
 
 ### HTTP-anrop
 
-För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I många fall använder ytterligare paket som till exempel [axios](https://www.npmjs.com/package/axios) för att kommunicera med en backend, vilket ökar komplexiteten och beroenden ytterligare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i webapp. I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
+För att vi ska kunna prata med en backend behöver vi kunna kommunicera över HTTP. Jag har valt att i react, vanilla och vue exemplen använda [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), som vi känner igen från tidigare. I många fall används ytterligare paket som till exempel [axios](https://www.npmjs.com/package/axios) för att kommunicera med en backend, vilket ökar komplexiteten och beroenden ytterligare. I mithril används den inbyggda funktionen `m.request()`, som introducerades tillsammans med mithril i kursen webapp. I angular använder vi oss av den inbyggda modulen HttpClient och en så kallad service. Exempel på detta kan ses i me-angular applikationen i katalogerna `src/app/report` och `src/app/me`.
 
 
 
@@ -204,24 +198,24 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 
 
-## Skriva
-
-Vi ska i denna kurs träna på akademiskt skrivande och kommer i vecka 1, 2 & 3 fokusera på inledningen. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
-
-I ett akademiskt arbete fyller inledningen en viktig funktion. Bakgrunden som är en del av inledningen skapar grunden och utgångspunkten för vår diskussion och sammanfattning där vi sätter vårt arbete i relation till aktuell forskning. Därför är det viktigt att vi i bakgrunden berättar för vår läsare om läget på den aktuella forskningen inom området.
-
-Skriv en kort inledning till det ramverk som du har valt. Använd referenser på ett akademiskt sätt. Se denna texten som ett första utkast, vi kommer under de kommande två veckorna förbättra texten.
-
-Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång. Denna och kommande veckor är avsnittet [Inledning](http://skrivguiden.se/skriva/uppsatsens_delar/#inledning) en bra start.
-
-Du får skriva inledningen på antigen svenska eller engelska. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Textbehandlare (Microsoft Word, Google Docs, Apple Pages, LibreOffice Writer eller liknande), [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
-
-**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
-
-
-
 ## Sammanfattning
 
 Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för [django](https://www.djangoproject.com/) pratar om hur vi inte alltid behöver ett JavaScript ramverk.
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/k7n2xnOiWI8" frameborder="0" allowfullscreen></iframe></div>
+
+
+
+## Skriva
+
+Vi ska i denna kurs träna på akademiskt skrivande och förbereda för en studie. Vi kommer i vecka 1 & 2 fokusera på forskningsfrågor. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
+
+Forskningsfrågor skapar grunden för studien och är de frågor vi söker svar på i studien. All forskning och den vetenskapliga metoden handlar i grunden om att ställa intressanta frågor och sedan på ett metodiskt och reproducerbart sätt jobba fram svaren till dessa frågor. Viktigt med forskningsfrågor är att de är avgränsade, inte är ja/nej frågor och att de är mätbara. Sen är det viktigt att de två forskningsfrågorna är inom samma område. Vi kan inte ha en fråga om testning och en om JavaScript-ramverk, det är för brett ett område och vi vill försöka avgränsa och fokusera vår studie.
+
+Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång. Första 4 veckorna är speciellt "[Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte)" ett bra ställe att titta i guiden.
+
+Denna första veckan formulerar du två stycken forskningsfrågor. Frågorna ska ligga inom de ämnen som du ska skriva ditt kommande exjobb inom, dvs. programvaruteknik, datavetenskap eller webbprogrammering. Så ni kan basera frågorna runt mycket av det vi har gått igenom i utbildningen. Exempel på hur man formulerar bra forskningsfrågor kommer visas på föreläsningen. Se till att numrera forskningsfrågorna med titeln RQ1 för research question 1.
+
+Se forskningsfrågorna som ett första utkast denna veckan, du får möjlighet att förbättra frågorna kommande veckan.
+
+**Lämna in dina frågor som en del av inlämningen på Canvas.**

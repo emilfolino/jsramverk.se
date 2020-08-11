@@ -314,7 +314,7 @@ server {
 }
 ```
 
-Och använder liknande rsync skript för att skicka upp till servern som i [Driftsättning av frontend](https://jsramverk.se/deploy-frontend#driftsattning-av-frontend).
+Och använder liknande rsync skript för att skicka upp till servern som i [Driftsättning av frontend](devops#driftsattning-av-frontend).
 
 I server appen måste vi tillåta inkommande trafik från `https://socket-client.jsramverk.se:443` för att klienten ska kunna kommunicera med servern. Det gör vi genom raden `io.origins(['https://socket-client.jsramverk.se:443']);`, nedan syns hela min server.
 
@@ -401,8 +401,16 @@ Titta igenom exemplet och se hur `socket.io` kan användas för annat än en cha
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på förra veckans text och förbättra din forskningsfråga och metod.
+Vi flyttar denna och kommande två veckorna fokus från forskningsfrågorna och syftet till metod. Vi ska nu beskriva för läsaren **HUR** vi har tänkt att genomföra studien.
 
-Gå tillbaka till skrivguiden och titta under [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod) för bra tips.
+I metod beskrivs hur man har tänkt att svara på sina forskningsfrågor. I skrivguiden beskrivs under Uppsatsens delar [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod).
+
+Under föreläsningen presenterar Emil ett antal olika metoder, som kan vara intressanta för området. Nedan finns en översikt, som kan vara bra att luta sig mot. Din uppgift är att för varje forskningsfråga detaljerat beskriva hur du har tänkt besvara frågan. En bra struktur är att börja stycken i metodbeskrivningen med: "För att besvara RQ1 används ...".
+
+Från exjobbsmallen läser vi följande om den emperiska metoden:
+
+> The method for realisation shall be described in detail! Describe the connection between each research question to be answered and the process of realisation you use for answering each question. It should be possible to understand your set-up for the thesis, and it shall be possible to replicate your study.
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
+
+![Forskningsmetoder](slides/img/metod-all.png)

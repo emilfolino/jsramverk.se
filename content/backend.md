@@ -1,6 +1,6 @@
 # Backend
 
-<p class="author">Emil Folino</p>
+<p class="author">Emil Folino och Mikael Roos</p>
 
 Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Vi vänder oss till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express.
 
@@ -21,6 +21,12 @@ Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation f
 Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite extra bra koll på hur "Event-loop" fungerar i JavaScript. Denna video ger en bra introduktion till hur det fungerar både för frontend och backend.
 
 <div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/8aGhZQkoFbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+
+
+## Exempelkod
+
+Om ni vill titta på två fullständiga exempelprogram som använder alla dessa tekniker är [auth](https://github.com/emilfolino/auth) eller [Lager API:t](https://github.com/emilfolino/order_api) från [webapp-kursen](https://dbwebb.se/kurser/webapp-v3) bra exempel.
 
 
 
@@ -167,7 +173,7 @@ $curl localhost:1337
 
 #### Automatisk omstart av node-appen
 
-Vid det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
+Vid det har laget har du nog redan börjat tröttna på att starta om din server varje gång du har ändrat i koden, så låt oss göra nått åt detta. Vi använder oss av npm modulen `nodemon` ([Dokumentation](https://www.npmjs.com/package/nodemon)) för att starta om vår node applikation varje gång vi sparar. Vi installerar `nodemon` som ett globalt paket, så vi kan använda det för alla vår node applikationer.
 
 ```shell
 $npm install -g nodemon
@@ -251,7 +257,7 @@ app.get("/user", (req, res) => {
 app.post("/user", (req, res) => {
     res.status(201).json({
         data: {
-            msg: "Got a POST request, sending back 201 Created");
+            msg: "Got a POST request, sending back 201 Created"
         }
     });
 });
@@ -267,7 +273,7 @@ app.delete("/user", (req, res) => {
 });
 ```
 
-Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. Innebörden av alla HTTP status koder finns [följande lista](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. Innebörden av alla HTTP status koder finns i [följande lista](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 
 
@@ -431,7 +437,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 När användaren försöker nå en route som inte finns så blir det ett svar med statuskod 404.
 
-![Ett standard felmeddelande när routen saknas.](image/snapvt17/express-default-404.png?w=w2)
+![Ett standard felmeddelande när routen saknas.](https://dbwebb.se/image/snapvt17/express-default-404.png?w=w2)
 
 Man kan lägga till en egen route som blir en "catch all" och agerar kontrollerad hantering av 404.
 
@@ -460,7 +466,7 @@ $NODE_ENV="production" node app.js
 
 Nu försvann stacktracen från klienten, men den syns fortfarande i terminalen där servern körs.
 
-![I produktion så visas inte stacktrace för klienten.](image/snapvt17/express-error-handling-production.png?w=w2)
+![I produktion så visas inte stacktrace för klienten.](https://dbwebb.se/image/snapvt17/express-error-handling-production.png?w=w2)
 
 Vi ser till att även skapa ett npm skript för att köra i produktion som vi sedan kan använda på servern. Vi kan då köra `npm run production` för att starta i i produktion.
 
@@ -513,7 +519,7 @@ Kom ihåg att en sådan här felhanterare är som all annan middleware och det �
 
 ### Uppdelning av routes
 
-Med tanke på de få routes vi kommer ha tillgängliga i våra API:er hade det inte varit helt orimligt att ha al hantering i `app.js`, men vi väljer ändå att dela upp våra routes då vi gillar bra struktur inför framtida uppskalningar.
+Med tanke på de få routes vi kommer ha tillgängliga i våra API:er hade det inte varit helt orimligt att ha all hantering i `app.js`, men vi väljer ändå att dela upp våra routes då vi gillar bra struktur inför framtida uppskalningar.
 
 Vi skapar katalogen `routes` och i den katalogen skapar vi två stycken filer `index.js` och `hello.js`. Här skapar vi och returnerar ett objekt av typen `express.Router()`.
 
@@ -681,7 +687,7 @@ jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
 
 #### JWT middleware
 
-Vi såg i guiden [Node.js API med Express](kunskap/nodejs-api-med-express) hur vi kan skapa routes som tar emot POST anrop och hur vi kan använda middleware för att köra en funktion varje gång vi har ett anrop till specifika routes. Om vi skapar nedanstående route i vår me-api ser vi hur middleware funktionen `checkToken` ligger som första funktion på routen. Den anropas först och beroende på om `next()` anropas funktionen efter middleware. Vi observerar även hur vi från klientens sida har skickat med token som en del av headers och hur vi hämtar ut det från request-objektet `req`.
+Vi såg i guiden [Node.js API med Express](https://dbwebb.se/kunskap/nodejs-api-med-express) hur vi kan skapa routes som tar emot POST anrop och hur vi kan använda middleware för att köra en funktion varje gång vi har ett anrop till specifika routes. Om vi skapar nedanstående route i vår me-api ser vi hur middleware funktionen `checkToken` ligger som första funktion på routen. Den anropas först och beroende på om `next()` anropas funktionen efter middleware. Vi observerar även hur vi från klientens sida har skickat med token som en del av headers och hur vi hämtar ut det från request-objektet `req`.
 
 ```javascript
 router.post("/reports",
@@ -702,7 +708,7 @@ function checkToken(req, res, next) {
 }
 ```
 
-Vi ser i kodexemplet ovan att vi använder `req.body` när vi tar emot en POST request från en klient och skickar med det in till modulen/modellen vi använder för att skapa rapporten. För att kunna använda `req.body` har vi dessa två rader längst upp i vår `app.js`. Vi har även sett detta i artikeln [Node.js API med Express](kunskap/nodejs-api-med-express#dynamiskt).
+Vi ser i kodexemplet ovan att vi använder `req.body` när vi tar emot en POST request från en klient och skickar med det in till modulen/modellen vi använder för att skapa rapporten. För att kunna använda `req.body` har vi dessa två rader längst upp i vår `app.js`. Vi har även sett detta i artikeln [Node.js API med Express](https://dbwebb.se/kunskap/nodejs-api-med-express#dynamiskt).
 
 ```javascript
 app.use(bodyParser.json()); // for parsing application/json
@@ -714,12 +720,6 @@ I Postman väljer vi att fylla i body fliken istället för params fliken.
 Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kursen webapp hur man kan skicka lösenord med [postman](https://www.getpostman.com/). postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.
 
 ![Postman](https://dbwebb.se/image/ramverk2/postman-headers.png?w=c18)
-
-
-
-### Exempelkod
-
-Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth](https://github.com/emilfolino/auth) eller [Lager API:t](https://github.com/emilfolino/order_api) från [webapp-kursen](https://dbwebb.se/kurser/webapp-v3) bra exempel.
 
 
 
@@ -763,7 +763,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. När en användare är inloggat ska det gå att skapa nya texter för kommande veckor och redigera befintliga texter.
 
-1. Committa alla filer och lägg till en tagg (3.0.0) med hjälp av `npm version 2.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
+1. Committa alla filer och lägg till en tagg (2.0.0) med hjälp av `npm version 2.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
@@ -773,8 +773,8 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på första och andra veckans text och förbättra din inledning.
+Vi fortsätter iterativt med att förbättra våra forskningsfrågor. Använd den återkopplingen du fick på första veckans frågor och förbättra frågorna.
 
-Gå tillbaka till skrivguiden och titta under [Inledning](http://skrivguiden.se/skriva/uppsatsens_delar/#inledning) för bra tips.
+Gå tillbaka till skrivguiden och titta under [Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips.
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
