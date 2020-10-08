@@ -362,6 +362,12 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 ```
 
+Ett annat sätt att uppnå samma funktionalitet finns numer tillgängligt direkt i [express](http://expressjs.com/en/api.html).
+
+```javascript
+app.use(express.json());
+```
+
 
 
 ### Middleware - CORS och loggning
