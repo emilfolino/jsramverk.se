@@ -380,7 +380,7 @@ $sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
 $sudo chmod 775 /var/www/[SERVER_NAME]/html
 ```
 
-Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare, `[APP_NAME]` är namnet på din applikation.
+Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare, `[APP_NAME]` är namnet på din applikation. Scriptet läggs till i ditt lokala repo och med hjälp av rsync skickar vi det till servern.
 
 ```json
 "scripts": {
@@ -394,7 +394,7 @@ Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json
 },
 ```
 
-Vi kan nu köra kommandot `npm run deploy` och applikationen byggas för produktion samt överföras till rätt katalog på servern.
+Vi kan nu köra kommandot `npm run deploy` lokalt på din dator  och applikationen byggas för produktion samt överföras till rätt katalog på servern.
 
 
 
@@ -454,7 +454,7 @@ $sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
 $sudo chmod 775 /var/www/[SERVER_NAME]/html
 ```
 
-Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare.
+Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare. Scriptet läggs till i ditt lokala repo och med hjälp av rsync skickar vi det till servern.
 
 ```json
 "scripts": {
@@ -466,7 +466,7 @@ Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json
 },
 ```
 
-Vi kan nu köra kommandot `npm run deploy` och applikationen byggas för produktion samt överföras till rätt katalog på servern.
+Vi kan nu köra kommandot `npm run deploy` lokalt på din dator och applikationen byggas för produktion samt överföras till rätt katalog på servern.
 
 
 
@@ -517,7 +517,7 @@ $sudo chown deploy:deploy /var/www/[SERVER_NAME]/html
 $sudo chmod 775 /var/www/[SERVER_NAME]/html
 ```
 
-Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare.
+Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json` och skapar ett deploy script på följande sätt. I nedanstående är `[SERVER]` din domän och `[SERVER_NAME]` samma som tidigare. Scriptet läggs till i ditt lokala repo och med hjälp av rsync skickar vi det till servern.
 
 ```json
 "scripts": {
@@ -528,7 +528,7 @@ Jag väljer att använda möjligheten för att skapa npm-scripts i `package.json
 },
 ```
 
-Vi kan nu köra kommandot `npm run deploy` och applikationen byggas för produktion samt överföras till rätt katalog på servern.
+Vi kan nu köra kommandot `npm run deploy` lokalt på din dator och applikationen byggas för produktion samt överföras till rätt katalog på servern.
 
 
 
