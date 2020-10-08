@@ -7,10 +7,10 @@
     <loc>https://jsramverk.se/frontend</loc>
   </url>
   <url>
-    <loc>https://jsramverk.se/ux</loc>
+    <loc>https://jsramverk.se/backend</loc>
   </url>
   <url>
-    <loc>https://jsramverk.se/backend</loc>
+    <loc>https://jsramverk.se/devops</loc>
   </url>
   <url>
     <loc>https://jsramverk.se/test</loc>
@@ -23,9 +23,6 @@
   </url>
   <url>
     <loc>https://jsramverk.se/project</loc>
-  </url>
-  <url>
-    <loc>https://jsramverk.se/deploy-frontend</loc>
   </url>
   <url>
     <loc>https://jsramverk.se/docker</loc>
