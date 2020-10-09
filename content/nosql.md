@@ -44,7 +44,14 @@ Gå till [MongoDB Community Server](https://www.mongodb.com/download-center/comm
 
 #### MacOS
 
-Installera med hjälp av pakethanteraren brew med kommandot `brew install mongodb`. Starta sedan mongodb med hjälp av kommandot `brew services start mongodb`.
+Installera med hjälp av pakethanteraren brew med kommandona:
+
+```shell
+$brew tap mongodb/brew
+$brew install mongodb-community
+```
+
+Starta sedan mongodb som en service med kommandot: `brew services start mongodb-community`.
 
 
 

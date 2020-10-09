@@ -362,6 +362,12 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 ```
 
+Ett annat sätt att uppnå samma funktionalitet finns numer tillgängligt direkt i [express](http://expressjs.com/en/api.html).
+
+```javascript
+app.use(express.json());
+```
+
 
 
 ### Middleware - CORS och loggning
@@ -735,7 +741,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Se till att det finns en `package.json` i katalogen. Filen skall innehålla alla beroenden som krävs.
 
-1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och starter ditt Me-API.
+1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och startar ditt Me-API.
 
 1. Skapa routen `GET /` där du ger en presentation av dig själv.
 
@@ -747,7 +753,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa routen `POST /reports` för att lägga till data. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.
 
-1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din committ-historik.
+1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
@@ -761,7 +767,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa ett inloggningsformulär för att kunna autentisera användare mot API:t.
 
-1. När en användare är inloggat ska det gå att skapa nya texter för kommande veckor och redigera befintliga texter.
+1. När en användare är inloggad ska det gå att skapa nya texter för kommande veckor och redigera befintliga texter.
 
 1. Committa alla filer och lägg till en tagg (2.0.0) med hjälp av `npm version 2.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
