@@ -24,7 +24,7 @@ const compiler = {
                 console.error(err.message);
             }
 
-            fs.readFile(`${output}inline.min.css`, 'utf8', (err, cssData) => {
+            fs.readFile(`${output}style.min.css`, 'utf8', (err, cssData) => {
                 if (err) {
                     console.error(err.message);
                 }
