@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/emilfolino/jsramverk.se#readme",
   "devDependencies": {
-    "css-loader": "^2.1.1",
+    "css-loader": "^5.2.6",
     "eslint": "^6.3.0",
     "eslint-plugin-react": "^7.12.4",
     "html-minifier": "^4.0.0",
@@ -50,7 +50,7 @@
     "npm-watch": "^0.6.0",
     "sass": "^1.26.3",
     "style-loader": "^0.23.1",
-    "stylelint": "^13.3.3",
+    "stylelint": "^9.3.0",
     "uglify-js": "^3.4.10",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.11"
@@ -61,7 +61,7 @@
     "html-entities": "^1.3.1",
     "markdown-it": "^8.4.2",
     "normalize.css": "^8.0.1",
-    "sitemap-generator": "^8.5.1",
+    "sitemap-generator": "^7.6.2",
     "slugify": "^1.3.4",
     "turbolinks": "^5.2.0"
   }
