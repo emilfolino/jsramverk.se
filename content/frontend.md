@@ -2,7 +2,7 @@
 
 <p class="author">Emil Folino</p>
 
-Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tittar på en föreläsning om hur man väljer JavaScript ramverk.
+Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tre korta filmer om ramverken. Sen tittar vi på en föreläsning om hur man väljer JavaScript ramverk.
 
 
 
@@ -13,6 +13,20 @@ Följande länkar är bra att ha för undersökande och implementation. [Angular
 
 
 ## Titta
+
+#### Tre korta
+
+Tre korta filmer om ramverken och deras historia.
+
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/Ata9cSC2WpM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/Tn6-PIqc4UM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/nhBVL41-_Cw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+
+
+#### Föreläsning om att välja ramverk
 
 I nedanstående video berättar John Papa om hur man kan tänka när man väljer ett JavaScript-ramverk.
 
@@ -27,6 +41,8 @@ I [kursrepot](https://github.com/emilfolino/jsramverk) finns två exempel progra
 Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa fem Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.se`. Du kommer under [vecka 2](backend) bygga ett eget Me-API.
 
 Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.
+
+
 
 #### Rader skriven kod i exempelprogrammen
 
@@ -178,17 +194,31 @@ För att vi ska kunna prata med en backend behöver vi kunna kommunicera över H
 
 
 
+## Editor-komponenter
+
+Att skriva en egen text-redigerare för att användas på webben är ett eget 10-årigt projekt, så här tar vi som man brukar i JavaScript-världen en genväg. Exempel på textredigerare finns nedan:
+
+[CKEditor](https://ckeditor.com/ckeditor-5/) - komponenter för [ramverken](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/overview.html)
+
+[Quill](https://quilljs.com/) - [Angular](https://www.npmjs.com/package/ngx-quill), [React](https://github.com/zenoamaro/react-quill) och [Vue](https://github.com/surmon-china/vue-quill-editor).
+
+[TinyMCE](https://github.com/tinymce/tinymce-dist#readme) - komponenter för [ramverken](https://www.tiny.cloud/docs/integrations/).
+
+[Trix](https://trix-editor.org/) - finns även som komponenter till ramverken [Angular](https://www.npmjs.com/package/angular-trix), [React](https://www.npmjs.com/package/react-trix) och [Vue](https://www.npmjs.com/package/vue-trix).
+
+
+
 ## Kravspecifikation
 
 Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
-1. Skapa en Me-applikation i ditt valda ramverk med följande routes: `/`, `/reports/week/1`.
+1. Skapa grunden till vår editor.
 
-1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och starter din Me-applikation.
+1. Din applikation ska innehålla en text editor där man kan skriva text. Välj en editor-komponent ovan eller en annan om du har en personlig favorit.
 
-1. `/` ska visa en kort beskrivning av dig själv.
+1. Applikationen ska dessutom innehålla en toolbar längst upp på skärmen.
 
-1. `/reports/week/1` ska innehålla en länk till GitHub repot och innehållet från din `README.md` fil.
+1. Toolbaren ska än så länge innehålla en Spara-knapp. När man trycker på knappen ska innehållet från editorn skrivas ut i consollen.
 
 1. Committa alla filer och lägg till en tagg (1.0.\*).
 
