@@ -2,6 +2,8 @@
 
 <p class="author">Emil Folino, Mikael Roos</p>
 
+> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
+
 Vi skapar en testmiljö för både frontend och backend kod, samt ett flöde för Continuous Integration.
 
 Tanken är att vi förbereder oss för ett större utvecklingsprojekt i JavaScript och vi vill säkerställa att vi har en utvecklingsmiljö där vi kan testa vår programvara.

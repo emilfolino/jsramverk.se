@@ -917,7 +917,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och startar ditt Me-API. Beskriv även hur du har valt att strukturera dina routes.
 
-1. Det ska gå att skapa (**C**reate), hämta (**R**ead), uppdatera (**Up**date) och ta bort (**D**elete) dokumenter. Förslagsvis har ett dokument minst namn och innehåll.
+1. Det ska gå att skapa (**C**reate), hämta (**R**ead), uppdatera (**U**pdate) och ta bort (**D**elete) dokumenter. Förslagsvis har ett dokument minst namn och innehåll.
 
 1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
