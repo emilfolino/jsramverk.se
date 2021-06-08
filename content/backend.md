@@ -2,17 +2,27 @@
 
 <p class="author">Emil Folino och Mikael Roos</p>
 
-Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en SQLite databas. Vi vänder oss till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se vad man kan göra med Express. Låt oss komma igång med grunderna i Express.
+Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en dokument-orienterad databas. Databasen vi ska använda heter mongodb och är av typen [NoSQL](https://en.wikipedia.org/wiki/NoSQL).
+
+
 
 
 
 ## Läsa
-
+<!--
 Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation från förra veckan med ett formulär. Nielsen Norman Group är världsledande inom forskningsbaserad User Experience (UX). Följande två artiklar har bra riktlinjer för att skapa formulär.
 
 [Website Forms Usability: Top 10 Recommendations](https://www.nngroup.com/articles/web-form-design/)
 
-[A Checklist for Registration and Login Forms on Mobile](https://www.nngroup.com/articles/checklist-registration-login/)
+[A Checklist for Registration and Login Forms on Mobile](https://www.nngroup.com/articles/checklist-registration-login/) -->
+
+1. Vi vänder oss till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se hur vi kan skapa ett API med Express.
+
+1. Bekanta dig översiktligt med [organisationen kring databasen MongoDB](https://www.mongodb.com/). Övningen (längre ned) kommer vidare utgå från informationen på denna webbplatsen.
+
+1. Bekanta dig översiktligt med dokumentationen för "[MongoDB Node.js driver](http://mongodb.github.io/node-mongodb-native/)" vilken är den driver vi kommer använda för att koppla JavaScript i Node.js till MongoDB. Det handlar både om referens-dokumentationen och API-dokumentationen.
+
+1. Läs igenom inledande tutorials för MongoDB Node.js driver som du hittar i Referensmanualen. Titta främst i "Connect to MongoDB", "Collections", "CRUD Operations" och "Projections". De ger dig snabbt en känsla av hur man jobbar med datan.
 
 
 
@@ -22,11 +32,15 @@ Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite 
 
 <div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/8aGhZQkoFbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
+Sen låter vi Chief Technical Officer Eliot Horowitz hos [MongoDB](https://www.mongodb.com/) berätta om Dokumentorienterade databaser.
+
+<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/EE8ZTQxa0AM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 
 
 ## Exempelkod
 
-Om ni vill titta på två fullständiga exempelprogram som använder alla dessa tekniker är [auth](https://github.com/emilfolino/auth) eller [Lager API:t](https://github.com/emilfolino/order_api) från [webapp-kursen](https://dbwebb.se/kurser/webapp-v3) bra exempel.
+Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth_mongo](https://github.com/emilfolino/auth_mongo) ett bra ställe att börja.
 
 
 
@@ -564,168 +578,328 @@ På det sättet håller vi `app.js` liten i storlek och var sak har sin plats.
 
 
 
-### En databas
+### MongoDB
 
-Vi vill koppla vårt API mot en databas för att vi ska kunna hämta och spara data där istället för att bara ha statisk data. I denna del av kursen väljer vi att använda den filbaserade relationsdatabasen SQLite. Senare i kursen kommer vi bekanta oss med [Dokument-orienterade databaser](nosql).
+I denna artikel installerar vi MongoDB lokalt på din utvecklingsdator, om du vill och har möjligt kan du använda MongoDB i Docker. Artikeln [MongoDB i Docker](mongodb-docker) visar hur det kan gå till.
 
-Om du inte har SQLite installerat på din utvecklingsdator installera det via ett installationspaket eller pakethanteraren i ditt operativsystem.
+I kursrepot finns exempelkod under [db/mongodb](https://github.com/emilfolino/jsramverk/tree/master/db/mongodb).
 
-För att kunna spara användare och så småningom redovisningstexter installerar vi npm modulen node-sqlite3 i vårt me-api repo med följande kommando. [Dokumentationen för modulen](https://www.npmjs.com/package/sqlite3) är som alltid vår bästa vän.
 
-```shell
-$npm install sqlite3 --save
-```
 
-Vi skapar sedan katalogen `db` i vårt repo och i den katalogen filen `texts.sqlite`. Vi ville inte att denna och andra sqlite filer är under versionshantering då de isåfall skriver över vår produktions databas när vi driftsätter så vi lägger till `*.sqlite` i `.gitignore`.
+#### Installation MongoDB
 
-Ett smart drag i detta skedet är att skapa en migrations-fil `db/migrate.sql` som du kan använda för att skapa tabeller. Min migrate-fil innehåller än så länge följande SQL.
+##### Windows
 
-```shell
-CREATE TABLE IF NOT EXISTS users (
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(60) NOT NULL,
-    UNIQUE(email)
-);
-```
+Gå till [MongoDB Community Server](https://www.mongodb.com/download-center/community) och välj ditt operativsystem i listan. Följ sedan installationsinstruktionerna.
 
-Vi har alltså två kolumner `email` och `password` och vi vill att `email` är unik. Vi kan nu med hjälp av följande kommandon skapa tabellen i vår `texts.sqlite` databas.
+
+
+##### MacOS
+
+Installera med hjälp av pakethanteraren brew med kommandona:
 
 ```shell
-$cd db
-$sqlite3 texts.sqlite
-sqlite> .read migrate.sql
-sqlite> .exit
+$brew tap mongodb/brew
+$brew install mongodb-community
 ```
 
-Vi kan nu använda `sqlite3` modulen för att lägga till en användare i vår `texts.sqlite` databas på följande sätt.
-
-```javascript
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/texts.sqlite');
-
-db.run("INSERT INTO users (email, password) VALUES (?, ?)",
-    "user@example.com",
-    "superlonghashedpasswordthatwewillseehowtohashinthenextsection", (err) => {
-    if (err) {
-        // returnera error
-    }
-
-    // returnera korrekt svar
-});
-```
+Starta sedan mongodb som en service med kommandot: `brew services start mongodb-community`.
 
 
 
-### Säker hantering av lösenord
+##### Linux (Debian/Ubuntu)
 
-När vi sparar lösenord i en databas vill göra det så säkert som möjligt. Därför använder vi [bcrypt](https://codahale.com/how-to-safely-store-a-password/).
+Vi börjar med att installera `dirmngr`, för att kunna ta hand gpg nycklar, med kommandot `sudo apt-get install dirmngr`. Vi följer sedan de rekommenderade [installationsinstruktionerna hos MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/#using-deb-packages-recommended). Se till att välja rätt operativsystem i menyn.
 
-Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från [installationsmanualen för bcrypt](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows) är att installare npm paketet `windows-build-tools` med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.
+
+
+#### Starta klienten
+
+Det ska nu gå att starta mongodb klienten med kommandot `mongo` i din terminal. Kommandot `help` inne i mongodb klienten ger en översikt över tillgängliga kommandon.
 
 ```shell
-$npm install --global --production windows-build-tools
+$mongo
+> help
+    db.help()                    help on db methods
+    db.mycoll.help()             help on collection methods
+    sh.help()                    sharding helpers
+    rs.help()                    replica set helpers
+    help admin                   administrative help
+    help connect                 connecting to a db help
+    help keys                    key shortcuts
+    help misc                    misc things to know
+    help mr                      mapreduce
+
+    show dbs                     show database names
+    show collections             show collections in current database
+    show users                   show users in current database
+    show profile                 show most recent system.profile entries with time >= 1ms
+    show logs                    show the accessible logger names
+    show log [name]              prints out the last segment of log in memory, 'global' is default
+    use <db_name>                set current database
+    db.foo.find()                list objects in collection foo
+    db.foo.find( { a : 1 } )     list objects in foo where a == 1
+    it                           result of the last line evaluated; use to further iterate
+    DBQuery.shellBatchSize = x   set default number of items to display on shell
+    exit                         quit the mongo shell
 ```
 
-Vi installerar bcrypt paketet med npm med hjälp av kommandot `npm install bcryptjs --save`. [Dokumentationen för modulen](https://www.npmjs.com/package/bcryptjs) är som alltid vår bästa vän.
+Du som är van vid liknande klienter till andra databaser kan känna igen dig bland de kommandon som erbjuds.
 
-För att hasha ett lösenord med bcrypt modulen importerar vi först modulen och sedan använder vi `bcrypt.hash` funktionen. Antal `saltRounds` definierar hur svåra lösenord vi vill skapa. Ju fler `saltRounds` är svårare att knäcka, men tar också längre tid att skapa och jämföra.
+Det finns en manual som hjälper dig igång med [grunderna och baskommandona](https://docs.mongodb.com/manual/mongo/).
 
-```javascript
-const bcrypt = require('bcryptjs');
-const saltRounds = 10;
-const myPlaintextPassword = 'longandhardP4$$w0rD';
 
-bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-    // spara lösenord i databasen.
-});
+
+#### Skapa en databas
+
+Vi prövar att använda klienten för att skapa en databas och lägga in ett dokument i en collection.
+
+Först skapar vi databasen.
+
+```shell
+> use mumin
+> show collections
 ```
 
-Det finns även en promise version av biblioteket om man gillar promise eller async/await teknikerna. Läs mer om det i dokumentationen.
+Den är tom och innehåller inga collections ännu. Vi skapar en collection genom att lägga ett dokument i den.
 
-För att jämföra ett sparad lösenord med det användaren skrivit in använder vi `bcrypt.compare`.
-
-```javascript
-const bcrypt = require('bcryptjs');
-const myPlaintextPassword = 'longandhardP4$$w0rD';
-const hash = 'superlonghashedpasswordfetchedfromthedatabase';
-
-bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
-    // res innehåller nu true eller false beroende på om det är rätt lösenord.
-});
+```shell
+> db.crowd.insertOne( { name: "Mumintrollet" } )
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5a13069000b2ff0b912aeeb6")
+}
+> show collections
+crowd
 ```
 
-<div class="under-construction">
-    <p>Tidigare användes npm-modulen <code>bcrypt</code>, men verkar finnas installationsproblem med modulen i produktion. Därför används nu bcryptjs istället.</p>
-</div>
+Om jag fyller på ytterligare några dokument så kan det se ut så här när vi frågar efter innehållet i en collection.
 
-
-
-### JSON Web Tokens
-
-Vi har i tidigare kurser använt både sessioner och tokens för att autentisera klienter mot en server. Vi ska i detta stycke titta på hur vi implementerar logiken bakom att skicka JSON Web Tokens från servern till en klient. Vi använder modulen `jsonwebtoken` som vi installerar med kommandot `npm install jsonwebtoken --save` och [dokumentationen finns på npm](https://www.npmjs.com/package/jsonwebtoken).
-
-Vi använder här de två funktioner `sign` och `verify`.
-
-```javascript
-const jwt = require('jsonwebtoken');
-
-const payload = { email: "user@example.com" };
-const secret = process.env.JWT_SECRET;
-
-const token = jwt.sign(payload, secret, { expiresIn: '1h'});
+```shell
+> db.crowd.find()
+{ "_id" : ObjectId("5a13069000b2ff0b912aeeb6"), "name" : "Mumintrollet" }
+{ "_id" : ObjectId("5a13079100b2ff0b912aeeb7"), "name" : "Sniff" }
+{ "_id" : ObjectId("5a13079b00b2ff0b912aeeb8"), "name" : "Snusmumriken" }
+{ "_id" : ObjectId("5a1307a900b2ff0b912aeeb9"), "name" : "Snorkfröken" }
 ```
 
-I ovanstående exempel skapar vi `payload` som i detta fallet enbart innehåller klientens e-post. Vi hämtar sedan ut vår `JWT_SECRET` från environment variablerna. En environment variabel sätts i terminalen, både lokalt på din dator och på servern med kommandot `export JWT_SECRET='longsecret'`, där du byter 'longsecret' mot nått långt och slumpmässigt. Se till att denna secret är lång och slumpmässig, gärna 64 karaktärer. `payload` och `secret` blir sedan tillsammans med ett konfigurationsobjekt argument till funktionen `jwt.sign` och returvärdet är vår `token`.
+Vi kan uppdatera samtliga dokument/objekt i vår collection.
 
-När vi sen vill verifiera en token använder vi funktionen `jwt.verify`. Här skickar vi med token och vår secret som argument. Om token kan verifieras får vi dekrypterat payload och annars ett felmeddelande.
-
-```javascript
-jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
-    if (err) {
-        // not a valid token
-    }
-
-    // valid token
-});
+```shell
+> db.crowd.updateMany({}, {$set: { bor: "Mumindalen" }})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+> db.crowd.find().pretty()
+{
+        "_id" : ObjectId("5a13069000b2ff0b912aeeb6"),
+        "name" : "Mumintrollet",
+        "bor" : "Mumindalen"
+}
+{
+        "_id" : ObjectId("5a13079100b2ff0b912aeeb7"),
+        "name" : "Sniff",
+        "bor" : "Mumindalen"
+}
+{
+        "_id" : ObjectId("5a13079b00b2ff0b912aeeb8"),
+        "name" : "Snusmumriken",
+        "bor" : "Mumindalen"
+}
+{
+        "_id" : ObjectId("5a1307a900b2ff0b912aeeb9"),
+        "name" : "Snorkfröken",
+        "bor" : "Mumindalen"
+}
+>
 ```
 
+Det finns alltså ett antal vanliga CRUD-operationer vi kan göra för att jobba med datat i databasen. Du kan läsa mer om dessa [CRUD-operationer i manualen](https://docs.mongodb.com/manual/crud/).
+
+Låt oss gå vidare och skapa ett program som använder vår nyskapade databas.
 
 
-#### JWT middleware
 
-Vi såg i guiden [Node.js API med Express](https://dbwebb.se/kunskap/nodejs-api-med-express) hur vi kan skapa routes som tar emot POST anrop och hur vi kan använda middleware för att köra en funktion varje gång vi har ett anrop till specifika routes. Om vi skapar nedanstående route i vår me-api ser vi hur middleware funktionen `checkToken` ligger som första funktion på routen. Den anropas först och beroende på om `next()` anropas funktionen efter middleware. Vi observerar även hur vi från klientens sida har skickat med token som en del av headers och hur vi hämtar ut det från request-objektet `req`.
+#### Node till MongoDB
 
-```javascript
-router.post("/reports",
-    (req, res, next) => checkToken(req, res, next),
-    (req, res) => reports.addReport(res, req.body));
+Först installerar vi npm-paketet `mongodb` som är en Node driver till databasen MongoDB. Det finns redan i `package.json` så följande kommandon fungerar.
 
-function checkToken(req, res, next) {
-    const token = req.headers['x-access-token'];
+```shell
+npm install
+npm install mongodb --save
+```
 
-    jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
-        if (err) {
-            // send error response
-        }
+Vi kan läsa om [MongoBD Node.JS Driver i dokumentationen](https://mongodb.github.io/node-mongodb-native/). Där finner vi också dokumentationen för API:et och dess metoder.
 
-        // Valid token send on the request
-        next();
-    });
+
+
+#### Setup med grunddata
+
+I filen `src/setup.js` finns kod som kopplar upp sig mot MongoDB och skapar databasen mumin, rensar den från innehåll och lägger in en del av befolkningen från mumindalen i en collection `crowd` genom att hämta data från filen `src/setup.json`.
+
+Du kan pröva köra programmet och därefter koppla dig med klienten mongo för att se att datan ligger på plats.
+
+```shell
+$node src/setup.js
+$mongo --eval "db.crowd.find().pretty()"
+MongoDB shell version v3.4.10
+connecting to: mongodb://mongodb/mumin
+MongoDB server version: 3.4.10
+{
+        "_id" : ObjectId("5a134ec3c28e762f068f48f1"),
+        "name" : "Mumintrollet",
+        "bor" : "Mumindalen"
+}
+{
+        "_id" : ObjectId("5a134ec3c28e762f068f48f2"),
+        "name" : "Sniff",
+        "bor" : "Mumindalen"
+}
+{
+        "_id" : ObjectId("5a134ec3c28e762f068f48f3"),
+        "name" : "Snusmumriken",
+        "bor" : "Mumindalen"
+}
+{
+        "_id" : ObjectId("5a134ec3c28e762f068f48f4"),
+        "name" : "Snorkfröken",
+        "bor" : "Mumindalen"
 }
 ```
 
-Vi ser i kodexemplet ovan att vi använder `req.body` när vi tar emot en POST request från en klient och skickar med det in till modulen/modellen vi använder för att skapa rapporten. För att kunna använda `req.body` har vi dessa två rader längst upp i vår `app.js`. Vi har även sett detta i artikeln [Node.js API med Express](https://dbwebb.se/kunskap/nodejs-api-med-express#dynamiskt).
+
+
+#### Söka information från databasen
+
+I filen `src/search.js` finns kod som kopplar upp sig mot MongoDB och söker i databasen. Kodexemplet visar på ett par alternativa sätt att jobba med MongoDB avseende den asynkrona biten. Det API som erbjuds bygger på att man kan välja callbacks eller Promise för att hantera det asynkrona flödet.
+
+Låt oss titta på koden.
+
+Först har vi en funktion som kopplar sig mot databasen och en colletion samt utför själva find-operationen.
 
 ```javascript
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+/**
+ * Find documents in an collection by matching search criteria.
+ *
+ * @async
+ *
+ * @param {string} dsn        DSN to connect to database.
+ * @param {string} colName    Name of collection.
+ * @param {object} criteria   Search criteria.
+ * @param {object} projection What to project in results.
+ * @param {number} limit      Limit the number of documents to retrieve.
+ *
+ * @throws Error when database operation fails.
+ *
+ * @return {Promise<array>} The resultset as an array.
+ */
+async function findInCollection(dsn, colName, criteria, projection, limit) {
+    const client  = await mongo.connect(dsn);
+    const db = await client.db();
+    const col = await db.collection(colName);
+    const res = await col.find(criteria, projection).limit(limit).toArray();
+
+    await client.close();
+
+    return res;
+}
 ```
 
-I Postman väljer vi att fylla i body fliken istället för params fliken.
+Funktionen använder konstruktionen async/await för att serialisera flödet mot databasen. Varje metod som jobbar mot databasen, i exemplet ovan, är asynkron och har alternativet att använda callbacks, eller Promise. I koden ovan bygger vi på att ett Promise returneras när respektive metod är avklarad.
 
-Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kursen webapp hur man kan skicka lösenord med [postman](https://www.getpostman.com/). postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.
+En vanlig frågeställning i en async funktion är om await behövs eller inte. För att besvara det behöver man delvis veta om metoden/funktionen returnerar ett Promise eller ej. Här vänder vi oss till API-manualen för respektive metod. Man kommer inte framåt utan att bli bekant med det API man jobbar med. En vanlig fråga är till exempel vad som returneras inom ett Promise, vilka argument man har tillgång till. API manualen ger svaret.
 
-![Postman](https://dbwebb.se/image/ramverk2/postman-headers.png?w=c18)
+Låt oss titta på hur vi kan använda funktionen ovan. Jag kan visa två alternativ och vi börjar med async/await.
+
+Jag lägger premisserna för sökningen i variabler, för tydlighetens skull.
+
+```javascript
+// Find documents where namn starts with string
+const criteria2 = {
+    namn: /^Sn/
+};
+const projection2 = {
+    _id: 1,
+    namn: 1
+};
+const limit2 = 3;
+```
+
+Sedan wrappar jag koden i en _Immediately Invoked Async Arrow Function_ för att kunna använda await inom funktionen.
+
+```javascript
+// Do it within an Immediately Invoked Async Arrow Function.
+// This is to enable usage of await within the function scope.
+(async () => {
+    // Find using await
+    try {
+        let res = await findInCollection(
+            dsn, "crowd", criteria2, projection2, limit2
+        );
+        console.log(res);
+    } catch(err) {
+        console.log(err);
+    }
+})();
+```
+
+Jag lägger koden inom en traditionell try/catch för att hantera eventuella fel som uppkommer. Jag använder await på `findInCollection()` och lägger svaret i en variabel. På det sättet löser jag serialiseringen.
+
+Vi tittar på en annan variant.
+
+```javascript
+(() => {
+    // Find using .then()
+    findInCollection(dsn, "crowd", criteria1, projection1, limit1)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+})();
+```
+
+Här finns inget krav på att använda async, ej heller att wrappa koden inom ett funktionsscope. Serialiseringen sköts av `.then()` och felhanteringen i `.catch()`.
+
+Vi hade också kunnat tänka oss en variant av `findInCollection()` som jobbar med callbacks. Funkionen hade isåfall tagit ytterligare ett argument `callback` som hade anropats när funktionen var klar.
+
+
+
+#### Express till MongoDB
+
+Hur kan det se ut om vi kopplar in databasen MongoDB mot en instans av Express? Låt oss titta på ett exempel i `src/server.js` som exponerar en route `/list` som visar allt innehåll i en collection i databasen.
+
+Vi kan starta upp server och testa att accessa routen.
+
+```shell
+$npm start
+Server is listening on 1337
+```
+
+Via en webbläsare eller curl kan vi nu komma åt routen och med kommadnot jq får vi en renare utskift.
+
+```shell
+$curl -s http://localhost:1337/list | jq
+[
+  {
+    "_id": "5a13efb54dbe18550bce601b",
+    "namn": "Mumintrollet",
+    "bor": "Mumindalen"
+  },
+  {
+    "_id": "5a13efb54dbe18550bce601c",
+    "namn": "Sniff",
+    "bor": "Mumindalen"
+  },
+  {
+    "_id": "5a13efb54dbe18550bce601d",
+    "namn": "Snusmumriken",
+    "bor": "Mumindalen"
+  },
+  {
+    "_id": "5a13efb54dbe18550bce601e",
+    "namn": "Snorkfröken",
+    "bor": "Mumindalen"
+  }
+]
+```
+
+Som vi kunde ana var det inget större bekymmer att flytta in vår kod i en route i express som stödjer async funktioner som callbacks till en route.
 
 
 
@@ -737,21 +911,13 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 ### Del 1: Backend
 
-1. Skapa ett Me-API med nedanstående router.
+1. Skapa ett API för att kunna spara dokument från din editor.
 
 1. Se till att det finns en `package.json` i katalogen. Filen skall innehålla alla beroenden som krävs.
 
-1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och startar ditt Me-API.
+1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och startar ditt Me-API. Beskriv även hur du har valt att strukturera dina routes.
 
-1. Skapa routen `GET /` där du ger en presentation av dig själv.
-
-1. Skapa routerna `GET /reports/week/1`, `GET /reports/week/2`, som innehåller data/text för att fylla motsvarande sidor i din Me-applikation.
-
-1. `GET /reports/week/2` ska innehålla en länk till GitHub repot och innehållet från din `README.md` fil.
-
-1. Skapa routerna `POST /register` och `POST /login` för att registrera en användare och logga in.
-
-1. Skapa routen `POST /reports` för att lägga till data. För att kunna använda denna route ska klienten vara autentiserad med hjälp av JWT.
+1. Det ska gå att skapa (**C**reate), hämta (**R**ead), uppdatera (**Up**date) och ta bort (**D**elete) dokumenter. Förslagsvis har ett dokument minst namn och innehåll.
 
 1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
@@ -761,13 +927,9 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 ### Del 2: Frontend
 
-1. Din frontend Me-applikation ska hämta innehåll från Me-API:t.
+1. Gör om din editor så att dokument kan skapas och hämtas in i editorn.
 
-1. Skapa ett registreringsformulär för registrering av användare i Me-API:t.
-
-1. Skapa ett inloggningsformulär för att kunna autentisera användare mot API:t.
-
-1. När en användare är inloggad ska det gå att skapa nya texter för kommande veckor och redigera befintliga texter.
+1. När ett befintligt dokument ändras ska det uppdateras istället för att skapas om på nytt.
 
 1. Committa alla filer och lägg till en tagg (2.0.0) med hjälp av `npm version 2.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
