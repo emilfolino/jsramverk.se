@@ -63,7 +63,7 @@ const compiler = {
                     let h1Pattern = /<h1>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h1>/gi;
                     let h1 = parsed.match(h1Pattern)[0].replace(/<\/?h1>/g, '');
 
-                    let headerPattern = /<h[1-4]>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h[1-4]>/gi;
+                    let headerPattern = /<h[1-5]>[a-zA-Z0-9äöåÄÖÅ -_,]*<\/h[1-4]>/gi;
                     let headers = parsed.match(headerPattern).map((header) => {
                         let headerNumber = header.match(/\d/i)[0];
                         let headerText = header.replace(/<\/?h\d>/g, '');
@@ -161,7 +161,7 @@ const compiler = {
                 parsed = parsed.replace(stringMatch, replaceString);
             }
 
-            if (level == 4) {
+            if (level >= 4) {
                 replaceString += `<h${level} id="${slug}">`+
                     `<a href="#${slug}">${title}</a></h${level}>`;
 
