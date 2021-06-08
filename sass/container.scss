@@ -55,12 +55,13 @@
         display: block;
         text-align: right;
         position: fixed;
-        top: 10rem;
+        top: 12rem;
     }
 
     .toc ul {
         list-style-type: none;
         font-size: 1.4rem;
+        margin: 0;
     }
 
     .breadcrump {

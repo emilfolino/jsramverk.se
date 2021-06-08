@@ -12,7 +12,8 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
     font-family: $titleFont;
     font-weight: 700;
 }
@@ -37,6 +38,11 @@ h4 {
     margin-bottom: $mainLineHeight * $mainPFontSize;
 }
 
+h5 {
+    font-size: $mainH5FontSize;
+    margin-bottom: $mainLineHeight * $mainPFontSize;
+}
+
 p {
     font-size: $mainPFontSize;
     margin-bottom: $mainLineHeight * $mainPFontSize;
@@ -49,7 +55,8 @@ a {
 .week h1 a,
 .week h2 a,
 .week h3 a,
-.week h4 a {
+.week h4 a,
+.week h5 a {
     color: $darkCharcoal;
     text-decoration: none;
 }
@@ -57,7 +64,8 @@ a {
 .week h1 a:hover,
 .week h2 a:hover,
 .week h3 a:hover,
-.week h4 a:hover {
+.week h4 a:hover,
+.week h5 a:hover {
     text-decoration: underline;
 }
 
@@ -68,7 +76,8 @@ a {
 }
 
 .general-information h2:hover .anchor,
-.general-information h4:hover .anchor {
+.general-information h4:hover .anchor,
+.general-information h5:hover .anchor {
     display: inline;
 }
 

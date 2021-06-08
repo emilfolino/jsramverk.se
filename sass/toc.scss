@@ -12,8 +12,12 @@
 
     .toc ul li a {
         display: block;
-        padding: 0.2rem 1rem;
+        padding: 0.1rem 1rem;
         text-decoration: none;
         border-right: 3px solid white;
+    }
+
+    .toc ul li a:hover {
+        text-decoration: underline;
     }
 }
