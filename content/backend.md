@@ -20,7 +20,7 @@ Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation f
 
 1. Bekanta dig översiktligt med [organisationen kring databasen MongoDB](https://www.mongodb.com/). Övningen (längre ned) kommer vidare utgå från informationen på denna webbplatsen.
 
-1. Bekanta dig översiktligt med dokumentationen för "[MongoDB Node.js driver](http://mongodb.github.io/node-mongodb-native/)" vilken är den driver vi kommer använda för att koppla JavaScript i Node.js till MongoDB. Det handlar både om referens-dokumentationen och API-dokumentationen.
+1. Bekanta dig översiktligt med dokumentationen för "[MongoDB Node.js driver](https://docs.mongodb.com/drivers/node/)" vilken är den driver vi kommer använda för att koppla JavaScript i Node.js till MongoDB. Det handlar både om referens-dokumentationen och API-dokumentationen.
 
 1. Läs igenom inledande tutorials för MongoDB Node.js driver som du hittar i Referensmanualen. Titta främst i "Connect to MongoDB", "Collections", "CRUD Operations" och "Projections". De ger dig snabbt en känsla av hur man jobbar med datan.
 
@@ -917,7 +917,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och startar ditt Me-API. Beskriv även hur du har valt att strukturera dina routes.
 
-1. Det ska gå att skapa (**C**reate), hämta (**R**ead), uppdatera (**U**pdate) och ta bort (**D**elete) dokumenter. Förslagsvis har ett dokument minst namn och innehåll.
+1. Det ska gå att skapa (**C**reate) och uppdatera (**U**pdate) dokumenter via din editor. Förslagsvis har ett dokument minst namn och innehåll.
 
 1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
