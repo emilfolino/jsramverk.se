@@ -2,6 +2,8 @@
 
 <p class="author">Emil Folino</p>
 
+> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
+
 Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tre korta filmer om ramverken. Sen tittar vi på en föreläsning om hur man väljer JavaScript ramverk.
 
 
@@ -70,13 +72,13 @@ I nedanstående tabell listas storleken på produktionsfilerna som skapas av ant
 
 ## Flera exempelprogram
 
-### RealWorld
+#### RealWorld
 
 För att ytterligare utvärdera våra valda ramverk tar vi en titt i GitHub repot [RealWorld Example](https://github.com/gothinkster/realworld). RealWorld Example repon är både backend och frontend som uppfyller vissa specifikationer och därför kan sättas ihop villkorligt. Använd dessa repon för att skapa dig en uppfattning om hur frontend ramverken samspelar med backends.
 
 
 
-### John Papa's Heroes
+#### John Papas Heroes
 
 Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk, videon är länkat ovan. Som förberedelse för presentationen hade han skapat samma app i "The Big Three" och de tre apparna ligger som open source kod på GitHub. [heroes-angular](https://github.com/johnpapa/heroes-angular), [heroes-react](https://github.com/johnpapa/heroes-react) och [heroes-vue](https://github.com/johnpapa/heroes-vue) är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.
 
@@ -194,6 +196,57 @@ För att vi ska kunna prata med en backend behöver vi kunna kommunicera över H
 
 
 
+### Command-Line-Interfaces
+
+Till ramverken kan man använda olika CLI verktyg som kan hjälpa till när man ska skapa en applikation från början eller skapa olika delar av en applikation.
+
+
+
+#### Angular
+
+[Angulars CLI](https://angular.io/cli) heter `ng` och är det mest fullfjädrade CLI till dessa ramverk. Man kan göra oerhört mycket med det och det installeras med hjälp av:
+
+```shell
+$npm install -g @angular/cli
+```
+
+Och vi kan skapa ett nytt projekt och starta utvecklingsservern med hjälp av kommandona:
+
+```shell
+$ng new my-first-project
+$cd my-first-project
+$ng serve
+```
+
+Titta gärna igenom [dokumentationen](https://angular.io/cli) för att se alla valmöjligheter.
+
+
+
+#### React
+
+[React](https://github.com/facebook/create-react-app) har inte på samma sätt ett hårt kopplat CLI som till exempel Angular eller Vue. Dock kan `npx` scriptet `create-react-app` användas för att skapa boilerplate kod, installera paket och bygg-script för att komma igång snabbt. Här är kommandona för att komma igång med `create-react-app`.
+
+```shell
+$npx create-react-app my-app
+$cd my-app
+$npm start
+```
+
+
+
+#### Vue
+
+[Vues CLI](https://cli.vuejs.org/) är som mycket annat i Vue inspirerad av Angular. Men som många andra delar ligger det mitt-i-mellan Angular och React. Det installeras och en applikation skapas med följande kommandon:
+
+```shell
+$npm install -g @vue/cli
+$vue create my-project
+$cd my-project
+$npm run serve
+```
+
+
+
 ## Editor-komponenter
 
 Att skriva en egen text-redigerare för att användas på webben är ett eget 10-årigt projekt, så här tar vi som man brukar i JavaScript-världen en genväg. Exempel på textredigerare finns nedan:
@@ -205,6 +258,128 @@ Att skriva en egen text-redigerare för att användas på webben är ett eget 10
 [TinyMCE](https://github.com/tinymce/tinymce-dist#readme) - komponenter för [ramverken](https://www.tiny.cloud/docs/integrations/).
 
 [Trix](https://trix-editor.org/) - finns även som komponenter till ramverken [Angular](https://www.npmjs.com/package/angular-trix), [React](https://www.npmjs.com/package/react-trix) och [Vue](https://www.npmjs.com/package/vue-trix).
+
+
+
+## Driftsättning
+
+Vi har än så länge visat upp våra än så länge ganska enkla editors med hjälp av ramverkens inbyggda webbservrar. Men för att de applikationer vi skapar med hjälp av ramverken ska få ett värde för andra än oss själva ska de självklart ut på internet och ha ett liv.
+
+Vi har under utvecklingen av vår applikation använd oss av ett `start` eller `serve` kommando. Dessa kommandon bygger i botten på `webpack` och sedan en inbyggt webbserver som har använts för att visa upp filerna.
+
+När vi ska driftsätta sker det på ett lite annat sätt. Alla ramverken har ett inbyggt `build` kommando som med hjälp av webpack packar ihop filerna till produktionsfiler och lägger dessa i en `dist/` eller `build/` katalog. Dessa filer kan vi sedan visa upp med en vanlig webbserver till exempel studentservern. Vi har tidigare använt `dbwebb`-kommandot för att publicera innehåll till studentservern. Vi ska nu titta på hur vi kan göra det  med hjälp av `rsync`, som ligger till grund för mycket av `dbwebb publish`.
+
+
+
+#### Angular
+
+Angulars CLI ger oss möjlighet för att skapa produktionsfiler med kommandot `ng build` som kan anropas med `npm run build` i vårt projekt. `build` kommandot skapar en katalog `dist/projekt_namn/` som innehåller HMTL, CSS och JavaScript filer, samt lite annat smått och gott.
+
+Om vi skickar upp denna katalogen till vår användares `www`-katalog på studentservern har vi driftsatt vår applikation. Vi kommer använda `rsync` för att kopiera upp filerna till studentservern. `-av` står för archive och verbose, så vi tar med kataloger och vi skriver ut vad som händer. `--delete` gör att vi tar bort filer på mottagersidan som inte finns lokalt.
+
+```shell
+$rsync -av --delete dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
+```
+
+Om `rsync` inte hittar rätt ssh nyckel kan man testa med kommandot nedan där vi specificerar vilken nyckel vi vill använda.
+
+```shell
+$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb.pub" dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
+```
+
+Vi kan nu gå till `www.student.bth.se/~AKRONYM/editor` och se en vit sida. Detta beror på att filerna skapas med utgångspunkten att de ska driftsättas i en rot-katalog och inte som vi har gjort det i editor katalogen. Vi kan se till att vår sida kan driftsättas i editor-katalogen genom att skicka med `--base-href './'` till `ng build` kommandot så vårt kommando blir:
+
+```shell
+$ng build --prod --base-href './'
+```
+
+Vi kan förenkla flödet ytterligare genom att lägga till ett npm script som vi kan använda varje gång vi vill driftsätta.
+
+```json
+"scripts": {
+
+  "deploy": "ng build --prod --base-href './' && rsync -av --delete build/ AKRONYM@ssh.student.bth.se:www/editor"
+
+}
+```
+
+
+
+#### React
+
+När vi skapade vår app med hjälp av `create-react-app` fick vi med ett `npm script` för att skapa produktionsfiler. Vi kan köra detta sciptet med `npm run build`. Scriptet skapar en katalog `build/` som innehåller HMTL, CSS och JavaScript filer, samt lite annat smått och gott.
+
+Om vi skickar upp denna katalogen till vår användares `www`-katalog på studentservern har vi driftsatt vår applikation. Vi kommer använda `rsync` för att kopiera upp filerna till studentservern. `-av` står för archive och verbose, så vi tar med kataloger och vi skriver ut vad som händer. `--delete` gör att vi tar bort filer på mottagersidan som inte finns lokalt.
+
+```shell
+$rsync -av --delete build/ AKRONYM@ssh.student.bth.se:www/editor
+```
+
+Om `rsync` inte hittar rätt ssh nyckel kan man testa med kommandot nedan där vi specificerar vilken nyckel vi vill använda.
+
+```shell
+$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb.pub" build/ AKRONYM@ssh.student.bth.se:www/editor
+```
+
+Vi kan nu gå till `www.student.bth.se/~AKRONYM/editor` och se en vit sida. Anledningen till detta är att React skapar `build`-katalogen med utgångspunkt i att den ska driftsättas i en rot-katalog och inte som vi har gjort det i editor katalogen. Vi kan använda oss av `homepage`-attributet i vår `package.json`. Vi sätter det till `"homepage": "."` vilket gör att de första raderna i min fil ser ut så här:
+
+```json
+{
+  "name": "jsramverk-editor",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+
+  }
+}
+```
+
+Vi kan förenkla flödet ytterligare genom att lägga till ett npm script som vi kan använda varje gång vi vill driftsätta.
+
+```json
+"scripts": {
+
+  "deploy": "npm run build && rsync -av --delete build/ AKRONYM@ssh.student.bth.se:www/editor"
+
+}
+```
+
+
+
+#### Vue
+
+Vues CLI ger oss möjlighet för att skapa produktionsfiler med kommandot  `npm run build` i vårt projekt. `build` kommandot skapar en katalog `dist/` som innehåller HMTL, CSS och JavaScript filer, samt lite annat smått och gott.
+
+Om vi skickar upp denna katalogen till vår användares `www`-katalog på studentservern har vi driftsatt vår applikation. Vi kommer använda `rsync` för att kopiera upp filerna till studentservern. `-av` står för archive och verbose, så vi tar med kataloger och vi skriver ut vad som händer. `--delete` gör att vi tar bort filer på mottagersidan som inte finns lokalt.
+
+```shell
+$rsync -av --delete dist/ AKRONYM@ssh.student.bth.se:www/editor
+```
+
+Om `rsync` inte hittar rätt ssh nyckel kan man testa med kommandot nedan där vi specificerar vilken nyckel vi vill använda.
+
+```shell
+$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb.pub" dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
+```
+
+Vi kan nu gå till `www.student.bth.se/~AKRONYM/editor` och se en vit sida. Detta beror på att filerna skapas med utgångspunkten att de ska driftsättas i en rot-katalog och inte som vi har gjort det i editor katalogen. Vi kan se till att vår sida kan driftsättas i editor-katalogen genom att använda oss av [Vues konfigurationsfil](https://cli.vuejs.org/config/#global-cli-config) `vue.config.js`. Skapa filen i roten av ditt projekt med följande innehåll.
+
+```javascript
+module.exports = {
+  publicPath: "./",
+};
+```
+
+Vi kan förenkla flödet ytterligare genom att lägga till ett npm script som vi kan använda varje gång vi vill driftsätta.
+
+```json
+"scripts": {
+
+  "deploy": "npm run build && rsync -av --delete dist/ efostud@ssh.student.bth.se:www/editor"
+
+}
+```
 
 
 
@@ -224,7 +399,7 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
-1. Länka till ditt GitHub repo i en kommentar till din inlämning på Canvas.
+1. Länka till ditt GitHub repo och till din editor på studentservern i en kommentar till din inlämning på Canvas.
 
 
 
