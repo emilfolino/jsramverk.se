@@ -2,6 +2,8 @@
 
 <p class="author">Emil Folino och Mikael Roos</p>
 
+> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
+
 Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en dokument-orienterad databas. Databasen vi ska använda heter mongodb och är av typen [NoSQL](https://en.wikipedia.org/wiki/NoSQL).
 
 
@@ -30,11 +32,11 @@ Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation f
 
 Vi ska denna veckan skriva en del asynkron kod och det kan vara bra att ha lite extra bra koll på hur "Event-loop" fungerar i JavaScript. Denna video ger en bra introduktion till hur det fungerar både för frontend och backend.
 
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/8aGhZQkoFbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/8aGhZQkoFbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Sen låter vi Chief Technical Officer Eliot Horowitz hos [MongoDB](https://www.mongodb.com/) berätta om Dokumentorienterade databaser.
 
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/EE8ZTQxa0AM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/EE8ZTQxa0AM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 
 
@@ -578,9 +580,11 @@ På det sättet håller vi `app.js` liten i storlek och var sak har sin plats.
 
 
 
-### MongoDB
+### MongoDB som databas
 
 I denna artikel installerar vi MongoDB lokalt på din utvecklingsdator, om du vill och har möjligt kan du använda MongoDB i Docker. Artikeln [MongoDB i Docker](mongodb-docker) visar hur det kan gå till.
+
+Vi kommer sedan använda oss av MongoDB Atlas för att driftsätta vår databas, men mer om det [senare](#mongodb).
 
 I kursrepot finns exempelkod under [db/mongodb](https://github.com/emilfolino/jsramverk/tree/master/db/mongodb).
 
@@ -860,6 +864,48 @@ Vi hade också kunnat tänka oss en variant av `findInCollection()` som jobbar m
 
 
 
+#### Lägga till och uppdatera data
+
+Vi har i ovanstående sett hur vi läser data från databasen och i exempelkoden `db/mongodb/src/setup.js` finns ett exempel där funktionen [insertMany](https://docs.mongodb.com/drivers/node/current/fundamentals/crud/write-operations/insert/#insert-multiple-documents) används.
+
+Förutom `insertMany` finns `insertOne` funktionen där man lägger [till ett dokument i databasen](https://docs.mongodb.com/drivers/node/current/fundamentals/crud/write-operations/insert/#insert-a-single-document). Om vi vill lägga till ett dokument med attributen `name` och `html` gör vi på följande sätt.
+
+```javascript
+const doc = {
+    name: body.name,
+    html: body.html,
+};
+
+const result = await db.collection.insertOne(doc);
+```
+
+MongoDB lägger automatiskt till ett `_id` fält i dokumentet/objektet och vi kan kolla om allt gått bra och titta på det objekt vi har lagt till med följande kod. `result.ops` innehåller det objekt som har lagts till i databasen bland annat det automatgenererade `_id`.
+
+```javascript
+if (result.result.ok) {
+    return res.status(201).json({ data: result.ops });
+}
+```
+
+Detta `_id` behövs sedan när vi vill uppdatera dokumentet i databasen. Vi gör det med funktionen [updateOne](https://docs.mongodb.com/drivers/node/current/fundamentals/crud/write-operations/change-a-document/#update). Först importerar vi ObjectID funktionen för att kunna hitta rätt `_id` i databasen. Vi skapar sedan ett `filter` och ett `updateDocument` och använder oss av `updateOne`. Bara de fält som skickas in uppdateras, vill vi ersätta dokumentet istället kan vi använda `replaceOne`.
+
+```javascript
+const ObjectID = require('mongodb').ObjectID;
+
+const filter = { _id: ObjectID(body["_id"]) };
+const updateDocument = {
+    name: body.name,
+    html: body.html,
+};
+
+const result = await db.collection.updateOne(
+    filter,
+    updateDocument,
+);
+```
+
+
+
 #### Express till MongoDB
 
 Hur kan det se ut om vi kopplar in databasen MongoDB mot en instans av Express? Låt oss titta på ett exempel i `src/server.js` som exponerar en route `/list` som visar allt innehåll i en collection i databasen.
@@ -900,6 +946,114 @@ $curl -s http://localhost:1337/list | jq
 ```
 
 Som vi kunde ana var det inget större bekymmer att flytta in vår kod i en route i express som stödjer async funktioner som callbacks till en route.
+
+
+
+#### Bryta ut databas koden
+
+För att få mer DRY kod och för att underlätta för testning lite längre fram i kursen är detta ett bra tillfälle att bryta ut hanteringen av databas uppkopplingen till en egen modul. Jag har i mitt projekt skapat en katalog `db` där jag har lagt filen `database.js`. Här skapar jag först en `dsn` sträng. Om vi håller på att testa koden ändrar jag den till en test databas istället, mer om detta när vi senare i kursen ska testa vår applikation.
+
+Nästa steg är som vi tidigare har gjort i exempelprogrammen att koppla oss mot databasen och som det sista steget att returnera `client` och `collection`.
+
+```javascript
+const mongo = require("mongodb").MongoClient;
+const config = require("./config.json");
+const collectionName = "docs";
+
+const database = {
+    getDb: async function getDb () {
+        let dsn = `mongodb://localhost:27017/folinodocs`;
+
+        if (process.env.NODE_ENV === 'test') {
+            dsn = "mongodb://localhost:27017/test";
+        }
+
+        const client  = await mongo.connect(dsn, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        const db = await client.db();
+        const collection = await db.collection(collectionName);
+
+        return {
+            collection: collection,
+            client: client,
+        };
+    }
+};
+
+module.exports = database;
+```
+
+Vi kan sedan i koden hämta databasen, ställa frågor och sedan stänga ner databasen.
+
+```javascript
+const db = await database.getDb();
+const resultSet = await db.collection.find({}).toArray();
+
+await db.client.close();
+```
+
+
+
+## Driftsättning
+
+Molnet eller _the cloud_ har under de senaste 10 åren växt fram enormt fort. Om du vill ha en kort introduktion till molnet kan Bill Laberis' bok _"What is the cloud?"_ rekommenderas. Du kommer åt boken via [biblioteket på BTH](https://bibliotek.bth.se/databases?q=o%27reilly) och välj O'reilly. Du ska nu kunna söka på "What is the cloud?" i Sökrutan och första träffen bör vara _"What is the cloud?"_.
+
+
+
+#### MongoDB
+
+Vi börjar med att skaffa oss en plats för vår mongodb databas. Vi kommer i kursen använda oss av [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). Atlas är en moln-tjänst för databaser.
+
+Skapa en användare genom att klicka på "Start free". Skapa sedan ett cluster genom knappen "Create a New Cluster". Bilden nedan visar de tre olika cluster-typerna och välj här "Shared Clusters" då de är gratis.
+
+![Clusters](https://dbwebb.se/image/jsramverk/mongodb-atlas-choose.png?w=778)
+
+Skapa sedan ett cluster där du väljer en cloud provider och en plats för vart servern ska stå. Se till att under Cluster Tier välja M0 som är gratis varianten.
+
+![Cloud Providers](https://dbwebb.se/img/jsramverk/mongodb-atlas-create.png?w=778)
+
+Efter att vi skapat ett cluster vill vi skapa en användare som får komma åt clustret och de databaser som kommer skapas i clustret. Nedan väljer vi först Database Access och sedan Add New Database User.
+
+![Create User overview](https://dbwebb.se/image/jsramverk/mongodb-atlas-db-user.png?w=778)
+
+Sedan skapar vi en användare för att koppla oss mot databaserna. Välj att vi vill använda lösenord som autentiseringsmetod.
+
+![Create User specifics](https://dbwebb.se/image/jsramverk/mongodb-atlas-create-user.png?w=778)
+
+För att skydda databasen ytterligare kan vi bestämma vilka IP-adresser som får komma åt databasen. Välj Network Access och sedan Add IP Adress.
+
+![Add IP](https://dbwebb.se/image/jsramverk/mongodb-atlas-ip.png?w=778)
+
+Tryck på knappen Add Current IP Adress för att lägga till adressen till den dator/nätverk som du utvecklar ifrån. Vi kommer senare i artikeln återupprepa processen genom att lägga till IP-adressen för vår server vi skapar i en kommande del.
+
+![Add HOME IP](https://dbwebb.se/image/jsramverk/mongodb-atlas-from-home.png?w=778)
+
+Låt oss nu koppla upp vår applikation mot vår nya databas hos MongoDB atlas. Gå till Clusters fliken i mongodb atlas gränssnittet och tryck på Connect, välj sedan Connect Your application.
+
+![Choose App](https://dbwebb.se/image/jsramverk/mongodb-atlas-connect-app.png?w=778)
+
+Välj sedan korrekt driver och version, senaste bör vara korrekt. Kopiera sedan in detta i din `db/database.js`.
+
+![Choose Driver](https://dbwebb.se/image/jsramverk/mongodb-atlas-connect-url.png?w=778)
+
+Jag valde att skapa en JSON fil för att hantera användarenamn och lösenord till databasen. Har exkluderat den från Git genom att fylla i sökvägen till filen i repots `.gitignore`-fil. Min `config.json` fil ser ut som nedan, med ett långt och svårt lösenord skapat i gränssnittet, som värde för password attributet.
+
+```json
+{
+    "username": "texteditor",
+    "password": "..."
+}
+```
+
+Vilket gör att jag kan skapa min dsn sträng på följande sätt.
+
+```javascript
+const config = require("./config.json");
+
+let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.hkfbt.mongodb.net/folinodocs?retryWrites=true&w=majority`;
+```
 
 
 

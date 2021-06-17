@@ -413,7 +413,9 @@ Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue,
 
 ## Skriva
 
-Vi ska i denna kurs träna på akademiskt skrivande och förbereda för en studie. Vi kommer i vecka 1 & 2 fokusera på forskningsfrågor. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
+Ni får i denna kursen möjlighet för att träna på akademiskt skrivande och förbereda inför en studie/exjobb. Denna delen av kursen är optionell och enbart tänkt som en hjälp inför kommande exjobb.
+
+Vi kommer i vecka 1 & 2 fokusera på forskningsfrågor. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
 
 Forskningsfrågor skapar grunden för studien och är de frågor vi söker svar på i studien. All forskning och den vetenskapliga metoden handlar i grunden om att ställa intressanta frågor och sedan på ett metodiskt och reproducerbart sätt jobba fram svaren till dessa frågor. Viktigt med forskningsfrågor är att de är avgränsade, inte är ja/nej frågor och att de är mätbara. Sen är det viktigt att de två forskningsfrågorna är inom samma område. Vi kan inte ha en fråga om testning och en om JavaScript-ramverk, det är för brett ett område och vi vill försöka avgränsa och fokusera vår studie.
 
