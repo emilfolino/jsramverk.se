@@ -1026,9 +1026,9 @@ För att skydda databasen ytterligare kan vi bestämma vilka IP-adresser som få
 
 ![Add IP](https://dbwebb.se/image/jsramverk/mongodb-atlas-ip.png?w=778)
 
-Tryck på knappen Add Current IP Adress för att lägga till adressen till den dator/nätverk som du utvecklar ifrån. Vi kommer senare i artikeln återupprepa processen genom att lägga till IP-adressen för vår server vi skapar i en kommande del.
+Tryck på knappen Allow Access From Anywhere för att lägga till alla IP-adresser det kommer underlätta när vi har driftsatt backend. Blir lite sämre säkerhet, men vi är medvetna om detta och förstår innebörden.
 
-![Add HOME IP](https://dbwebb.se/image/jsramverk/mongodb-atlas-from-home.png?w=778)
+![Add Allow Anywhere](https://dbwebb.se/image/jsramverk/mongodb-atlas-allow-anywhere.png?w=778)
 
 Låt oss nu koppla upp vår applikation mot vår nya databas hos MongoDB atlas. Gå till Clusters fliken i mongodb atlas gränssnittet och tryck på Connect, välj sedan Connect Your application.
 
@@ -1038,7 +1038,7 @@ Välj sedan korrekt driver och version, senaste bör vara korrekt. Kopiera sedan
 
 ![Choose Driver](https://dbwebb.se/image/jsramverk/mongodb-atlas-connect-url.png?w=778)
 
-Jag valde att skapa en JSON fil för att hantera användarenamn och lösenord till databasen. Har exkluderat den från Git genom att fylla i sökvägen till filen i repots `.gitignore`-fil. Min `config.json` fil ser ut som nedan, med ett långt och svårt lösenord skapat i gränssnittet, som värde för password attributet.
+Jag valde att skapa en JSON fil för att hantera användarnamn och lösenord till databasen. Har exkluderat den från Git genom att fylla i sökvägen till filen i repots `.gitignore`-fil. Min `config.json` fil ser ut som nedan, med ett långt och svårt lösenord skapat i gränssnittet, som värde för password attributet.
 
 ```json
 {
@@ -1054,6 +1054,22 @@ const config = require("./config.json");
 
 let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.hkfbt.mongodb.net/folinodocs?retryWrites=true&w=majority`;
 ```
+
+Vi kan nu verifiera att kopplingen till mongodb atlas fungerar genom att köra igång vår backend lokalt och se att det fungerar som tidigare.
+
+
+
+#### Express Appen
+
+Med databasen på plats och vi har verifierad att det fungerar bra fortsätter vi med backend. Vi ska driftsätta vår Express/Node applikation i Microsofts Azure Cloud, men innan vi kommer så långt behöver vi uppdatera så cloudet kan ändra porten som vårt API lyssnar på.
+
+Vi kan utnyttja `process`, som är en global variabel med innehåll om den Node process som vi kör vårt API i. I den kan vi hämta ut miljövariabler och i detta fallet `PORT`. Om vi ändrar till nedanstående kod får vi miljövariabelns värde om den är satt annars vår standard port 1337.
+
+```javascript
+const port = process.env.PORT || 1337;
+```
+
+Nedanstående är en översiktlig genomgång av denna [Microsoft Guide](https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?pivots=platform-linux), så om du vill ha med alla detaljer välj guiden.
 
 
 
