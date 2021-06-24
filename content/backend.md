@@ -588,6 +588,8 @@ Vi kommer sedan använda oss av MongoDB Atlas för att driftsätta vår databas,
 
 I kursrepot finns exempelkod under [db/mongodb](https://github.com/emilfolino/jsramverk/tree/master/db/mongodb).
 
+Om du vill lära dig mer om mongodb utanför kursen är [MongoDB University](https://university.mongodb.com/) en bra resurs.
+
 
 
 #### Installation MongoDB

@@ -33,6 +33,83 @@ Nedanstående video ger en bra introduktion till varför vi vill använda scoket
 
 Vi kommer i detta och kommande kursmoment använda oss av paketet [socket.io](https://socket.io/). Paketet underlättar för oss när vi vill skicka data över en websocket mellan en server och ett flertal klienter. Vi börjar med servern och tar sedan en titt på hur vi kan integrera socket.io i klienter och i de olika ramverken ni har valt att jobba med.
 
-### Server
+Ett exempel program med en chattklient och chattserver finns under `socket/` i kursrepot.
 
-### Klient
+
+
+### Sockets för vår editor
+
+Vi börjar på serversidan och kommer igenom hela denna artikel hoppa lite fram och tillbaka mellan de olika delarna av vår applikation. Jag har markerat kodexempel med `// Klient` respektive `//// Server` för att markera vart koden hör hemma.
+
+För att kunna använda oss av `socket.io` på servern installerar vi det med hjälp av `npm`. De två paketen `bufferutil` och `utf-8-validate` installerar vi för att [snabba upp](https://github.com/websockets/ws/#opt-in-for-performance) serverns hantering av sockets. Det är viktigt i dessa sammanhang när vi använder oss av realtidsprogrammering.
+
+```shell
+$npm install --save socket.io
+$npm install --save-optional bufferutil utf-8-validate
+```
+
+För att initiera och integrera sockets i vår express backend måste vi skapa en `httpServer` instans som använder vår Express-`app`.
+
+```javascript
+const httpServer = require("http").createServer(app);
+
+const io = require("socket.io")(httpServer, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
+```
+
+`origin` är den URL'n som vi vill kunna ta emot uppkopplingar ifrån. Under utveckling är det högst troligen en `localhost` adress med en port för ditt valda ramverk.
+
+Precis som vi är vana vid från JavaScript händer allt asynkront och event-styrd när vi hanterar sockets. Därför är en viktig del av att hantera sockets att skapa `EventListeners` som lyssnar på olika händelser.
+
+Vi börjar med en lyssnare för att kolla om vi får in några uppkopplingar:
+
+```javascript
+io.sockets.on('connection', function(socket) {
+    console.log(socket.id); // Nått lång och slumpat
+});
+```
+
+En funktion som vi kan använda en hel del i detta kursmoment är `socket.emit()`. I `emit` funktionen skickar vi med en nyckel/event-namn och sedan data som vi vill koppla till eventet. Så till exempel om vi vill skicka ett `message` via vår socket antingen från server till klient eller från klient till server, kan vi göra det med `emit()` enligt nedan.
+
+```javascript
+socket.emit("message", data);
+```
+
+
+
+### Installation i klienten
+
+Vi installerar `socket.io-client` med hjälp av `npm`.
+
+```shell
+$npm i --save socket.io-client
+```
+
+Och sedan initierar vi klienten med en `ENDPOINT` som är URL'n till servern vi vill att paketen skickas till.
+
+```javascript
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "http://127.0.0.1:1337";
+
+const socket = socketIOClient(ENDPOINT);
+```
+
+
+
+### Rooms
+
+Då vi kommer ha många olika dokument i vår editor kommer vi använda oss av [Rooms](https://socket.io/docs/v4/rooms/). Rooms lever enbart på servern, men vi kan initiera de från klienten genom att använda
+
+
+
+## Skriva
+
+Vi fortsätter iterativt med att förbättra våra syften. Använd den återkopplingen du fick på förra veckans syften och förbättra.
+
+Gå tillbaka till skrivguiden och titta under [Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips.
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**

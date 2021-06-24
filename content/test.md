@@ -61,6 +61,8 @@ Som en bonus blir all vår kod testbar och troligen skriven för att vara högst
 
 TDD får oss att skriva koden som löser testfallen, möjligen får det oss att fokusera på det som är viktigt i koden och möjligen ökar fokusen på att hålla kodmodulerna små.
 
+Vi har börjat med att utveckla innan vi testar, men vi kan i kommande kursmoment testa på TDD. Speciellt är det intressant i [kursmoment 05: Auth](/auth).
+
 
 
 ### Behaviour driven utveckling
@@ -130,7 +132,7 @@ Det är inte en enkel sak att välja testverktyg, men om man börjar välja någ
 
 På min kravlista finns att kodtäckning skall fungera för mina enhetstester. I JavaScript-världen finns främst [Istanbul](https://istanbul.js.org/) och [Blanket.js](http://blanketjs.org/) som ger oss denna möjlighet. Testverktyget jag väljer behöver alltså ha en känd koppling mot något av dessa verktyg.
 
-När jag går från enhetstester till funktionstester så kan behovet av en headless browser komma upp. Här finns [Selenium](http://www.seleniumhq.org/) som en av de mer kända. Men alternativen är flera.
+<!-- När jag går från enhetstester till funktionstester så kan behovet av en headless browser komma upp. Här finns [Selenium](http://www.seleniumhq.org/) som en av de mer kända. Men alternativen är flera. -->
 
 När jag väl bestämt mig för verktygen behövs en testrunner som kör mina tester och en hantering av testrapporten så den kan visas upp för programmerare och kanske även extern personal.
 
@@ -331,7 +333,7 @@ Vi kör testarna på samma sätt som tidigare med `npm test` och får på samma 
 ```json
 "scripts": {
     "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "clean": "rm -rf node_modules package-lock.json",
 },
 ```
@@ -343,42 +345,48 @@ Vi kör testarna på samma sätt som tidigare med `npm test` och får på samma 
 Om vi har tester som påverkar databasen vill inte att dessa ska påverka utvecklingsdatabasen och definitivt inte produktionsdatabasen. Därför är det starkt rekommenderat att du skapar en testdatabas. Ett enkelt sätt att returnera korrekt databas beroende på `NODE_ENV` är att skapa en fil `db/database.js`, som gör precis detta. Ett exempel syns nedan där rätt databas returneras beroende på `NODE_ENV`.
 
 ```javascript
-var sqlite3 = require('sqlite3').verbose();
+const mongo = require("mongodb").MongoClient;
+const config = require("./config.json");
+const collectionName = "docs";
 
-module.exports = (function () {
-    if (process.env.NODE_ENV === 'test') {
-        return new sqlite3.Database('./db/test.sqlite');
+const database = {
+    getDb: async function getDb () {
+        let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.hkfbt.mongodb.net/folinodocs?retryWrites=true&w=majority`;
+
+        if (process.env.NODE_ENV === 'test') {
+            // We can even use MongoDB Atlas for testing
+            dsn = "mongodb://localhost:27017/test";
+        }
+
+        const client  = await mongo.connect(dsn, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        const db = await client.db();
+        const collection = await db.collection(collectionName);
+
+        return {
+            collection: collection,
+            client: client,
+        };
     }
+};
 
-    return new sqlite3.Database('./db/texts.sqlite');
-}());
+module.exports = database;
 ```
 
 Vi kan sedan hämta korrekt databas genom att anropa `database.js`.
 
 ```javascript
-const db = require("../db/database.js");
+const database = require("../db/database.js");
+
+const db = await database.getDb();
+const resultSet = await db.collection.find({}).toArray();
+
+await db.client.close();
+
+return res.json({ data: resultSet });
 ```
-
-För att skapa om en tom test databas för varje körning av testerna kan vi använda följande i vårt script block i `package.json`.
-
-```json
-"scripts": {
-    "pretest": "bash db/reset_test_db.bash",
-    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
-    "start": "node app.js",
-    "clean": "rm -rf node_modules package-lock.json",
-},
-```
-
-Och bash-skriptet `db/reset_test_db.bash` är som nedan.
-
-```bash
-$(> db/test.sqlite)
-cat db/migrate.sql | sqlite3 db/test.sqlite
-```
-
-Där `db/migrate.sql` innehåller kod för att skapa tabeller i databasen.
 
 
 
@@ -417,7 +425,6 @@ Vill du köra validatorn som en del av din `npm test` så kan du lägga till det
 
 ```json
 "scripts": {
-    "pretest": "bash db/reset_test_db.bash",
     "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
     "posttest": "npm run eslint",
     "start": "node app.js",
@@ -432,7 +439,45 @@ När enhetstester körs så genereras kodtäckningen till katalogen `build/`. De
 
 ## Funktionstestning
 
-Selenium kan sammanfattas lite kort med: _"Selenium is an umbrella project for a range of tools and libraries that enable and support the automation of web browsers."_
+I ramverken finns det inbyggda test-verktyg och vi kommer i kommande stycken ta en överflygning över dessa verktyg.
+
+#### Angular
+
+Med tanke på att Angular är ett _batteries included_ ramverk finns det självklart [ett väl integrerad test verktyg](https://angular.io/guide/testing) som en del av ramverket.
+
+I [detta exempel](https://angular.io/guide/testing-components-basics#component-class-testing) kan vi se hur koden för en knapp testas.
+
+
+
+#### React
+
+React har en översikt över [testverktygen](https://reactjs.org/docs/testing.html) och speciellt artikeln [Testing Recipes](https://reactjs.org/docs/testing-recipes.html) är en bra genomgång av hur man kan skriva tests i React.
+
+Testerna för en komponent till exempel `App.js` skrivs i filen `App.test.js`.
+
+Ett test för att kolla om en rubrik finns i den renderade appen görs på följande sätt.
+
+```javascript
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders ', () => {
+  const { container } = render(<App />);
+
+  expect(screen.getByText(/folinodocs/i)).toBeInTheDocument();
+});
+```
+
+
+
+#### Vue
+
+För Vue finns [denna beskrivning](https://vuejs.org/v2/guide/testing.html) av testramverken/verktygen. Precis som för React finns även här ett [Testing Library](https://vuejs.org/v2/guide/testing.html) kopplat till Jest.
+
+Vue rekommenderar precis som Angular [End-to-End testing](https://vuejs.org/v2/guide/testing.html#End-to-End-E2E-Testing) med olika verktyg som Cypress och Nightwatch. End-to-End testing innebär att man använder sig av en headless browser och benämns ovan som Funktionstestning.
+
+
+<!-- Selenium kan sammanfattas lite kort med: _"Selenium is an umbrella project for a range of tools and libraries that enable and support the automation of web browsers."_
 
 Selenium finns tillgängligt i ett antal språk, bl.a. Java, Python och JavaScript. Det finns [dokumentation för hela projektet](https://seleniumhq.github.io/docs/index.html) men även bara för [Javascript API:et](https://seleniumhq.github.io/selenium/docs/api/javascript/). Jag tycker att JavaScript dokumentationen fungerade bra för att söka upp funktioner och få en hyfsad uppfattning om hur de fungerar.
 
@@ -661,7 +706,7 @@ Ni borde ha testat köra testerna några gånger nu och har märkt att det går 
 
 #### Kodtäckning med Selenium
 
-Det ska gå att få kodtäckning av Selenium tester med hjälp av [Istanbul](https://github.com/gotwarlost/istanbul/issues/132). Det krävs lite eget arbete och vi vet inte om det funkar, om någon är intresserad är det fritt fram att försöka. Gör gärna ett forum inlägg om det lyckas.
+Det ska gå att få kodtäckning av Selenium tester med hjälp av [Istanbul](https://github.com/gotwarlost/istanbul/issues/132). Det krävs lite eget arbete och vi vet inte om det funkar, om någon är intresserad är det fritt fram att försöka. Gör gärna ett forum inlägg om det lyckas. -->
 
 
 
@@ -694,7 +739,7 @@ Mikael visar i följande video hur han gör det för modulen rem-server.
 
 
 
-### Kodkvalitet och kodtäckning med Scrutinizer
+<!-- ### Kodkvalitet och kodtäckning med Scrutinizer
 
 Avslutningsvis integrerar jag mitt repo mot [Scrutinizer](https://scrutinizer-ci.com/g/janaxs/blackjack/) som är ett verktyg för kodkvalitet och kodtäckning. Verktyget kan exekvera mina tester, visa kodtäckning och analysera min kod ur olika aspekter.
 
@@ -704,13 +749,13 @@ Ett exempel på en `.scrutinizer.yml` fil finns i Lager API repot [order_api/.sc
 
 Mikael visar i följande video hur han gör det för modulen rem-server.
 
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/Xzq28ZbX6tc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/Xzq28ZbX6tc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> -->
 
 
 
 ### CI kedja klar
 
-Då var vår CI kedja klar med flera alternativ för byggsystem, kodtäckning och kodkvalitet.
+Då var vår CI kedja klar med flera alternativ för byggsystem och kodtäckning.
 
 Du kan ta en närmare titt på mitt demo repo [janaxs/blackjack](https://github.com/janaxs/blackjack) om du vill se valideringsverktyg, enhetstester och CI-kedjan i ett sammanhang i ett repo med nödvändiga konfigurationsfiler.
 
@@ -728,15 +773,11 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 1. Allt som behövs i ditt repo skall installeras vid `npm install`.
 
-1. Välj och integrera ett verktyg för enhetstester. Verktyget skall exekvera dina enhetstester vid `npm test`.
-
-1. Lägg till ett antal enhetstester och integrationstester så du känner förtroende för din kod.
+1. Lägg till ett antal enhetstester eller integrationstester så du känner förtroende för din kod.
 
 1. Lägg till så att kodtäckning fungerar vid enhetstester och integrationstester.
 
 1. Bygg en CI-kedja och integrera med byggtjänsten Travis som checkar ut ditt repo och utför `npm install` och `npm test`. Badga din README.
-
-1. Integrera ditt repo med kodkvalitets verktyget Scrutinizer. Badga din README.
 
 1. Committa och tagga ditt repon med 2.0.0 eller senare, ladda upp till GitHub och driftsätt.
 
@@ -744,24 +785,26 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 ### Frontend
 
-1. Lägg till routen `/reports/week/4` där beskriver tre (3) stycken simpla use-cases och skriv sedan Selenium tester för att testa dessa use-cases. Data att fylla sidan sidan ska som vanligt komma från Me-API:t.
+1. I din inlämning på Canvas beskriver du tre (3) stycken simpla use-cases och skriv sedan funktions-tester i ditt ramverk för att testa dessa use-cases.
 
 > Exempel på use-case: "Användaren ska från förstasidan kunna trycka på en länk för att se redovisningstexten för vecka 1."
 
-2. Skapa Selenium-tester för att testa ovanstående tre use-cases.
+2. Bygg en CI-kedja och integrera med byggtjänsten Travis som checkar ut ditt repo och utför `npm install` och `npm test`. Badga din README.
 
-3. Bygg en CI-kedja och integrera med byggtjänsten Travis som checkar ut ditt repo och utför `npm install` och `npm test`. Badga din README.
-
-4. Integrera ditt repo med kodkvalitets verktyget Scrutinizer. Badga din README.
-
-5. Committa och tagga ditt repon med 4.0.0 eller senare, ladda upp till GitHub och driftsätt.
+3. Committa och tagga ditt repon med 3.0.0 eller senare, ladda upp till GitHub och driftsätt.
 
 
 
 ## Skriva
 
-Vi fortsätter iterativt med att förbättra våra syften. Använd den återkopplingen du fick på förra veckans syften och förbättra.
+Vi fortsätter med grunden för vår studie. Vi har med forskningsfrågorna beskrivit för våra läsare **VAD** vi vill undersöka. Vi ska denna och kommande veckan beskriva **VARFÖR** och därigenom formulera ett syfte till de två forskningsfrågor vi gjorde tidigare.
 
-Gå tillbaka till skrivguiden och titta under [Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips.
+Ett syfte i en akademisk text förklarar för läsaren varför studien genomförs och hur de tänkta resultaten kan bidra till att föra området, som studien görs inom vidare. Gå tillbaka till skrivguiden och titta under [Syfte](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips. I [mallen](https://dbwebb.se/kurser/exjobb/guide/mall-for-thesis-dokumentet) som används i [kommande exjobbskurs](https://dbwebb.se/kurser/exjobb) står följande om forskningsfrågor och syfte:
+
+> State the RQ:s, and motivate each of them! Describe the goals/objectives with your study, and the expected outcome. The evaluation of the thesis will be very much towards the clarity of the RQ:s and if you answer the RQ:s in your thesis.
+
+För varje forskningsfråga skriver du en text på 5-10 meningar som förklarar **VARFÖR** denna forskningsfrågan är viktig att belysa. Skriv syftet direkt under frågan så man ser att de hör ihop.
+
+I och med att vi börjar få lite mer text blir inlämningen av texten denna och kommande veckor i PDF format. Du väljer själv på vilket sätt och med vilken teknik du vill skriva texten. Under föreläsningen går Emil igenom tre olika sätt att skriva texten: Textbehandlare (Microsoft Word, Google Docs, Apple Pages, LibreOffice Writer eller liknande), [Markdown med Pandoc](http://arthurcgusmao.com/academia/2018/01/27/markdown-pandoc.html) och [LaTeX med Overleaf](https://sv.overleaf.com/edu/bth).
 
 **Lämna in texten som PDF bilaga till din inlämning på Canvas.**
