@@ -2,8 +2,6 @@
 
 <p class="author">Emil Folino</p>
 
-> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
-
 Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tre korta filmer om ramverken. Sen tittar vi på en föreläsning om hur man väljer JavaScript ramverk.
 
 
@@ -28,11 +26,15 @@ Tre korta filmer om ramverken och deras historia.
 
 
 
-#### Föreläsning om att välja ramverk
+#### Föreläsningar om att välja ramverk
 
 I nedanstående video berättar John Papa om hur man kan tänka när man väljer ett JavaScript-ramverk.
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/dHptnyroFNA" frameborder="0" allowfullscreen></iframe></div>
+
+Fireship har gjort en lite nyare jämförelse av ramverken, där även sju andra ramverk jämförs med "The Big Three".
+
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/cuHDQhDhvPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 
 

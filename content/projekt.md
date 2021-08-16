@@ -44,7 +44,7 @@ Använd ett mail API, förslagsvis Mailgun eller Sendgrid, för att koppla på m
 
 ### Krav 4: Code-mode
 
-Lägg till möjligheten att välja code-mode. Editorn byts då ut mot en kod-editor förslagsvis codemirror eller monaco-editor. Spara information i databasen
+Lägg till möjligheten att välja code-mode. Editorn byts då ut mot en kod-editor förslagsvis codemirror eller monaco-editor. Spara information i databasen om dokumentets typ.
 
 
 
