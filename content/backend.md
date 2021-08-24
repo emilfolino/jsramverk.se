@@ -1109,11 +1109,11 @@ Vi kommer göra dirftsättningen automagiskt via Visual Studio Code, så har du 
 
 I Visual Studio Code installerar vi pluginen Azure App Services med hjälp av plugin menyn.
 
-![Installerar pluginen Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-install.png?w=250)
+![Installerar pluginen Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-install.png)
 
 Logga sedan in i Azure App Services genom att klicka på länken Sign in to Azure under den nya fliken Azure i din aktivitetsflik längst till vänster. Du ska logga in med din Studentkonto-mail: abcdxx@student.bth.se.
 
-![Logga in i Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-login.png?w=250)
+![Logga in i Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-login.png)
 
 Se till att du har Code öppnat för din backend app och klicka sedan på lilla krysset bredvid App Service rubriken. Välj sedan den subscription som dyker upp. Första steget är sedan att välja ett unikt namn. Jag har valt _jsramverk-editor-efostud_ som är mitt fejkade student-akronym så kan vara smart att använda _jsramverk-editor-abcdxx_.
 
@@ -1165,7 +1165,7 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
 
-1. Länka till båda dina GitHub repon i en kommentar till din inlämning på Canvas.
+1. Länka till båda dina GitHub repon och den driftsatta klienten i en kommentar till din inlämning på Canvas.
 
 
 

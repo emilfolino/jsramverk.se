@@ -190,7 +190,12 @@ För Angular finns det ett paket `ngx-socket-io` för att hantera sockets: [http
 
 1. Använd sockets för att skapa realtidskommunikation mellan server och klienter.
 
-1. 
+1. Två klienter ska samtidigt kunna öppna samma dokument och man ska i ena klienten kunna se när man skriver i andra.
+
+1. Committa och tagga ditt repon med 4.0.0 eller senare, ladda upp till GitHub och driftsätt.
+
+1. Länka till båda dina GitHub repon och den driftsatta klienten i en kommentar till din inlämning på Canvas.
+
 
 
 ## Skriva
