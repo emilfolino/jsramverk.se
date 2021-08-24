@@ -22,9 +22,7 @@ Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation f
 
 1. Bekanta dig översiktligt med [organisationen kring databasen MongoDB](https://www.mongodb.com/). Övningen (längre ned) kommer vidare utgå från informationen på denna webbplatsen.
 
-1. Bekanta dig översiktligt med dokumentationen för "[MongoDB Node.js driver](https://docs.mongodb.com/drivers/node/)" vilken är den driver vi kommer använda för att koppla JavaScript i Node.js till MongoDB. Det handlar både om referens-dokumentationen och API-dokumentationen.
-
-1. Läs igenom inledande tutorials för MongoDB Node.js driver som du hittar i Referensmanualen. Titta främst i "Connect to MongoDB", "Collections", "CRUD Operations" och "Projections". De ger dig snabbt en känsla av hur man jobbar med datan.
+1. Bekanta dig översiktligt med dokumentationen för "[MongoDB Node.js driver](https://docs.mongodb.com/drivers/node/)" vilken är den driver vi kommer använda för att koppla JavaScript i Node.js till MongoDB. Det handlar både om referens-dokumentationen och API-dokumentationen. [Användarexemplen](https://docs.mongodb.com/drivers/node/current/usage-examples/) är ett bra ställe att börja.
 
 
 
@@ -42,7 +40,7 @@ Sen låter vi Chief Technical Officer Eliot Horowitz hos [MongoDB](https://www.m
 
 ## Exempelkod
 
-Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth_mongo](https://github.com/emilfolino/auth_mongo) ett bra ställe att börja.
+Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth_mongo](https://github.com/emilfolino/auth_mongo) ett bra ställe att börja. auth_mongo repot är en klon av det auth repo som användes i projektet i kursen webapp. Jag har bytt databasen från SQLite till mongodb.
 
 
 
@@ -582,7 +580,7 @@ På det sättet håller vi `app.js` liten i storlek och var sak har sin plats.
 
 ### MongoDB som databas
 
-I denna artikel installerar vi MongoDB lokalt på din utvecklingsdator, om du vill och har möjligt kan du använda MongoDB i Docker. Artikeln [MongoDB i Docker](mongodb-docker) visar hur det kan gå till.
+I denna artikel installerar vi MongoDB lokalt på din utvecklingsdator, om du vill och har möjlighet kan du använda MongoDB i Docker. Artikeln [MongoDB i Docker](mongodb-docker) visar hur det kan gå till.
 
 Vi kommer sedan använda oss av MongoDB Atlas för att driftsätta vår databas, men mer om det [senare](#mongodb).
 
@@ -998,9 +996,43 @@ await db.client.close();
 
 
 
+#### Felhantering av frågor till databasen
+
+Vi har ovan sett en kort introduktion till felhantering. Och här kommer ett lite längre exempel där vi även tittar på hur vi kan stänga ner databasen. Vi använder oss av konstruktionen `try-catch-finally` ([Dokumentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch#syntax)).
+
+```javascript
+let db;
+
+try {
+    db = await database.getDb();
+
+    const filter = { email: email };
+    const keyObject = await db.collection.findOne(filter);
+
+    if (keyObject) {
+        return res.json({ data: keyObject });
+    }
+} catch (e) {
+    return res.status(500).json({
+        errors: {
+            status: 500,
+            source: "/",
+            title: "Database error",
+            detail: e.message
+        }
+    });
+} finally {
+    await db.client.close();
+}
+```
+
+Finally delen av konstuktionen utförs alltid både när det har gått bra och vid fel.
+
+
+
 ## Driftsättning
 
-Molnet eller _the cloud_ har under de senaste 10 åren växt fram enormt fort. Om du vill ha en kort introduktion till molnet kan Bill Laberis' bok _"What is the cloud?"_ rekommenderas. Du kommer åt boken via [biblioteket på BTH](https://bibliotek.bth.se/databases?q=o%27reilly) och välj O'reilly. Du ska nu kunna söka på "What is the cloud?" i Sökrutan och första träffen bör vara _"What is the cloud?"_.
+Molnet eller _the cloud_ har under de senaste 10 åren växt fram enormt fort. Om du vill ha en kort introduktion till molnet kan Bill Laberis' bok _"What is the cloud?"_ rekommenderas. Är inte nödvändigt för att klara kursen, men är snabbläst. Du kommer åt boken via [biblioteket på BTH](https://bibliotek.bth.se/databases?q=o%27reilly) och välj O'reilly. Du ska nu kunna söka på "What is the cloud?" i Sökrutan och första träffen bör vara _"What is the cloud?"_.
 
 
 
@@ -1040,7 +1072,7 @@ Välj sedan korrekt driver och version, senaste bör vara korrekt. Kopiera sedan
 
 ![Choose Driver](https://dbwebb.se/image/jsramverk/mongodb-atlas-connect-url.png?w=778)
 
-Jag valde att skapa en JSON fil för att hantera användarnamn och lösenord till databasen. Har exkluderat den från Git genom att fylla i sökvägen till filen i repots `.gitignore`-fil. Min `config.json` fil ser ut som nedan, med ett långt och svårt lösenord skapat i gränssnittet, som värde för password attributet.
+Jag valde att skapa en JSON fil för att hantera användarnamn och lösenord till databasen. Jag har exkluderat den från Git genom att fylla i sökvägen till filen i repots `.gitignore`-fil. Min `config.json` fil ser ut som nedan, med ett långt och svårt lösenord skapat i gränssnittet, som värde för password attributet.
 
 ```json
 {
@@ -1073,6 +1105,30 @@ const port = process.env.PORT || 1337;
 
 Nedanstående är en översiktlig genomgång av denna [Microsoft Guide](https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?pivots=platform-linux), så om du vill ha med alla detaljer välj guiden.
 
+Vi kommer göra dirftsättningen automagiskt via Visual Studio Code, så har du inte den [installerad](https://code.visualstudio.com) är det dags nu.
+
+I Visual Studio Code installerar vi pluginen Azure App Services med hjälp av plugin menyn.
+
+![Installerar pluginen Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-install.png?w=250)
+
+Logga sedan in i Azure App Services genom att klicka på länken Sign in to Azure under den nya fliken Azure i din aktivitetsflik längst till vänster. Du ska logga in med din Studentkonto-mail: abcdxx@student.bth.se.
+
+![Logga in i Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-login.png?w=250)
+
+Se till att du har Code öppnat för din backend app och klicka sedan på lilla krysset bredvid App Service rubriken. Välj sedan den subscription som dyker upp. Första steget är sedan att välja ett unikt namn. Jag har valt _jsramverk-editor-efostud_ som är mitt fejkade student-akronym så kan vara smart att använda _jsramverk-editor-abcdxx_.
+
+![Namn för din app service](https://dbwebb.se/image/jsramverk/code-azure-deploy-name.png)
+
+Välj sedan stack för din app, 14 LTS är bästa valet.
+
+![Stack för din app service](https://dbwebb.se/image/jsramverk/code-azure-deploy-stack.png)
+
+Välj sedan prisnivå för appen. Ni ska kunna välja mellan Free och B1. Free kan vara lite trögt, så är bäst med B1.
+
+![Price för din app service](https://dbwebb.se/image/jsramverk/code-azure-deploy-name.png)
+
+Välj sedan Deploy i den dialog ruta som dyker upp. Nu sätter Code och Azure igång med att driftsätta din app. Efter en stund får du upp en länk med texten Browse Website och du kommer nu till din app.
+
 
 
 ## Kravspecifikation
@@ -1089,7 +1145,9 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Skapa en `README.md` fil i ditt repo som beskriver hur man installerar moduler och startar ditt Me-API. Beskriv även hur du har valt att strukturera dina routes.
 
-1. Det ska gå att skapa (**C**reate) och uppdatera (**U**pdate) dokumenter via din editor. Förslagsvis har ett dokument minst namn och innehåll.
+1. Det ska gå att skapa (**C**reate) och uppdatera (**U**pdate) dokumenter via din editor. Förslagsvis har ett dokument minst namn och innehåll förutom det automatgenererade _id.
+
+1. Det ska gå att hämta alla dokument från API't för att sedan kunna visas upp i din frontend.
 
 1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 

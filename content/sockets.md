@@ -186,6 +186,13 @@ För Angular finns det ett paket `ngx-socket-io` för att hantera sockets: [http
 
 
 
+## Kravspecifikation
+
+1. Använd sockets för att skapa realtidskommunikation mellan server och klienter.
+
+1. 
+
+
 ## Skriva
 
 Vi fortsätter iterativt med att förbättra våra syften. Använd den återkopplingen du fick på förra veckans syften och förbättra.

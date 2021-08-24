@@ -392,7 +392,9 @@ return res.json({ data: resultSet });
 
 ### Exempel
 
-I repona för [auth](https://github.com/emilfolino/auth/tree/master/test) och [Lager API:t](https://github.com/emilfolino/order_api/tree/master/v2/test) som användes i kursen webapp finns det integrationstester med `chai` och `chai-http`. Ta en titt på detta för att se hur det kan se ut med fler testfall.
+I repot för [auth_mongo](https://github.com/emilfolino/auth_mongo/tree/master/test) som är en klon av auth som användes i kursen webapp finns det integrationstester med `chai` och `chai-http`. Ta en titt på detta för att se hur det kan se ut med fler testfall.
+
+Dessutom finns liknande tester i repon för [Lager-API:t](https://github.com/emilfolino/order_api) och [auth](https://github.com/emilfolino/auth).
 
 
 
