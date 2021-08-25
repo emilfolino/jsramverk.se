@@ -2,8 +2,6 @@
 
 <p class="author">Emil Folino, Mikael Roos</p>
 
-> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
-
 Vi skapar en testmiljö för både frontend och backend kod, samt ett flöde för Continuous Integration.
 
 Tanken är att vi förbereder oss för ett större utvecklingsprojekt i JavaScript och vi vill säkerställa att vi har en utvecklingsmiljö där vi kan testa vår programvara.
@@ -733,11 +731,24 @@ Först tar vi en titt på byggsystemet [Travis](https://travis-ci.org/janaxs/bla
 
 I katalogen `/test/ci` ligger en konfigurationsfil `.travis.yml`  som är exempel på konfigurationsfiler för Travis. Om du kikar i filerna ser du referenser till `npm install` och `npm test`. Kopiera över filen eller skapa en `.travis.yml` fil i dina repon och gör en commit till GitHub.
 
-Jag lägger sedan till mitt repo till Travis genom att gå till [Travis](https://travis-ci.org/) och välja "Sign in with GitHub". Gå sedan till "Settings" i menyn som dyker upp under din profilbild. Slå sedan på att Travis ska bygga ditt repo.
+Jag lägger sedan till mitt repo till Travis genom att gå till [Travis](https://travis-ci.com/) och välja "Sign in with GitHub". Gå sedan till "Settings" i menyn som dyker upp under din profilbild. Slå sedan på att Travis ska bygga ditt repo.
 
 Mikael visar i följande video hur han gör det för modulen rem-server.
 
 <div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/KGe6r4B3ZSg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+När vi vill köra tester där vi kopplar oss mot till exempel en databas vill vi starta igång en [service](https://docs.travis-ci.com/user/database-setup/). Vi gör det genom att använda nyckelordet `services` i `.travis.yml` enligt nedan.
+
+```shell
+language: node_js
+node_js:
+    - "node"
+    - "14"
+    - "12"
+    - "11"
+    - "10"
+services: mongodb
+```
 
 
 

@@ -2,8 +2,6 @@
 
 <p class="author">Emil Folino och Mikael Roos</p>
 
-> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
-
 Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjälp av Express och en dokument-orienterad databas. Databasen vi ska använda heter mongodb och är av typen [NoSQL](https://en.wikipedia.org/wiki/NoSQL).
 
 
