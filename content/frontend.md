@@ -395,7 +395,7 @@ Nedan finns kravspecifikationen för veckans inlämningsuppgift:
 
 1. Applikationen ska dessutom innehålla en toolbar längst upp på skärmen.
 
-1. Toolbaren ska än så länge innehålla en Spara-knapp. När man trycker på knappen ska innehållet från editorn skrivas ut i consollen.
+1. Toolbaren ska än så länge innehålla en Spara-knapp. När man trycker på knappen ska innehållet från editorn skrivas ut i consollen. Spara-knappen behöver alltså inte ligga som en del av editorn.
 
 1. Committa alla filer och lägg till en tagg (1.0.\*).
 
