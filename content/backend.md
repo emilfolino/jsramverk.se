@@ -602,10 +602,10 @@ Installera med hjälp av pakethanteraren brew med kommandona:
 
 ```shell
 $brew tap mongodb/brew
-$brew install mongodb-community
+$brew install mongodb-community@5.0
 ```
 
-Starta sedan mongodb som en service med kommandot: `brew services start mongodb-community`.
+Starta sedan mongodb som en service med kommandot: `brew services start mongodb-community@5.0`.
 
 
 
@@ -617,10 +617,10 @@ Vi börjar med att installera `dirmngr`, för att kunna ta hand gpg nycklar, med
 
 #### Starta klienten
 
-Det ska nu gå att starta mongodb klienten med kommandot `mongo` i din terminal. Kommandot `help` inne i mongodb klienten ger en översikt över tillgängliga kommandon.
+Det ska nu gå att starta mongodb klienten med kommandot `mongosh` i din terminal. Kommandot `help` inne i mongodb klienten ger en översikt över tillgängliga kommandon.
 
 ```shell
-$mongo
+$mongosh
 > help
     db.help()                    help on db methods
     db.mycoll.help()             help on collection methods
