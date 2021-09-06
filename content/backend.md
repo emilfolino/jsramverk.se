@@ -1123,9 +1123,13 @@ Välj sedan stack för din app, 14 LTS är bästa valet.
 
 Välj sedan prisnivå för appen. Ni ska kunna välja mellan Free och B1. Free kan vara lite trögt, så är bäst med B1.
 
-![Price för din app service](https://dbwebb.se/image/jsramverk/code-azure-deploy-name.png)
+![Price för din app service](https://dbwebb.se/image/jsramverk/code-azure-deploy-pricing.png)
 
 Välj sedan Deploy i den dialog ruta som dyker upp. Nu sätter Code och Azure igång med att driftsätta din app. Efter en stund får du upp en länk med texten Browse Website och du kommer nu till din app.
+
+Om du får problem med att inte ha rättigheter att skapa en server utanför North Europe kan meny-valet "Create New Web app (Advanced)" som nås via att högerklicka på prenumerationen under App Service i Code vara en bra lösning.
+
+![Price för din app service](https://dbwebb.se/image/jsramverk/code-azure-create-advanced.png)
 
 
 
