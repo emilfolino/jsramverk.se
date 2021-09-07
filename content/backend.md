@@ -885,12 +885,12 @@ if (result.result.ok) {
 }
 ```
 
-Detta `_id` behövs sedan när vi vill uppdatera dokumentet i databasen. Vi gör det med funktionen [updateOne](https://docs.mongodb.com/drivers/node/current/fundamentals/crud/write-operations/change-a-document/#update). Först importerar vi ObjectID funktionen för att kunna hitta rätt `_id` i databasen. Vi skapar sedan ett `filter` och ett `updateDocument` och använder oss av `updateOne`. Bara de fält som skickas in uppdateras, vill vi ersätta dokumentet istället kan vi använda `replaceOne`.
+Detta `_id` behövs sedan när vi vill uppdatera dokumentet i databasen. Vi gör det med funktionen [updateOne](https://docs.mongodb.com/drivers/node/current/fundamentals/crud/write-operations/change-a-document/#update). Först importerar vi ObjectId funktionen för att kunna hitta rätt `_id` i databasen. Vi skapar sedan ett `filter` och ett `updateDocument` och använder oss av `updateOne`. Bara de fält som skickas in uppdateras, vill vi ersätta dokumentet istället kan vi använda `replaceOne`.
 
 ```javascript
-const ObjectID = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectId;
 
-const filter = { _id: ObjectID(body["_id"]) };
+const filter = { _id: ObjectId(body["_id"]) };
 const updateDocument = {
     name: body.name,
     html: body.html,
