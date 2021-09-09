@@ -2,73 +2,33 @@
 
 <p class="author">Emil Folino</p>
 
-> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
-
 Denna veckan tittar vi på hur vi kan lägga till autentisering i vårt API och implementerar login-formulär på frontend.
 
-### En databas
 
-Vi vill koppla vårt API mot en databas för att vi ska kunna hämta och spara data där istället för att bara ha statisk data. I denna del av kursen väljer vi att använda den filbaserade relationsdatabasen SQLite. Senare i kursen kommer vi bekanta oss med [Dokument-orienterade databaser](nosql).
 
-Om du inte har SQLite installerat på din utvecklingsdator installera det via ett installationspaket eller pakethanteraren i ditt operativsystem.
+## Läsa
 
-För att kunna spara användare och så småningom redovisningstexter installerar vi npm modulen node-sqlite3 i vårt me-api repo med följande kommando. [Dokumentationen för modulen](https://www.npmjs.com/package/sqlite3) är som alltid vår bästa vän.
+Nielsen Norman Group är världsledande inom forskningsbaserad User Experience (UX). Följande två artiklar introducerar bra råd för att skapa användbara formulär:
 
-```shell
-$npm install sqlite3 --save
-```
+* [Website Forms Usability: Top 10 Recommendations](https://www.nngroup.com/articles/web-form-design/)
 
-Vi skapar sedan katalogen `db` i vårt repo och i den katalogen filen `texts.sqlite`. Vi ville inte att denna och andra sqlite filer är under versionshantering då de isåfall skriver över vår produktions databas när vi driftsätter så vi lägger till `*.sqlite` i `.gitignore`.
+* [A Checklist for Registration and Login Forms on Mobile](https://www.nngroup.com/articles/checklist-registration-login/)
 
-Ett smart drag i detta skedet är att skapa en migrations-fil `db/migrate.sql` som du kan använda för att skapa tabeller. Min migrate-fil innehåller än så länge följande SQL.
 
-```shell
-CREATE TABLE IF NOT EXISTS users (
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(60) NOT NULL,
-    UNIQUE(email)
-);
-```
 
-Vi har alltså två kolumner `email` och `password` och vi vill att `email` är unik. Vi kan nu med hjälp av följande kommandon skapa tabellen i vår `texts.sqlite` databas.
+## Autentisering
 
-```shell
-$cd db
-$sqlite3 texts.sqlite
-sqlite> .read migrate.sql
-sqlite> .exit
-```
+När vi vill autentisera en användare kan det gå till på lite olika sätt. Vi tittade i webapp-kursen hur man kan använda JWT för att autentisera sig mot ett API. Det är även det sättet som beskrivs nedan och som är i implementerad i [auth_mongo](https://github.com/emilfolino/auth_mongo/blob/main/models/auth.js#L217).
 
-Vi kan nu använda `sqlite3` modulen för att lägga till en användare i vår `texts.sqlite` databas på följande sätt.
-
-```javascript
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/texts.sqlite');
-
-db.run("INSERT INTO users (email, password) VALUES (?, ?)",
-    "user@example.com",
-    "superlonghashedpasswordthatwewillseehowtohashinthenextsection", (err) => {
-    if (err) {
-        // returnera error
-    }
-
-    // returnera korrekt svar
-});
-```
+Ett annat sätt är att använda sessions-baserad inloggning som vi har tittat på tidigare i programmen. I de allra flesta fallen vill man använda sig av ett befintligt paket för att hantera sessionsinloggning. I node.js är det mest använda paketet [passport.js](http://www.passportjs.org/). passport.js hanterar även olika strategier för att hantera autentisering till exempel via olika sociala medier med hjälp av OAuth.
 
 
 
 ### Säker hantering av lösenord
 
-När vi sparar lösenord i en databas vill göra det så säkert som möjligt. Därför använder vi [bcrypt](https://codahale.com/how-to-safely-store-a-password/).
+När vi sparar lösenord i en databas vill vi göra det så säkert som möjligt. Därför använder vi [bcrypt](https://codahale.com/how-to-safely-store-a-password/).
 
-Ibland kan kombinationen av Windows och npm modulen bcrypt ställa till med stora problem. Ett tips hämtat från [installationsmanualen för bcrypt](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions#microsoft-windows) är att installare npm paketet `windows-build-tools` med kommandot nedan. Installera det i kommandotolken (cmd) eller Powershell så Windows har tillgång till det.
-
-```shell
-$npm install --global --production windows-build-tools
-```
-
-Vi installerar bcrypt paketet med npm med hjälp av kommandot `npm install bcryptjs --save`. [Dokumentationen för modulen](https://www.npmjs.com/package/bcryptjs) är som alltid vår bästa vän.
+Vi installerar ett bcrypt paket med npm med hjälp av kommandot `npm install bcryptjs --save`. [Dokumentationen för modulen](https://www.npmjs.com/package/bcryptjs) är som alltid vår bästa vän.
 
 För att hasha ett lösenord med bcrypt modulen importerar vi först modulen och sedan använder vi `bcrypt.hash` funktionen. Antal `saltRounds` definierar hur svåra lösenord vi vill skapa. Ju fler `saltRounds` är svårare att knäcka, men tar också längre tid att skapa och jämföra.
 
@@ -96,10 +56,6 @@ bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
 });
 ```
 
-<div class="under-construction">
-    <p>Tidigare användes npm-modulen <code>bcrypt</code>, men verkar finnas installationsproblem med modulen i produktion. Därför används nu bcryptjs istället.</p>
-</div>
-
 
 
 ### JSON Web Tokens
@@ -122,7 +78,9 @@ I ovanstående exempel skapar vi `payload` som i detta fallet enbart innehåller
 När vi sen vill verifiera en token använder vi funktionen `jwt.verify`. Här skickar vi med token och vår secret som argument. Om token kan verifieras får vi dekrypterat payload och annars ett felmeddelande.
 
 ```javascript
-jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+const secret = process.env.JWT_SECRET;
+
+jwt.verify(token, secret, function(err, decoded) {
     if (err) {
         // not a valid token
     }
@@ -135,7 +93,7 @@ jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
 
 #### JWT middleware
 
-Vi såg i guiden [Node.js API med Express](https://dbwebb.se/kunskap/nodejs-api-med-express) hur vi kan skapa routes som tar emot POST anrop och hur vi kan använda middleware för att köra en funktion varje gång vi har ett anrop till specifika routes. Om vi skapar nedanstående route i vår me-api ser vi hur middleware funktionen `checkToken` ligger som första funktion på routen. Den anropas först och beroende på om `next()` anropas funktionen efter middleware. Vi observerar även hur vi från klientens sida har skickat med token som en del av headers och hur vi hämtar ut det från request-objektet `req`.
+Vi såg i kmom02 hur vi kan skapa routes som tar emot POST anrop och hur vi kan använda middleware för att köra en funktion varje gång vi har ett anrop till specifika routes. Om vi skapar nedanstående route i vår me-api ser vi hur middleware funktionen `checkToken` ligger som första funktion på routen. Den anropas först och beroende på om `next()` anropas funktionen efter middleware. Vi observerar även hur vi från klientens sida har skickat med token som en del av headers och hur vi hämtar ut det från request-objektet `req`.
 
 ```javascript
 router.post("/reports",
@@ -156,15 +114,46 @@ function checkToken(req, res, next) {
 }
 ```
 
-Vi ser i kodexemplet ovan att vi använder `req.body` när vi tar emot en POST request från en klient och skickar med det in till modulen/modellen vi använder för att skapa rapporten. För att kunna använda `req.body` har vi dessa två rader längst upp i vår `app.js`. Vi har även sett detta i artikeln [Node.js API med Express](https://dbwebb.se/kunskap/nodejs-api-med-express#dynamiskt).
-
-```javascript
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-```
-
-I Postman väljer vi att fylla i body fliken istället för params fliken.
+Vi ser i kodexemplet ovan att vi använder `req.body` när vi tar emot en POST request från en klient och skickar med det in till modulen/modellen vi använder för att skapa rapporten. För att kunna använda `req.body` har vi dessa två rader längst upp i vår `app.js`.
 
 Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kursen webapp hur man kan skicka lösenord med [postman](https://www.getpostman.com/). postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.
 
 ![Postman](https://dbwebb.se/image/ramverk2/postman-headers.png?w=c18)
+
+
+
+## Kravspecifikation
+
+1. Skapa ett registreringsformulär och ett inloggningsformulär i frontend. Se till att använda de goda råden från läsanvisningarna när du designar formuläret.
+
+1. Välj antingen inloggning med JWT eller passport.js och implementera möjlighet för att registrera och logga in en användare i backend.
+
+1. Dokument i editorn ska bara gå att komma åt för autentiserade användare och bara för de användare som har givits tillstånd att ändra i dokumenten.
+
+1. Fundera över din dokumentstruktur och hur du kan implementera autentiseringen och tillstånden att ändra i dokument på ett effektivt sätt.
+
+1. Committa alla filer i frontend och backend. Lägg till en tagg som passar in i versionsnumreringen.
+
+1. Pusha upp repot till GitHub, inklusive taggarna.
+
+1. Lämna in länk till frontenden och dina GitHub repon som en kommentar till din inlämning i Canvas.
+
+
+
+## Skriva
+
+Vi flyttar denna och kommande veckan fokus från forskningsfrågorna och syftet till metod. Vi ska nu beskriva för läsaren **HUR** vi har tänkt att genomföra studien.
+
+I metod beskrivs hur man har tänkt att svara på sina forskningsfrågor. I skrivguiden beskrivs under Uppsatsens delar [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod).
+
+Under föreläsningen presenterar Emil ett antal olika metoder, som kan vara intressanta för området. Nedan finns en översikt, som kan vara bra att luta sig mot. Din uppgift är att för varje forskningsfråga detaljerat beskriva hur du har tänkt besvara frågan. En bra struktur är att börja stycken i metodbeskrivningen med: "För att besvara RQ1 används ...".
+
+Lägg metod beskrivningen som ett eget stycke, så inte direkt under forskningsfrågorna och syftet som vi har gjort tidigare.
+
+Från exjobbsmallen läser vi följande om den emperiska metoden:
+
+> The method for realisation shall be described in detail! Describe the connection between each research question to be answered and the process of realisation you use for answering each question. It should be possible to understand your set-up for the thesis, and it shall be possible to replicate your study.
+
+**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
+
+![Forskningsmetoder](slides/img/metod-all.png)
