@@ -1151,6 +1151,8 @@ Denna veckan är uppgiften uppdelat i två delar. En del handlar om backend och 
 
 1. Det ska gå att hämta alla dokument från API't för att sedan kunna visas upp i din frontend.
 
+1. Driftsätt din backend på Azure enligt beskrivningen ovan.
+
 1. Committa alla filer och lägg till en tagg (1.0.0) med hjälp av `npm version 1.0.0`. Det skapas automatiskt en motsvarande tagg i ditt GitHub repo. Lägg till fler taggar efterhand som det behövs. Var noga med din commit-historik.
 
 1. Pusha upp repot till GitHub, inklusive taggarna.
