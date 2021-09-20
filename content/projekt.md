@@ -2,8 +2,6 @@
 
 <p class="author">Emil Folino</p>
 
-> **Kursmomentet uppdateras** Kursen håller på att göras om inför kurstillfället HT2021. Kursmaterial för 2020 finns på [https://2020.jsramverk.se/](https://2020.jsramverk.se/).
-
 
 
 ## Projektbeskrivning
@@ -26,7 +24,7 @@ Skapa flera repon för projektet. När du är klar, committa, tagga, pusha till 
 
 ### Krav 1: Skriva ut PDF
 
-Skapa en knapp för utskrift där backend sedan skapar en PDF som går att ladda ner. Välj ett npm-paket för att skapa PDF'en, beskriv varför du valde just det paket du valde.
+Skapa en knapp för utskrift där backend sedan skapar en PDF, som går att ladda ner. Välj ett npm-paket för att skapa PDF'en, beskriv varför du valde just det paket du valde.
 
 
 
@@ -38,19 +36,19 @@ Lägg till möjligheten att kommentera specifika rader i dokumentet. Skapa ett b
 
 ### Krav 3: Maila inbjudan
 
-Använd ett mail API, förslagsvis Mailgun eller Sendgrid, för att koppla på möjligheten att maila ut inbjudan till att redigera dokument.
+Använd ett mail API, förslagsvis Mailgun eller Sendgrid, för att koppla på möjligheten att maila ut inbjudan till att redigera dokument. Skicka med en länk i mailet för att användaren ska kunna registrera sig.
 
 
 
 ### Krav 4: Code-mode
 
-Lägg till möjligheten att välja code-mode. Editorn byts då ut mot en kod-editor förslagsvis codemirror eller monaco-editor. Spara information i databasen om dokumentets typ.
+Lägg till möjligheten att välja code-mode. Editorn byts då ut mot en kod-editor förslagsvis codemirror eller monaco-editor. Din kod-editor bör enbart stödja JavaScript och är även det enda som kan exekveras enligt nedan. Spara information i databasen om dokumentets typ (kod eller inte kod-dokument). Skapa en knapp för att exekvera koden. Koden ska exekveras genom att skickas som en [base64](https://developer.mozilla.org/en-US/docs/Glossary/Base64)-kodat sträng till endpointen [execjs.emilfolino.se](https://execjs.emilfolino.se). Se dokumentation på hemsidan för endpoints och request-typ.
 
 
 
-### Krav 5: Exekvera koden på servern
+### Krav 5: GraphQL
 
-I klienten skapar du en knapp som gör ett anrop till en route i din backend som kan exekvera koden som skrivits in i code-mode. Behöver bara fungera för JavaScript då det är i den kontexten vi kör vår backend. `stdout` (och eventuellt `stderr`) från [nodejs exec-funktion](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback) ska skickas tillbaka till klienten och presenteras för användarna.
+Implementera GraphQL som en del av ditt API. Redovisa varför du har valt att implementera GraphQL för just den delen av ditt API där du har valt att implementera GraphQL. Förklara vilka fördelar du får av att implementera GraphQL för just denna delen av ditt API. Dokumentera hur din klient använder GraphQL servern.
 
 
 
@@ -76,4 +74,4 @@ Länka till dina GitHub repon och driftsatta sidor som en del av din inlämning.
 
 ### Presentation
 
-Spela in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata främst om de val ni har gjort och varför.
+Spela in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata om koden ni skrivit för att utöka editorn med de nya features.
