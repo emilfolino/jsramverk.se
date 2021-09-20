@@ -46,15 +46,15 @@ Lägg till möjligheten att välja code-mode. Editorn byts då ut mot en kod-edi
 
 
 
-### Krav 5: GraphQL
-
-Implementera GraphQL som en del av ditt API. Redovisa varför du har valt att implementera GraphQL för just den delen av ditt API där du har valt att implementera GraphQL. Förklara vilka fördelar du får av att implementera GraphQL för just denna delen av ditt API. Dokumentera hur din klient använder GraphQL servern.
-
-
-
-### Krav 6: Testning
+### Krav 5: Testning
 
 Testa dina features från ovan så du känner förtroende för koden. Du kan välja att testa i frontend eller backend. Beskriv i din redovisningstext ditt testförfarande och vad som gör att du känner förtroende för koden.
+
+
+
+### Krav 6: Sälj in GraphQL
+
+Beskriv med 25-30 meningar varför GraphQL är att föredra framför REST-API:er. Målgruppen är webbprogrammeringsstudenter som precis har avslutat första året på deras utbildning. De har alltså koll på API:er och klienter, men kan inte GraphQL i sig. Använd gärna kodexempel och bilder (dessa räknas inte som en del av ovanstående meningar). Du ska sälja in tekniken till dessa studenter.
 
 
 
