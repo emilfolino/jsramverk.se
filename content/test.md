@@ -727,7 +727,7 @@ Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `/test/ci` och
 
 ### Byggverktyget Travis
 
-Först tar vi en titt på byggsystemet [Travis](https://travis-ci.org/janaxs/blackjack). Syftet med et byggsystem är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
+Först tar vi en titt på byggsystemet [Travis](https://travis-ci.org/janaxs/blackjack). Syftet med ett byggsystem är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
 
 I katalogen `/test/ci` ligger en konfigurationsfil `.travis.yml`  som är exempel på konfigurationsfiler för Travis. Om du kikar i filerna ser du referenser till `npm install` och `npm test`. Kopiera över filen eller skapa en `.travis.yml` fil i dina repon och gör en commit till GitHub.
 
