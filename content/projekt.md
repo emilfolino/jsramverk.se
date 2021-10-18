@@ -24,7 +24,7 @@ Skapa flera repon för projektet. När du är klar, committa, tagga, pusha till 
 
 ### Krav 1: Skriva ut PDF
 
-Skapa en knapp för utskrift där backend sedan skapar en PDF, som går att ladda ner. Välj ett npm-paket för att skapa PDF'en, beskriv varför du valde just det paket du valde.
+Skapa en knapp för utskrift som <s>backend</s> sedan skapar en PDF, som går att ladda ner. Välj ett npm-paket för att skapa PDF'en, beskriv varför du valde just det paket du valde.
 
 
 
