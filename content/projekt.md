@@ -18,7 +18,7 @@ Varje krav ger max 10 poäng, totalt är det 60 poäng.
 
 #### Repon på GitHub
 
-Skapa flera repon för projektet. När du är klar, committa, tagga, pusha till GitHub. Länka till dina repon i din inlämning på Canvas.
+När du är klar, committa, tagga, pusha till GitHub. Länka till dina repon i din inlämning på Canvas.
 
 
 
