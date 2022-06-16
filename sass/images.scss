@@ -1,0 +1,9 @@
+.path {
+    width: 100px;
+}
+
+@media (min-width: 768px) {
+    .path {
+        width: 160px;
+    }
+}
