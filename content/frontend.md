@@ -98,6 +98,8 @@ Vill du utveckla dina kunskaper i ramverket React och ha möjlighet att diskuter
 
 <img src="path.png" class="path" alt="road used as indicator for path of least resistance track" />
 
+Om du däremot vill utmana dig själv lite mer i kursen välj ett av de andra ramverken Angular, Svelte eller Vue och eventuellt även en annan text editor komponent.
+
 
 
 ## Tekniska koncept
@@ -264,6 +266,8 @@ $npm run serve
 ## Editor-komponenter
 
 Att skriva en egen text-redigerare för att användas på webben är ett eget 10-årigt projekt, så här tar vi som man brukar i JavaScript-världen en genväg. Exempel på textredigerare finns nedan:
+
+[CKEditor](https://ckeditor.com/ckeditor-5/) - komponenter för [ramverken](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/overview.html)
 
 [Quill](https://quilljs.com/) - [Angular](https://www.npmjs.com/package/ngx-quill), [React](https://github.com/zenoamaro/react-quill) och [Vue](https://github.com/surmon-china/vue-quill-editor).
 
