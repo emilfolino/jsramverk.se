@@ -6,6 +6,16 @@ Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och 
 
 
 
+## Path of Least Resistance
+
+Innan vi kommer allt för långt ner i tekniska detaljer kommer här nog det viktigaste valet inom Path of Least Resistance i denna kursen.
+
+Vill du utveckla dina kunskaper i ramverket React och ha möjlighet att diskutera med många andra i chatten väljer du i detta kursmomentet ramverket React och text editorn Quill. Det är dessa tekniker som ingår i Path of Least Resistance från detta kmomet.
+
+Om du däremot vill utmana dig själv lite mer i kursen välj ett av de andra ramverken Angular, Svelte eller Vue och eventuellt även en annan text editor komponent.
+
+
+
 ## Läsa
 
 Följande länkar är bra att ha för undersökande och implementation. [Angular](https://angular.io/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/) och [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
@@ -87,18 +97,6 @@ För att ytterligare utvärdera våra valda ramverk tar vi en titt i GitHub repo
 Under dotJS konferensen pratade John Papa om att välja ett frontend ramverk, videon är länkat ovan. Som förberedelse för presentationen hade han skapat samma app i "The Big Three" och de tre apparna ligger som open source kod på GitHub. [heroes-angular](https://github.com/johnpapa/heroes-angular), [heroes-react](https://github.com/johnpapa/heroes-react) och [heroes-vue](https://github.com/johnpapa/heroes-vue) är de tre repon som innehåller koden och det finns länkar till en publik driftsatt version från GitHub.
 
 Titta igenom repon och se hur John Papa har strukturerat apparna i de olika ramverken.
-
-
-
-## Path of Least Resistance
-
-Innan vi kommer allt för långt ner i tekniska detaljer kommer här nog det viktigaste valet inom Path of Least Resistance i denna kursen.
-
-Vill du utveckla dina kunskaper i ramverket React och ha möjlighet att diskutera med många andra i chatten väljer du i detta kursmomentet ramverket React och text editorn Quill. Det är dessa tekniker som ingår i Path of Least Resistance från detta kmomet.
-
-<img src="path.png" class="path" alt="road used as indicator for path of least resistance track" />
-
-Om du däremot vill utmana dig själv lite mer i kursen välj ett av de andra ramverken Angular, Svelte eller Vue och eventuellt även en annan text editor komponent.
 
 
 
@@ -266,8 +264,6 @@ $npm run serve
 ## Editor-komponenter
 
 Att skriva en egen text-redigerare för att användas på webben är ett eget 10-årigt projekt, så här tar vi som man brukar i JavaScript-världen en genväg. Exempel på textredigerare finns nedan:
-
-[CKEditor](https://ckeditor.com/ckeditor-5/) - komponenter för [ramverken](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/overview.html)
 
 [Quill](https://quilljs.com/) - [Angular](https://www.npmjs.com/package/ngx-quill), [React](https://github.com/zenoamaro/react-quill) och [Vue](https://github.com/surmon-china/vue-quill-editor).
 
