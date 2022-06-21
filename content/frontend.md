@@ -10,9 +10,9 @@ Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och 
 
 Innan vi kommer allt för långt ner i tekniska detaljer kommer här nog det viktigaste valet inom Path of Least Resistance i denna kursen.
 
-Vill du utveckla dina kunskaper i ramverket React och ha möjlighet att diskutera med många andra i chatten väljer du i detta kursmomentet ramverket React och text editorn Quill. Det är dessa tekniker som ingår i Path of Least Resistance från detta kmomet.
+Vill du utveckla dina kunskaper i ramverket React och ha möjlighet att diskutera med många andra i chatten väljer du i detta kursmomentet ramverket React och text editorn Trix. Det är dessa tekniker som ingår i Path of Least Resistance från detta kmomet.
 
-Om du däremot vill utmana dig själv lite mer i kursen välj ett av de andra ramverken Angular, Svelte eller Vue och eventuellt även en annan text editor komponent.
+Om du däremot vill utmana dig själv lite mer i kursen välj ett av de andra ramverken Angular, Svelte eller Vue och en annan text editor komponent.
 
 
 
