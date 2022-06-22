@@ -1032,7 +1032,74 @@ Finally delen av konstuktionen utförs alltid både när det har gått bra och v
 
 Innan vi dyker ner i att driftsätta både databas och backend tar vi en liten titt på frontend. Tanken med kursen är att ni ska utforska ramverket till stor del på egen hand, men i och med introduktionen av Path of Least Resistance kommer här lite hjälp på vägen.
 
-I vår frontend vill vi kunna ladda in befintliga dokument, vi vill kunna skapa ett nytt dokument, vi vill kunna välja ett dokument och när vi har ändrat i valt dokument vill vi kunna uppdatera dokumentet.
+I vår frontend vill vi kunna ladda in befintliga dokument, vi vill kunna skapa ett nytt dokument, vi vill kunna välja ett dokument och när vi har ändrat i valt dokument vill vi kunna uppdatera dokumentet. Vi kommer gå igenom en del av dessa funktioner i nedanstående.
+
+Jag kommer i nedanstående utgå ifrån att vi har delat koden upp i modeller och komponenter. Så jag har två filer i frontend som vi kommer fokusera på `models/docs.js` och `components/editor.js`.
+
+
+
+#### Hämta alla dokument
+
+Låt oss börja med att hämta alla dokument från backend och visa de i en dropdown. Jag kommer utgå från att jag har en `GET /docs` route i backend som skickar tillbaka alla dokument. Jag börjar med att importera modellen genom följande kod: `import docsModel from '../models/docs';`. Sedan skapar jag en `docs` array som blir en state-variabel. `useEffect` används för att hämta dokumenten och `docs`-arrayen setts till det som returneras.
+
+```javascript
+const [docs, setDocs] = useState([]);
+
+useEffect(() => {
+    (async () => {
+        const allDocs = await docsModel.getAllDocs();
+        setDocs(allDocs);
+    })();
+}, []);
+```
+
+I `docsModel` har jag följande kod som hämtar och returnerar data från backend:
+
+```javascript
+const docs = {
+    getAllDocs: async function getAllDocs() {
+        const response = await fetch(`${URL}/docs`);
+        const result = await response.json();
+
+        return result.data;
+    },
+};
+
+export default docs;
+```
+
+Vi kan nu i vår komponent rita upp ett `select` element med innehållet från backend.
+
+```javascript
+<select
+    onChange={fetchDoc}
+>
+    <option value="-99" key="0">Choose a document</option>
+    {docs.map((doc, index) => <option value={index} key={index}>{doc.name}</option>)}
+</select>
+```
+
+Så långt så gott.
+
+
+
+#### Hämta baserat på en annan variabel
+
+Dock vill vi utöka funktionaliteten lite grann. Vi vill hämta alla dokumenten varje gång vi ändrar dokumentet vi skriver i. Det underlättar till exempel när vi vill skapa nya dokument.
+
+Vi kan göra det genom att lägga till en variabel som en del av det [andra argumentet](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) till `useEffect`. Varje gång variabeln ändras kommer funktionen inuti `useEffect` köras.
+
+```javascript
+const [docs, setDocs] = useState([]);
+const [currentDoc, setCurrentDoc] = useState({});
+
+useEffect(() => {
+    (async () => {
+        const allDocs = await docsModel.getAllDocs();
+        setDocs(allDocs);
+    })();
+}, [currentDoc]);
+```
 
 
 
@@ -1111,7 +1178,7 @@ const port = process.env.PORT || 1337;
 
 Nedanstående är en översiktlig genomgång av denna [Microsoft Guide](https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?pivots=platform-linux), så om du vill ha med alla detaljer välj guiden.
 
-Vi kommer göra dirftsättningen automagiskt via Visual Studio Code, så har du inte den [installerad](https://code.visualstudio.com) är det dags nu.
+Vi kommer göra driftsättningen automagiskt via Visual Studio Code, så har du inte den [installerad](https://code.visualstudio.com) är det dags nu.
 
 I Visual Studio Code installerar vi pluginen Azure App Services med hjälp av plugin menyn.
 
