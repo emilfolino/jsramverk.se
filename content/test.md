@@ -499,6 +499,8 @@ För att komma igång med GitHub Actions väljer du Actions i menyn för ditt Gi
 
 Du bör nu få upp följande vy där du ser början till den konfigurationsfil som vi ska använda för att checka-ut koden och köra våra tester på olika versioner av node.
 
+![Val av Actions](https://dbwebb.se/image/jsramverk/create_workflow.png)
+
 Du kan klistra in följande kod i filen och trycka på den gröna knappen Start Commit. Sen ska GitHub Actions sätta igång och köra allt och under tiden som det körs tar vi en titt på nedanstående kod under kodexemplet.
 
 ```yaml
