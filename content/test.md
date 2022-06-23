@@ -1,9 +1,5 @@
 # Test
 
-<div class="under-construction" id="under-construction">
-    <p class="optional">Kursmomentet utvecklas. Avvakta med att påbörja arbetet.</p>
-</div>
-
 <p class="author">Emil Folino, Mikael Roos</p>
 
 Vi skapar en testmiljö för både frontend och backend kod, samt ett flöde för Continuous Integration.
@@ -491,58 +487,61 @@ $npm install   # Installerar allt som finns i package.json
 $npm test      # Exekvera validatorer och testfall
 ```
 
-Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `/test/ci` och jag använder ett repo [janaxs/blackjack](https://github.com/janaxs/blackjack) för att demonstrera hur det ser ut.
 
 
+### GitHub Actions
 
-### Byggverktyget Travis
+Först tar vi en titt på byggsystemet [GitHub Actions](https://github.com/emilfolino/auth_mongo/actions). Actions är en integrerad del av GitHub och med det ditt repo där. Actions kan användas för att automatisera en stor del av det vi i vanliga fall gör manuellt som programmerare.
 
-Först tar vi en titt på byggsystemet [Travis](https://travis-ci.org/janaxs/blackjack). Syftet med et byggsystem är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
+För att komma igång med GitHub Actions väljer du Actions i menyn för ditt GitHub Repo. Vi börjar med backend repot så gå in på det först. När du valt Actions bör du kunna hitta Node.js och under det trycka på en knapp Configure enligt nedan.
 
-I katalogen `/test/ci` ligger en konfigurationsfil `.travis.yml`  som är exempel på konfigurationsfiler för Travis. Om du kikar i filerna ser du referenser till `npm install` och `npm test`. Kopiera över filen eller skapa en `.travis.yml` fil i dina repon och gör en commit till GitHub.
+![Val av Actions](https://dbwebb.se/image/jsramverk/choose_actions.png)
 
-Jag lägger sedan till mitt repo till Travis genom att gå till [Travis](https://travis-ci.com/) och välja "Sign in with GitHub". Gå sedan till "Settings" i menyn som dyker upp under din profilbild. Slå sedan på att Travis ska bygga ditt repo.
+Du bör nu få upp följande vy där du ser början till den konfigurationsfil som vi ska använda för att checka-ut koden och köra våra tester på olika versioner av node.
 
-Mikael visar i följande video hur han gör det för modulen rem-server.
+Du kan klistra in följande kod i filen och trycka på den gröna knappen Start Commit. Sen ska GitHub Actions sätta igång och köra allt och under tiden som det körs tar vi en titt på nedanstående kod under kodexemplet.
 
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/KGe6r4B3ZSg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+```yaml
+name: Node.js CI
 
-När vi vill köra tester där vi kopplar oss mot till exempel en databas vill vi starta igång en [service](https://docs.travis-ci.com/user/database-setup/). Vi gör det genom att använda nyckelordet `services` i `.travis.yml` enligt nedan.
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-```shell
-language: node_js
-node_js:
-    - "node"
-    - "14"
-    - "12"
-    - "11"
-    - "10"
-services: mongodb
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        mongodb-version: ['4.2', '4.4', '5.0']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.7.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+
+    - run: npm install
+    - run: npm test
 ```
 
+Först ger vi vårt workflow ett namn, i detta fallet "Node.js CI". Efter namnet definierar vi när vi vill köra testerna, i detta fallet på alla pushes och vid pull requests. Efter det definierar vi variabler för de olika "byggen" (builds) vi vill göra. Först säger vi att vi vill ha operativsystemet `ubuntu-latest` i den container där vår kod kommer köras.
 
+Vi definierar sedan vilka Node versioner vi vill köra koden för och vilka versioner av MongoDB. Actions kommer sedan köra testerna för alla permutationer av detta, vilket innebär att testerna kommer köras nio olika gånger i olika konfigurationer.
 
-<!-- ### Kodkvalitet och kodtäckning med Scrutinizer
-
-Avslutningsvis integrerar jag mitt repo mot [Scrutinizer](https://scrutinizer-ci.com/g/janaxs/blackjack/) som är ett verktyg för kodkvalitet och kodtäckning. Verktyget kan exekvera mina tester, visa kodtäckning och analysera min kod ur olika aspekter.
-
-Vi gör på liknande sätt som för Travis att vi skapar en `.scrutinizer.yml` fil och slår på kollar i Scrutinizers gränssnitt.
-
-Ett exempel på en `.scrutinizer.yml` fil finns i Lager API repot [order_api/.scrutinizer.yml](https://github.com/emilfolino/order_api/blob/master/.scrutinizer.yml).
-
-Mikael visar i följande video hur han gör det för modulen rem-server.
-
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/Xzq28ZbX6tc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> -->
-
-
-
-### CI kedja klar
-
-Då var vår CI kedja klar med flera alternativ för byggsystem och kodtäckning.
-
-Du kan ta en närmare titt på mitt demo repo [janaxs/blackjack](https://github.com/janaxs/blackjack) om du vill se valideringsverktyg, enhetstester och CI-kedjan i ett sammanhang i ett repo med nödvändiga konfigurationsfiler.
-
-Denna CI kedja är bara ett exempel på en CI-kedja och det finns många olika verktyg som bygger och granskar din kod.
+Under `steps` berättar vi vad som ska hända. Först checks koden ut och vi sätter upp node och mongodb för att slutligen köra `npm install` och `npm test`.
 
 
 
@@ -560,7 +559,7 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 1. Lägg till så att kodtäckning fungerar vid enhetstester och integrationstester.
 
-1. Bygg en CI-kedja och integrera med byggtjänsten Travis som checkar ut ditt repo och utför `npm install` och `npm test`. Badga din README.
+1. Integrera GitHub Actions som gör tester för ditt repo.
 
 1. Committa och tagga ditt repon med 2.0.0 eller senare, ladda upp till GitHub och driftsätt.
 
@@ -572,7 +571,7 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 > Exempel på use-case: "Användaren ska från förstasidan kunna trycka på en länk för att se redovisningstexten för vecka 1."
 
-2. Bygg en CI-kedja och integrera med byggtjänsten Travis som checkar ut ditt repo och utför `npm install` och `npm test`. Badga din README.
+1. Integrera GitHub Actions som gör tester för ditt repo.
 
 3. Committa och tagga ditt repon med 3.0.0 eller senare, ladda upp till GitHub och driftsätt.
 
