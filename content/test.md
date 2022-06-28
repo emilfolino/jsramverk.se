@@ -130,8 +130,6 @@ Det är inte en enkel sak att välja testverktyg, men om man börjar välja någ
 
 På min kravlista finns att kodtäckning skall fungera för mina enhetstester. I JavaScript-världen finns främst [Istanbul](https://istanbul.js.org/) och [Blanket.js](http://blanketjs.org/) som ger oss denna möjlighet. Testverktyget jag väljer behöver alltså ha en känd koppling mot något av dessa verktyg.
 
-<!-- När jag går från enhetstester till funktionstester så kan behovet av en headless browser komma upp. Här finns [Selenium](http://www.seleniumhq.org/) som en av de mer kända. Men alternativen är flera. -->
-
 När jag väl bestämt mig för verktygen behövs en testrunner som kör mina tester och en hantering av testrapporten så den kan visas upp för programmerare och kanske även extern personal.
 
 Allt som allt, någonstans här är namnen på några vanliga testverktyg inom JavaScript och jag tänker välja bland dessa.
@@ -477,238 +475,6 @@ För Vue finns [denna beskrivning](https://vuejs.org/v2/guide/testing.html) av t
 Vue rekommenderar precis som Angular [End-to-End testing](https://vuejs.org/v2/guide/testing.html#End-to-End-E2E-Testing) med olika verktyg som Cypress och Nightwatch. End-to-End testing innebär att man använder sig av en headless browser och benämns ovan som Funktionstestning.
 
 
-<!-- Selenium kan sammanfattas lite kort med: _"Selenium is an umbrella project for a range of tools and libraries that enable and support the automation of web browsers."_
-
-Selenium finns tillgängligt i ett antal språk, bl.a. Java, Python och JavaScript. Det finns [dokumentation för hela projektet](https://seleniumhq.github.io/docs/index.html) men även bara för [Javascript API:et](https://seleniumhq.github.io/selenium/docs/api/javascript/). Jag tycker att JavaScript dokumentationen fungerade bra för att söka upp funktioner och få en hyfsad uppfattning om hur de fungerar.
-
-När man kodar med Selenium behöver man tänka på att det jobbar asynkront med promises, vilket gör att det blir mycket kod med `.then()` och skapande av anonyma funktioner. Nästan alla funktioner i Selenium returnerar ett promise.
-
-Vi använder Selenium tillsammans med Mocha för att det ger oss en bra struktur för våra tester med Test Suit, Test Case, before och after funktioner bl.a.
-
-**OBS!** för er som använder WSL på Windows, jag fick inte Selenium och Mocha att fungera. Jag var tvungen att gå över till Cygwin. Ni kan testa köra det men om det inte fungerar spendera inte för mycket tid på att försöka fixa det. Om någon får det att fungera dock gör ett foruminlägg och dela med er av hur ni gjorde.
-
-Vi går vidare till att sätta igång med att få igång Selenium men först behöver vi en webbsida att testa.
-
-
-
-#### Kodmoduler att testa
-
-Vi behöver en kodbas att testa, jag har klippt och klistrat ihop två av exempelprogrammen som finns i kursrepot och skapat [Multipage med en kalkylator](https://github.com/dbwebb-se/ramverk2/tree/master/example/test/functiontest-selenium). Däri kan ni hitta ett fungerande exempel på vad vi kommer gå igenom i denna övningen.
-
-
-
-### Selenium i JavaScript
-
-Jag gjorde ett testprogram i `test/functiontest-selenium` för att se hur det fungerade.
-
-```shell
-test/functiontest-selenium $ tree .
-.
-├── package.json
-├── src
-│   ├── multipage
-│   │   ├── index.html
-│   │   └── main.js
-│   └── style.css
-└── test
-    └── multipage
-        ├── mocha_test.js
-        └── simple_test.js
-```
-
-Min källkod finns i `src/multipage` och mina selenium tester ligger i `test/multipage`. `simple_test.js` innehåller ett kort exempel för att starta Selenium, hämta en sidas titel och skriva ut den i terminalen. `mocha_test.js` innehåller testerna och använder sig av både Selenium och Mocha.
-
-Om ni kollar i `package.json` ser ni att vi använder paketen mocha, selenium-webdriver och http-server. Mocha och selenium-webdriver är självförklarande, http-server använder vi bara för att köra koden i `src` som om det låg på en server och URL:erna i testerna ser likadana ut för alla. Börja med att installera paketen.
-
-```shell
-$npm install
-```
-
-**Notera** versionen på selenium-webdriver, när jag installerade det första gången fick jag en alpha build som inte fungerar så kolla att ni har ex. `3.6.0`. Vi går vidare med att starta upp servern och kollar på hur webbsidan ser ut. Efter kommandot öppna din webbläsare och gå till `localhost:8082`.
-
-```shell
-$npm start
-```
-
-<img src="https://dbwebb.se/image/ramverk2/multipage.png" alt="Multipage exempel i Javascript.">
-
-Om du redan kör en annan tjänst på port 8082 kan du ändra vilken port som ska användas i `package.json`.
-Det är en väldigt simpel sida vi ska testa, det enda som är lite avancerat är kalkylatorn. När vi skriver tester nu vill vi testa användarnas upplevelse. T.ex. att knappar och länkar fungerar och saker har rätt färg m.m.
-
-
-
-#### Selenium kod
-
-Öppna `simple_test.js` i Atom och kolla på koden.
-
-```javascript
-var browser = new webdriver.Builder().
-    withCapabilities(webdriver.Capabilities.firefox())
-    .build();
-
-browser.get("http://localhost:8082/multipage/#!/");
-```
-
-Vi börjar med att bygga en driver (`browser`), det är den som sköter vår interaktion med webbsidan. Det finns en mängd inställningar man kan sätta med [Capabilities](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_Capabilities.html) men jag sätter bara vilken webbläsare som ska användas. De tillgängliga webbläsarna finns i slutet i Capabilities länken. Sist sätter vi vilken URL weblläsaren ska gå till när man startar testet.
-
-Nu kan vi börja jobba mot webbsidan, vi börjar simpelt med att hämta titeln på sidan med `browser.getTitle()` och skriver ut den.
-
-```javascript
-// Two different ways to work with promises
-// Way 1
-let promise = browser.getTitle();
-
-promise.then(function(title) {
-    console.log(title);
-});
-
-// Way 2
-browser.getTitle().then(function( title ) {
-    console.log(title);
-});
-```
-
-`.getTitle()` returner ett promise som bli klart innan vi kan kan skriva ut värdet. Ovanför kan ni se två vanliga sätt som man jobbar med promises och ".then". Välj det sättet ni föredrar och håll er till det, jag kommer använda den nedre av de två.
-
-Nu har vi lite koll på vad som sker i koden, vi testar köra det.
-
-```shell
-$node test/multipage/simple_test.js
-Multipage
-Multipage
-```
-
-Finemang, nu kan vi gå vidare till att bygga ordentliga tester och kör det med Mocha.
-
-
-
-#### Selenium med Mocha
-
-`mocha_test.js` innehåller en hel del kod redan så innan ni dyker ner i den kör vi en förklaring av strukturen och börjar lite smått.
-
-Vi börjar överst:
-
-```javascript
-const assert = require("assert");
-const test = require("selenium-webdriver/testing");
-const webdriver = require("selenium-webdriver");
-const By = require("selenium-webdriver").By;
-
-let browser;
-```
-
-Vi importerar lite fler moduler, `selenium-webdriver/testing` wrappar Mocha vilket gör att vi inte behöver importera Mocha utan behöver bara köra testerna med mocha kommandot i terminalen och `assert` borde ni känna igen. När vi ska navigera på webbsidan via koden och få tag på element fungerar det nästan som när vi kodar vanlig JS och hämtar element med t.ex. `document.getElementById()`, men vi behöver använda Seleniums funktioner. [webdriver.findElement()](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/ie_exports_Driver.html#findElement) eller [webdriver.findElements()](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/ie_exports_Driver.html#findElements) och [By modulen](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/by_exports_By.html).
-
-Vi fortsätter med att bygga den vanliga Mocha strukturen i vår kod för att få Test Suite och Cases.
-
-```javascript
-// Test Suite
-test.describe("Multipage", function() {
-
-    test.beforeEach(function(done) {
-        this.timeout(20000);
-        browser = new webdriver.Builder().
-            withCapabilities(webdriver.Capabilities.firefox()).build();
-
-        browser.get("http://localhost:8082/multipage/#!/");
-        done();
-    });
-
-    test.afterEach(function(done) {
-        browser.quit();
-        done();
-    });
-
-    // Test case
-    test.it("Test index", function(done) {
-        // Check correct title
-        browser.getTitle().then(function(title) {
-            assert.equal(title, "Multipage");
-        });
-
-        // Check correct heading
-        browser.findElement(By.css("h1")).then(function(element) {
-            element.getText().then(function(text) {
-                assert.equal(text, "Home");
-            });
-        });
-
-        // Check correct URL ending
-        browser.getCurrentUrl().then(function(url) {
-            assert.ok(url.endsWith("multipage/#!/"));
-        });
-
-        done();
-    });
-
-
-
-    test.it("Test go to Home", function(done) {
-        // Use nav link to go to home page
-        browser.findElement(By.linkText("Home")).then(function(element) {
-            element.click();
-        });
-
-        // Check correct heading
-        browser.findElement(By.css("h1")).then(function(element) {
-            element.getText().then(function(text) {
-                assert.equal(text, "Home");
-            });
-        });
-
-        // Check correct URL ending
-        browser.getCurrentUrl().then(function(url) {
-            assert.ok(url.endsWith("multipage/#!/"));
-        });
-
-        done();
-    });
-});
-```
-
-Vi börjar med att lägga in en beforeEach, där vi bygger vår Firefox webdriver och går till sidan vi vill testa. Med `this.timeout(20000);` ökar vi mängden tid som drivern väntar på att något ska ske i webbläsaren. Att starta webbläsaren och gåt till URL:en tog för lång tid på min datorn så jag behöver öka timeout längen. I afterEach stänger vi ner webbläsaren, detta är för att vi inte vill att val i ett test ska påverka nästa test. Om vi hade haft en mer avancerad sida med cookies och session hade vi behövt göra ytterligare steg för att rensa dem mellan testerna. I och med att Selenium är asynkront behöver vi använda [done()](https://mochajs.org/#asynchronous-code) för meddela Mocha när en funktion är klar. Gäller bara de Mocha specifika funktionerna som "it", "afterEach" och "beforeEach".
-
-Sen har vi två test cases där vi kollar att startsidan har rätt title, rubrik och url. Nästa test cases har vi lagt till att kolla så länken till startsidan fungerar och att det fortfarande är rätt värden. Vi hittar rätt länk med [By.linktext()](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/by_exports_By.html#By.linkText), ett av flera sätt för att hitta element. Vi anropar `.click()` på elementet för att emulera att vi själva hade klickat med musen i webbläsaren, jätte smidigt. Vi ser redan nu att vi har duplikation i koden och vi kommer få mer för de andra undersidorna så därför har jag i exempel koden skapat hjälpfunktioner för de vanliga repeterade handlingarna.
-
-I testfallen för kalkylatorn kan ni se mer exempel på att klicka på element och läsa av CSS värden. För att köra alla tester kan ni använda kommandot `npm test`. Det kör alla "*.js" filer som ligger under mappne "test".
-
-En lyckad körning borde se ut som följer:
-
-```shell
-$npm test
-
-> multipage-test@1.0.0 test .../ramverk2/example/test/functiontest-selenium
-> mocha test/**/*.js
-
-Multipage
-Multipage
-Multipage
-    ✓ Test index
-    ✓ Test go to Home (320ms)
-    ✓ Test go to About (47ms)
-    ✓ Test go to Calculator (78ms)
-    ✓ Test color on Calculator (77ms)
-    ✓ Test an addition calculation (984ms)
-
-
-  6 passing (22s)
-```
-
-
-
-#### Mer Selenium funktionalitet
-
-Något som inte finns i exempelkoden men som man kan göra är att emulera tangentbordstryck med funktionen [sendKeys](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_WebElement.html#sendKeys) och skicka formulär med [submit](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_WebElement.html#submit).
-
-Ni borde ha testat köra testerna några gånger nu och har märkt att det går snabbt när testerna körs och man hinner inte se allt som sker. För att komma runt detta kan man använda [takeScreenshot()](https://seleniumhq.github.io/selenium/docs/api/javascript/module/selenium-webdriver/lib/webdriver_exports_WebElement.html#takeScreenshot). Om ni googlar lite kan ni även hitta olika program för att spela in en video av testerna.
-
-
-
-#### Kodtäckning med Selenium
-
-Det ska gå att få kodtäckning av Selenium tester med hjälp av [Istanbul](https://github.com/gotwarlost/istanbul/issues/132). Det krävs lite eget arbete och vi vet inte om det funkar, om någon är intresserad är det fritt fram att försöka. Gör gärna ett forum inlägg om det lyckas. -->
-
-
 
 ## Continuous Integration
 
@@ -721,58 +487,63 @@ $npm install   # Installerar allt som finns i package.json
 $npm test      # Exekvera validatorer och testfall
 ```
 
-Då bygger vi en CI kedja. Det finns exempelkod i kursrepot under `/test/ci` och jag använder ett repo [janaxs/blackjack](https://github.com/janaxs/blackjack) för att demonstrera hur det ser ut.
 
 
+### GitHub Actions
 
-### Byggverktyget Travis
+Först tar vi en titt på byggsystemet [GitHub Actions](https://github.com/emilfolino/auth_mongo/actions). Actions är en integrerad del av GitHub och med det ditt repo där. Actions kan användas för att automatisera en stor del av det vi i vanliga fall gör manuellt som programmerare.
 
-Först tar vi en titt på byggsystemet [Travis](https://travis-ci.org/janaxs/blackjack). Syftet med et byggsystem är att checka ut din kod och köra dina tester varje gång du checkar in en ny version av din kod.
+För att komma igång med GitHub Actions väljer du Actions i menyn för ditt GitHub Repo. Vi börjar med backend repot så gå in på det först. När du valt Actions bör du kunna hitta Node.js och under det trycka på en knapp Configure enligt nedan.
 
-I katalogen `/test/ci` ligger en konfigurationsfil `.travis.yml`  som är exempel på konfigurationsfiler för Travis. Om du kikar i filerna ser du referenser till `npm install` och `npm test`. Kopiera över filen eller skapa en `.travis.yml` fil i dina repon och gör en commit till GitHub.
+![Val av Actions](https://dbwebb.se/image/jsramverk/choose_actions.png)
 
-Jag lägger sedan till mitt repo till Travis genom att gå till [Travis](https://travis-ci.com/) och välja "Sign in with GitHub". Gå sedan till "Settings" i menyn som dyker upp under din profilbild. Slå sedan på att Travis ska bygga ditt repo.
+Du bör nu få upp följande vy där du ser början till den konfigurationsfil som vi ska använda för att checka-ut koden och köra våra tester på olika versioner av node.
 
-Mikael visar i följande video hur han gör det för modulen rem-server.
+![Val av Actions](https://dbwebb.se/image/jsramverk/create_workflow.png)
 
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/KGe6r4B3ZSg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+Du kan klistra in följande kod i filen och trycka på den gröna knappen Start Commit. Sen ska GitHub Actions sätta igång och köra allt och under tiden som det körs tar vi en titt på nedanstående kod under kodexemplet.
 
-När vi vill köra tester där vi kopplar oss mot till exempel en databas vill vi starta igång en [service](https://docs.travis-ci.com/user/database-setup/). Vi gör det genom att använda nyckelordet `services` i `.travis.yml` enligt nedan.
+```yaml
+name: Node.js CI
 
-```shell
-language: node_js
-node_js:
-    - "node"
-    - "14"
-    - "12"
-    - "11"
-    - "10"
-services: mongodb
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        mongodb-version: ['4.2', '4.4', '5.0']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.7.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+
+    - run: npm install
+    - run: npm test
 ```
 
+Först ger vi vårt workflow ett namn, i detta fallet "Node.js CI". Efter namnet definierar vi när vi vill köra testerna, i detta fallet på alla pushes och vid pull requests. Efter det definierar vi variabler för de olika "byggen" (builds) vi vill göra. Först säger vi att vi vill ha operativsystemet `ubuntu-latest` i den container där vår kod kommer köras.
 
+Vi definierar sedan vilka Node versioner vi vill köra koden för och vilka versioner av MongoDB. Actions kommer sedan köra testerna för alla permutationer av detta, vilket innebär att testerna kommer köras nio olika gånger i olika konfigurationer.
 
-<!-- ### Kodkvalitet och kodtäckning med Scrutinizer
-
-Avslutningsvis integrerar jag mitt repo mot [Scrutinizer](https://scrutinizer-ci.com/g/janaxs/blackjack/) som är ett verktyg för kodkvalitet och kodtäckning. Verktyget kan exekvera mina tester, visa kodtäckning och analysera min kod ur olika aspekter.
-
-Vi gör på liknande sätt som för Travis att vi skapar en `.scrutinizer.yml` fil och slår på kollar i Scrutinizers gränssnitt.
-
-Ett exempel på en `.scrutinizer.yml` fil finns i Lager API repot [order_api/.scrutinizer.yml](https://github.com/emilfolino/order_api/blob/master/.scrutinizer.yml).
-
-Mikael visar i följande video hur han gör det för modulen rem-server.
-
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/Xzq28ZbX6tc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> -->
-
-
-
-### CI kedja klar
-
-Då var vår CI kedja klar med flera alternativ för byggsystem och kodtäckning.
-
-Du kan ta en närmare titt på mitt demo repo [janaxs/blackjack](https://github.com/janaxs/blackjack) om du vill se valideringsverktyg, enhetstester och CI-kedjan i ett sammanhang i ett repo med nödvändiga konfigurationsfiler.
-
-Denna CI kedja är bara ett exempel på en CI-kedja och det finns många olika verktyg som bygger och granskar din kod.
+Under `steps` berättar vi vad som ska hända. Först checks koden ut och vi sätter upp node och mongodb för att slutligen köra `npm install` och `npm test`.
 
 
 
@@ -790,7 +561,7 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 1. Lägg till så att kodtäckning fungerar vid enhetstester och integrationstester.
 
-1. Bygg en CI-kedja och integrera med byggtjänsten Travis som checkar ut ditt repo och utför `npm install` och `npm test`. Badga din README.
+1. Integrera GitHub Actions som gör tester för ditt repo.
 
 1. Committa och tagga ditt repon med 2.0.0 eller senare, ladda upp till GitHub och driftsätt.
 
@@ -802,7 +573,7 @@ Veckans kravspecifikation är uppdelat på backend och frontend och är beskrive
 
 > Exempel på use-case: "Användaren ska från förstasidan kunna trycka på en länk för att se redovisningstexten för vecka 1."
 
-2. Bygg en CI-kedja och integrera med byggtjänsten Travis som checkar ut ditt repo och utför `npm install` och `npm test`. Badga din README.
+1. Integrera GitHub Actions som gör tester för ditt repo.
 
 3. Committa och tagga ditt repon med 3.0.0 eller senare, ladda upp till GitHub och driftsätt.
 

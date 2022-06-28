@@ -2,7 +2,7 @@
 
 <p class="author">Emil Folino</p>
 
-Denna veckan tittar vi på realtidsprogrammering och hur två eller fler personer kan uppdatera samma dokument.
+Denna veckan tittar vi på realtidsprogrammering och hur två eller fler personer kan uppdatera samma dokument. Det är nu vår editor blir "real-time" och "collaborative".
 
 
 
@@ -36,7 +36,7 @@ Ett exempel program med en chattklient och chattserver finns under `socket/` i k
 
 ### Sockets för vår editor
 
-Vi börjar på serversidan och kommer igenom hela denna artikel hoppa lite fram och tillbaka mellan de olika delarna av vår applikation. Jag har markerat kodexempel med `// Klient` respektive `// Server` för att markera vart koden hör hemma.
+Vi börjar på serversidan och kommer igenom hela denna artikel hoppa lite fram och tillbaka mellan de olika delarna av vår applikation. Jag har markerat kodexempel med `// Klient` respektive `// Server` för att markera vart koden hör hemma. Kodexempeln för klienten är skriven för React som en del av **Path of Least Resistance**.
 
 För att kunna använda oss av `socket.io` på servern installerar vi det med hjälp av `npm`. De två paketen `bufferutil` och `utf-8-validate` installerar vi för att [snabba upp](https://github.com/websockets/ws/#opt-in-for-performance) serverns hantering av sockets. Det är viktigt i dessa sammanhang när vi använder oss av realtidsprogrammering.
 
@@ -90,14 +90,25 @@ Vi installerar `socket.io-client` med hjälp av `npm`.
 $npm i --save socket.io-client
 ```
 
-Och sedan initierar vi klienten med en `ENDPOINT` som är URL'n till servern vi vill att paketen skickas till.
+Och sedan initierar vi klienten med en `SERVER_URL` som är URL'n till servern vi vill att paketen skickas till. Nedanstående kodexempel visar endast en del av App komponenten.
+
+Vi använder oss alltså av en `useEffect` som körs varje gång vi ändrar vilket dokument vi vill ändra. Vi skapar en `socket` utifrån `SERVER_URL`. `return` delen av vårt `useEffect` anropas varje gång vi ändrar dokument med och tar bort socket för att städa upp.
 
 ```javascript
 // Klient
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://127.0.0.1:1337";
 
-const socket = socketIOClient(ENDPOINT);
+let socket;
+
+function App() {
+    useEffect(() => {
+      socket = io(SERVER_URL);
+
+      return () => {
+        socket.disconnect();
+      }
+    }, [selectedDoc]);
+}
 ```
 
 
@@ -131,7 +142,7 @@ Vi kan nu använda `emit` och `to` funktionerna för att skicka data till alla k
 socket.to(data["_id"]).emit("doc", data);
 ```
 
-Vi kan sedan i klienten ta emot data genom en EventListener och uppdatera värdet i vår text editor.
+Vi kan sedan i klienten ta emot data genom en EventListener och uppdatera värdet i vår text editor. Denna del har vi i vår `useEffect` från tidigare.
 
 ```javascript
 // Klient

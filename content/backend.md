@@ -6,15 +6,7 @@ Denna veckan tittar vi på hur vi kan skapa ett API som svarar med JSON med hjä
 
 
 
-
-
 ## Läsa
-<!--
-Vi ska som en sista del av detta kursmoment bygga ut vår frontend applikation från förra veckan med ett formulär. Nielsen Norman Group är världsledande inom forskningsbaserad User Experience (UX). Följande två artiklar har bra riktlinjer för att skapa formulär.
-
-[Website Forms Usability: Top 10 Recommendations](https://www.nngroup.com/articles/web-form-design/)
-
-[A Checklist for Registration and Login Forms on Mobile](https://www.nngroup.com/articles/checklist-registration-login/) -->
 
 1. Vi vänder oss till dokumentationen för [Node](https://nodejs.org/en/docs/) och [Express](http://expressjs.com/) för att ytterligare se hur vi kan skapa ett API med Express.
 
@@ -36,6 +28,14 @@ Sen låter vi Chief Technical Officer Eliot Horowitz hos [MongoDB](https://www.m
 
 
 
+## Path of Least Resistance
+
+I detta kursmoment är det inte lika många val som förra kursmomentet. Det som kan underlätta är att använda sig av exempelkoden nedan och materialet i denna artikeln.
+
+I stycket [En liten titt på frontend](#en-liten-titt-pa-frontend) kommer några exempel på hur man kan använda `useEffect` och `useState` i React för att hämta dokument samt uppdatera innehåll i text editorn.
+
+
+
 ## Exempelkod
 
 Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa tekniker är [auth_mongo](https://github.com/emilfolino/auth_mongo) ett bra ställe att börja. auth_mongo repot är en klon av det auth repo som användes i projektet i kursen webapp. Jag har bytt databasen från SQLite till mongodb.
@@ -44,7 +44,7 @@ Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa t
 
 ## Material
 
-Modulen [Express finns på npm](https://www.npmjs.com/package/express). Express är en del av [MEAN](http://mean.io/) som är en samling moduler för att bygga webbapplikationer med Node.js. I denna artikeln kommer vi att använda Express (E) och Node.js (N) i MEAN.
+Modulen [Express finns på npm](https://www.npmjs.com/package/express). Express är en del av [MEAN](http://mean.io/) som är en samling moduler för att bygga webbapplikationer med Node.js. I denna artikeln kommer vi att använda MongoDB (M), Express (E), Node.js (N) i MEAN. A står för Angular, men kan bytas ut mot ett annat frontend ramverk. Dock blir förkortningarna något sämre (MERN, MESN, MEVN....).
 
 Innan vi börjar så skapar vi en `package.json` som kan spara information om de moduler vi nu skall använda.
 
@@ -53,9 +53,9 @@ Innan vi börjar så skapar vi en `package.json` som kan spara information om de
 $npm init
 ```
 
-När du ombeds döpa paketet så ange "me-api" eller något liknande (det spelar ingen roll). Använd bara inte "express" eftersom det paketnamnet redan finns och du får problem i nästa steg. Du kan köra om `npm init` om du vill ändra namn, eller redigera namnet direkt i filen `package.json`.
+När du ombeds döpa paketet så ange "editor-backend" eller något liknande (det spelar ingen roll). Använd bara inte "express" eftersom det paketnamnet redan finns och du får problem i nästa steg. Du kan köra om `npm init` om du vill ändra namn, eller redigera namnet direkt i filen `package.json`.
 
-Nu kan vi installera paketen vi skall använda `express`, `cors` och `morgan`. Vi väljer att spara dem i vår `package.json`.
+Nu kan vi installera paketen vi skall använda så här från början `express`, `cors` och `morgan`. Vi väljer att spara dem i vår `package.json`.
 
 ```shell
 $npm install express cors morgan --save
@@ -246,13 +246,13 @@ app.delete("/user", (req, res) => {
 
 Om du testar med din webbläsare så blir det en GET request.
 
-För att testa de andra metoderna så använder jag verktygen Postman eller RESTClient som är ett plugin in till Firefox. Med de verktygen kan jag välja om jag skall skicka en GET, POST, PUT, DELETE eller någon annan av de HTTP-metoder som finns. En sådan REST-klient är ett värdefullt utvecklingsverktyg.
+För att testa de andra metoderna så använder jag verktygen Postman eller RESTClient som är ett plugin till Firefox. Med de verktygen kan jag välja om jag skall skicka en GET, POST, PUT, DELETE eller någon annan av de HTTP-metoder som finns. En sådan REST-klient är ett värdefullt utvecklingsverktyg.
 
 Så här ser det ut när jag skickar en request med en annan metod än GET.
 
 ![En DELETE request skickas tll servern som svarar från rätt route.](https://dbwebb.se/image/snapvt17/express-rest-client.png?w=w2)
 
-Det var routes och stöd för olika metoder det. Se till att du installerar en klient motsvarande RESTClient och testa din egen server.
+Det var routes och stöd för olika metoder det. Se till att du installerar en klient motsvarande Postman eller RESTClient och testa din egen server.
 
 Man vill ofta skicka en annan statuskod än 200 när man gör andra typer av requests än GET. Det kan vi göra med `response` objektets inbyggda funktion `status`.
 
@@ -285,7 +285,7 @@ app.delete("/user", (req, res) => {
 });
 ```
 
-Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. Innebörden av alla HTTP status koder finns i [följande lista](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+Vi skickar alltså tillbaka statusen 201 när vi skapar objekt med POST anrop och 204 när vi uppdaterar eller tar bort. Det är enkelt gjort med `status` funktion. Innebörden av alla HTTP status koder finns i [följande lista](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 
 
 
@@ -1028,6 +1028,81 @@ Finally delen av konstuktionen utförs alltid både när det har gått bra och v
 
 
 
+## En liten titt på frontend
+
+Innan vi dyker ner i att driftsätta både databas och backend tar vi en liten titt på frontend. Tanken med kursen är att ni ska utforska ramverket till stor del på egen hand, men i och med introduktionen av Path of Least Resistance kommer här lite hjälp på vägen.
+
+I vår frontend vill vi kunna ladda in befintliga dokument, vi vill kunna skapa ett nytt dokument, vi vill kunna välja ett dokument och när vi har ändrat i valt dokument vill vi kunna uppdatera dokumentet. Vi kommer gå igenom en del av dessa funktioner i nedanstående.
+
+Jag kommer i nedanstående utgå ifrån att vi har delat koden upp i modeller och komponenter. Så jag har två filer i frontend som vi kommer fokusera på `models/docs.js` och `components/editor.js`.
+
+
+
+#### Hämta alla dokument
+
+Låt oss börja med att hämta alla dokument från backend och visa de i en dropdown. Jag kommer utgå från att jag har en `GET /docs` route i backend som skickar tillbaka alla dokument. Jag börjar med att importera modellen genom följande kod: `import docsModel from '../models/docs';`. Sedan skapar jag en `docs` array som blir en state-variabel. `useEffect` används för att hämta dokumenten och `docs`-arrayen setts till det som returneras.
+
+```javascript
+const [docs, setDocs] = useState([]);
+
+useEffect(() => {
+    (async () => {
+        const allDocs = await docsModel.getAllDocs();
+        setDocs(allDocs);
+    })();
+}, []);
+```
+
+I `docsModel` har jag följande kod som hämtar och returnerar data från backend:
+
+```javascript
+const docs = {
+    getAllDocs: async function getAllDocs() {
+        const response = await fetch(`${URL}/docs`);
+        const result = await response.json();
+
+        return result.data;
+    },
+};
+
+export default docs;
+```
+
+Vi kan nu i vår komponent rita upp ett `select` element med innehållet från backend.
+
+```javascript
+<select
+    onChange={fetchDoc}
+>
+    <option value="-99" key="0">Choose a document</option>
+    {docs.map((doc, index) => <option value={index} key={index}>{doc.name}</option>)}
+</select>
+```
+
+Så långt så gott.
+
+
+
+#### Hämta baserat på en annan variabel
+
+Dock vill vi utöka funktionaliteten lite grann. Vi vill hämta alla dokumenten varje gång vi ändrar dokumentet vi skriver i. Det underlättar till exempel när vi vill skapa nya dokument.
+
+Vi kan göra det genom att lägga till en variabel som en del av det [andra argumentet](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) till `useEffect`. Varje gång variabeln ändras kommer funktionen inuti `useEffect` köras.
+
+```javascript
+const [docs, setDocs] = useState([]);
+const [currentDoc, setCurrentDoc] = useState({});
+
+useEffect(() => {
+    (async () => {
+        const allDocs = await docsModel.getAllDocs();
+        setDocs(allDocs);
+    })();
+}, [currentDoc]);
+```
+
+
+
 ## Driftsättning
 
 Molnet eller _the cloud_ har under de senaste 10 åren växt fram enormt fort. Om du vill ha en kort introduktion till molnet kan Bill Laberis' bok _"What is the cloud?"_ rekommenderas. Är inte nödvändigt för att klara kursen, men är snabbläst. Du kommer åt boken via [biblioteket på BTH](https://bibliotek.bth.se/databases?q=o%27reilly) och välj O'reilly. Du ska nu kunna söka på "What is the cloud?" i Sökrutan och första träffen bör vara _"What is the cloud?"_.
@@ -1070,21 +1145,21 @@ Välj sedan korrekt driver och version, senaste bör vara korrekt. Kopiera sedan
 
 ![Choose Driver](https://dbwebb.se/image/jsramverk/mongodb-atlas-connect-url.png?w=778)
 
-Jag valde att skapa en JSON fil för att hantera användarnamn och lösenord till databasen. Jag har exkluderat den från Git genom att fylla i sökvägen till filen i repots `.gitignore`-fil. Min `config.json` fil ser ut som nedan, med ett långt och svårt lösenord skapat i gränssnittet, som värde för password attributet.
+Jag väljer att använda mig av [npm paketet](https://www.npmjs.com/package/dotenv) `dotenv` för att hantera användarnamn och lösenord till databasen. Vi installerar paketet genom att skriva `npm install --save dotenv`. Vi kan sedan skapa en fil `.env` i roten av vår backend-katalog. Jag har exkluderat `.env` från Git genom att fylla i sökvägen till filen i repots `.gitignore`-fil.
 
-```json
-{
-    "username": "texteditor",
-    "password": "..."
-}
+Vi nu fylla i användarnamn och lösenord i filen `.env`:
+
+```text
+ATLAS_USERNAME="YOUR_USERNAME"
+ATLAS_PASSWORD="YOUR_PASSWORD"
 ```
+Högst upp i din fil `app.js` kan du nu köra anropet `require('dotenv').config()`.
+
 
 Vilket gör att jag kan skapa min dsn sträng på följande sätt.
 
 ```javascript
-const config = require("./config.json");
-
-let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.hkfbt.mongodb.net/folinodocs?retryWrites=true&w=majority`;
+let dsn = `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@cluster0.hkfbt.mongodb.net/folinodocs?retryWrites=true&w=majority`;
 ```
 
 Vi kan nu verifiera att kopplingen till mongodb atlas fungerar genom att köra igång vår backend lokalt och se att det fungerar som tidigare.
@@ -1103,7 +1178,7 @@ const port = process.env.PORT || 1337;
 
 Nedanstående är en översiktlig genomgång av denna [Microsoft Guide](https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?pivots=platform-linux), så om du vill ha med alla detaljer välj guiden.
 
-Vi kommer göra dirftsättningen automagiskt via Visual Studio Code, så har du inte den [installerad](https://code.visualstudio.com) är det dags nu.
+Vi kommer göra driftsättningen automagiskt via Visual Studio Code, så har du inte den [installerad](https://code.visualstudio.com) är det dags nu.
 
 I Visual Studio Code installerar vi pluginen Azure App Services med hjälp av plugin menyn.
 
@@ -1117,7 +1192,7 @@ Se till att du har Code öppnat för din backend app och klicka sedan på lilla 
 
 ![Namn för din app service](https://dbwebb.se/image/jsramverk/code-azure-deploy-name.png)
 
-Välj sedan stack för din app, 14 LTS är bästa valet.
+Välj sedan stack för din app, senaste LTS är bästa valet.
 
 ![Stack för din app service](https://dbwebb.se/image/jsramverk/code-azure-deploy-stack.png)
 

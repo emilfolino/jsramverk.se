@@ -24,7 +24,7 @@ När du är klar, committa, tagga, pusha till GitHub. Länka till dina repon i d
 
 ### Krav 1: Skriva ut PDF
 
-Skapa en knapp för utskrift som <s>backend</s> sedan skapar en PDF, som går att ladda ner. Välj ett npm-paket för att skapa PDF'en, beskriv varför du valde just det paket du valde.
+Skapa en knapp för utskrift som sedan skapar en PDF, som går att ladda ner. Välj ett npm-paket för att skapa PDF'en, beskriv varför du valde just det paket du valde. Azure cloudet gör att det är svårt att driftsätta så att backend skapar PDF'n. Gör det därför enkelt för dig själv och skapa PDF'n i front.
 
 
 
@@ -74,4 +74,6 @@ Länka till dina GitHub repon och driftsatta sidor som en del av din inlämning.
 
 ### Presentation
 
-Spela in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata om koden ni skrivit för att utöka editorn med de nya features.
+**Campusstudenter:** Vi samlas och presenterar för varann i H430.
+
+**Distansstudenter:** Spela in en redovisningsvideo som ni länkar till i inlämningen på Canvas. Prata om koden ni skrivit för att utöka editorn med de nya features.

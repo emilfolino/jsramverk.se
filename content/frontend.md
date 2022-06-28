@@ -2,25 +2,37 @@
 
 <p class="author">Emil Folino</p>
 
-Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript och Mithril, som vi redan är bekanta med. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och tre korta filmer om ramverken. Sen tittar vi på en föreläsning om hur man väljer JavaScript ramverk.
+Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och jämför "The Big Three" Angular, React och Vue med Vanilla JavaScript, Svelte och Mithril. Vi kollar på arkitekturen för de olika ramverken och hur vi gör vissa viktiga saker i ramverket. Vi jämför dessutom hur många rader det krävs för att skriva vissa kodexempel och hur stora produktionsfilerna blir för dessa kodexempel. Först bekantar vi oss med dokumentationen och fyra korta filmer om ramverken. Sen tittar vi på några föreläsningar om hur man väljer JavaScript ramverk.
+
+
+
+## Path of Least Resistance
+
+Innan vi kommer allt för långt ner i tekniska detaljer kommer här nog det viktigaste valet inom Path of Least Resistance i denna kursen.
+
+Vill du utveckla dina kunskaper i ramverket React och ha möjlighet att diskutera med många andra i chatten väljer du i detta kursmomentet ramverket React och text editorn Trix. Det är dessa tekniker som ingår i Path of Least Resistance från detta kmomet.
+
+Om du däremot vill utmana dig själv lite mer i kursen välj ett av de andra ramverken Angular, Svelte eller Vue och en annan text editor komponent.
 
 
 
 ## Läsa
 
-Följande länkar är bra att ha för undersökande och implementation. [Angular](https://angular.io/), [React](https://reactjs.org/) och [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
+Följande länkar är bra att ha för undersökande och implementation. [Angular](https://angular.io/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/) och [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
 
 
 
 ## Titta
 
-#### Tre korta
+#### Fyra korta
 
-Tre korta filmer om ramverken och deras historia.
+Fyra korta filmer om ramverken och deras historia.
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/Ata9cSC2WpM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/Tn6-PIqc4UM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+<div class='embed-container'><iframe src="https://www.youtube.com/embed/rv3Yq-B8qp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/nhBVL41-_Cw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
@@ -40,9 +52,9 @@ Fireship har gjort en lite nyare jämförelse av ramverken, där även sju andra
 
 ## Material och tekniker
 
-I [kursrepot](https://github.com/emilfolino/jsramverk) finns två exempel program skrivna med hjälp av de fem ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
+I [kursrepot](https://github.com/emilfolino/jsramverk) finns två exempel program skrivna med hjälp av de sex ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
 
-Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de 5 olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa fem Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.se`. Du kommer under [vecka 2](backend) bygga ett eget Me-API.
+Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de sex olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa sex Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, svelte, vanilla, vue}.jsramverk.se`.
 
 Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.
 
@@ -253,8 +265,6 @@ $npm run serve
 
 Att skriva en egen text-redigerare för att användas på webben är ett eget 10-årigt projekt, så här tar vi som man brukar i JavaScript-världen en genväg. Exempel på textredigerare finns nedan:
 
-[CKEditor](https://ckeditor.com/ckeditor-5/) - komponenter för [ramverken](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/overview.html)
-
 [Quill](https://quilljs.com/) - [Angular](https://www.npmjs.com/package/ngx-quill), [React](https://github.com/zenoamaro/react-quill) och [Vue](https://github.com/surmon-china/vue-quill-editor).
 
 [TinyMCE](https://github.com/tinymce/tinymce-dist#readme) - komponenter för [ramverken](https://www.tiny.cloud/docs/integrations/).
@@ -269,7 +279,7 @@ Vi har än så länge visat upp våra än så länge ganska enkla editors med hj
 
 Vi har under utvecklingen av vår applikation använd oss av ett `start` eller `serve` kommando. Dessa kommandon bygger i botten på `webpack` och sedan en inbyggt webbserver som har använts för att visa upp filerna.
 
-När vi ska driftsätta sker det på ett lite annat sätt. Alla ramverken har ett inbyggt `build` kommando som med hjälp av webpack packar ihop filerna till produktionsfiler och lägger dessa i en `dist/` eller `build/` katalog. Dessa filer kan vi sedan visa upp med en vanlig webbserver till exempel studentservern. Vi har tidigare använt `dbwebb`-kommandot för att publicera innehåll till studentservern. Vi ska nu titta på hur vi kan göra det  med hjälp av `rsync`, som ligger till grund för mycket av `dbwebb publish`.
+När vi ska driftsätta sker det på ett lite annat sätt. Alla ramverken har ett inbyggt `build` kommando som med hjälp av webpack packar ihop filerna till produktionsfiler och lägger dessa i en `dist/` eller `build/` katalog. Dessa filer kan vi sedan visa upp med en vanlig webbserver till exempel studentservern. Vi har tidigare använt `dbwebb`-kommandot för att publicera innehåll till studentservern. Vi ska nu titta på hur vi kan göra det med hjälp av `rsync`, som ligger till grund för mycket av `dbwebb publish`.
 
 
 
