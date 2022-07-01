@@ -136,7 +136,7 @@ Vi kan nu genom att definiera även `TeacherType` och `StudentType få fram föl
 
 ### GraphQL i frontend
 
-Vi kan hämta data från en GraphQL kan vi göra det med våra vanliga verktyg för att hämta data. Till exempel `fetch`, `axios` eller services i Angular. Det kan se ut på följande sätt när vi vill hämta alla kursers namn från graphql-servern i exempelkoden ovan.
+Vi kan hämta data från en GraphQL server med våra vanliga verktyg för att hämta data. Till exempel `fetch`, `axios` eller services i Angular. Det kan se ut på följande sätt när vi vill hämta alla kursers namn från graphql-servern i exempelkoden ovan.
 
 ```javascript
 fetch('/graphql', {
