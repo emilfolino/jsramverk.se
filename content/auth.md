@@ -1,9 +1,5 @@
 # Auth
 
-<div class="under-construction" id="under-construction">
-    <p class="optional">Kursmomentet utvecklas. Avvakta med att påbörja arbetet.</p>
-</div>
-
 <p class="author">Emil Folino</p>
 
 Denna veckan tittar vi på hur vi kan lägga till autentisering i vårt API och implementerar login-formulär på frontend.
@@ -17,6 +13,12 @@ Nielsen Norman Group är världsledande inom forskningsbaserad User Experience (
 * [Website Forms Usability: Top 10 Recommendations](https://www.nngroup.com/articles/web-form-design/)
 
 * [A Checklist for Registration and Login Forms on Mobile](https://www.nngroup.com/articles/checklist-registration-login/)
+
+
+
+## Path of Least Resistance
+
+I detta kursmomentet är Path of Least Resistance att använda erfarenheterna från webapp-kursen och att implementera med JWT i backend.
 
 
 
