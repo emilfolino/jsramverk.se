@@ -1184,6 +1184,10 @@ I Visual Studio Code installerar vi pluginen Azure App Services med hjälp av pl
 
 ![Installerar pluginen Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-install.png)
 
+För att vi ska ha säker tillgång till våra konto på Azure är Multi-Factor Authentication (MFA) påslaget. Via [Studentportalen](https://studentportal.bth.se/genomfor-studierna/it-verktyg/studentkonto/) finns det guider för hur man använder MFA. Se bilden under för att hitta guiderna.
+
+![Multi-Factor Authentication](https://dbwebb.se/image/jsramverk/mfa.png)
+
 Logga sedan in i Azure App Services genom att klicka på länken Sign in to Azure under den nya fliken Azure i din aktivitetsflik längst till vänster. Du ska logga in med din Studentkonto-mail: abcdxx@student.bth.se.
 
 ![Logga in i Azure App Services](https://dbwebb.se/image/jsramverk/code-azure-login.png)
