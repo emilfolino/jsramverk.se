@@ -296,7 +296,7 @@ $rsync -av --delete dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
 Om `rsync` inte hittar rätt ssh nyckel kan man testa med kommandot nedan där vi specificerar vilken nyckel vi vill använda.
 
 ```shell
-$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb.pub" dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
+$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb" dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
 ```
 
 Vi kan nu gå till `www.student.bth.se/~AKRONYM/editor` och se en vit sida. Detta beror på att filerna skapas med utgångspunkten att de ska driftsättas i en rot-katalog och inte som vi har gjort det i editor katalogen. Vi kan se till att vår sida kan driftsättas i editor-katalogen genom att skicka med `--base-href './'` till `ng build` kommandot så vårt kommando blir:
@@ -330,7 +330,7 @@ $rsync -av --delete build/ AKRONYM@ssh.student.bth.se:www/editor
 Om `rsync` inte hittar rätt ssh nyckel kan man testa med kommandot nedan där vi specificerar vilken nyckel vi vill använda.
 
 ```shell
-$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb.pub" build/ AKRONYM@ssh.student.bth.se:www/editor
+$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb" build/ AKRONYM@ssh.student.bth.se:www/editor
 ```
 
 Vi kan nu gå till `www.student.bth.se/~AKRONYM/editor` och se en vit sida. Anledningen till detta är att React skapar `build`-katalogen med utgångspunkt i att den ska driftsättas i en rot-katalog och inte som vi har gjort det i editor katalogen. Vi kan använda oss av `homepage`-attributet i vår `package.json`. Vi sätter det till `"homepage": "."` vilket gör att de första raderna i min fil ser ut så här:
@@ -372,7 +372,7 @@ $rsync -av --delete dist/ AKRONYM@ssh.student.bth.se:www/editor
 Om `rsync` inte hittar rätt ssh nyckel kan man testa med kommandot nedan där vi specificerar vilken nyckel vi vill använda.
 
 ```shell
-$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb.pub" dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
+$rsync -av --delete -e "ssh -i $HOME/.ssh/dbwebb" dist/projekt_namn/ AKRONYM@ssh.student.bth.se:www/editor
 ```
 
 Vi kan nu gå till `www.student.bth.se/~AKRONYM/editor` och se en vit sida. Detta beror på att filerna skapas med utgångspunkten att de ska driftsättas i en rot-katalog och inte som vi har gjort det i editor katalogen. Vi kan se till att vår sida kan driftsättas i editor-katalogen genom att använda oss av [Vues konfigurationsfil](https://cli.vuejs.org/config/#global-cli-config) `vue.config.js`. Skapa filen i roten av ditt projekt med följande innehåll.
