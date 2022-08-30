@@ -52,9 +52,9 @@ Fireship har gjort en lite nyare jämförelse av ramverken, där även sju andra
 
 ## Material och tekniker
 
-I [kursrepot](https://github.com/emilfolino/jsramverk) finns två exempel program skrivna med hjälp av de sex ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
+I [kursrepot](https://github.com/emilfolino/jsramverk) finns två exempel program skrivna med hjälp av fem av de sex ovannämnda teknikerna. I `/tic-tac-toe` finns ett luffarschack implementerad med möjlighet att hoppa tillbaka i spelets historik. I `/calculator` är en simpel miniräknare implementerad.
 
-Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de sex olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa sex Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, svelte, vanilla, vue}.jsramverk.se`.
+Dessutom finns en Me-sida som konsumerar ett Me-API implementerad i de sex olika teknikerna. [GitHub repon](https://github.com/emilfolino?utf8=%E2%9C%93&tab=repositories&q=me-&type=&language=) för dessa sex Me-sidor samt Me-API:t finns tillgängligt. Dessa är även driftsatta på `me-{angular, mithril, react, vanilla, vue}.jsramverk.se`.
 
 Först tar vi en titt på antal rader som utvecklaren behöver skriva i dessa små exempelprogram och hur stora produktionsfilerna för dessa exempelprogram är.
 
