@@ -96,7 +96,7 @@ Vi använder oss alltså av en `useEffect` som körs varje gång vi ändrar vilk
 
 ```javascript
 // Klient
-import socketIOClient from "socket.io-client";
+import { io } from "socket.io-client";
 
 let socket;
 
