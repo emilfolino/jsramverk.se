@@ -78,7 +78,7 @@ app.use('/graphql', graphqlHTTP({
 
 ```javascript
 courses: {
-    type: GraphQLList(CourseType),
+    type: new GraphQLList(CourseType),
     description: 'List of all courses',
     resolve: async function() {
         return await courses.getAll();
@@ -104,17 +104,17 @@ const CourseType = new GraphQLObjectType({
     name: 'Course',
     description: 'This represents a course',
     fields: () => ({
-        courseCode: { type: GraphQLNonNull(GraphQLString) },
-        name: { type: GraphQLNonNull(GraphQLString) },
-        credits: { type: GraphQLNonNull(GraphQLFloat) },
+        courseCode: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        credits: { type: new GraphQLNonNull(GraphQLFloat) },
         teachers: {
-            type: GraphQLList(TeacherType),
+            type: new GraphQLList(TeacherType),
             resolve: (course) => {
                 return course.teachers
             }
         },
         students: {
-            type: GraphQLList(StudentType),
+            type: new GraphQLList(StudentType),
             resolve: (course) => {
                 return course.students
             }
