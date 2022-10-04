@@ -32,7 +32,9 @@ Exempelkod till nedanstående video finns på [GitHub](https://github.com/WebDev
 
 I vårt API så här långt i kursen har vi haft olika _routes_ för att hämta olika _resurser_. När vi använder oss av GraphQL har vi en enda route och till den skickar vi olika queries för att hämta ut den data vill hämta ut. GraphQL kan också användas för att skapa och ändra data, men i detta materialet tar jag inte upp det. I den länkade tutorial ovan och i den länkade koden på GitHub finns exempel på hur man kan mutera data som det heter inom GraphQL.
 
-Vi börjar därför med att skapa en endpoint för graphql på routes `/graphql`.
+
+
+Vi börjar med att installera två paket `npm install --save graphql express-graphql` i vårt backend repo. Efter Installationen skapar vi en endpoint för graphql på routen `/graphql`.
 
 ```javascript
 // app.js
