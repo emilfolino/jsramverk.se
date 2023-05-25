@@ -2,7 +2,7 @@
 
 <p class="author">Emil Folino</p>
 
-Denna veckan tittar vi på hur vi kan använda GraphQL som ett lager framför vårt REST-API.
+I denna artikeln tittar vi på hur vi kan använda GraphQL för att skapa en enda endpoint för vår backend.
 
 
 
@@ -28,11 +28,9 @@ Exempelkod till nedanstående video finns på [GitHub](https://github.com/WebDev
 
 ### GraphQL i backend
 
-[Kursrepot](https://github.com/emilfolino/jsramverk) har uppdaterats med ett nytt exempel [graphql](https://github.com/emilfolino/jsramverk/tree/master/graphql). Gör en `git pull` för att ladda ner senaste. Är exempelkoden från detta exemplet som förklaras nedan. Är nog bäst att hålla ganska hårt i exempelkoden i denna artikeln då det är ganska många delar som samverkar. API:t är ett API för att hämta ut data om kurser. Exempeldata innehåller två kurser, två lärare och totalt 4 studenter. API:t använder sig av samma stack som tidigare i kursen, men med ett lager av GraphQL "utanpå".
+I [Kursrepot](https://github.com/emilfolino/jsramverk) finns exemplet [graphql](https://github.com/emilfolino/jsramverk/tree/master/graphql) är koden från detta exemplet som förklaras nedan. Är nog bäst att hålla ganska hårt i exempelkoden i denna artikeln då det är ganska många delar som samverkar. API:t är ett API för att hämta ut data om kurser. Exempeldata innehåller två kurser, två lärare och totalt 4 studenter. API:t använder sig av samma stack som tidigare i kursen, men med ett lager av GraphQL "utanpå".
 
 I vårt API så här långt i kursen har vi haft olika _routes_ för att hämta olika _resurser_. När vi använder oss av GraphQL har vi en enda route och till den skickar vi olika queries för att hämta ut den data vill hämta ut. GraphQL kan också användas för att skapa och ändra data, men i detta materialet tar jag inte upp det. I den länkade tutorial ovan och i den länkade koden på GitHub finns exempel på hur man kan mutera data som det heter inom GraphQL.
-
-
 
 Vi börjar med att installera två paket `npm install --save graphql express-graphql` i vårt backend repo. Efter Installationen skapar vi en endpoint för graphql på routen `/graphql`.
 
@@ -150,25 +148,3 @@ fetch('/graphql', {
 ```
 
 Om man vill ha en mer fullständig GraphQL-klient att använda kan [Relay](https://relay.dev/) för React eller [Apollo-client](https://www.apollographql.com/docs/react/#community-integrations) som finns för Angular och Vue rekommenderas.
-
-
-
-## Kravspecifikation
-
-1. Implementera ett GraphQL schema för ditt API.
-
-1. Din frontend bör använda GraphQL för minst en (1) del av ditt gränssnitt.
-
-1. Committa och tagga dina repon med 5.0.0 och 6.0.0 eller senare, ladda upp till GitHub och driftsätt.
-
-1. Länka till båda dina GitHub repon och den driftsatta klienten i en kommentar till din inlämning på Canvas.
-
-
-
-## Skriva
-
-Vi fortsätter iterativt med att förbättra vårt akademiska skrivande. Använd den återkopplingen du fick på förra veckans metodbeskrivning och förbättra beskrivningen.
-
-Gå tillbaka till skrivguiden och titta under [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod) för bra tips.
-
-**Lämna in texten som PDF bilaga till din inlämning på Canvas.**

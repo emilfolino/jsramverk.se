@@ -64,7 +64,7 @@ Gör en inlämning på Canvas med följande innehåll:
 
 Länka till dina GitHub repon och driftsatta sidor som en del av din inlämning.
 
-1. Berätta om vilka krav du har gjort och hur du har  implementerad kraven. Beskriv de val du har gjort och vilka problem som uppstod på vägen.
+1. Berätta om vilka krav du har gjort och hur du har implementerad kraven. Beskriv de val du har gjort och vilka problem som uppstod på vägen.
 
 2. Skriv ett allmänt stycke om hur projektet gick att genomföra. Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. Var projektet lätt eller svårt? Tog det lång tid? Vad var svårt och vad gick lätt? Var det ett bra och rimligt projekt för denna kursen?
 

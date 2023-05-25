@@ -2,7 +2,7 @@
 
 <p class="author">Emil Folino</p>
 
-Denna veckan tittar vi på hur vi kan lägga till autentisering i vårt API och implementerar login-formulär på frontend.
+I denna artikeln tittar vi på hur vi kan lägga till autentisering i vårt API.
 
 
 
@@ -13,12 +13,6 @@ Nielsen Norman Group är världsledande inom forskningsbaserad User Experience (
 * [Website Forms Usability: Top 10 Recommendations](https://www.nngroup.com/articles/web-form-design/)
 
 * [A Checklist for Registration and Login Forms on Mobile](https://www.nngroup.com/articles/checklist-registration-login/)
-
-
-
-## Path of Least Resistance
-
-I detta kursmomentet är Path of Least Resistance att använda erfarenheterna från webapp-kursen och att implementera med JWT i backend.
 
 
 
@@ -125,41 +119,3 @@ Vi ser i kodexemplet ovan att vi använder `req.body` när vi tar emot en POST r
 Vi såg i artikeln [Login med JWT](https://dbwebb.se/kunskap/login-med-jwt) kursen webapp hur man kan skicka lösenord med [postman](https://www.getpostman.com/). postman är ett utmärkt verktyg för att manuellt testa ett API. I postman kan man även sätta headers under headers fliken för varje request.
 
 ![Postman](https://dbwebb.se/image/ramverk2/postman-headers.png?w=c18)
-
-
-
-## Kravspecifikation
-
-1. Skapa ett registreringsformulär och ett inloggningsformulär i frontend. Se till att använda de goda råden från läsanvisningarna när du designar formuläret.
-
-1. Välj antingen inloggning med JWT eller passport.js och implementera möjlighet för att registrera och logga in en användare i backend.
-
-1. Dokument i editorn ska bara gå att komma åt för autentiserade användare och bara för de användare som har givits tillstånd att ändra i dokumenten.
-
-1. Fundera över din dokumentstruktur och hur du kan implementera autentiseringen och tillstånden att ändra i dokument på ett effektivt sätt.
-
-1. Committa alla filer i frontend och backend. Lägg till en tagg som passar in i versionsnumreringen.
-
-1. Pusha upp repot till GitHub, inklusive taggarna.
-
-1. Lämna in länk till frontenden och dina GitHub repon som en kommentar till din inlämning i Canvas.
-
-
-
-## Skriva
-
-Vi flyttar denna och kommande veckan fokus från forskningsfrågorna och syftet till metod. Vi ska nu beskriva för läsaren **HUR** vi har tänkt att genomföra studien.
-
-I metod beskrivs hur man har tänkt att svara på sina forskningsfrågor. I skrivguiden beskrivs under Uppsatsens delar [metod](http://skrivguiden.se/skriva/uppsatsens_delar/#metod).
-
-Under föreläsningen presenterar Emil ett antal olika metoder, som kan vara intressanta för området. Nedan finns en översikt, som kan vara bra att luta sig mot. Din uppgift är att för varje forskningsfråga detaljerat beskriva hur du har tänkt besvara frågan. En bra struktur är att börja stycken i metodbeskrivningen med: "För att besvara RQ1 används ...".
-
-Lägg metod beskrivningen som ett eget stycke, så inte direkt under forskningsfrågorna och syftet som vi har gjort tidigare.
-
-Från exjobbsmallen läser vi följande om den emperiska metoden:
-
-> The method for realisation shall be described in detail! Describe the connection between each research question to be answered and the process of realisation you use for answering each question. It should be possible to understand your set-up for the thesis, and it shall be possible to replicate your study.
-
-**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
-
-![Forskningsmetoder](slides/img/metod-all.png)
