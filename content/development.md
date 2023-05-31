@@ -4,10 +4,9 @@ Nu har vi uppdaterad applikationen och säkerställt funktionalitet genom testni
 
 
 
-### Krav 1: Skriva ut PDF
+### Krav 1: Visa enbart försenade tåg
 
-Skapa en knapp för utskrift som sedan skapar en PDF, som går att ladda ner. Välj ett npm-paket för att skapa PDF'en, beskriv varför du valde just det paket du valde. Azure cloudet gör att det är svårt att driftsätta så att backend skapar PDF'n. Gör det därför enkelt för dig själv och skapa PDF'n i front.
-
+På kartan i frontend visas just nu alla tåg och deras position i Sverige. För att underlätta för trafikledare visa endast de tåg som avviker. Gör det dessutom möjligt att genom att klicka på en rad i "Försenade tåg" tabellen visa tåget på kartan och tvärtom.
 
 
 ### Krav 2: Kommentarer
@@ -16,9 +15,9 @@ Lägg till möjligheten att kommentera specifika rader i dokumentet. Skapa ett b
 
 
 
-### Krav 3: Maila inbjudan
+### Krav 3: Sockets
 
-Använd ett mail API, förslagsvis Mailgun eller Sendgrid, för att koppla på möjligheten att maila ut inbjudan till att redigera dokument. Skicka med en länk i mailet för att användaren ska kunna registrera sig.
+Använd Sockets för att hantera tilldelningen av ärenden av de försenade tågen. Så det inte går för två användare att samtidigt hantera ett ärende.
 
 
 

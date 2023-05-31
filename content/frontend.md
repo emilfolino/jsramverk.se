@@ -6,16 +6,6 @@ Vi börjar kursen med att utvärdera frontend JavaScript ramverk. Vi tittar och 
 
 
 
-## Path of Least Resistance
-
-Innan vi kommer allt för långt ner i tekniska detaljer kommer här nog det viktigaste valet inom Path of Least Resistance i denna kursen.
-
-Vill du utveckla dina kunskaper i ramverket React och ha möjlighet att diskutera med många andra i chatten väljer du i detta kursmomentet ramverket React och text editorn Trix. Det är dessa tekniker som ingår i Path of Least Resistance från detta kmomet.
-
-Om du däremot vill utmana dig själv lite mer i kursen välj ett av de andra ramverken Angular, Svelte eller Vue och en annan text editor komponent.
-
-
-
 ## Läsa
 
 Följande länkar är bra att ha för undersökande och implementation. [Angular](https://angular.io/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/) och [Vue](https://vuejs.org/) ger dig en översikt och där hittar du dokumentationen som du vill läsa igenom.
@@ -392,49 +382,3 @@ Vi kan förenkla flödet ytterligare genom att lägga till ett npm script som vi
 
 }
 ```
-
-
-
-## Kravspecifikation
-
-Nedan finns kravspecifikationen för veckans inlämningsuppgift:
-
-1. Skapa grunden till vår editor.
-
-1. Din applikation ska innehålla en text editor där man kan skriva text. Välj en editor-komponent ovan eller en annan om du har en personlig favorit.
-
-1. Applikationen ska dessutom innehålla en toolbar längst upp på skärmen.
-
-1. Toolbaren ska än så länge innehålla en Spara-knapp. När man trycker på knappen ska innehållet från editorn skrivas ut i consollen. Spara-knappen behöver alltså inte ligga som en del av editorn.
-
-1. Committa alla filer och lägg till en tagg (1.0.\*).
-
-1. Pusha upp repot till GitHub, inklusive taggarna.
-
-1. Länka till ditt GitHub repo och till din editor på studentservern i en kommentar till din inlämning på Canvas.
-
-
-
-## Sammanfattning
-
-Vi har nu skrapat ytan på JavaScript ramverken Angular, Mithril, React och Vue, samt jämfört ramverken med vanilla JavaScript. Vi avslutar denna vecka med en video där den tidigare BDFL för [django](https://www.djangoproject.com/) pratar om hur vi inte alltid behöver ett JavaScript ramverk.
-
-<div class='embed-container'><iframe src="https://www.youtube.com/embed/k7n2xnOiWI8" frameborder="0" allowfullscreen></iframe></div>
-
-
-
-## Skriva
-
-Ni får i denna kursen möjlighet för att träna på akademiskt skrivande och förbereda inför en studie/exjobb. Denna delen av kursen är optionell och enbart tänkt som en hjälp inför kommande exjobb.
-
-Vi kommer i vecka 1 & 2 fokusera på forskningsfrågor. Vi kommer använda oss av en iterativ process för att förbättra vårt akademiska skrivande inför kommande exjobb, som avslutar och sammanfattar utbildningen.
-
-Forskningsfrågor skapar grunden för studien och är de frågor vi söker svar på i studien. All forskning och den vetenskapliga metoden handlar i grunden om att ställa intressanta frågor och sedan på ett metodiskt och reproducerbart sätt jobba fram svaren till dessa frågor. Viktigt med forskningsfrågor är att de är avgränsade, inte är ja/nej frågor och att de är mätbara. Sen är det viktigt att de två forskningsfrågorna är inom samma område. Vi kan inte ha en fråga om testning och en om JavaScript-ramverk, det är för brett ett område och vi vill försöka avgränsa och fokusera vår studie.
-
-Biblioteket vid BTH och tre andra högskolor och universitet i Sverige utvecklar tillsammans [skrivguiden.se](http://skrivguiden.se/). Här finns bra tips på struktur, vad de olika delar av en akademisk text ska innehålla och hur man skriver akademiskt. Använd [skrivguiden.se](http://skrivguiden.se/) som en referens under kursen, titta på guiden översiktligt denna veckan och återkom till guiden under kursens gång. Första 4 veckorna är speciellt "[Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte)" ett bra ställe att titta i guiden.
-
-Denna första veckan formulerar du två stycken forskningsfrågor. Frågorna ska ligga inom de ämnen som du ska skriva ditt kommande exjobb inom, dvs. programvaruteknik, datavetenskap eller webbprogrammering. Så ni kan basera frågorna runt mycket av det vi har gått igenom i utbildningen. Exempel på hur man formulerar bra forskningsfrågor kommer visas på föreläsningen. Se till att numrera forskningsfrågorna med titeln RQ1 för research question 1.
-
-Se forskningsfrågorna som ett första utkast denna veckan, du får möjlighet att förbättra frågorna kommande veckan.
-
-**Lämna in dina frågor som en del av inlämningen på Canvas.**
