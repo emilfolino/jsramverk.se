@@ -30,10 +30,22 @@ Artikeln [Frontend](/frontend) introducerar frontend ramverk och går igenom oli
 
 1. Se till att ha åtgärdat alla säkerhetshål enligt `npm audit`.
 
-1. Skapa en README.md fil i repot. I denna filen kommer under hela kursens dokumentera olika val.
+1. Skapa en `README.md` fil i repot. I denna filen kommer under hela kursens dokumentera olika val.
 
-1. Beskriv i README.md vilka säkerhetshål ni hittade och hur ni åtgärdade de.
+1. Beskriv i `README.md` vilka säkerhetshål ni hittade och hur ni åtgärdade de.
 
-1. Beskriv i README.md vilka steg ni fick gå igenom för att få applikationen att fungera.
+1. Beskriv i `README.md` vilka steg ni fick gå igenom för att få applikationen att fungera.
 
-1. Gör ett val av frontend ramverk och dokumentera det i README.md. Ni behöver inte implementera något, men kan vara bra att börja titta på hur implementationen av ett frontend-ramverk kan gå till.
+1. Gör ett val av frontend ramverk och dokumentera det i `README.md`. Ni behöver inte implementera något, men kan vara bra att börja titta på hur implementationen av ett frontend-ramverk kan gå till.
+
+
+
+## Redovisning
+
+Svara på nedanstående frågor individuellt och lämna in på Canvas tillsammans med länken till ert gemensamma GitHub-repo.
+
+* Vilka lärdomar gjorde du dig kring ditt eget sätt att ta dig an kod som du inte själv skrivit?
+
+* Var det enkelt att ta till dig information om de olika frontend-ramverken? Vilken är din uppfattning om ramverkens dokumentation?
+
+* Vilka fördelar och nackdelar ser du med arbetssättet GitHub Flow?
