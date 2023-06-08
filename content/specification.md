@@ -8,6 +8,8 @@
 
 I denna delen av kursen börjar vi med att ta en titt på den befintliga koden och utvärderar frontend ramverk. Målet med denna delen är att ha en applikation utan säkerhetshål, där vi samtidigt tagit några beslut kring vägval inför kommande delar.
 
+Börja därför med att ladda ner appen [emilfolino/train-controller](https://github.com/emilfolino/train-controller/archive/refs/heads/main.zip), som en zip-fil. Skapa sedan ett eget Git och GitHub repo utifrån den koden. Till exempel utifrån [Git guides](https://github.com/git-guides/git-init).
+
 
 
 ## Läsa och titta
