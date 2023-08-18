@@ -32,7 +32,7 @@ Artikeln [Frontend](/frontend) introducerar frontend ramverk och går igenom oli
 
 1. Se till att ha åtgärdat alla säkerhetshål enligt `npm audit`.
 
-1. Skapa en `README.md` fil i repot. I denna filen kommer under hela kursens dokumentera olika val.
+1. Skapa en `README.md` fil i repot. I denna filen kommer ni under hela kursen dokumentera olika val.
 
 1. Beskriv i `README.md` vilka säkerhetshål ni hittade och hur ni åtgärdade de.
 

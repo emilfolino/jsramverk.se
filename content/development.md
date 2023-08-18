@@ -46,7 +46,7 @@ Gör en inlämning på Canvas med följande innehåll:
 
 Länka till dina GitHub repon och driftsatta sidor som en del av din inlämning.
 
-1. Berätta **gemensamt** om vilka krav ni har gjort och hur du har implementerad kraven. Beskriv de val ni har gjort och vilka problem som uppstod på vägen.
+1. Berätta **gemensamt** om vilka krav ni har gjort och hur ni har implementerad kraven. Beskriv de val ni har gjort och vilka problem som uppstod på vägen.
 
 2. Svara sedan **individuellt** på följande redovisningsfrågor:
 
