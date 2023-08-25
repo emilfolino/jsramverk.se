@@ -72,3 +72,14 @@ a {
     top: 0;
     right: 0;
 }
+
+.framework-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.framework-container>img {
+    width: 22%;
+}
