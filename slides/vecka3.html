@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Slides jsramverk</title>
+
+    <link rel="stylesheet" href="jsramverk.css" />
+</head>
+<body>
+    <div id="presentation" class="presentation"></div>
+
+    <div id="slide-container" class="slide-container">
+        <div class="slide">
+            <h1 class="frontpage">Vecka 3</h1>
+            <p>Refaktorering del 1</p>
+        </div>
+
+        <div class="slide">
+            <h1>Agenda</h1>
+            <p>Refaktorering</p>
+            <p>MongoDB</p>
+            <p>Test backend och lite frontend</p>
+        </div>
+
+        <div class="slide fade-in">
+            <h1>Refaktorering</h1>
+            <p>Skriv om egen eller annan programmerares kod till "clean code".</p>
+            <p><a href="https://refactoring.guru/refactoring/what-is-refactoring" target="_blank">Refactoring Guru</a></p>
+        </div>
+
+        <div class="slide fade-in">
+            <h1>SQL</h1>
+            <p>Vana och erfarna användare av SQL databaser / relationsdatabaser.</p>
+
+            <p>Relationsdatabaser är byggda kring tabeller med fasta kolumner och data i raderna. Ungefär som ett Excel dokument.</p>
+        </div>
+
+        <div class="slide fade-in">
+            <h1>SQL del 2</h1>
+            <p>Exempel</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Namn</th>
+                        <th>Födelsedatum</th>
+                        <th>Lön</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Emil</td>
+                        <td>Juli 86</td>
+                        <td>$$$</td>
+                    </tr>
+                    <tr>
+                        <td>Kenneth</td>
+                        <td>Nångång 83</td>
+                        <td>$$$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide fade-in">
+            <h1>MongoDB</h1>
+            <p>Strukturerar vår data med hjälp av JSON.</p>
+
+            <pre><code>[
+{
+    "name": "Emil",
+    "birthday": "Juli 86",
+    "salary": "$$$",
+    "last_date": "2023-09-11",
+    "contact_information" : [
+        {
+            value: "0731111111",
+            type: "phone"
+        }
+    ]
+},
+{
+    "name": "Kenneth",
+    "birthday": "Nångång 83",
+    "salary": "$$$"
+}
+]</code></pre>
+        </div>
+
+        <div class="slide fade-in">
+            <h1>Test</h1>
+            <p>Låt oss titta på auth_mongo</p>
+        </div>
+
+        <div class="slide fade-in">
+            <h1>Test del 2</h1>
+            <p>Vill ni kan ni testa frontenden redan nu och ta med de tester sen.</p>
+
+            <p>Dock hade jag nog rekommenderat att vänta.</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="bundle.js"></script>
+</body>
+</html>
