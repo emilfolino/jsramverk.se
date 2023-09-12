@@ -33,6 +33,8 @@ I artikeln [Test](/test) tittar vi på hur vi kan säkerställa funktionalitet g
 
 1. Skapa en CI-kedja med hjälp av GitHub Actions.
 
+1. Driftsätta frontenden på studentservern enligt [instruktionerna](/deploy) och backenden samt databasen i "molnet" enligt [instruktionerna](/deploy).
+
 1. Lämna in länkar till de driftsatta applikationerna på Canvas, samt länk till GitHub repot.
 
 
