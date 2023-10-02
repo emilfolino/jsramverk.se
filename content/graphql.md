@@ -8,6 +8,10 @@ I denna artikeln tittar vi på hur vi kan använda GraphQL för att skapa en end
 
 ## Titta
 
+Innan vi kommer allt för långt är det bra att ha referensmanualen för [express-graphql](https://graphql.org/graphql-js/express-graphql/) nära till hands.
+
+
+
 #### Kort introduktion till GraphQL
 
 <div class='embed-container'><iframe src="https://www.youtube.com/embed/eIQh02xuVw4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
@@ -148,3 +152,9 @@ fetch('/graphql', {
 ```
 
 Om man vill ha en mer fullständig GraphQL-klient att använda kan [Relay](https://relay.dev/) för React eller [Apollo-client](https://www.apollographql.com/docs/react/#community-integrations) som finns för Angular och Vue rekommenderas.
+
+
+
+### GraphQL och auth
+
+När vi vill få GraphQL att samverka med autentisering av våra användare är artikeln [Authentication and Express Middleware](https://graphql.org/graphql-js/authentication-and-express-middleware/) en bra utgångspunkt.
