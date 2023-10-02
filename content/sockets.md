@@ -194,22 +194,6 @@ För Angular finns det ett paket `ngx-socket-io` för att hantera sockets: [http
 
 
 
-## Kravspecifikation
+## Sockets och autentisering
 
-1. Använd sockets för att skapa realtidskommunikation mellan server och klienter.
-
-1. Två klienter ska samtidigt kunna öppna samma dokument och man ska i ena klienten kunna se när man skriver i andra.
-
-1. Committa och tagga ditt repon med 4.0.0 eller senare, ladda upp till GitHub och driftsätt.
-
-1. Länka till båda dina GitHub repon och den driftsatta klienten i en kommentar till din inlämning på Canvas.
-
-
-
-## Skriva
-
-Vi fortsätter iterativt med att förbättra våra syften. Använd den återkopplingen du fick på förra veckans syften och förbättra.
-
-Gå tillbaka till skrivguiden och titta under [Syfte, problemformulering och forskningsfrågor – att begränsa ämne](http://skrivguiden.se/skriva/skrivprocessen/#syfte) för bra tips.
-
-**Lämna in texten som PDF bilaga till din inlämning på Canvas.**
+För att det ska gå att autentisera vår uppkoppling mot servern vill vi se till att vi använder JWT eller andra autentiseringsmetoder innan vi börjar med att skicka data. Detta [StackOverflow svaret](https://stackoverflow.com/a/36821359) ger en bra introduktion till de paket som kan användas och bra exempelkod.

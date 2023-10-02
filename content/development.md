@@ -18,7 +18,7 @@ Gör det möjligt att ändra de befintliga ärenden som finns i listan.
 
 ### Krav 3: Sockets
 
-Använd Sockets för att hantera tilldelningen av ärenden av de försenade tågen. Så det inte går för två användare att samtidigt hantera ett ärende, gäller både nya och befintliga ärenden.
+Använd Sockets för att hantera tilldelningen av ärenden av de försenade tågen. Så det inte går för två användare att samtidigt hantera ett ärende, gäller både nya och befintliga ärenden. Artikeln [Sockets](sockets) ger hjälp på traven.
 
 
 
