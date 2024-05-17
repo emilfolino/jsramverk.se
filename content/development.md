@@ -6,7 +6,7 @@ Nu har vi uppdaterad applikationen och säkerställt funktionalitet genom testni
 
 ### Krav 1: Autentisering
 
-Användare ska ha möjlighet för att registrera sig för applikationen och sedan kan en användare bara se och redigera egna dokument. Skapa möjlighet för att dela dokument med andra användare på plattformen. Använd ett mail API, förslagsvis Mailgun eller Sendgrid, för att koppla på möjligheten att maila ut inbjudan till att redigera dokument. Skicka med en länk i mailet för att användaren ska kunna registrera sig.
+Användare ska ha möjlighet för att registrera sig för applikationen och sedan kan en användare bara se och redigera egna dokument. Skapa möjlighet för att dela dokument med andra användare på plattformen. Använd ett mail API, förslagsvis Mailgun eller Sendgrid, för att koppla på möjligheten att maila ut inbjudan till att redigera dokument. Skicka med en länk i mailet för att användaren ska kunna registrera sig. Artikeln [auth](auth) visar på ett sätt att göra autentisering för ett Express API. I repot [emilfolino/auth_mongo](https://github.com/emilfolino/auth_mongo) finns en fullständig implementation av ett autentiseringsflöde.
 
 
 
