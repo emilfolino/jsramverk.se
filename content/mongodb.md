@@ -20,9 +20,6 @@ Om ni vill titta på ett fullständigt exempelprogram som använder alla dessa t
 
 
 
-
-
-
 ## Installation MongoDB
 
 
