@@ -2,7 +2,7 @@
 
 <p class="author">Emil Folino</p>
 
-Denna veckan tittar vi på realtidsprogrammering och hur två eller fler personer kan uppdatera samma dokument. Det är nu vår editor blir "real-time" och "collaborative".
+I denna artikeln tittar vi på realtidsprogrammering och hur två eller fler personer kan uppdatera samma dokument. Det är nu vår editor blir "real-time" och "collaborative".
 
 
 

@@ -5,7 +5,7 @@
 
 ## Beskrivning
 
-Nu börjar vi programmera på riktigt. Vi ska byta databas för backend och i frontend ska vi implementera ett frontend-ramverk. Vi tittar på tester för att enklare kunna refaktorera och avslutar med att driftsätta vår backend i Azure molnet och frontend på studentservern.
+Nu börjar vi programmera på riktigt. Vi ska byta databas för backend och vi ska implementera ett frontend-ramverk. Vi tittar på tester för att enklare kunna refaktorera och avslutar med att driftsätta vår databas i MongoDB Atlas, backend i Azure molnet och frontend på studentservern.
 
 
 
@@ -25,9 +25,9 @@ I artikeln [Test](/test) tittar vi på hur vi kan säkerställa funktionalitet g
 
 ## Kravspecifikation
 
-1. Byt ut från en SQLite databas till MongoDB för backend.
+1. Byt ut från en SQLite databas till MongoDB för backend. Och gör om så API:t svarar med JSON-data istället för olika vyer.
 
-1. Implementera frontenden med samma funktionalitet som i den befintliga appen fast i ett JavaScript ramverk.
+1. Implementera frontenden med samma funktionalitet som i den befintliga appen fast i ett JavaScript ramverk. Frontend bör skapas som en fristående SPA.
 
 1. Implementera tester för att säkerställa funktionalitet under tiden ni gör refaktorering.
 

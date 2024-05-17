@@ -4,27 +4,27 @@ Nu har vi uppdaterad applikationen och säkerställt funktionalitet genom testni
 
 
 
-### Krav 1: Visa enbart försenade tåg
+### Krav 1: Autentisering
 
-På kartan i frontend visas just nu alla tåg och deras position i Sverige. För att underlätta för trafikledare visa endast de tåg som avviker. Gör det dessutom möjligt att genom att klicka på en rad i "Försenade tåg" tabellen visa enbart det tåget på kartan och tvärtom.
-
-
-
-### Krav 2: Ändra befintliga ärenden
-
-Gör det möjligt att ändra de befintliga ärenden som finns i listan.
+Användare ska ha möjlighet för att registrera sig för applikationen och sedan kan en användare bara se och redigera egna dokument. Skapa möjlighet för att dela dokument med andra användare på plattformen. Använd ett mail API, förslagsvis Mailgun eller Sendgrid, för att koppla på möjligheten att maila ut inbjudan till att redigera dokument. Skicka med en länk i mailet för att användaren ska kunna registrera sig.
 
 
 
-### Krav 3: Sockets
+### Krav 2: Sockets
 
-Använd Sockets för att hantera tilldelningen av ärenden av de försenade tågen. Så det inte går för två användare att samtidigt hantera ett ärende, gäller både nya och befintliga ärenden. Artikeln [Sockets](sockets) ger hjälp på traven.
+Använd web-sockets för att skapa möjlighet för att två användare samtidigt ska kunna redigera i samma dokument. Använd artikeln [sockets](sockets) som hjälp på traven.
 
 
 
-### Krav 4: Autentisering
+### Krav 3: Kommentarer
 
-Skapa ett inloggningsflöde för applikationen och begränsa tillgång till data och applikation, både i frontend och i backend. Artikeln [Auth](auth) kan hjälpa till med ett tillvägagångssätt för backend.
+Lägg till möjligheten att kommentera specifika rader i dokumentet. Skapa ett bra och lättanvänt gränssnitt för att kommentera i dokumentet. Kommentarer bör hanteras med hjälp av sockets, artikeln [sockets](sockets) kan ge vissa tips om hur ni kan gå till väga.
+
+
+
+### Krav 4: Code-mode
+
+Lägg till möjligheten att välja code-mode. Editorn byts då ut mot en kod-editor förslagsvis codemirror eller monaco-editor. Din kod-editor bör stödja JavaScript och är även det enda som kan exekveras enligt nedan. Spara information i databasen om dokumentets typ (kod eller inte kod-dokument). Skapa en knapp för att exekvera koden. Koden ska exekveras genom att skickas som en [base64](https://developer.mozilla.org/en-US/docs/Glossary/Base64)-kodat sträng till endpointen [execjs.emilfolino.se](https://execjs.emilfolino.se). Se dokumentation på hemsidan för endpoints och request-typ.
 
 
 
