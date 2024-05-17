@@ -15,7 +15,7 @@
     "build-style": "npm run cp-highlightstyle && npm run style",
     "cp-highlightstyle": "cp node_modules/highlight.js/styles/monokai-sublime.css sass/monokai-sublime.scss",
     "build": "node app.js",
-    "publish": "rsync -av --delete output/ efo@emilfolino.se:/var/www/jsramverk.me/html",
+    "publish": "rsync -av --delete output/ efo@emilfolino.se:/var/www/jsramverk.se/html",
     "beta-publish": "rsync -av --delete output/ efo@emilfolino.se:/var/www/beta.jsramverk.se/html",
     "clean-output": "rm -rf output/*",
     "build-client-js": "webpack -p && cp dist/bundle.js output/",
