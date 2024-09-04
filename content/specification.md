@@ -36,7 +36,7 @@ Artikeln [Frontend](/frontend) introducerar frontend ramverk och går igenom oli
 
 1. Beskriv i `README.md` vilka steg ni fick gå igenom för att få applikationen att fungera.
 
-1. Implementera en `PUT /` route för att uppdatera innehåll istället för att skapa nya documents hela tiden.
+1. Implementera en `POST /update` route för att uppdatera innehåll istället för att skapa nya documents hela tiden.
 
 1. Uppdatera vyerna så det är möjligt att uppdatera ett dokument och att skapa nya.
 
